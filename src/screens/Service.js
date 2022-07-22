@@ -53,51 +53,50 @@ const Service = () => {
     console.log("조회 클릭");
     if (id && pw) {
       console.log("fetch");
-      fetch("https://api.credot.kr:9000/coupang?id=" + id + "&pw=" + pw).then(
-        (response) => {
+      fetch("https://api.credot.kr:9000/coupang?id=" + id + "&pw=" + pw)
+        .then((response) => {
           console.log(response);
-          // if (!response.ok) {
-          //   throw new Error("400아니면 500에러남");
-          // }
-          // return response.text();
-        }
-      );
-      // .then((결과) => {
-      //   console.log("결과");
-      //   if (결과 == "idpwError") {
-      //     alert(결과);
-      //     return;
-      //   } else if (결과 == "auth") {
-      //     const inputString = prompt("인증번호를 입력해주세요", "인증번호");
-      //     if (inputString != "") {
-      //       fetch("http://api.credot.kr:9000/coupangcode?code=" + inputString)
-      //         .then((response) => {
-      //           if (!response.ok) {
-      //             throw new Error("400아니면 500에러남");
-      //           }
-      //           return response.text();
-      //         })
-      //         .then((결과) => {
-      //           if (결과 == "authError") {
-      //             alert("인증번호 오류입니다");
-      //             return;
-      //           }
-      //           var result = 결과;
-      //           setResult(JSON.parse(result).price);
-      //           alert(result);
-      //         });
-      //     }
-      //     return;
-      //   } else {
-      //     let result = 결과;
-      //     setResult(JSON.parse(result).price);
-      //     return;
-      //   }
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      //   alert("조회 실패... 아이디와 비번을 확인해주세요");
-      // });
+          if (!response.ok) {
+            throw new Error("400아니면 500에러남");
+          }
+          return response.text();
+        })
+        .then((결과) => {
+          console.log("결과");
+          if (결과 == "idpwError") {
+            alert(결과);
+            return;
+          } else if (결과 == "auth") {
+            const inputString = prompt("인증번호를 입력해주세요", "인증번호");
+            if (inputString != "") {
+              fetch("http://api.credot.kr:9000/coupangcode?code=" + inputString)
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("400아니면 500에러남");
+                  }
+                  return response.text();
+                })
+                .then((결과) => {
+                  if (결과 == "authError") {
+                    alert("인증번호 오류입니다");
+                    return;
+                  }
+                  var result = 결과;
+                  setResult(JSON.parse(result).price);
+                  alert(result);
+                });
+            }
+            return;
+          } else {
+            let result = 결과;
+            setResult(JSON.parse(result).price);
+            return;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("조회 실패... 아이디와 비번을 확인해주세요");
+        });
     } else {
       alert("값을 모두 입력해주세요");
     }
