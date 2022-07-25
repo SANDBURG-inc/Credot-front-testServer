@@ -124,7 +124,7 @@ const Service = () => {
           <div>
             <h3>후기 자리</h3>
 
-            <h3>후기 자리</h3>
+            <h3>hook test</h3>
 
             <h3>hook test</h3>
           </div>
