@@ -5,6 +5,8 @@ import Guide from "./screens/Guide";
 import Media from "./screens/Media";
 import Notice from "./screens/Notice";
 import Faq from "./screens/Faq";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
 import NavBarElement from "./components/NavBarElement";
 
 import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
@@ -22,6 +24,8 @@ function App() {
         <Route path="/Media" element={<Media />} />
         <Route path="/Notice" element={<Notice />} />
         <Route path="/Faq" element={<Faq />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </div>
   );
