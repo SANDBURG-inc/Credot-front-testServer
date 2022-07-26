@@ -24,6 +24,10 @@ const NavBarElement = () => {
               <NavDropdown.Item href="/Faq">자주하는 질문</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <Nav>
+          <Nav.Link href="/Login">로그인</Nav.Link>
+          <Nav.Link href="/Register">회원가입</Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
