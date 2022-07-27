@@ -25,9 +25,22 @@ function Register() {
         }
     }
 
+    class BankInfo extends Component {
+        render() {
+            return (
+                <AuthWrapper>
+                    <AuthContent title="선정산 받으실 계좌를 입력해주세요">
+                        <InputWithLabel label="" name="account" placeholder="  계좌번호"/>
+                    </AuthContent>
+                    <AuthButton>회원가입 완료</AuthButton>
+                </AuthWrapper>
+            );
+        }
+    }
+
     return flag === 0
            ? <CustomerInfo></CustomerInfo>
-           : <div></div>
+           : <BankInfo></BankInfo>
 }
 
 export default Register;
