@@ -8,7 +8,7 @@ import RightAlignedLink from './../components/RightAlignedLink';
 import { bankList } from "./../data/bankList";
 import { Route, Routes, Link, Outlet } from 'react-router-dom';
 
-function Register () {
+const Register = () => {
     const [flag, setFlag] = useState(0);
     
     // const [name, setName] = useState("");
@@ -27,7 +27,7 @@ function Register () {
 
     const [users, setUsers] = useState([])
 
-    function handleOnChange  (e)  {
+    const handleOnChange = (e) => {
         console.log(e.target.name + ": " + e.target.value);
         setInputs({
             ...inputs,
