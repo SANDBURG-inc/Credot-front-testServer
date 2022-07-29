@@ -7,9 +7,6 @@ import Combobox from './../components/Combobox';
 import RightAlignedLink from './../components/RightAlignedLink';
 import { bankList } from "./../data/bankList";
 import { Route, Routes, Link, Outlet } from 'react-router-dom';
-import { useDispatch, useSelector, Provider } from "react-redux";
-import { changeName, changeEmail, changePhoneNum, changePassword } from "./../redux/user";
-import store from './../store.js';
 
 function Register () {
     const [flag, setFlag] = useState(0);
