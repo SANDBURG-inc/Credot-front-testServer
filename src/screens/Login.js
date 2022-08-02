@@ -51,7 +51,23 @@ const Login = () => {
                 <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange}/>
                 <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange}/>
             </AuthContent>
-            <AuthButton onClick={handleOnClick}>로그인</AuthButton>
+            <AuthButton onClick={()=>{
+                            handleOnClick();
+                            console.log('http://api.credot.kr/login?id=' + inputs.email
+                            + '&pw=' + inputs.password
+                            )
+                            fetch('http://api.credot.kr/login?id=' + inputs.email
+                            + '&pw=' + inputs.password
+                            )
+                            .then(response => {
+                                if(!response){
+                                    console.log('fetch error')
+                                }
+                                    return response.text();
+                                }
+                            )
+                            .then(response =>{alert(response)});
+                            }}>로그인</AuthButton>
             <RightAlignedLink to="/register">회원가입</RightAlignedLink>
         </AuthWrapper>
     )
