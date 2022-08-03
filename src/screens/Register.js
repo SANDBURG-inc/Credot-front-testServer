@@ -30,8 +30,12 @@ const Register = () => {
     };
 
     useEffect(() => {
-        console.log(bank)
+        console.log("은행: " + bank);
     }, [bank])
+
+    useEffect(() => {
+        console.log("계좌번호: " + account);
+    }, [account])
 
     useEffect(() => {
         console.log(inputs)
