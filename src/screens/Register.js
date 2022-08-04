@@ -92,7 +92,7 @@ const Register = () => {
                 </AuthContent>
                 <AuthButton onClick={()=>{
                             handleOnClick();
-                            fetch('http://api.credot.kr/register?id=' + users[users.length-1].email
+                            fetch('http://api.credot.kr/database/register?id=' + users[users.length-1].email
                                 + '&name=' + users[users.length-1].name
                                 + '&pw=' + users[users.length-1].password
                                 + '&phoneNum=' + users[users.length-1].phoneNum

@@ -53,7 +53,7 @@ const Service = () => {
     console.log("조회 클릭");
     if (id && pw) {
       console.log("fetch");
-      fetch("http://3.38.232.237:9000/coupang?id=" + id + "&pw=" + pw)
+      fetch("http://3.38.232.237:9000/coupang/crawl?id=" + id + "&pw=" + pw)
         .then((response) => {
           console.log(response);
           if (!response.ok) {
@@ -69,7 +69,7 @@ const Service = () => {
           } else if (결과 == "auth") {
             const inputString = prompt("인증번호를 입력해주세요", "인증번호");
             if (inputString != "") {
-              fetch("http://3.38.232.237:9000/coupangcode?code=" + inputString)
+              fetch("http://3.38.232.237:9000/coupang/auth?code=" + inputString)
                 .then((response) => {
                   if (!response.ok) {
                     throw new Error("400아니면 500에러남");
