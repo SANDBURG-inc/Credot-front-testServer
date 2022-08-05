@@ -4,8 +4,11 @@ import AuthContent from '../components/auth/AuthContent';
 import InputWithLabel from './../components/InputWithLabel';
 import AuthButton from './../components/auth/AuthButton';
 import RightAlignedLink from './../components/RightAlignedLink';
+import { useDispatch, useSelector } from "react-redux"
+import { update, isLoginSelector } from "./../redux/store.js"
 
 const Login = () => {
+    const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
         email: "",
         password: "",
@@ -62,6 +65,8 @@ const Login = () => {
                             .then(response => {
                                 if(!response){
                                     console.log('fetch error')
+                                } else {
+                                    dispatch(update())
                                 }
                                     return response.text();
                                 }

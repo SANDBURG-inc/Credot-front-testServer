@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Nav, Navbar, NavDropdown, Col } from "react-bootstrap";
+import { useSelector } from "react-redux"
+import { update, isLoginSelector } from "./../redux/store.js"
 
 const NavBarElement = () => {
+  let a = useSelector((state) => state.userInfo ) 
+  console.log(a)
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -25,8 +29,17 @@ const NavBarElement = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-          <Nav.Link href="/Login">로그인</Nav.Link>
-          <Nav.Link href="/Register">회원가입</Nav.Link>
+          
+          {
+            a === false
+            ?
+              <Nav>
+                <Nav.Link href="/Login">로그인</Nav.Link>
+                <Nav.Link href="/Register">회원가입</Nav.Link>
+              </Nav>
+            : 
+              <Nav.Link href="/Mypage">MY 크레닷</Nav.Link>
+          }
           </Nav>
         </Navbar.Collapse>
       </Container>
