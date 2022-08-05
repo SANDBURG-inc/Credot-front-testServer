@@ -12,7 +12,7 @@ let isLogin = createSlice({
 
 export default configureStore({
   reducer: {
-    userInfo : isLogin.reducer
+    isLogin : isLogin.reducer
   }
 }) 
 
