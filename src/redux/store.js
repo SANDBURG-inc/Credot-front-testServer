@@ -1,17 +1,27 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-
-let userInfo = createSlice({
-    name : 'userInfo',
-    initialState : {
-        email : 'user@example.com',
-        password : 'password'
-    },
+import { configureStore, createSlice, createSelector } from '@reduxjs/toolkit';
+let isLogin = createSlice({
+    name : 'isLogin',
+    initialState : false,
     reducers : {
-      update(state, a){
-        state.email = a.payload.email
-        state.password = a.password.password
+      update(state) {
+        return !state
       }
     }
 })
 
-export default userInfo;
+export default configureStore({
+  reducer: {
+    userInfo : isLogin.reducer
+  }
+}) 
+
+export let { update } = isLogin.actions
+
+
+export const isLoginSelector = createSelector(
+  state => state.isLogin,
+  (isLogin) => {
+    console.log("isLogin : ");
+    return {isLogin};
+  }
+)

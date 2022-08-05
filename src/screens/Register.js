@@ -7,6 +7,8 @@ import RightAlignedLink from './../components/RightAlignedLink';
 import { useCombobox } from "downshift";
 import { bankList } from "./../data/bankList";
 import { Route, Routes, Link, Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux"
+import { isLogin } from "./../redux/store.js"
 
 const Register = () => {
 
