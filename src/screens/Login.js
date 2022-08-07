@@ -53,10 +53,10 @@ const Login = () => {
             </AuthContent>
             <AuthButton onClick={()=>{
                             handleOnClick();
-                            console.log('http://api.credot.kr/database/login?id=' + inputs.email
+                            console.log('http://api.credot.kr/login?id=' + inputs.email
                             + '&pw=' + inputs.password
                             )
-                            fetch('http://api.credot.kr/database/login?id=' + inputs.email
+                            fetch('http://api.credot.kr/login?id=' + inputs.email
                             + '&pw=' + inputs.password
                             )
                             .then(response => {
