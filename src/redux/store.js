@@ -10,13 +10,36 @@ let isLogin = createSlice({
     }
 })
 
+let userInfo = createSlice({
+  name : 'userInfo',
+  initialState : {
+    name: '',
+    email: '',
+    phoneNum: '',
+    bank: '',
+    account: '',
+  },
+  reducers : {
+    updateUserInfo(state) {
+      return {
+        name: '',
+        email: '',
+        phoneNum: '',
+        bank: '',
+        account: '',
+      }
+    }
+  }
+})
+
 export default configureStore({
   reducer: {
-    isLogin : isLogin.reducer
+    isLogin : isLogin.reducer,
+    userInfo : userInfo.reducer
   }
 }) 
 
-export let { update } = isLogin.actions
+export let { update, updateUserInfo } = isLogin.actions
 
 
 export const isLoginSelector = createSelector(
