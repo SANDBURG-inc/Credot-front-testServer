@@ -4,10 +4,13 @@ import AuthContent from '../components/auth/AuthContent';
 import InputWithLabel from './../components/InputWithLabel';
 import AuthButton from './../components/auth/AuthButton';
 import RightAlignedLink from './../components/RightAlignedLink';
+import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import { update, isLoginSelector } from "./../redux/store.js"
+import { render } from '@testing-library/react';
 
 const Login = () => {
+    let a = useSelector((state) => state.isLogin) 
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
         email: "",
@@ -48,13 +51,19 @@ const Login = () => {
         console.log(users)
     }, [users])
 
+    if (a === true) {
+        return (
+            <Navigate to="/" />
+        );
+    }
+
     return (
         <AuthWrapper>
             <AuthContent title="Credot에 로그인">
                 <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange}/>
                 <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange}/>
             </AuthContent>
-            <AuthButton onClick={()=>{
+            {/* <AuthButton onClick={()=>{
                             handleOnClick();
                             console.log('http://api.credot.kr/login?id=' + inputs.email
                             + '&pw=' + inputs.password
@@ -72,6 +81,33 @@ const Login = () => {
                                 }
                             )
                             .then(response =>{alert(response)});
+                            }}>로그인</AuthButton> */}
+            <AuthButton onClick={()=>{
+                            handleOnClick();
+                            fetch('http://localhost:9000/login?id=' + inputs.email
+                            + '&pw=' + inputs.password ,
+                            {
+                                method: "get",
+                                headers: {
+                                  "Content-Type": "application/json; charset=utf-8"
+                                },
+                                credentials: 'include',
+                              }
+                            )
+                            .then(response => {
+                                console.log(response);
+                                if(!response.ok){
+                                    console.log('fetch error')
+                                } 
+                                    return response.json();
+                                }
+                            )
+                            .then(response =>{
+                                console.log(response.name)
+                                if (typeof response.name === 'string') {
+                                    dispatch(update())
+                                }
+                            });
                             }}>로그인</AuthButton>
             <RightAlignedLink to="/register">회원가입</RightAlignedLink>
         </AuthWrapper>

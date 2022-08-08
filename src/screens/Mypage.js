@@ -15,7 +15,7 @@ const Mypage = () => {
               <Form.Label>성함</Form.Label>
               <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="권민성" disabled />
               <Form.Label>이메일</Form.Label>
-              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="minseongkw@gmail.com" disabled />
+              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="test@gmail.com" disabled />
               <Form.Label>연락처</Form.Label>
               <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="010-1234-5678" disabled />
               <Form.Label style={{margin: "10px 0px 10px 0px"}}>계좌정보</Form.Label>
