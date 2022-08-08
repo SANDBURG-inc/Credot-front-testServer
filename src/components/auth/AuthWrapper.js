@@ -46,7 +46,7 @@ const AuthWrapper = ({children}) => (
     <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo>CRE</Logo>
+                <Logo>credot</Logo>
             </LogoWrapper>
             <Contents>
                 {children}
