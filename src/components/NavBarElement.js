@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { update, isLoginSelector } from "./../redux/store.js"
 
 const NavBarElement = () => {
-  let a = useSelector((state) => state.isLogin ) 
+  let a = useSelector((state) => state.isLogin) 
   console.log(a)
   return (
     <Navbar bg="light" expand="lg">
