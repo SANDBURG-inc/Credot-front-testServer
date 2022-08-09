@@ -4,9 +4,12 @@ import AuthContent from '../components/auth/AuthContent';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AuthButton from './../components/auth/AuthButton';
+import { useSelector } from 'react-redux';
 
 const Mypage = () => {
     const [flag, setFlag] = useState(0);
+
+    useSelector((state)=>{return state})
 
     return flag === 0
     ? 
@@ -26,6 +29,9 @@ const Mypage = () => {
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호" />
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호 확인" />
               <AuthButton onClick={()=>{}}>비밀번호 수정</AuthButton>
+              <AuthButton onClick={()=>{
+                fetch('http://localhost:9000/logout');
+              }}>로그아웃</AuthButton>
           </Form.Group>
       </AuthWrapper>
     : 
