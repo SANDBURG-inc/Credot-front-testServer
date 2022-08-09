@@ -4,15 +4,11 @@ import AuthContent from '../components/auth/AuthContent';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AuthButton from './../components/auth/AuthButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux"
 
 const Mypage = () => {
-    const [flag, setFlag] = useState(0);
 
-    useSelector((state)=>{return state})
-
-    return flag === 0
-    ? 
+    return(
       <AuthWrapper>
           <Form.Group>
               <Form.Label>성함</Form.Label>
@@ -34,8 +30,7 @@ const Mypage = () => {
               }}>로그아웃</AuthButton>
           </Form.Group>
       </AuthWrapper>
-    : 
-        <div></div>
+    )
 }
 
 export default Mypage;

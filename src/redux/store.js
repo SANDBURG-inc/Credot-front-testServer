@@ -46,7 +46,11 @@ export default configureStore({
   reducer: {
     isLogin : isLogin.reducer,
     userInfo : userInfo.reducer
-  }
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 }) 
 
 export let { update, updateUserInfo ,removeUserInfo } = isLogin.actions
