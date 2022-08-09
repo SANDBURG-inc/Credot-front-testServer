@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Container, Nav, Navbar, NavDropdown, Col } from "react-bootstrap";
 import { useSelector } from "react-redux"
-import { update, isLoginSelector } from "./../redux/store.js"
+import { update } from "./../redux/store.js"
 
 const NavBarElement = () => {
-  let a = useSelector((state) => state.isLogin) 
+  let a = useSelector((state) => state.login)
   console.log(a)
   return (
     <Navbar bg="light" expand="lg">
@@ -29,7 +29,6 @@ const NavBarElement = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-          
           {
             a === false
             ?

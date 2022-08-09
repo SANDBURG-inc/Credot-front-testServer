@@ -5,9 +5,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AuthButton from './../components/auth/AuthButton';
 import { useDispatch, useSelector } from "react-redux"
+import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
+import { update } from "./../redux/store.js"
 
 const Mypage = () => {
-
+    let a = useSelector((state) => state.isLogin) 
+    const dispatch = useDispatch();
+    if (a === true) {
+        return (
+            <Navigate to="/" />
+        );
+    }
     return(
       <AuthWrapper>
           <Form.Group>
@@ -25,8 +33,11 @@ const Mypage = () => {
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호" />
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호 확인" />
               <AuthButton onClick={()=>{}}>비밀번호 수정</AuthButton>
-              <AuthButton onClick={()=>{
+              <AuthButton onClick={async()=>{
                 fetch('http://localhost:9000/logout');
+                await dispatch(update());
+                localStorage.clear();
+                alert("로그아웃 되었습니다");
               }}>로그아웃</AuthButton>
           </Form.Group>
       </AuthWrapper>

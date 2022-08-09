@@ -6,11 +6,12 @@ import AuthButton from './../components/auth/AuthButton';
 import RightAlignedLink from './../components/RightAlignedLink';
 import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
-import { update, isLoginSelector } from "./../redux/store.js"
+import { update } from "./../redux/store.js"
 import { render } from '@testing-library/react';
 
 const Login = () => {
-    let a = useSelector((state) => state.isLogin) 
+    let a = useSelector((state) => state.isLogin);
+    // let a = isLoginSelector();
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
         email: "",
