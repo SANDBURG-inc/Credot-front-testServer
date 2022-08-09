@@ -20,7 +20,16 @@ let userInfo = createSlice({
     account: '',
   },
   reducers : {
-    updateUserInfo(state) {
+    updateUserInfo() {
+      return {
+        name: '',
+        email: '',
+        phoneNum: '',
+        bank: '',
+        account: '',
+      }
+    },
+    removeUserInfo() {
       return {
         name: '',
         email: '',
@@ -30,6 +39,7 @@ let userInfo = createSlice({
       }
     }
   }
+  
 })
 
 export default configureStore({
@@ -39,7 +49,7 @@ export default configureStore({
   }
 }) 
 
-export let { update, updateUserInfo } = isLogin.actions
+export let { update, updateUserInfo ,removeUserInfo } = isLogin.actions
 
 
 export const isLoginSelector = createSelector(
