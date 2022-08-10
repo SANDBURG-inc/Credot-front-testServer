@@ -34,8 +34,8 @@ const Mypage = () => {
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호 확인" />
               <AuthButton onClick={()=>{}}>비밀번호 수정</AuthButton>
               <AuthButton onClick={async()=>{
-                fetch('http://localhost:9000/logout');
-                await dispatch(update());
+                await fetch('http://localhost:9000/logout');
+                dispatch(update());
                 localStorage.clear();
                 alert("로그아웃 되었습니다");
               }}>로그아웃</AuthButton>
