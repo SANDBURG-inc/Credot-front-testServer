@@ -9,9 +9,9 @@ import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
 import { update } from "./../redux/store.js"
 
 const Mypage = () => {
-    let a = useSelector((state) => state.isLogin) 
+    let a = useSelector((state) => state.login);
     const dispatch = useDispatch();
-    if (a === true) {
+    if (a === false) {
         return (
             <Navigate to="/" />
         );

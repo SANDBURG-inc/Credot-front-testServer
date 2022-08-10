@@ -10,7 +10,7 @@ import { update } from "./../redux/store.js"
 import { render } from '@testing-library/react';
 
 const Login = () => {
-    let a = useSelector((state) => state.isLogin);
+    let a = useSelector((state) => state.login);
     // let a = isLoginSelector();
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
