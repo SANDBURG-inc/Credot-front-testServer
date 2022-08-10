@@ -32,14 +32,20 @@ let userInfo = createSlice({
     account: '',
   },
   reducers : {
-    updateUserInfo() {
-      return {
-        name: '',
-        email: '',
-        phoneNum: '',
-        bank: '',
-        account: '',
-      }
+    updateUserName(state,a) {
+      state.name = a.payload
+    },
+    updateUserEmail(state,a) {
+      state.email = a.payload
+    },
+    updateUserPhoneNum(state,a) {
+      state.phoneNum = a.payload
+    },
+    updateUserBank(state,a) {
+      state.bank = a.payload
+    },
+    updateUserAccount(state,a) {
+      state.account = a.payload
     },
     removeUserInfo() {
       return {
@@ -79,4 +85,5 @@ const store = configureStore({
 
 export default store;
 
-export let { update, updateUserInfo ,removeUserInfo } = isLogin.actions;
+export let { update } = isLogin.actions;
+export let { updateUserName,updateUserEmail,updateUserPhoneNum,updateUserBank,updateUserAccount } = userInfo.actions;

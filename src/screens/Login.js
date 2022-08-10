@@ -6,11 +6,12 @@ import AuthButton from './../components/auth/AuthButton';
 import RightAlignedLink from './../components/RightAlignedLink';
 import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
-import { update } from "./../redux/store.js"
+import { update, updateUserAccount, updateUserBank, updateUserEmail, updateUserName, updateUserPhoneNum } from "./../redux/store.js"
 import { render } from '@testing-library/react';
 
 const Login = () => {
     let a = useSelector((state) => state.login);
+    let b = useSelector((state)=>state.info);
     // let a = isLoginSelector();
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
@@ -83,7 +84,7 @@ const Login = () => {
                             )
                             .then(response =>{alert(response)});
                             }}>로그인</AuthButton> */}
-            <AuthButton onClick={()=>{
+            <AuthButton onClick={async()=>{
                             handleOnClick();
                             fetch('http://localhost:9000/login?id=' + inputs.email
                             + '&pw=' + inputs.password ,
@@ -106,6 +107,11 @@ const Login = () => {
                             .then(response =>{
                                 console.log(response.name)
                                 if (typeof response.name === 'string') {
+                                    dispatch(updateUserName(response.name))
+                                    dispatch(updateUserEmail(response.id))
+                                    dispatch(updateUserPhoneNum(response.phoneNum))
+                                    dispatch(updateUserBank(response.bank))
+                                    dispatch(updateUserAccount(response.account))
                                     dispatch(update())
                                 }
                             });
