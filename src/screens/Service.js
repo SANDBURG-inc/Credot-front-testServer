@@ -153,18 +153,8 @@ const Service = () => {
             <LookupCard>
               <img src={require("../img/coupang_wing.png")} height="20"></img>
               <div style={{ padding: "20px 0px" }}>
-                <input
-                  name="id"
-                  placeholder="ID"
-                  onChange={onChange}
-                  value={id}
-                />
-                <input
-                  name="pw"
-                  placeholder="PW"
-                  onChange={onChange}
-                  value={pw}
-                />
+                <input name="id" placeholder="ID" onChange={onChange} value={id} />
+                <input name="pw" placeholder="PW" onChange={onChange} value={pw} />
               </div>
               <button onClick={lookUp}>조회</button>
             </LookupCard>
