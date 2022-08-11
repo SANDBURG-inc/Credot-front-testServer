@@ -129,7 +129,7 @@ const Combobox = (props) => {
 
   useEffect(() => {
     props.setBank(selectedItem);
-  }, [selectedItem]);
+  }, [props, selectedItem]);
 
   const getFilter = (inputValue) => {
     return function Filter(bankList) {
