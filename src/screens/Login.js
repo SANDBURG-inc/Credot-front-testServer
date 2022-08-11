@@ -1,18 +1,15 @@
-import React, { Component, useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthWrapper from '../components/auth/AuthWrapper';
 import AuthContent from '../components/auth/AuthContent';
 import InputWithLabel from './../components/InputWithLabel';
 import AuthButton from './../components/auth/AuthButton';
 import RightAlignedLink from './../components/RightAlignedLink';
-import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import { update, updateUserAccount, updateUserBank, updateUserEmail, updateUserName, updateUserPhoneNum } from "./../redux/store.js"
-import { render } from '@testing-library/react';
 
 const Login = () => {
     let a = useSelector((state) => state.login);
-    let b = useSelector((state)=>state.info);
-    // let a = isLoginSelector();
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
         email: "",

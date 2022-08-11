@@ -1,15 +1,17 @@
-import React, { Component, useState, useCallback, useEffect } from 'react';
 import AuthWrapper from '../components/auth/AuthWrapper';
-import AuthContent from '../components/auth/AuthContent';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AuthButton from './../components/auth/AuthButton';
 import { useDispatch, useSelector } from "react-redux"
-import { Route, Routes, Link, Outlet, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { update } from "./../redux/store.js"
 
 const Mypage = () => {
     let a = useSelector((state) => state.login);
+    let tmpName = useSelector((state) => state.info.name);
+    let tmpEmail = useSelector((state) => state.info.email);
+    let tmpPhoneNum = useSelector((state) => state.info.phoneNum);
+    let tmpBank = useSelector((state) => state.info.bank);
+    let tmpAccount = useSelector((state) => state.info.account);
     const dispatch = useDispatch();
     if (a === false) {
         return (
@@ -20,14 +22,14 @@ const Mypage = () => {
       <AuthWrapper>
           <Form.Group>
               <Form.Label>성함</Form.Label>
-              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="권민성" disabled />
+              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder={tmpName} disabled />
               <Form.Label>이메일</Form.Label>
-              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="test@gmail.com" disabled />
+              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder={tmpEmail} disabled />
               <Form.Label>연락처</Form.Label>
-              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="010-1234-5678" disabled />
+              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder={tmpPhoneNum} disabled />
               <Form.Label style={{margin: "10px 0px 10px 0px"}}>계좌정보</Form.Label>
-              <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="신한은행" disabled />
-              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder="3432491823099" disabled />
+              <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder={tmpBank} disabled />
+              <Form.Control style={{margin: "10px 0px 50px 0px"}} placeholder={tmpAccount} disabled />
               <Form.Label>비밀번호</Form.Label>
               <Form.Control style={{margin: "10px 0px 25px 0px"}} placeholder="현재 비밀번호" />
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호" />
