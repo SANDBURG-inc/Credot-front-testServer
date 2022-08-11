@@ -3,7 +3,7 @@ import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } fro
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 
-let isLogin = createSlice({
+const isLogin = createSlice({
   name: "isLogin",
   initialState: false,
   reducers: {
@@ -13,7 +13,7 @@ let isLogin = createSlice({
   },
 });
 
-let userInfo = createSlice({
+const userInfo = createSlice({
   name: "userInfo",
   initialState: {
     name: "",
@@ -90,6 +90,6 @@ const store = configureStore({
 
 export default store;
 
-export let { update } = isLogin.actions;
-export let { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
+export const { update } = isLogin.actions;
+export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 // export let { updatePassword } = password.actions;
