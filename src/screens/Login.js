@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { update, updateUserAccount, updateUserBank, updateUserEmail, updateUserName, updateUserPhoneNum } from "./../redux/store.js";
 
 const Login = () => {
-  let a = useSelector((state) => state.login);
+  const a = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     email: "",

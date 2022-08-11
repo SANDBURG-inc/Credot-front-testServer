@@ -6,12 +6,12 @@ import { Navigate } from "react-router-dom";
 import { update } from "./../redux/store.js";
 
 const Mypage = () => {
-  let a = useSelector((state) => state.login);
-  let tmpName = useSelector((state) => state.info.name);
-  let tmpEmail = useSelector((state) => state.info.email);
-  let tmpPhoneNum = useSelector((state) => state.info.phoneNum);
-  let tmpBank = useSelector((state) => state.info.bank);
-  let tmpAccount = useSelector((state) => state.info.account);
+  const a = useSelector((state) => state.login);
+  const tmpName = useSelector((state) => state.info.name);
+  const tmpEmail = useSelector((state) => state.info.email);
+  const tmpPhoneNum = useSelector((state) => state.info.phoneNum);
+  const tmpBank = useSelector((state) => state.info.bank);
+  const tmpAccount = useSelector((state) => state.info.account);
   const dispatch = useDispatch();
   if (a === false) {
     console.log("로그인 안됌");
