@@ -72,6 +72,7 @@ let password = createSlice({
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['token']
 };
 
 const rootReducer = combineReducers({
