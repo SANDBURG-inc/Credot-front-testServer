@@ -7,7 +7,6 @@ import { update } from "./../redux/store.js"
 
 const Mypage = () => {
     let a = useSelector((state) => state.login);
-    const currentpw = useSelector((state) => state.pw);
     let tmpName = useSelector((state) => state.info.name);
     let tmpEmail = useSelector((state) => state.info.email);
     let tmpPhoneNum = useSelector((state) => state.info.phoneNum);
