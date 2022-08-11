@@ -63,11 +63,11 @@ const Mypage = () => {
             console.log(newPassword);
             fetch(`http://localhost:9000/database/changepw?currentid=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
             // fetch('http://localhost:9000/database/changepw?currentid='+tmpName+'&currentpw='+curPassword+'&futurepw='+newPassword)
+            .then((response) => 
+              response.text()
+            )
             .then((response) => {
-              response.text();
-            })
-            .then((response) => {
-              console.log(response);
+              alert(response);
             });
           }}
         >
