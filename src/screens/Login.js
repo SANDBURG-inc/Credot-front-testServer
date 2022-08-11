@@ -102,13 +102,14 @@ const Login = () => {
                                 }
                             )
                             .then(response =>{
-                                console.log(response.name)
+                                console.log(response.pw)
                                 if (typeof response.name === 'string') {
                                     dispatch(updateUserName(response.name))
                                     dispatch(updateUserEmail(response.id))
                                     dispatch(updateUserPhoneNum(response.phoneNum))
                                     dispatch(updateUserBank(response.bank))
                                     dispatch(updateUserAccount(response.account))
+                                    // dispatch(updatePassword(response.pw))
                                     dispatch(update())
                                 }
                             });

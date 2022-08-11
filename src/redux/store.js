@@ -59,15 +59,15 @@ let userInfo = createSlice({
 })
 
 // eslint-disable-next-line no-unused-vars
-let password = createSlice({
-  name: 'password',
-  initialState: '',
-  reducers: {
-    updatePassword(value) {
-      return value
-    }
-  }
-})
+// let password = createSlice({
+//   name: 'password',
+//   initialState: '',
+//   reducers: {
+//     updatePassword(state, value) {
+//       return value.payload
+//     }
+//   }
+// })
 
 const persistConfig = {
   key: 'root',
@@ -78,6 +78,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   login: isLogin.reducer,
   info: userInfo.reducer
+  // pw: password.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -99,3 +100,4 @@ export default store;
 
 export let { update } = isLogin.actions;
 export let { updateUserName,updateUserEmail,updateUserPhoneNum,updateUserBank,updateUserAccount } = userInfo.actions;
+// export let { updatePassword } = password.actions;
