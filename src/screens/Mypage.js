@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import AuthWrapper from "../components/auth/AuthWrapper";
 import Form from "react-bootstrap/Form";
 import AuthButton from "./../components/auth/AuthButton";
@@ -13,6 +14,28 @@ const Mypage = () => {
   const tmpBank = useSelector((state) => state.info.bank);
   const tmpAccount = useSelector((state) => state.info.account);
   const dispatch = useDispatch();
+
+  const [curPassword, setCurPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const handleOnChange1 = (e) => {
+    setCurPassword(
+      e.target.value
+    );
+  };
+  const handleOnChange2 = (e) => {
+    setNewPassword(
+      e.target.value
+    );
+  };
+
+  useEffect(() => {
+    console.log("현재 비밀번호: " + curPassword);
+  }, [curPassword]);
+
+  useEffect(() => {
+    console.log("새 비밀번호: " + newPassword);
+  }, [newPassword]);
+
   if (a === false) {
     console.log("로그인 안됌");
     return <Navigate to="/" />;
@@ -30,12 +53,22 @@ const Mypage = () => {
         <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder={tmpBank} disabled />
         <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpAccount} disabled />
         <Form.Label>비밀번호</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 25px 0px" }} placeholder="현재 비밀번호" />
-        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호" />
+        <Form.Control style={{ margin: "10px 0px 25px 0px" }} placeholder="현재 비밀번호" onChange={handleOnChange1}/>
+        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호" onChange={handleOnChange2}/>
         <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호 확인" />
         <AuthButton
-          onClick={async () => {
-            // await fetch('http://localhost:9000/database/changepw?currentid=<redux현재id>&currentpw=<redux현재pw>&futurepw=<바꾸고싶은 pw>');
+          onClick={() => {
+            console.log(tmpEmail);
+            console.log(curPassword);
+            console.log(newPassword);
+            fetch(`http://localhost:9000/database/changepw?currentid=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
+            // fetch('http://localhost:9000/database/changepw?currentid='+tmpName+'&currentpw='+curPassword+'&futurepw='+newPassword)
+            .then((response) => {
+              response.text();
+            })
+            .then((response) => {
+              console.log(response);
+            });
           }}
         >
           비밀번호 수정
