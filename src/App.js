@@ -9,8 +9,6 @@ import Mypage from "./screens/Mypage";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import NavBarElement from "./components/NavBarElement";
-
-import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
