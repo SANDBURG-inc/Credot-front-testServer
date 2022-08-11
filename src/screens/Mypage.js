@@ -7,6 +7,7 @@ import { update } from "./../redux/store.js"
 
 const Mypage = () => {
     let a = useSelector((state) => state.login);
+    const currentpw = useSelector((state) => state.pw);
     let tmpName = useSelector((state) => state.info.name);
     let tmpEmail = useSelector((state) => state.info.email);
     let tmpPhoneNum = useSelector((state) => state.info.phoneNum);
@@ -14,6 +15,7 @@ const Mypage = () => {
     let tmpAccount = useSelector((state) => state.info.account);
     const dispatch = useDispatch();
     if (a === false) {
+        console.log("로그인 안됌");
         return (
             <Navigate to="/" />
         );
@@ -34,7 +36,9 @@ const Mypage = () => {
               <Form.Control style={{margin: "10px 0px 25px 0px"}} placeholder="현재 비밀번호" />
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호" />
               <Form.Control style={{margin: "10px 0px 10px 0px"}} placeholder="새 비밀번호 확인" />
-              <AuthButton onClick={()=>{}}>비밀번호 수정</AuthButton>
+              <AuthButton onClick={async()=>{
+                // await fetch('http://localhost:9000/database/changepw?currentid=<redux현재id>&currentpw=<redux현재pw>&futurepw=<바꾸고싶은 pw>');
+              }}>비밀번호 수정</AuthButton>
               <AuthButton onClick={async()=>{
                 await fetch('http://localhost:9000/logout');
                 dispatch(update());
