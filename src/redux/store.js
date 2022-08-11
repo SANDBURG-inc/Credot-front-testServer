@@ -1,6 +1,5 @@
-import { configureStore, createSlice, createSelector, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, createSlice, combineReducers } from '@reduxjs/toolkit';
 import {
-  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -32,20 +31,20 @@ let userInfo = createSlice({
     account: '',
   },
   reducers : {
-    updateUserName(state,a) {
-      state.name = a.payload
+    updateUserName(state, value) {
+      state.name = value.payload
     },
-    updateUserEmail(state,a) {
-      state.email = a.payload
+    updateUserEmail(state, value) {
+      state.email = value.payload
     },
-    updateUserPhoneNum(state,a) {
-      state.phoneNum = a.payload
+    updateUserPhoneNum(state, value) {
+      state.phoneNum = value.payload
     },
-    updateUserBank(state,a) {
-      state.bank = a.payload
+    updateUserBank(state, value) {
+      state.bank = value.payload
     },
-    updateUserAccount(state,a) {
-      state.account = a.payload
+    updateUserAccount(state, value) {
+      state.account = value.payload
     },
     removeUserInfo() {
       return {
@@ -55,6 +54,17 @@ let userInfo = createSlice({
         bank: '',
         account: '',
       }
+    }
+  }
+})
+
+// eslint-disable-next-line no-unused-vars
+let password = createSlice({
+  name: 'password',
+  initialState: '',
+  reducers: {
+    updatePassword(value) {
+      return value
     }
   }
 })
@@ -78,6 +88,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
+      // eslint-disable-next-line no-dupe-keys
       serializableCheck: false,
             }).concat(logger),
     // }),
