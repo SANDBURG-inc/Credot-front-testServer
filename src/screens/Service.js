@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 let Text = styled.p`
   color: #ec5f2c;
@@ -30,6 +31,8 @@ let LookupCard = styled.div`
 `;
 
 const Service = () => {
+  const HOST = useSelector((state) => state.HOST);
+
   const [inputs, setInputs] = useState({
     id: "",
     pw: "",
@@ -53,7 +56,7 @@ const Service = () => {
     console.log("조회 클릭");
     if (id && pw) {
       console.log("fetch");
-      fetch("http://3.38.232.237:9000/coupang/crawl?id=" + id + "&pw=" + pw)
+      fetch(HOST + "/coupang/crawl?id=" + id + "&pw=" + pw)
         .then((response) => {
           console.log(response);
           if (!response.ok) {
@@ -63,13 +66,13 @@ const Service = () => {
         })
         .then((결과) => {
           console.log("결과");
-          if (결과 == "idpwError") {
+          if (결과 === "idpwError") {
             alert(결과);
             return;
-          } else if (결과 == "auth") {
+          } else if (결과 === "auth") {
             const inputString = prompt("인증번호를 입력해주세요", "인증번호");
-            if (inputString != "") {
-              fetch("http://3.38.232.237:9000/coupang/auth?code=" + inputString)
+            if (inputString !== "") {
+              fetch(HOST + "/coupang/auth?code=" + inputString)
                 .then((response) => {
                   if (!response.ok) {
                     throw new Error("400아니면 500에러남");

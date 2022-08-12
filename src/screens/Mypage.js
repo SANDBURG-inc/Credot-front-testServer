@@ -8,6 +8,8 @@ import { update } from "./../redux/store.js";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
+  const HOST = useSelector((state) => state.HOST);
+
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
   const tmpPhoneNum = useSelector((state) => state.info.phoneNum);
@@ -18,14 +20,10 @@ const Mypage = () => {
   const [curPassword, setCurPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const handleOnChange1 = (e) => {
-    setCurPassword(
-      e.target.value
-    );
+    setCurPassword(e.target.value);
   };
   const handleOnChange2 = (e) => {
-    setNewPassword(
-      e.target.value
-    );
+    setNewPassword(e.target.value);
   };
 
   useEffect(() => {
@@ -53,29 +51,26 @@ const Mypage = () => {
         <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder={tmpBank} disabled />
         <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpAccount} disabled />
         <Form.Label>비밀번호</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 25px 0px" }} placeholder="현재 비밀번호" onChange={handleOnChange1}/>
-        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호" onChange={handleOnChange2}/>
+        <Form.Control style={{ margin: "10px 0px 25px 0px" }} placeholder="현재 비밀번호" onChange={handleOnChange1} />
+        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호" onChange={handleOnChange2} />
         <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호 확인" />
         <AuthButton
           onClick={() => {
             console.log(tmpEmail);
             console.log(curPassword);
             console.log(newPassword);
-            fetch(`http://localhost:9000/database/changepw?currentid=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
-            // fetch('http://localhost:9000/database/changepw?currentid='+tmpName+'&currentpw='+curPassword+'&futurepw='+newPassword)
-            .then((response) => 
-              response.text()
-            )
-            .then((response) => {
-              alert(response);
-            });
+            fetch(HOST + `/database/changepw?currentid=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
+              .then((response) => response.text())
+              .then((response) => {
+                alert(response);
+              });
           }}
         >
           비밀번호 수정
         </AuthButton>
         <AuthButton
           onClick={async () => {
-            await fetch("http://localhost:9000/logout");
+            await fetch(HOST + "/logout");
             dispatch(update());
             localStorage.clear();
             alert("로그아웃 되었습니다");

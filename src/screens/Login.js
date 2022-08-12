@@ -10,6 +10,8 @@ import { update, updateUserAccount, updateUserBank, updateUserEmail, updateUserN
 
 const Login = () => {
   const a = useSelector((state) => state.login);
+  const HOST = useSelector((state) => state.HOST);
+
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     email: "",
@@ -79,7 +81,7 @@ const Login = () => {
       <AuthButton
         onClick={async () => {
           handleOnClick();
-          fetch("http://localhost:9000/login?id=" + inputs.email + "&pw=" + inputs.password, {
+          fetch(HOST + "/login?id=" + inputs.email + "&pw=" + inputs.password, {
             method: "get",
             headers: {
               "Content-Type": "application/json; charset=utf-8",
