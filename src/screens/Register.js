@@ -6,10 +6,16 @@ import AuthButton from "./../components/auth/AuthButton";
 import RightAlignedLink from "./../components/RightAlignedLink";
 import Button from 'react-bootstrap/Button';
 import { useCombobox } from "downshift";
+import { Navigate } from "react-router-dom";
 import { bankList } from "./../data/bankList";
+import { useSelector } from "react-redux";
+import { serializeCache } from "axios-hooks";
+
 
 const Register = () => {
+  const HOST = useSelector((state) => state.HOST);
   const [flag, setFlag] = useState(0);
+  const [r, setR] = useState(false);
   const [bank, setBank] = useState("초기값");
   const [account, setAccount] = useState("초기값");
   const [inputs, setInputs] = useState({
@@ -44,6 +50,10 @@ const Register = () => {
     console.log(users);
   }, [users]);
 
+  if (r === true) {
+    return <Navigate to="/" />;
+  }
+
   const handleOnClick = () => {
     const { name, email, phoneNum, password } = inputs;
 
@@ -70,7 +80,7 @@ const Register = () => {
         <InputWithLabel label="이름" name="name" placeholder=" 이름" onChange={handleOnChange} />
         <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
         <Button className='button' style={{ margin: "20px 0px 65px 0px" }} variant='light' onClick={() => {
-          fetch('http://localhost:9000/database/checkEmail?id=' + inputs.email)
+          fetch(HOST+'/database/checkEmail?id=' + inputs.email)
           .then((response) => response.text())
           .then((response) => alert(response))
         }}>이메일 중복확인</Button>
@@ -104,7 +114,7 @@ const Register = () => {
         onClick={() => {
           handleOnClick();
           fetch(
-            "http://api.credot.kr/database/register?id=" +
+            HOST+"/database/register?id=" +
               users[users.length - 1].email +
               "&name=" +
               users[users.length - 1].name +
@@ -116,9 +126,19 @@ const Register = () => {
               bank +
               "&account=" +
               account
-          ).then((response) => {
+          ).then((response)=>response.text())
+          .then((response) => {
+            console.log(response)
             if (!response) {
               console.log("fetch error");
+            }
+            else if (response) {
+              setR(true);
+              console.log(r);
+              alert(users[users.length - 1].name + "님 환영합니다.");
+            }
+            else {
+              alert("제대로 입력해라 마");
             }
           });
         }}
