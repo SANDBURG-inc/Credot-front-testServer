@@ -3,6 +3,12 @@ import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } fro
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 
+const HOST = createSlice({
+  name: "HOST",
+  initialState: "http://localhost:9000",
+  // initialState: "http://3.38.232.237:9000",
+});
+
 const isLogin = createSlice({
   name: "isLogin",
   initialState: false,
@@ -70,6 +76,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   login: isLogin.reducer,
   info: userInfo.reducer,
+  HOST: HOST.reducer,
   // pw: password.reducer
 });
 
