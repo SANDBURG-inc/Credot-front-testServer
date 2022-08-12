@@ -4,6 +4,7 @@ import AuthContent from "../components/auth/AuthContent";
 import InputWithLabel from "./../components/InputWithLabel";
 import AuthButton from "./../components/auth/AuthButton";
 import RightAlignedLink from "./../components/RightAlignedLink";
+import Button from 'react-bootstrap/Button';
 import { useCombobox } from "downshift";
 import { bankList } from "./../data/bankList";
 
@@ -68,6 +69,11 @@ const Register = () => {
       <AuthContent title="회원가입">
         <InputWithLabel label="이름" name="name" placeholder=" 이름" onChange={handleOnChange} />
         <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
+        <Button className='button' style={{ margin: "20px 0px 65px 0px" }} variant='light' onClick={() => {
+          fetch('http://localhost:9000/database/checkEmail?id=' + inputs.email)
+          .then((response) => response.text())
+          .then((response) => alert(response))
+        }}>이메일 중복확인</Button>
         <InputWithLabel label="연락처" name="phoneNum" placeholder="  연락처" onChange={handleOnChange} />
         <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange} />
         <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChange} />
