@@ -16,6 +16,7 @@ const Register = () => {
   const HOST = useSelector((state) => state.HOST);
   const [flag, setFlag] = useState(0);
   const [r, setR] = useState(false);
+  const [check, setCheck] = useState(false);
   const [bank, setBank] = useState("초기값");
   const [account, setAccount] = useState("초기값");
   const [inputs, setInputs] = useState({
@@ -24,6 +25,7 @@ const Register = () => {
     phoneNum: "",
     password: "",
   });
+  const [checkPw, setCheckPw] = useState("");
   const [users, setUsers] = useState([]);
 
   const handleOnChange = (e) => {
@@ -32,6 +34,10 @@ const Register = () => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleOnChangeCheckPw = (e) => {
+    setCheckPw(e.target.value);
   };
 
   useEffect(() => {
@@ -47,6 +53,10 @@ const Register = () => {
   }, [inputs]);
 
   useEffect(() => {
+    console.log("비밀번호 확인 값: " + checkPw);
+  }, [checkPw]);
+
+  useEffect(() => {
     console.log(users);
   }, [users]);
 
@@ -55,23 +65,31 @@ const Register = () => {
   }
 
   const handleOnClick = () => {
-    const { name, email, phoneNum, password } = inputs;
+    if (inputs.password === "" || checkPw === "") {
+      alert("비밀번호를 확인해주세요!");
+    } else if (inputs.password === "" || checkPw === "") {
+      const { name, email, phoneNum, password } = inputs;
 
-    // users 배열에 추가할 user 객체
-    const user = { name, email, phoneNum, password };
+      // users 배열에 추가할 user 객체
+      const user = { name, email, phoneNum, password };
 
-    // spread 연산을 통해서 기존의 값을 복사하고, users State에 추가
-    setUsers([...users, user]);
+      // spread 연산을 통해서 기존의 값을 복사하고, users State에 추가
+      setUsers([...users, user]);
 
-    // 입력이 끝나고 inputs를 비워주는 역할
-    // setInputs({
-    //     name: "",
-    //     email: "",
-    //     phoneNum: "",
-    //     password: "",
-    //     bank: "",
-    //     account: "",
-    // })
+      // 입력이 끝나고 inputs를 비워주는 역할
+      // setInputs({
+      //     name: "",
+      //     email: "",
+      //     phoneNum: "",
+      //     password: "",
+      //     bank: "",
+      //     account: "",
+      // })
+      setFlag();
+    } 
+    else {
+      alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
+    }
   };
 
   return flag === 0 ? (
@@ -80,17 +98,20 @@ const Register = () => {
         <InputWithLabel label="이름" name="name" placeholder=" 이름" onChange={handleOnChange} />
         <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
         <Button className='button' style={{ margin: "20px 0px 65px 0px" }} variant='light' onClick={() => {
-          fetch(HOST+'/database/checkEmail?id=' + inputs.email)
-          .then((response) => response.text())
-          .then((response) => alert(response))
+          if (!inputs.email.includes('@')) {
+            alert('이메일 형식을 올바르게 입력해주세요!');
+          } else {
+            fetch(HOST+'/database/checkEmail?id=' + inputs.email)
+            .then((response) => response.text())
+            .then((response) => alert(response))
+          }
         }}>이메일 중복확인</Button>
         <InputWithLabel label="연락처" name="phoneNum" placeholder="  연락처" onChange={handleOnChange} />
         <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange} />
-        <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChange} />
+        <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChangeCheckPw} />
         <AuthButton
           onClick={() => {
             handleOnClick();
-            setFlag();
           }}
         >
           다음
