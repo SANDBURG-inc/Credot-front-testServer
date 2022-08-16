@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import ContractModal from "../components/contractModal/ContractModal";
 
 let Text = styled.p`
   color: #ec5f2c;
@@ -32,6 +33,15 @@ let LookupCard = styled.div`
 
 const Service = () => {
   const HOST = useSelector((state) => state.HOST);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const [inputs, setInputs] = useState({
     id: "",
@@ -148,8 +158,11 @@ const Service = () => {
         >
           {"즉시 정산 가능 금액 " + result + " 원"}
         </p>
+        <button onClick={openModal} style={{ padding: "4px" }}>
+          선정산 받기
+        </button>
       </OrangeContainer>
-
+      <ContractModal open={modalOpen} close={closeModal} header="계약서 작성"></ContractModal>
       <OrangeRoundContainer>
         <Row>
           <Col>
