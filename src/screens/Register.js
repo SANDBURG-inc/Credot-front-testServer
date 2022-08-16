@@ -16,7 +16,6 @@ const Register = () => {
   const HOST = useSelector((state) => state.HOST);
   const [flag, setFlag] = useState(0);
   const [r, setR] = useState(false);
-  const [check, setCheck] = useState(false);
   const [bank, setBank] = useState("초기값");
   const [account, setAccount] = useState("초기값");
   const [inputs, setInputs] = useState({
@@ -67,7 +66,7 @@ const Register = () => {
   const handleOnClick = () => {
     if (inputs.password === "" || checkPw === "") {
       alert("비밀번호를 확인해주세요!");
-    } else if (inputs.password === "" || checkPw === "") {
+    } else if (inputs.password === checkPw) {
       const { name, email, phoneNum, password } = inputs;
 
       // users 배열에 추가할 user 객체
