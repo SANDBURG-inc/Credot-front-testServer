@@ -4,12 +4,11 @@ import AuthContent from "../components/auth/AuthContent";
 import InputWithLabel from "./../components/InputWithLabel";
 import AuthButton from "./../components/auth/AuthButton";
 import RightAlignedLink from "./../components/RightAlignedLink";
-import Button from 'react-bootstrap/Button';
+import { Button, Form } from 'react-bootstrap';
 import { useCombobox } from "downshift";
 import { Navigate } from "react-router-dom";
 import { bankList } from "./../data/bankList";
 import { useSelector } from "react-redux";
-import { serializeCache } from "axios-hooks";
 
 
 const Register = () => {
@@ -24,6 +23,14 @@ const Register = () => {
     phoneNum: "",
     password: "",
   });
+  const [incInputs, setIncInputs] = useState({
+    corporateName: "",
+    ceo: "",
+    businessLoc: "",
+    registerNum: "",
+  });
+
+  const [checkPw, setCheckPw] = useState("");
   const [users, setUsers] = useState([]);
 
   const handleOnChange = (e) => {
@@ -32,6 +39,18 @@ const Register = () => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleOnChange2 = (e) => {
+    console.log(e.target.name + ": " + e.target.value);
+    setInputs({
+      ...incInputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleOnChangeCheckPw = (e) => {
+    setCheckPw(e.target.value);
   };
 
   useEffect(() => {
@@ -47,6 +66,12 @@ const Register = () => {
   }, [inputs]);
 
   useEffect(() => {
+    console.log("비밀번호 확인 값: " + checkPw);
+  }, [checkPw]);
+
+  
+
+  useEffect(() => {
     console.log(users);
   }, [users]);
 
@@ -55,23 +80,31 @@ const Register = () => {
   }
 
   const handleOnClick = () => {
-    const { name, email, phoneNum, password } = inputs;
+    if (inputs.password === "" || checkPw === "") {
+      alert("비밀번호를 확인해주세요!");
+    } else if (inputs.password === checkPw) {
+      const { name, email, phoneNum, password } = inputs;
 
-    // users 배열에 추가할 user 객체
-    const user = { name, email, phoneNum, password };
+      // users 배열에 추가할 user 객체
+      const user = { name, email, phoneNum, password };
 
-    // spread 연산을 통해서 기존의 값을 복사하고, users State에 추가
-    setUsers([...users, user]);
+      // spread 연산을 통해서 기존의 값을 복사하고, users State에 추가
+      setUsers([...users, user]);
 
-    // 입력이 끝나고 inputs를 비워주는 역할
-    // setInputs({
-    //     name: "",
-    //     email: "",
-    //     phoneNum: "",
-    //     password: "",
-    //     bank: "",
-    //     account: "",
-    // })
+      // 입력이 끝나고 inputs를 비워주는 역할
+      setInputs({
+          name: "",
+          email: "",
+          phoneNum: "",
+          password: "",
+          bank: "",
+          account: "",
+      })
+      setFlag();
+    } 
+    else {
+      alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
+    }
   };
 
   return flag === 0 ? (
@@ -80,18 +113,22 @@ const Register = () => {
         <InputWithLabel label="이름" name="name" placeholder=" 이름" onChange={handleOnChange} />
         <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
         <Button className='button' style={{ margin: "20px 0px 65px 0px" }} variant='light' onClick={() => {
-          fetch(HOST+'/database/checkEmail?id=' + inputs.email)
-          .then((response) => response.text())
-          .then((response) => alert(response))
+          if (!inputs.email.includes('@')) {
+            alert('이메일 형식을 올바르게 입력해주세요!');
+          } else {
+            fetch(HOST+'/database/checkEmail?id=' + inputs.email)
+            .then((response) => response.text())
+            .then((response) => alert(response))
+          }
         }}>이메일 중복확인</Button>
         <InputWithLabel label="연락처" name="phoneNum" placeholder="  연락처" onChange={handleOnChange} />
         <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange} />
-        <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChange} />
+        <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChangeCheckPw} />
         <AuthButton
           onClick={() => {
             handleOnClick();
-            setFlag();
           }}
+          // onChange={handleOnChange}
         >
           다음
         </AuthButton>
@@ -100,15 +137,18 @@ const Register = () => {
     </AuthWrapper>
   ) : (
     <AuthWrapper>
+      <AuthContent title="사업자 정보를 입력해주세요">
+        <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="corporateName" placeholder="법인명" onChange={handleOnChange2} />
+        <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="ceo" placeholder="대표명" onChange={handleOnChange2} />
+        <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="businessLoc" placeholder="사업장 소재지" onChange={handleOnChange2} />
+        <Form.Control style={{ margin: "10px 0px 70px 0px" }} name="registerNum" placeholder="사업자 등록번호" onChange={handleOnChange2} />
+      </AuthContent>
       <AuthContent title="선정산 받으실 계좌를 입력해주세요">
         <Combobox name="bank" setBank={setBank} />
-        <input
-          name="account"
-          placeholder="  계좌번호"
+        <Form.Control style={{ margin: "10px 0px 50px 0px" }} name="account" placeholder="  계좌번호"
           onChange={(e) => {
             setAccount(e.target.value);
-          }}
-        />
+          }} />
       </AuthContent>
       <AuthButton
         onClick={() => {
