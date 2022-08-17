@@ -43,7 +43,7 @@ const Register = () => {
 
   const handleOnChange2 = (e) => {
     console.log(e.target.name + ": " + e.target.value);
-    setInputs({
+    setIncInputs({
       ...incInputs,
       [e.target.name]: e.target.value,
     });
@@ -64,6 +64,10 @@ const Register = () => {
   useEffect(() => {
     console.log(inputs);
   }, [inputs]);
+
+  useEffect(() => {
+    console.log(incInputs);
+  }, [incInputs]);
 
   useEffect(() => {
     console.log("비밀번호 확인 값: " + checkPw);
@@ -137,13 +141,13 @@ const Register = () => {
     </AuthWrapper>
   ) : (
     <AuthWrapper>
-      <AuthContent title="사업자 정보를 입력해주세요">
+      <AuthContent title="사업자 정보를 알려주세요">
         <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="corporateName" placeholder="법인명" onChange={handleOnChange2} />
         <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="ceo" placeholder="대표명" onChange={handleOnChange2} />
         <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="businessLoc" placeholder="사업장 소재지" onChange={handleOnChange2} />
         <Form.Control style={{ margin: "10px 0px 70px 0px" }} name="registerNum" placeholder="사업자 등록번호" onChange={handleOnChange2} />
       </AuthContent>
-      <AuthContent title="선정산 받으실 계좌를 입력해주세요">
+      <AuthContent title="선정산 받으실 계좌를 알려주세요">
         <Combobox name="bank" setBank={setBank} />
         <Form.Control style={{ margin: "10px 0px 50px 0px" }} name="account" placeholder="  계좌번호"
           onChange={(e) => {
