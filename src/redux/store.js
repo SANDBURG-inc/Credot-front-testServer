@@ -56,6 +56,30 @@ const userInfo = createSlice({
   },
 });
 
+const incInfo = createSlice({
+  name: "userInfo",
+  initialState: {
+    corporateName: "",
+    ceo: "",
+    businessLoc: "",
+    registerNum: "",
+  },
+  reducers: {
+    updateCorporateName(state, value) {
+      state.corporateName = value.payload;
+    },
+    updateCeo(state, value) {
+      state.ceo = value.payload;
+    },
+    updateBusinessLoc(state, value) {
+      state.businessLoc = value.payload;
+    },
+    updateRegisterNum(state, value) {
+      state.registerNum = value.payload;
+    },
+  },
+});
+
 
 // eslint-disable-next-line no-unused-vars
 // let password = createSlice({
@@ -77,8 +101,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   login: isLogin.reducer,
   info: userInfo.reducer,
+  incInfo: incInfo.reducer,
   HOST: HOST.reducer,
-  // pw: password.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -100,4 +124,5 @@ export default store;
 
 export const { update } = isLogin.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
+export const { updateCorporateName, updateCeo, updateBusinessLoc, updateRegisterNum } = incInfo.actions;
 // export let { updatePassword } = password.actions;
