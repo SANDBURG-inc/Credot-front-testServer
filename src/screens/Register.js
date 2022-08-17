@@ -4,12 +4,32 @@ import AuthContent from "../components/auth/AuthContent";
 import InputWithLabel from "./../components/InputWithLabel";
 import AuthButton from "./../components/auth/AuthButton";
 import RightAlignedLink from "./../components/RightAlignedLink";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form } from "react-bootstrap";
 import { useCombobox } from "downshift";
 import { Navigate } from "react-router-dom";
 import { bankList } from "./../data/bankList";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import oc from "open-color";
 
+const BankInput = styled.input`
+  width: 65%;
+  border: 1px solid ${oc.gray[3]};
+  line-height: 2rem;
+  padding-left: 0.5rem;
+`;
+
+const AccountInput = styled.input`
+  width: 72%;
+  border: 1px solid ${oc.gray[3]};
+  line-height: 2rem;
+  padding-left: 0.5rem;
+`;
+
+const Btn = styled.button`
+  border: 1px solid ${oc.gray[3]};
+  line-height: 2rem;
+`;
 
 const Register = () => {
   const HOST = useSelector((state) => state.HOST);
@@ -30,6 +50,7 @@ const Register = () => {
     registerNum: "",
   });
 
+  const [checkEmail, setCheckEmail] = useState(false);
   const [checkPw, setCheckPw] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -73,8 +94,6 @@ const Register = () => {
     console.log("비밀번호 확인 값: " + checkPw);
   }, [checkPw]);
 
-  
-
   useEffect(() => {
     console.log(users);
   }, [users]);
@@ -97,16 +116,15 @@ const Register = () => {
 
       // 입력이 끝나고 inputs를 비워주는 역할
       setInputs({
-          name: "",
-          email: "",
-          phoneNum: "",
-          password: "",
-          bank: "",
-          account: "",
-      })
+        name: "",
+        email: "",
+        phoneNum: "",
+        password: "",
+        bank: "",
+        account: "",
+      });
       setFlag();
-    } 
-    else {
+    } else {
       alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
     }
   };
@@ -116,15 +134,29 @@ const Register = () => {
       <AuthContent title="회원가입">
         <InputWithLabel label="이름" name="name" placeholder=" 이름" onChange={handleOnChange} />
         <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
-        <Button className='button' style={{ margin: "20px 0px 65px 0px" }} variant='light' onClick={() => {
-          if (!inputs.email.includes('@')) {
-            alert('이메일 형식을 올바르게 입력해주세요!');
-          } else {
-            fetch(HOST+'/database/checkEmail?id=' + inputs.email)
-            .then((response) => response.text())
-            .then((response) => alert(response))
-          }
-        }}>이메일 중복확인</Button>
+        <Button
+          className="button"
+          style={{ margin: "20px 0px 65px 0px" }}
+          variant="light"
+          onClick={() => {
+            if (!inputs.email.includes("@")) {
+              alert("이메일 형식을 올바르게 입력해주세요!");
+            } else {
+              fetch(HOST + "/database/checkEmail?id=" + inputs.email)
+                .then((response) => response.json())
+                .then((response) => {
+                  console.log(response);
+                  if (response) {
+                    alert("중복되는 이메일이 있습니다.");
+                  } else {
+                    alert("사용가능한 이메일입니다.");
+                  }
+                });
+            }
+          }}
+        >
+          이메일 중복확인
+        </Button>
         <InputWithLabel label="연락처" name="phoneNum" placeholder="  연락처" onChange={handleOnChange} />
         <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange} />
         <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChangeCheckPw} />
@@ -149,16 +181,21 @@ const Register = () => {
       </AuthContent>
       <AuthContent title="선정산 받으실 계좌를 알려주세요">
         <Combobox name="bank" setBank={setBank} />
-        <Form.Control style={{ margin: "10px 0px 50px 0px" }} name="account" placeholder="  계좌번호"
+        <AccountInput
+          style={{ margin: "10px 0px 10px 0px" }}
+          name="account"
+          placeholder="계좌번호"
           onChange={(e) => {
             setAccount(e.target.value);
-          }} />
+          }}
+        />
       </AuthContent>
       <AuthButton
         onClick={() => {
           handleOnClick();
           fetch(
-            HOST+"/database/register?id=" +
+            HOST +
+              "/database/register?id=" +
               users[users.length - 1].email +
               "&name=" +
               users[users.length - 1].name +
@@ -170,21 +207,20 @@ const Register = () => {
               bank +
               "&account=" +
               account
-          ).then((response)=>response.text())
-          .then((response) => {
-            console.log(response)
-            if (!response) {
-              console.log("fetch error");
-            }
-            else if (response) {
-              setR(true);
-              console.log(r);
-              alert(users[users.length - 1].name + "님 환영합니다.");
-            }
-            else {
-              alert("제대로 입력해라 마");
-            }
-          });
+          )
+            .then((response) => response.text())
+            .then((response) => {
+              console.log(response);
+              if (!response) {
+                console.log("fetch error");
+              } else if (response) {
+                setR(true);
+                console.log(r);
+                alert(users[users.length - 1].name + "님 환영합니다.");
+              } else {
+                alert("제대로 입력해라 마");
+              }
+            });
         }}
       >
         회원가입 완료
@@ -217,8 +253,8 @@ const Combobox = (props) => {
   return (
     <>
       <div {...getComboboxProps()}>
-        <input readOnly name="bank" placeholder="  은행" {...getInputProps()} />
-        <button {...getToggleButtonProps()}>{isOpen ? <>&#8593;</> : <>&#8595;</>}</button>
+        <BankInput readOnly name="bank" placeholder="은행" {...getInputProps()} />
+        <Btn {...getToggleButtonProps()}>{isOpen ? <>&#8593;</> : <>&#8595;</>}</Btn>
       </div>
       <ul {...getMenuProps()}>
         {isOpen &&
