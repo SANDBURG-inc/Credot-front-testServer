@@ -33,6 +33,7 @@ let LookupCard = styled.div`
 
 const Service = () => {
   const HOST = useSelector((state) => state.HOST);
+  let isLogined = useSelector((state) => state.login);
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -50,7 +51,30 @@ const Service = () => {
 
   const [result, setResult] = useState(0);
 
+  const [isChecked, setIsChecked] = useState(false);
+
   const { id, pw } = inputs;
+
+  const signing = () => {
+    //로그인이 안된 경우
+    if (!isLogined) {
+      alert("로그인 후 선정산 받기가 가능합니다.");
+      return;
+    }
+
+    //조회를 하지 않았을 경우
+    if (!isChecked) {
+      alert("선정산 가능 금액을 조회해주세요.");
+      return;
+    }
+
+    //선정산 가능 금액이 0원일 경우
+    if (result === 0) {
+      alert("선정산 가능한 금액이 없습니다.");
+      return;
+    }
+    openModal();
+  };
 
   const onChange = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
@@ -96,6 +120,7 @@ const Service = () => {
                   }
                   var result = 결과;
                   setResult(JSON.parse(result).price);
+                  setIsChecked(true);
                   alert(result);
                 });
             }
@@ -103,6 +128,8 @@ const Service = () => {
           } else {
             let result = 결과;
             setResult(JSON.parse(result).price);
+            setIsChecked(true);
+            alert(result);
             return;
           }
         })
@@ -158,11 +185,11 @@ const Service = () => {
         >
           {"즉시 정산 가능 금액 " + result + " 원"}
         </p>
-        <button onClick={openModal} style={{ padding: "4px" }}>
+        <button onClick={signing} style={{ padding: "4px" }}>
           선정산 받기
         </button>
       </OrangeContainer>
-      <ContractModal open={modalOpen} close={closeModal} header="계약서 작성"></ContractModal>
+      <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={result} deadline={result}></ContractModal> {/* 수정필요 */}
       <OrangeRoundContainer>
         <Row>
           <Col>
