@@ -50,6 +50,7 @@ const Register = () => {
     registerNum: "",
   });
 
+  const [checkEmail, setCheckEmail] = useState(false);
   const [checkPw, setCheckPw] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -142,8 +143,15 @@ const Register = () => {
               alert("이메일 형식을 올바르게 입력해주세요!");
             } else {
               fetch(HOST + "/database/checkEmail?id=" + inputs.email)
-                .then((response) => response.text())
-                .then((response) => alert(response));
+                .then((response) => response.json())
+                .then((response) => {
+                  console.log(response);
+                  if (response) {
+                    alert("중복되는 이메일이 있습니다.");
+                  } else {
+                    alert("사용가능한 이메일입니다.");
+                  }
+                });
             }
           }}
         >
