@@ -149,6 +149,7 @@ const Register = () => {
                   if (response) {
                     alert("중복되는 이메일이 있습니다.");
                   } else {
+                    setCheckEmail(true);
                     alert("사용가능한 이메일입니다.");
                   }
                 });
@@ -162,7 +163,11 @@ const Register = () => {
         <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChangeCheckPw} />
         <AuthButton
           onClick={() => {
-            handleOnClick();
+            if (checkEmail) {
+              handleOnClick();
+            } else {
+              alert("이메일 중복확인을 해주세요!");
+            }
           }}
           // onChange={handleOnChange}
         >
