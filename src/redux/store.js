@@ -62,7 +62,7 @@ const incInfo = createSlice({
     corporateName: "",
     ceo: "",
     businessLoc: "",
-    registerNum: "",
+    corporateNum: "",
   },
   reducers: {
     updateCorporateName(state, value) {
@@ -74,8 +74,8 @@ const incInfo = createSlice({
     updateBusinessLoc(state, value) {
       state.businessLoc = value.payload;
     },
-    updateRegisterNum(state, value) {
-      state.registerNum = value.payload;
+    updateCorporateNum(state, value) {
+      state.corporateNum = value.payload;
     },
   },
 });
@@ -123,5 +123,5 @@ export default store;
 
 export const { update } = isLogin.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
-export const { updateCorporateName, updateCeo, updateBusinessLoc, updateRegisterNum } = incInfo.actions;
+export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
 // export let { updatePassword } = password.actions;

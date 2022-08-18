@@ -47,7 +47,7 @@ const Register = () => {
     corporateName: "",
     ceo: "",
     businessLoc: "",
-    registerNum: "",
+    corporateNum: "",
   });
 
   const [checkEmail, setCheckEmail] = useState(false);
@@ -149,6 +149,7 @@ const Register = () => {
                   if (response) {
                     alert("중복되는 이메일이 있습니다.");
                   } else {
+                    setCheckEmail(true);
                     alert("사용가능한 이메일입니다.");
                   }
                 });
@@ -162,7 +163,11 @@ const Register = () => {
         <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChangeCheckPw} />
         <AuthButton
           onClick={() => {
-            handleOnClick();
+            if (checkEmail) {
+              handleOnClick();
+            } else {
+              alert("이메일 중복확인을 해주세요!");
+            }
           }}
           // onChange={handleOnChange}
         >
@@ -177,7 +182,7 @@ const Register = () => {
         <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="corporateName" placeholder="법인명" onChange={handleOnChange2} />
         <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="ceo" placeholder="대표명" onChange={handleOnChange2} />
         <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="businessLoc" placeholder="사업장 소재지" onChange={handleOnChange2} />
-        <Form.Control style={{ margin: "10px 0px 70px 0px" }} name="registerNum" placeholder="사업자 등록번호" onChange={handleOnChange2} />
+        <Form.Control style={{ margin: "10px 0px 70px 0px" }} name="corporateNum" placeholder="사업자 등록번호" onChange={handleOnChange2} />
       </AuthContent>
       <AuthContent title="선정산 받으실 계좌를 알려주세요">
         <Combobox name="bank" setBank={setBank} />
@@ -206,7 +211,15 @@ const Register = () => {
               "&bank=" +
               bank +
               "&account=" +
-              account
+              account +
+              "&corperateName=" +
+              incInputs.corporateName +
+              "&ceo=" +
+              incInputs.ceo +
+              "&businessLoc=" +
+              incInputs.businessLoc +
+              "&corporateNum=" +
+              incInputs.corporateNum
           )
             .then((response) => response.text())
             .then((response) => {
