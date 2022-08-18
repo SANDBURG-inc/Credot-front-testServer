@@ -32,7 +32,7 @@ const ContractModal = (props) => {
             <main>
               <Contract amount={amount} deadline={deadline}></Contract>
               <h3>서명을 입력해주세요. ✍️</h3>
-              <Signature open={openModal} />
+              <Signature open={openModal} amount={amount} deadline={deadline} />
             </main>
             <footer>
               <button className="close" onClick={close}>
