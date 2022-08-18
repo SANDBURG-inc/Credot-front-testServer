@@ -115,24 +115,21 @@ const Login = () => {
                 if (!response) {
                   alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
                 } else {
-                  console.log(response);
-                  if (typeof response.name === "string") {
-                    //userInfo
-                    dispatch(updateUserName(response.name));
-                    dispatch(updateUserEmail(response.id));
-                    dispatch(updateUserPhoneNum(response.phoneNum));
-                    dispatch(updateUserBank(response.bank));
-                    dispatch(updateUserAccount(response.account));
-                    // dispatch(updatePassword(response.pw))
+                  //userInfo
+                  dispatch(updateUserName(response.name));
+                  dispatch(updateUserEmail(response.id));
+                  dispatch(updateUserPhoneNum(response.phoneNum));
+                  dispatch(updateUserBank(response.bank));
+                  dispatch(updateUserAccount(response.account));
+                  // dispatch(updatePassword(response.pw))
 
-                    //incInfo
-                    dispatch(updateCorporateName(response.corporateName));
-                    dispatch(updateCeo(response.ceo));
-                    dispatch(updateBusinessLoc(response.businessLoc));
-                    dispatch(updateCorporateNum(response.corporateNum));
+                  //incInfo
+                  dispatch(updateCorporateName(response.corporateName));
+                  dispatch(updateCeo(response.ceo));
+                  dispatch(updateBusinessLoc(response.businessLoc));
+                  dispatch(updateCorporateNum(response.corporateNum));
 
-                    dispatch(update());
-                  }
+                  dispatch(update());
                 }
               });
           }
