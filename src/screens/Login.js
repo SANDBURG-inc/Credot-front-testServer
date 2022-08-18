@@ -16,7 +16,7 @@ import {
   updateCorporateName,
   updateCeo,
   updateBusinessLoc,
-  updateRegisterNum,
+  updateCorporateNum,
 } from "./../redux/store.js";
 
 const Login = () => {
@@ -91,41 +91,51 @@ const Login = () => {
                             }}>로그인</AuthButton> */}
       <AuthButton
         onClick={async () => {
-          handleOnClick();
-          fetch(HOST + "/login?id=" + inputs.email + "&pw=" + inputs.password, {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-            },
-            credentials: "include",
-          })
-            .then((response) => {
-              console.log(response);
-              if (!response.ok) {
-                console.log("fetch error");
-              }
-              return response.json();
+          if (!inputs.email.includes("@")) {
+            alert("이메일 형식을 올바르게 입력해주세요!");
+          } else if (inputs.password === "") {
+            alert("비밀번호를 입력해주세요!");
+          } else {
+            handleOnClick();
+            fetch(HOST + "/login?id=" + inputs.email + "&pw=" + inputs.password, {
+              method: "get",
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+              },
+              credentials: "include",
             })
-            .then((response) => {
-              console.log(response);
-              if (typeof response.name === "string") {
-                //userInfo
-                dispatch(updateUserName(response.name));
-                dispatch(updateUserEmail(response.id));
-                dispatch(updateUserPhoneNum(response.phoneNum));
-                dispatch(updateUserBank(response.bank));
-                dispatch(updateUserAccount(response.account));
-                // dispatch(updatePassword(response.pw))
+              .then((response) => {
+                console.log(response);
+                if (!response.ok) {
+                  console.log("fetch error");
+                }
+                return response.json();
+              })
+              .then((response) => {
+                if (!response) {
+                  alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
+                } else {
+                  console.log(response);
+                  if (typeof response.name === "string") {
+                    //userInfo
+                    dispatch(updateUserName(response.name));
+                    dispatch(updateUserEmail(response.id));
+                    dispatch(updateUserPhoneNum(response.phoneNum));
+                    dispatch(updateUserBank(response.bank));
+                    dispatch(updateUserAccount(response.account));
+                    // dispatch(updatePassword(response.pw))
 
-                //incInfo
-                dispatch(updateCorporateName(response.corporateName));
-                dispatch(updateCeo(response.ceo));
-                dispatch(updateBusinessLoc(response.businessLoc));
-                dispatch(updateRegisterNum(response.corporateNum));
+                    //incInfo
+                    dispatch(updateCorporateName(response.corporateName));
+                    dispatch(updateCeo(response.ceo));
+                    dispatch(updateBusinessLoc(response.businessLoc));
+                    dispatch(updateCorporateNum(response.corporateNum));
 
-                dispatch(update());
-              }
-            });
+                    dispatch(update());
+                  }
+                }
+              });
+          }
         }}
       >
         로그인
