@@ -17,9 +17,10 @@ const Container = styled.div`
 `;
 
 const Contract = (props) => {
-  const { amount } = props;
+  const { amount, deadline } = props;
 
   let userInfo = useSelector((state) => state.info);
+  let incInfo = useSelector((state) => state.incInfo);
 
   const [contractData, setContractData] = useState({
     __CREDITOR__: "__CREDITOR__",
@@ -49,6 +50,10 @@ const Contract = (props) => {
     copy.__CREDITOR__ = userInfo.name;
     copy.__AMOUNT__ = amount;
     copy.__DATE__ = year + ". " + todayMonth + ". " + todayDate + ".";
+    copy.__DEADLINE__ = deadline;
+    copy.__CORPORATE__ = incInfo.corporateName;
+    copy.__NAME__ = incInfo.ceo;
+    copy.__ADDRESS__ = incInfo.businessLoc;
     copy.__PHONE__ = userInfo.phoneNum;
 
     setContractData(copy);

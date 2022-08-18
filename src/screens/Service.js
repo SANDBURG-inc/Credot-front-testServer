@@ -49,7 +49,8 @@ const Service = () => {
     pw: "",
   });
 
-  const [result, setResult] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [deadline, setDeadline] = useState(0);
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -69,7 +70,7 @@ const Service = () => {
     }
 
     //선정산 가능 금액이 0원일 경우
-    if (result === 0) {
+    if (price === 0) {
       alert("선정산 가능한 금액이 없습니다.");
       return;
     }
@@ -119,7 +120,8 @@ const Service = () => {
                     return;
                   }
                   var result = 결과;
-                  setResult(JSON.parse(result).price);
+                  setPrice(JSON.parse(result).price);
+                  setDeadline(JSON.parse(result).deadline);
                   setIsChecked(true);
                   alert(result);
                 });
@@ -127,7 +129,8 @@ const Service = () => {
             return;
           } else {
             let result = 결과;
-            setResult(JSON.parse(result).price);
+            setPrice(JSON.parse(result).price);
+            setDeadline(JSON.parse(result).deadline);
             setIsChecked(true);
             alert(result);
             return;
@@ -183,13 +186,13 @@ const Service = () => {
             color: "white",
           }}
         >
-          {"즉시 정산 가능 금액 " + result + " 원"}
+          {"즉시 정산 가능 금액 " + price + " 원"}
         </p>
         <button onClick={signing} style={{ padding: "4px" }}>
           선정산 받기
         </button>
       </OrangeContainer>
-      <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={result} deadline={result}></ContractModal> {/* 수정필요 */}
+      <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal> {/* 수정필요 */}
       <OrangeRoundContainer>
         <Row>
           <Col>

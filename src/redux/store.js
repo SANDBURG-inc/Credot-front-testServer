@@ -57,7 +57,7 @@ const userInfo = createSlice({
 });
 
 const incInfo = createSlice({
-  name: "userInfo",
+  name: "incInfo",
   initialState: {
     corporateName: "",
     ceo: "",
