@@ -62,7 +62,7 @@ const incInfo = createSlice({
     corporateName: "",
     ceo: "",
     businessLoc: "",
-    registerNum: "",
+    corporateNum: "",
   },
   reducers: {
     updateCorporateName(state, value) {
