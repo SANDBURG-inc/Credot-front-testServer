@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import SignatureCanvas from "react-signature-canvas";
 import styled from "styled-components";
 
@@ -58,11 +59,36 @@ const ClearButton = styled.button`
 // `;
 
 const Signature = (props) => {
+  const { open, amount, deadline } = props;
+  let userInfo = useSelector((state) => state.info);
+  const HOST = useSelector((state) => state.HOST);
+
   const canvasRef = useRef(null);
   const [isSigned, setIsSigned] = useState(false);
   const [isEntered, setIsEntered] = useState(false);
+  const [contractData, setContractData] = useState({
+    id: "",
+    sign: "",
+    date: "",
+    deadline: "",
+    ammount: "",
+    commerce: "coupang",
+    status: "false",
+  });
 
-  const { open } = props;
+  useEffect(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const todayMonth = now.getMonth() + 1;
+    const todayDate = now.getDate();
+
+    let copy = { ...contractData };
+    copy.id = userInfo.email;
+    copy.date = year + ". " + todayMonth + ". " + todayDate + ".";
+    copy.deadline = deadline;
+    copy.ammount = amount;
+    setContractData(copy);
+  }, []);
 
   const clear = () => {
     canvasRef.current.clear();
@@ -72,6 +98,27 @@ const Signature = (props) => {
     const image = canvasRef.current.getTrimmedCanvas().toDataURL("image/png");
     console.log(image.split(",")[1]); //base 64 코드
 
+    let copy = { ...contractData };
+    copy.sign = image.split(",")[1];
+    setContractData(copy);
+
+    fetch(
+      HOST +
+        "/database/contract?id=" +
+        contractData.id +
+        "&sign=" +
+        copy.sign +
+        "&date=" +
+        contractData.date +
+        "&deadline=" +
+        contractData.deadline +
+        "&ammount=" +
+        contractData.ammount +
+        "&commerce=" +
+        contractData.commerce +
+        "&status=" +
+        contractData.status
+    );
     // const link = document.createElement("a");
     // link.href = image;
     // link.download = "sign_image.png";
@@ -81,9 +128,7 @@ const Signature = (props) => {
   return (
     <Container>
       <SignatureContainer>
-        {!isSigned && (
-          <CanvasPlaceholder>여기에 서명을 해주세요.</CanvasPlaceholder>
-        )}
+        {!isSigned && <CanvasPlaceholder>여기에 서명을 해주세요.</CanvasPlaceholder>}
         <SignatureCanvas
           ref={canvasRef}
           canvasProps={{
