@@ -6,7 +6,18 @@ import AuthButton from "./../components/auth/AuthButton";
 import RightAlignedLink from "./../components/RightAlignedLink";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { update, updateUserAccount, updateUserBank, updateUserEmail, updateUserName, updateUserPhoneNum } from "./../redux/store.js";
+import {
+  update,
+  updateUserAccount,
+  updateUserBank,
+  updateUserEmail,
+  updateUserName,
+  updateUserPhoneNum,
+  updateCorporateName,
+  updateCeo,
+  updateBusinessLoc,
+  updateRegisterNum,
+} from "./../redux/store.js";
 
 const Login = () => {
   const a = useSelector((state) => state.login);
@@ -96,14 +107,22 @@ const Login = () => {
               return response.json();
             })
             .then((response) => {
-              console.log(response.pw);
+              console.log(response);
               if (typeof response.name === "string") {
+                //userInfo
                 dispatch(updateUserName(response.name));
                 dispatch(updateUserEmail(response.id));
                 dispatch(updateUserPhoneNum(response.phoneNum));
                 dispatch(updateUserBank(response.bank));
                 dispatch(updateUserAccount(response.account));
                 // dispatch(updatePassword(response.pw))
+
+                //incInfo
+                dispatch(updateCorporateName(response.corporateName));
+                dispatch(updateCeo(response.ceo));
+                dispatch(updateBusinessLoc(response.businessLoc));
+                dispatch(updateRegisterNum(response.corporateNum));
+
                 dispatch(update());
               }
             });

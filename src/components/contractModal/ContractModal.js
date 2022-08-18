@@ -15,7 +15,7 @@ const ContractModal = (props) => {
   };
 
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { open, close, header, amount } = props;
+  const { open, close, header, amount, deadline } = props;
 
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
@@ -30,7 +30,7 @@ const ContractModal = (props) => {
               </button>
             </header>
             <main>
-              <Contract amount={amount}></Contract>
+              <Contract amount={amount} deadline={deadline}></Contract>
               <h3>서명을 입력해주세요. ✍️</h3>
               <Signature open={openModal} />
             </main>
