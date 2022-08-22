@@ -5,8 +5,9 @@ import storage from "redux-persist/lib/storage";
 
 const HOST = createSlice({
   name: "HOST",
-  initialState: "http://localhost:9000",
-  // initialState: "http://3.38.232.237:9000",
+  // initialState: "http://localhost:9000",
+  // initialState: "https://api.credot.kr",
+  initialState: "http://3.38.232.237:9000",
 });
 
 const isLogin = createSlice({
