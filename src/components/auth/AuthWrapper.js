@@ -6,6 +6,7 @@ import { shadow } from "./../../lib/styleUtils";
 // 화면의 중앙에 위치시킨다
 const Positioner = styled.div`
   position: absolute;
+  height: 40%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -36,9 +37,9 @@ const Logo = styled.div`
 
 // children 이 들어가는 곳
 const Contents = styled.div`
+  overflow: auto;
   background: white;
   padding: 2rem;
-  height: auto;
 `;
 
 const AuthWrapper = ({ children }) => (

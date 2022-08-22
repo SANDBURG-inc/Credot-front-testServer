@@ -34,7 +34,10 @@ const NavBarElement = () => {
                 <Nav.Link href="/Register">회원가입</Nav.Link>
               </Nav>
             ) : (
-              <Nav.Link href="/Mypage">MY 크레닷</Nav.Link>
+              <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
+                <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
+              </NavDropdown>
             )}
           </Nav>
         </Navbar.Collapse>

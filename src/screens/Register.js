@@ -200,7 +200,7 @@ const Register = () => {
           handleOnClick();
           fetch(
             HOST +
-              "/database/register?id=" +
+              "/database/register?email=" +
               users[users.length - 1].email +
               "&name=" +
               users[users.length - 1].name +

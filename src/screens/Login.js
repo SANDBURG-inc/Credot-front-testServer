@@ -70,25 +70,6 @@ const Login = () => {
         <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
         <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange} />
       </AuthContent>
-      {/* <AuthButton onClick={()=>{
-                            handleOnClick();
-                            console.log('http://api.credot.kr/login?id=' + inputs.email
-                            + '&pw=' + inputs.password
-                            )
-                            fetch('http://api.credot.kr/login?id=' + inputs.email
-                            + '&pw=' + inputs.password
-                            )
-                            .then(response => {
-                                if(!response){
-                                    console.log('fetch error')
-                                } else {
-                                    dispatch(update())
-                                }
-                                    return response.text();
-                                }
-                            )
-                            .then(response =>{alert(response)});
-                            }}>로그인</AuthButton> */}
       <AuthButton
         onClick={async () => {
           if (!inputs.email.includes("@")) {
@@ -97,7 +78,7 @@ const Login = () => {
             alert("비밀번호를 입력해주세요!");
           } else {
             handleOnClick();
-            fetch(HOST + "/login?id=" + inputs.email + "&pw=" + inputs.password, {
+            fetch(HOST + "/login?email=" + inputs.email + "&pw=" + inputs.password, {
               method: "get",
               headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -113,6 +94,7 @@ const Login = () => {
               })
               .then((response) => {
                 if (!response) {
+                  console.log(response);
                   alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
                 } else {
                   console.log(response);
