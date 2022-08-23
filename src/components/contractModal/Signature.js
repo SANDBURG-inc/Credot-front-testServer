@@ -67,7 +67,7 @@ const Signature = (props) => {
   const [isSigned, setIsSigned] = useState(false);
   const [isEntered, setIsEntered] = useState(false);
   const [contractData, setContractData] = useState({
-    id: "",
+    email: "",
     sign: "",
     date: "",
     deadline: "",
@@ -83,11 +83,12 @@ const Signature = (props) => {
     const todayDate = now.getDate();
 
     let copy = { ...contractData };
-    copy.id = userInfo.email;
+    copy.email = userInfo.email;
     copy.date = year + ". " + todayMonth + ". " + todayDate + ".";
     copy.deadline = deadline;
     copy.ammount = amount;
     setContractData(copy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const clear = () => {
@@ -104,8 +105,8 @@ const Signature = (props) => {
 
     fetch(
       HOST +
-        "/database/contract?id=" +
-        contractData.id +
+        "/database/contract?email=" +
+        contractData.email +
         "&sign=" +
         copy.sign +
         "&date=" +

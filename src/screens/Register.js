@@ -115,14 +115,14 @@ const Register = () => {
       setUsers([...users, user]);
 
       // 입력이 끝나고 inputs를 비워주는 역할
-      setInputs({
-        name: "",
-        email: "",
-        phoneNum: "",
-        password: "",
-        bank: "",
-        account: "",
-      });
+      // setInputs({
+      //   name: "",
+      //   email: "",
+      //   phoneNum: "",
+      //   password: "",
+      //   bank: "",
+      //   account: "",
+      // });
       setFlag();
     } else {
       alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
@@ -212,7 +212,7 @@ const Register = () => {
               bank +
               "&account=" +
               account +
-              "&corperateName=" +
+              "&corporateName=" +
               incInputs.corporateName +
               "&ceo=" +
               incInputs.ceo +
@@ -234,6 +234,15 @@ const Register = () => {
                 alert("제대로 입력해라 마");
               }
             });
+          // 입력이 끝나고 inputs를 비워주는 역할
+          setInputs({
+            name: "",
+            email: "",
+            phoneNum: "",
+            password: "",
+            bank: "",
+            account: "",
+          });
         }}
       >
         회원가입 완료
