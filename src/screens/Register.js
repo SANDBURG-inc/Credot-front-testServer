@@ -11,6 +11,7 @@ import { bankList } from "./../data/bankList";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import oc from "open-color";
+import { HOST } from "../redux/store";
 
 const BankInput = styled.input`
   width: 65%;
@@ -32,7 +33,6 @@ const Btn = styled.button`
 `;
 
 const Register = () => {
-  const HOST = useSelector((state) => state.HOST);
   const [flag, setFlag] = useState(0);
   const [r, setR] = useState(false);
   const [bank, setBank] = useState("초기값");
