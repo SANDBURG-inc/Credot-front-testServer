@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import SignatureCanvas from "react-signature-canvas";
 import styled from "styled-components";
+import { HOST } from "../../redux/store";
 
 const Container = styled.div`
   width: 330px;
@@ -61,7 +62,6 @@ const ClearButton = styled.button`
 const Signature = (props) => {
   const { open, amount, deadline } = props;
   let userInfo = useSelector((state) => state.info);
-  const HOST = useSelector((state) => state.HOST);
 
   const canvasRef = useRef(null);
   const [isSigned, setIsSigned] = useState(false);

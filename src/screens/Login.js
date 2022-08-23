@@ -7,6 +7,7 @@ import RightAlignedLink from "./../components/RightAlignedLink";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  HOST,
   update,
   updateUserAccount,
   updateUserBank,
@@ -21,7 +22,6 @@ import {
 
 const Login = () => {
   const a = useSelector((state) => state.login);
-  const HOST = useSelector((state) => state.HOST);
 
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({

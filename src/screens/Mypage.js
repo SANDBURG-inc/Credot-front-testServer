@@ -4,11 +4,10 @@ import Form from "react-bootstrap/Form";
 import AuthButton from "./../components/auth/AuthButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { update } from "./../redux/store.js";
+import { update, HOST } from "./../redux/store.js";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
-  const HOST = useSelector((state) => state.HOST);
 
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);

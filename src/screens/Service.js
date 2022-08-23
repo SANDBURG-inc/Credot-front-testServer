@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ContractModal from "../components/contractModal/ContractModal";
+import { HOST } from "../redux/store";
 
 let Text = styled.p`
   color: #ec5f2c;
@@ -32,7 +33,6 @@ let LookupCard = styled.div`
 `;
 
 const Service = () => {
-  const HOST = useSelector((state) => state.HOST);
   let isLogined = useSelector((state) => state.login);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -77,72 +77,83 @@ const Service = () => {
     openModal();
   };
 
+  const checkError = (errorCode) => {
+    switch (errorCode) {
+      case "101":
+        alert("아이디 또는 비밀번호가 다릅니다. 확인 후 다시 입력해주세요");
+        return false;
+
+      case "102":
+      case "103":
+        alert("정산 현황이 존재하지 않습니다.");
+        return false;
+
+      case "104":
+        alert("인증번호가 틀렸습니다.");
+        return false;
+      default:
+        return true;
+    }
+  };
+
   const onChange = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
     setInputs({
       ...inputs, // 기존의 input 객체를 복사한 뒤
       [name]: value, // name 키를 가진 값을 value 로 설정
     });
-    console.log(id);
-    console.log(pw);
+  };
+
+  const finishLookUp = (result) => {
+    setPrice(JSON.parse(result).price);
+    setDeadline(JSON.parse(result).deadline);
+    setIsChecked(true);
+    alert(result);
   };
 
   const lookUp = () => {
-    console.log("조회 클릭");
-    if (id && pw) {
-      console.log("fetch");
-      fetch(HOST + "/coupang/crawl?id=" + id + "&pw=" + pw)
-        .then((response) => {
-          console.log(response);
-          if (!response.ok) {
-            throw new Error("400아니면 500에러남");
-          }
-          return response.text();
-        })
-        .then((결과) => {
-          console.log("결과");
-          if (결과 === "idpwError") {
-            alert(결과);
-            return;
-          } else if (결과 === "auth") {
-            const inputString = prompt("인증번호를 입력해주세요", "인증번호");
-            if (inputString !== "") {
-              fetch(HOST + "/coupang/auth?code=" + inputString)
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error("400아니면 500에러남");
-                  }
-                  return response.text();
-                })
-                .then((결과) => {
-                  if (결과 == "authError") {
-                    alert("인증번호 오류입니다");
-                    return;
-                  }
-                  var result = 결과;
-                  setPrice(JSON.parse(result).price);
-                  setDeadline(JSON.parse(result).deadline);
-                  setIsChecked(true);
-                  alert(result);
-                });
-            }
-            return;
-          } else {
-            let result = 결과;
-            setPrice(JSON.parse(result).price);
-            setDeadline(JSON.parse(result).deadline);
-            setIsChecked(true);
-            alert(result);
-            return;
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("조회 실패... 아이디와 비번을 확인해주세요");
-        });
-    } else {
-      alert("값을 모두 입력해주세요");
+    if (!id || !pw) {
+      alert("아이디와 비밀번호를 입력해주세요");
+      return;
     }
+
+    fetch(HOST + "/coupang/crawl?id=" + id + "&pw=" + pw)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("400 or 500 Error");
+        }
+        return response.text();
+      })
+      .then((response) => {
+        if (!checkError(response)) {
+          return;
+        }
+
+        if (response === "200") {
+          const inputString = prompt("인증번호를 입력해주세요", "인증번호");
+          fetch(HOST + "/coupang/auth?code=" + inputString)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("400아니면 500에러남");
+              }
+              return response.text();
+            })
+            .then((response) => {
+              if (!checkError(response)) {
+                return;
+              }
+              finishLookUp(response);
+            });
+          return;
+        } else {
+          finishLookUp(response);
+          return;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("조회 실패... 아이디와 비번을 확인해주세요");
+      });
   };
 
   return (
