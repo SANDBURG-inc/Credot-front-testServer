@@ -99,7 +99,7 @@ const Login = () => {
                 } else {
                   //userInfo
                   dispatch(updateUserName(response.name));
-                  dispatch(updateUserEmail(response.id));
+                  dispatch(updateUserEmail(response.email));
                   dispatch(updateUserPhoneNum(response.phoneNum));
                   dispatch(updateUserBank(response.bank));
                   dispatch(updateUserAccount(response.account));
