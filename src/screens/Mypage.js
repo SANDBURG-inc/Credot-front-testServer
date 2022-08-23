@@ -38,7 +38,12 @@ const Mypage = () => {
     return <Navigate to="/" />;
   }
   return (
-    <AuthWrapper>
+    <div
+      style={{
+        margin: "0px auto",
+        width: "450px",
+      }}
+    >
       <Form.Group>
         <Form.Label>성함</Form.Label>
         <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpName} disabled />
@@ -78,7 +83,7 @@ const Mypage = () => {
           로그아웃
         </AuthButton>
       </Form.Group>
-    </AuthWrapper>
+    </div>
   );
 };
 

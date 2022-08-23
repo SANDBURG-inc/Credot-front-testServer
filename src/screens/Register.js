@@ -142,7 +142,7 @@ const Register = () => {
             if (!inputs.email.includes("@")) {
               alert("이메일 형식을 올바르게 입력해주세요!");
             } else {
-              fetch(HOST + "/database/checkEmail?id=" + inputs.email)
+              fetch(HOST + "/database/checkEmail?email=" + inputs.email)
                 .then((response) => response.json())
                 .then((response) => {
                   console.log(response);
@@ -200,7 +200,7 @@ const Register = () => {
           handleOnClick();
           fetch(
             HOST +
-              "/database/register?id=" +
+              "/database/register?email=" +
               users[users.length - 1].email +
               "&name=" +
               users[users.length - 1].name +
