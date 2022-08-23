@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ContractModal from "../components/contractModal/ContractModal";
 import { HOST } from "../redux/store";
+import ProgressCircleDialog from "../components/ProgressCircleDialog";
 
 let Text = styled.p`
   color: #ec5f2c;
@@ -36,6 +37,7 @@ const Service = () => {
   let isLogined = useSelector((state) => state.login);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [progressOpen, setprogressOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -117,15 +119,18 @@ const Service = () => {
       return;
     }
 
+    setprogressOpen(true);
     fetch(HOST + "/coupang/crawl?id=" + id + "&pw=" + pw)
       .then((response) => {
         if (!response.ok) {
+          setprogressOpen(false);
           throw new Error("400 or 500 Error");
         }
         return response.text();
       })
       .then((response) => {
         if (!checkError(response)) {
+          setprogressOpen(false);
           return;
         }
 
@@ -134,19 +139,23 @@ const Service = () => {
           fetch(HOST + "/coupang/auth?code=" + inputString)
             .then((response) => {
               if (!response.ok) {
+                setprogressOpen(false);
                 throw new Error("400아니면 500에러남");
               }
               return response.text();
             })
             .then((response) => {
               if (!checkError(response)) {
+                setprogressOpen(false);
                 return;
               }
               finishLookUp(response);
             });
+          setprogressOpen(false);
           return;
         } else {
           finishLookUp(response);
+          setprogressOpen(false);
           return;
         }
       })
@@ -158,6 +167,7 @@ const Service = () => {
 
   return (
     <Container>
+      <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
       <Row>
         <Col style={{ padding: "100px" }}>
           <h4>크레닷으로 쉽고 빠른 판매대금 정산!</h4>

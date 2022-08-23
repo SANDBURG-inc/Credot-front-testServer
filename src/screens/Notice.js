@@ -1,13 +1,7 @@
 import React from "react";
-import ProgressCircleDialog from "../components/ProgressCircleDialog";
 
 const Notice = () => {
-  return (
-    <div>
-      Notice
-      <ProgressCircleDialog open={false}></ProgressCircleDialog>
-    </div>
-  );
+  return <div>Notice</div>;
 };
 
 export default Notice;
