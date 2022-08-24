@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const NavBarElement = () => {
   let a = useSelector((state) => state.login);
@@ -47,17 +48,21 @@ const NavBarElement = () => {
             고객센터
           </a>
         </div>
-        <div className="header-account-wrap">
+        <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
           <div>
             <a href="/Login"> 로그인 </a>
             <div className="devide-bar"></div>
             <a href="/Register"> 회원가입 </a>
           </div>
           <div>
-            <button>
+            <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
+              <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
+            </NavDropdown>
+            {/* <button>
               <img src="../assets/images/icon/account-default.svg" alt="" />
               <span className="account-name">별별 셀러님</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
