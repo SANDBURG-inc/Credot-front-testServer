@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <clipPath id="ynb17uruza">
+            <path data-name="사각형 33" transform="translate(1174 1303)" style="fill:#d5d5d5" d="M0 0h20v20H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="마스크 그룹 3" transform="translate(-1174 -1303)" style="clip-path:url(#ynb17uruza)">
+        <path data-name="패스 5" d="M0 0h20v20H0z" style="fill:none" transform="translate(1174 1303)"/>
+        <path data-name="패스 6" d="M.984 10a9.169 9.169 0 0 1 18.032 0A9.169 9.169 0 0 1 .984 10zM10 14.167A4.167 4.167 0 1 0 5.833 10 4.167 4.167 0 0 0 10 14.167zm0-1.667a2.5 2.5 0 1 1 2.5-2.5 2.5 2.5 0 0 1-2.5 2.5z" style="fill:#d5d5d5" transform="translate(1174 1303)"/>
+    </g>
+</svg>

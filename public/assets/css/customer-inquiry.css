@@ -1,0 +1,144 @@
+.introduce-wrap .inner {
+  padding-top: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.n-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.head-title {
+  display: inline-block;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+
+  margin-bottom: 35px;
+}
+
+.head-link {
+  display: flex;
+}
+
+.head-link a {
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #7e7e7e;
+  padding-bottom: 8px;
+  margin-right: 40px;
+}
+
+.head-link a:last-child {
+  margin-right: 0;
+}
+
+.head-link a.active {
+  font-weight: bold;
+  color: #ff7500;
+  border-bottom: 2px solid #ff7500;
+}
+
+.n-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 140px;
+}
+
+.n-body form {
+  width: var(--main-width);
+  display: flex;
+  flex-direction: column;
+  padding: 60px 140px;
+  object-fit: contain;
+  border-radius: 20px;
+  background-color: #fafafa;
+}
+
+.input-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-box:nth-child(4) {
+  margin-bottom: 0;
+  align-items: unset;
+}
+
+.input-box span {
+  width: 15%;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+
+.input-box:nth-child(4) span {
+  padding-top: 15px;
+}
+
+.input-box input {
+  height: 60px;
+  padding: 0 15px;
+}
+
+.input-box textarea {
+  height: 360px;
+  padding: 20px 15px;
+}
+
+.input-box input,
+.input-box textarea {
+  width: 85%;
+  border-radius: 8px;
+  border: solid 1px #dedede;
+  background-color: #fff;
+  cursor: text;
+}
+
+.button-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.n-body form button {
+  width: 154px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #fc8118;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+
+.n-body form button img {
+  margin-left: 20px;
+}

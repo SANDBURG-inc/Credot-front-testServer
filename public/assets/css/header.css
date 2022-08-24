@@ -1,0 +1,87 @@
+.header__inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  backdrop-filter: blur(0);
+}
+
+.header__inner.blur {
+  backdrop-filter: blur(30px);
+}
+
+.logo {
+  width: 62px;
+  height: 35px;
+}
+
+.logo {
+  margin-left: 80px;
+}
+
+.header-account-wrap {
+  margin-right: 80px;
+}
+
+.header-menu-wrap a {
+  margin-right: 60px;
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.header-menu-wrap a:last-child,
+.header-account-wrap a:last-child {
+  margin-right: 0;
+}
+
+.header-account-wrap a {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.header-account-wrap > div {
+  display: flex;
+  align-items: center;
+}
+
+.header-account-wrap .devide-bar {
+  width: 1px;
+  height: 11px;
+  background: #f2f2f2;
+  margin: 0 16.5px;
+}
+
+.header-account-wrap button {
+  display: flex;
+  align-items: center;
+}
+
+.header-account-wrap button img {
+  margin-right: 10px;
+}
+
+.header-account-wrap div:last-child {
+  display: none;
+}
+
+.header-account-wrap.logined div:first-child {
+  display: none;
+}
+
+.header-account-wrap.logined div:last-child {
+  display: flex;
+}
+
+.account-name {
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #202428;
+}

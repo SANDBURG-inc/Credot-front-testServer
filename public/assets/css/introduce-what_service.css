@@ -1,0 +1,150 @@
+.introduce-wrap .inner {
+  padding-top: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.i-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.head-title {
+  display: inline-block;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+
+  margin-bottom: 35px;
+}
+
+.head-link {
+  display: flex;
+}
+
+.head-link a {
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #7e7e7e;
+  padding-bottom: 8px;
+  margin-right: 40px;
+}
+
+.head-link a:last-child {
+  margin-right: 0;
+}
+
+.head-link a.active {
+  font-weight: bold;
+  color: #ff7500;
+  border-bottom: 2px solid #ff7500;
+}
+
+.i-body {
+  margin-bottom: 160px;
+}
+
+.i-body-info {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 100px;
+}
+
+.i-body-info:last-child {
+  margin-bottom: 0;
+}
+
+.i-body-info-lead {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.i-body-info img {
+  width: 40%;
+}
+
+.i-body-info-lead span:first-child {
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+  margin-bottom: 20px;
+}
+.i-body-info-lead span:last-child {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  text-align: left;
+  color: #969696;
+}
+
+/* guide-wrap */
+
+.guide-wrap .inner {
+  width: 100%;
+}
+
+.g-title {
+  display: inline-block;
+  width: var(--main-width);
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+
+  margin-bottom: 50px;
+}
+
+.g-process {
+  width: var(--main-width);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.g-process-info {
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+
+  margin-bottom: 30px;
+}
+
+.g-process-img {
+  width: 100%;
+  padding: 60px 80px;
+  background-color: #fafafa;
+  border-radius: 20px;
+}
