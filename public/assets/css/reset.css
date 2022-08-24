@@ -1,0 +1,253 @@
+/* Notosans font*/
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+* {
+  -webkit-text-size-adjust: none;
+  box-sizing: border-box;
+}
+/* 모든 Device를 위한 공통 로드 */
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+figure,
+figcaption,
+span {
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.5px;
+}
+body,
+html,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+dt,
+dd,
+p hr,
+button,
+input,
+form,
+fieldset,
+table,
+caption,
+th,
+td,
+header,
+nav,
+section,
+article,
+aside,
+footer,
+textarea {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  color: #212121;
+  background-color: #fff;
+}
+
+header,
+nav,
+section,
+article,
+aside,
+footer {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+legend,
+caption {
+  text-indent: -100%;
+  *text-indent: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  text-shadow: none;
+  color: transparent;
+}
+img {
+  max-width: 100%;
+  border: 0;
+  vertical-align: top;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: none;
+  text-align: left;
+}
+
+th,
+label {
+  font-weight: normal;
+}
+
+address {
+  font-style: normal;
+}
+
+button,
+input {
+  border: none;
+  background: none;
+}
+
+button:focus,
+input:focus {
+  outline: none;
+}
+
+button,
+a,
+input,
+label {
+  cursor: pointer;
+  text-decoration: none;
+  outline: 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled,
+button:disabled {
+  cursor: no-drop;
+}
+
+input[type="checkbox"]:disabled + label,
+input[type="radio"]:disabled + label {
+  cursor: no-drop;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  resize: none;
+}
+textarea:placeholder {
+  color: #6b6b6b;
+}
+textarea:focus {
+  outline: none;
+}
+
+/* select*/
+select {
+  border-radius: 0; /* 아이폰 사파리 보더 없애기 */
+  -webkit-appearance: none; /* 화살표 없애기 for chrome*/
+  -moz-appearance: none; /* 화살표 없애기 for firefox*/
+  appearance: none; /* 화살표 없애기 공통*/
+}
+select::-ms-expand {
+  display: none; /* 화살표 없애기 for IE10, 11*/
+}
+
+/* 공통 컨텐츠 font */
+
+@media only screen and (max-width: 1460px) {
+}
+
+@media only screen and (min-width: 1461px) {
+}
+
+/* input 체크박스 만들기  */
+/*
+input[type="checkbox"]:checked + label:after {
+    background: url(../../imgs/common/bg_checkbox_on.png) center /100% no-repeat;
+}
+
+input[type="checkbox"] + label {
+    position: relative;
+    padding-left: 30px;
+    font-size: 18px;
+    color: #A2A2A2;
+}
+
+input[type="checkbox"] + label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0,-50%);
+    width: 20px;
+    height: 20px;
+background: url(../../imgs/common/bg_checkbox_off.png) center /100% no-repeat;}
+*/

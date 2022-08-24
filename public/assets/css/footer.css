@@ -1,0 +1,38 @@
+.footer .inner {
+  height: 213px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #f4f4f4;
+}
+
+.f-logo {
+  width: 80px;
+  height: 45px;
+  margin-bottom: 30px;
+}
+
+.f-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 10px;
+  font-weight: normal;
+  color: #969696;
+  margin-bottom: 30px;
+}
+
+.f-info .devide-bar {
+  width: 1px;
+  height: 9px;
+  background: rgba(0, 0, 0, 0.11);
+  margin: 0 10px;
+}
+
+.f-copy {
+  font-size: 12px;
+  font-weight: normal;
+  color: #969696;
+}

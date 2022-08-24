@@ -1,4 +1,3 @@
-import "./App.css";
 import Service from "./screens/Service";
 import About from "./screens/About";
 import Guide from "./screens/Guide";
