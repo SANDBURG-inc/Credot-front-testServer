@@ -7,6 +7,7 @@ import Notice from "./screens/Notice";
 import Faq from "./screens/Faq";
 import Mypage from "./screens/Mypage";
 import Login from "./screens/Login";
+import Finance from "./screens/Finance";
 import Register from "./screens/Register";
 import NavBarElement from "./components/NavBarElement";
 import { Route, Routes } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Notice" element={<Notice />} />
         <Route path="/Faq" element={<Faq />} />
         <Route path="/Mypage" element={<Mypage />} />
+        <Route path="/Finance" element={<Finance />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
       </Routes>
