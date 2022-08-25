@@ -85,15 +85,15 @@ const incInfo = createSlice({
 const financeInfo = createSlice({
   name: "financeInfo",
   initialState: {
-    date: "",
+    contractDate: "",
     deadline: "",
     ammount: "",
     commerce: "",
     status: "",
   },
   reducers: {
-    updateDate(state, value) {
-      state.date = value.payload;
+    updateContractDate(state, value) {
+      state.contractDate = value.payload;
     },
     updateDeadline(state, value) {
       state.deadline = value.payload;
@@ -154,6 +154,6 @@ export default store;
 export const { update } = isLogin.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
-export const { updateDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
+export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
 export { HOST };
 // export let { updatePassword } = password.actions;

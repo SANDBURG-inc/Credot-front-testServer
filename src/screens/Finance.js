@@ -16,6 +16,12 @@ import { withStyles } from "@material-ui/core/styles";
 import { render } from "@testing-library/react";
 
 const Finance = () => {
+  const curDate = useSelector((state) => state.financeInfo.date);
+  const curDeadline = useSelector((state) => state.financeInfo.deadline);
+  const curAmmount = useSelector((state) => state.financeInfo.ammount);
+  const curCommerce = useSelector((state) => state.financeInfo.commerce);
+  const curStatus = useSelector((state) => state.financeInfo.status);
+
   return (
     <Paper>
       <Table>
@@ -31,12 +37,12 @@ const Finance = () => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>0</TableCell>
-            <TableCell>2022-06-21</TableCell>
-            <TableCell>2022-12-31</TableCell>
-            <TableCell>3,500,000</TableCell>
-            <TableCell>쿠팡</TableCell>
-            <TableCell>X</TableCell>
+            <TableBody>1</TableBody>
+            <TableCell>{curDate}</TableCell>
+            <TableCell>{curDeadline}</TableCell>
+            <TableCell>{curAmmount}</TableCell>
+            <TableCell>{curCommerce}</TableCell>
+            <TableCell>{curStatus}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
