@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ContractModal from "../components/contractModal/ContractModal";
 import { HOST } from "../redux/store";
@@ -57,6 +56,34 @@ const Service = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   const { id, pw } = inputs;
+
+  useEffect(() => {
+    // 메인 첫 섹션 스크롤 이동
+    document.querySelector(".visual-scroll-down").addEventListener("click", function () {
+      window.scrollTo({
+        top: document.querySelector(".calculate__check-wrap").offsetTop,
+        behavior: "smooth",
+      });
+    });
+
+    return () => {
+      // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
+      let eyes = document.querySelectorAll(".eyes");
+      let pwInput = document.querySelectorAll(".main-password");
+
+      for (let i = 0; i < eyes.length; i++) {
+        eyes[i].addEventListener("click", function () {
+          if (eyes[i].previousElementSibling.type === "text") {
+            this.classList.remove("visible");
+            this.previousElementSibling.type = "password";
+          } else {
+            this.classList.add("visible");
+            this.previousElementSibling.type = "text";
+          }
+        });
+      }
+    };
+  });
 
   const signing = () => {
     //로그인이 안된 경우
@@ -166,99 +193,278 @@ const Service = () => {
   };
 
   return (
-    <Container>
-      <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
-      <Row>
-        <Col style={{ padding: "100px" }}>
-          <h4>크레닷으로 쉽고 빠른 판매대금 정산!</h4>
-          <Text>
-            지금 바로 이용중인 커머스 <br />
-            판매자 정보를 입력하고
-            <br />
-            즉시 정산 가능한 금액을 조회해보세요!
-          </Text>
-        </Col>
-        <Col
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
-          <div>
-            <h3>hook test2</h3>
+    // <Container>
+    //   <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
+    //   <Row>
+    //     <Col style={{ padding: "100px" }}>
+    //       <h4>크레닷으로 쉽고 빠른 판매대금 정산!</h4>
+    //       <Text>
+    //         지금 바로 이용중인 커머스 <br />
+    //         판매자 정보를 입력하고
+    //         <br />
+    //         즉시 정산 가능한 금액을 조회해보세요!
+    //       </Text>
+    //     </Col>
+    //     <Col
+    //       style={{
+    //         alignItems: "center",
+    //         justifyContent: "center",
+    //         display: "flex",
+    //       }}
+    //     >
+    //       <div>
+    //         <h3>hook test2</h3>
 
-            <h3>hook test2</h3>
+    //         <h3>hook test2</h3>
 
-            <h3>hook test2</h3>
+    //         <h3>hook test2</h3>
+    //       </div>
+    //     </Col>
+    //   </Row>
+    //   <OrangeContainer>
+    //     <h3
+    //       style={{
+    //         color: "white",
+    //       }}
+    //     >
+    //       지금 즉시 정산 가능한 금액을 조회해보세요!
+    //     </h3>
+    //     <p
+    //       style={{
+    //         color: "white",
+    //       }}
+    //     >
+    //       {"즉시 정산 가능 금액 " + price + " 원"}
+    //     </p>
+    //     <button onClick={signing} style={{ padding: "4px" }}>
+    //       선정산 받기
+    //     </button>
+    //   </OrangeContainer>
+    //   <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal> {/* 수정필요 */}
+    //   <OrangeRoundContainer>
+    //     <Row>
+    //       <Col>
+    //         <LookupCard>
+    //           <img src={require("../img/coupang_wing.png")} height="20"></img>
+    //           <div style={{ padding: "20px 0px" }}>
+    //             <input name="id" placeholder="ID" onChange={onChange} value={id} />
+    //             <input name="pw" placeholder="PW" onChange={onChange} value={pw} />
+    //           </div>
+    //           <button onClick={lookUp}>조회</button>
+    //         </LookupCard>
+    //       </Col>
+    //       <Col>
+    //         <LookupCard>
+    //           <img src={require("../img/coupang_wing.png")} height="20"></img>
+    //           <div style={{ padding: "20px 0px" }}>
+    //             <input placeholder="ID" />
+    //             <input placeholder="PW" />
+    //           </div>
+    //           <button onClick={lookUp}>조회</button>
+    //         </LookupCard>
+    //       </Col>
+    //       <Col>
+    //         <LookupCard>
+    //           <img src={require("../img/coupang_wing.png")} height="20"></img>
+    //           <div style={{ padding: "20px 0px" }}>
+    //             <input placeholder="ID" />
+    //             <input placeholder="PW" />
+    //           </div>
+    //           <button onClick={lookUp}>조회</button>
+    //         </LookupCard>
+    //       </Col>
+    //       <Col>
+    //         <LookupCard>
+    //           <img src={require("../img/coupang_wing.png")} height="20"></img>
+    //           <div style={{ padding: "20px 0px" }}>
+    //             <input placeholder="ID" />
+    //             <input placeholder="PW" />
+    //           </div>
+    //           <button onClick={lookUp}>조회</button>
+    //         </LookupCard>
+    //       </Col>
+    //     </Row>
+    //   </OrangeRoundContainer>
+    // </Container>
+
+    <main className="container">
+      <div className="inner">
+        <section className="visual-wrap">
+          <div className="inner">
+            <div className="visual-main">
+              <div className="visual-main-lead">
+                <span>
+                  크레닷으로 쉽고 빠른
+                  <br />
+                  <strong>판매대금 정산!</strong>
+                </span>
+                <span>
+                  지금 바로 이용중인 커머스 판매자 정보를 입력하고
+                  <br />
+                  즉시 정산 가능한 금액을 조회해보세요!
+                </span>
+              </div>
+              <img className="visual-main-img" src="../assets/images/main/m-visual.png" alt="" />
+            </div>
+            <div className="visual-marquee">
+              <div className="marquee">
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                  </span>
+                </div>
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>사용이 편리</strong>해서 초보들도 간편하게 사용할수 있어요~ 넘 좋네요
+                  </span>
+                </div>
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                  </span>
+                </div>
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>빠른정산</strong>으로 사업이 더 빨리 성장 할수 있었어요!! 최고 입니다~
+                  </span>
+                </div>
+              </div>
+              <div className="marquee marquee2">
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                  </span>
+                </div>
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>사용이 편리</strong>해서 초보들도 간편하게 사용할수 있어요~ 넘 좋네요
+                  </span>
+                </div>
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                  </span>
+                </div>
+                <div className="marquee-balloon">
+                  <span>쿠팡 셀러 김**님의 후기</span>
+                  <span>
+                    <strong>빠른정산</strong>으로 사업이 더 빨리 성장 할수 있었어요!! 최고 입니다~
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button className="visual-scroll-down">
+              <img src="../assets/images/main/m-arrow-down.svg" alt="" />
+            </button>
           </div>
-        </Col>
-      </Row>
-      <OrangeContainer>
-        <h3
-          style={{
-            color: "white",
-          }}
-        >
-          지금 즉시 정산 가능한 금액을 조회해보세요!
-        </h3>
-        <p
-          style={{
-            color: "white",
-          }}
-        >
-          {"즉시 정산 가능 금액 " + price + " 원"}
-        </p>
-        <button onClick={signing} style={{ padding: "4px" }}>
-          선정산 받기
-        </button>
-      </OrangeContainer>
-      <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal> {/* 수정필요 */}
-      <OrangeRoundContainer>
-        <Row>
-          <Col>
-            <LookupCard>
-              <img src={require("../img/coupang_wing.png")} height="20"></img>
-              <div style={{ padding: "20px 0px" }}>
-                <input name="id" placeholder="ID" onChange={onChange} value={id} />
-                <input name="pw" placeholder="PW" onChange={onChange} value={pw} />
+        </section>
+        <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
+        <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal>
+        <section className="calculate__check-wrap">
+          <div className="inner">
+            <div className="c-head">
+              <div className="c-head-box">
+                <span>
+                  지금 즉시
+                  <strong>정산 가능한 금액</strong>을<br />
+                  조회 해보세요!
+                </span>
+                <span>
+                  즉시 정산 가능 금액
+                  <strong className="font-eng">{price}</strong>
+                  <mark>원</mark>
+                </span>
               </div>
-              <button onClick={lookUp}>조회</button>
-            </LookupCard>
-          </Col>
-          <Col>
-            <LookupCard>
-              <img src={require("../img/coupang_wing.png")} height="20"></img>
-              <div style={{ padding: "20px 0px" }}>
-                <input placeholder="ID" />
-                <input placeholder="PW" />
+            </div>
+            <div className="c-body">
+              <div className="c-body-box">
+                {/* <!-- 조회하기 버튼에 active 클래스 추가시 색상변경 --> */}
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo1.png" alt="" />
+                  <form action="">
+                    <input name="id" type="text" placeholder="ID" onChange={onChange} value={id} />
+                    <input name="pw" type="password" className="main-password" placeholder="PW" onChange={onChange} value={pw} />
+                    <div className="eyes"></div>
+                  </form>
+                  <button onClick={lookUp}>조회하기</button>
+                  <button onClick={signing}>선정산받기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo2.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo3.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo4.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo5.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo6.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo7.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
+                <div className="check-box">
+                  <img src="../assets/images/main/c-check-logo/c-check-logo8.png" alt="" />
+                  <form action="">
+                    <input type="text" placeholder="ID" />
+                    <input type="password" className="main-password" placeholder="PW" />
+                    <div className="eyes"></div>
+                  </form>
+                  <button>조회하기</button>
+                </div>
               </div>
-              <button onClick={lookUp}>조회</button>
-            </LookupCard>
-          </Col>
-          <Col>
-            <LookupCard>
-              <img src={require("../img/coupang_wing.png")} height="20"></img>
-              <div style={{ padding: "20px 0px" }}>
-                <input placeholder="ID" />
-                <input placeholder="PW" />
-              </div>
-              <button onClick={lookUp}>조회</button>
-            </LookupCard>
-          </Col>
-          <Col>
-            <LookupCard>
-              <img src={require("../img/coupang_wing.png")} height="20"></img>
-              <div style={{ padding: "20px 0px" }}>
-                <input placeholder="ID" />
-                <input placeholder="PW" />
-              </div>
-              <button onClick={lookUp}>조회</button>
-            </LookupCard>
-          </Col>
-        </Row>
-      </OrangeRoundContainer>
-    </Container>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 };
 
