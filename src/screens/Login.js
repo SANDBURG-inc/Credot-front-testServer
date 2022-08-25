@@ -18,6 +18,11 @@ import {
   updateCeo,
   updateBusinessLoc,
   updateCorporateNum,
+  updateContractDate,
+  updateDeadline,
+  updateAmmount,
+  updateCommerce,
+  updateStatus,
 } from "./../redux/store.js";
 
 const Login = () => {
@@ -111,9 +116,45 @@ const Login = () => {
                   dispatch(updateBusinessLoc(response.businessLoc));
                   dispatch(updateCorporateNum(response.corporateNum));
 
+                  //financeInfo
+                  // dispatch(updateContractDate(response.contractDate));
+                  // dispatch(updateDeadline(response.deadline));
+                  // dispatch(updateAmmount(response.ammount));
+                  // dispatch(updateCommerce(response.commerce));
+                  // dispatch(updateStatus(response.status));
+
                   dispatch(update());
                 }
               });
+            // .then(
+            //   fetch(HOST + "/database/extractContract?email=" + inputs.email, {
+            //     method: "get",
+            //     headers: {
+            //       "Content-Type": "application/json; charset=utf-8",
+            //     },
+            //     credentials: "include",
+            //   })
+            //     .then((response) => {
+            //       console.log(response);
+            //       if (!response.ok) {
+            //         console.log("fetch error");
+            //       }
+            //       return response.json();
+            //     })
+            //     .then((response) => {
+            //       console.log(
+            //         "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
+            //       );
+            //       console.log(response);
+            //       dispatch(updateContractDate(response[0].contractDate));
+            //       dispatch(updateDeadline(response[0].deadline));
+            //       dispatch(updateAmmount(response[0].ammount));
+            //       dispatch(updateCommerce(response[0].commerce));
+            //       dispatch(updateStatus(response[0].status));
+
+            //       dispatch(update());
+            //     })
+            // );
           }
         }}
       >
