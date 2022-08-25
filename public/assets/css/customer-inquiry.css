@@ -29,7 +29,7 @@
   display: flex;
 }
 
-.head-link a {
+.head-link-a {
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -42,17 +42,18 @@
   margin-right: 40px;
 }
 
-.head-link a:last-child {
+.head-link-a:last-child {
   margin-right: 0;
 }
 
-.head-link a.active {
+.head-link-a.active {
   font-weight: bold;
   color: #ff7500;
   border-bottom: 2px solid #ff7500;
 }
 
 .n-body {
+  width: var(--main-width);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,8 +61,8 @@
   margin-bottom: 140px;
 }
 
-.n-body form {
-  width: var(--main-width);
+.n-body-form {
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 60px 140px;
@@ -82,7 +83,7 @@
   align-items: unset;
 }
 
-.input-box span {
+.input-box-span {
   width: 15%;
   font-size: 18px;
   font-weight: 500;
@@ -94,22 +95,22 @@
   color: #000;
 }
 
-.input-box:nth-child(4) span {
+.input-box:nth-child(4) .input-box-span {
   padding-top: 15px;
 }
 
-.input-box input {
+.input-box-input {
   height: 60px;
   padding: 0 15px;
 }
 
-.input-box textarea {
+.input-box-textarea {
   height: 360px;
   padding: 20px 15px;
 }
 
-.input-box input,
-.input-box textarea {
+.input-box-input,
+.input-box-textarea {
   width: 85%;
   border-radius: 8px;
   border: solid 1px #dedede;
@@ -124,7 +125,7 @@
   margin-top: 40px;
 }
 
-.n-body form button {
+.form-btn {
   width: 154px;
   height: 60px;
   border-radius: 30px;
@@ -139,6 +140,54 @@
   color: #fff;
 }
 
-.n-body form button img {
+.form-btn-img {
   margin-left: 20px;
+}
+
+@media (max-width: 1300px) {
+  .n-body-form {
+    padding: 60px 100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .n-body-form {
+    padding: 60px 60px;
+  }
+}
+
+@media (max-width: 700px) {
+  .input-box {
+    flex-direction: column;
+  }
+
+  .input-box-span {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .input-box-input,
+  .input-box-textarea {
+    width: 100%;
+  }
+
+  .n-body-form {
+    padding: 40px 30px;
+    border-radius: 10px;
+  }
+
+  .input-box-input {
+    height: 50px;
+  }
+
+  .input-box-textarea {
+    height: 280px;
+    padding: 15px;
+  }
+
+  .form-btn {
+    width: 160px;
+    height: 50px;
+  }
 }

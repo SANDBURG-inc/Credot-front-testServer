@@ -31,8 +31,42 @@
   margin: 0 10px;
 }
 
+.f-info-div {
+  display: flex;
+  align-items: center;
+}
+
 .f-copy {
   font-size: 12px;
   font-weight: normal;
   color: #969696;
+}
+
+@media (max-width: 700px) {
+  .f-logo {
+    width: 70px;
+    height: 40px;
+  }
+
+  .f-info {
+    flex-direction: column;
+  }
+
+  .r-f-mo {
+    display: none !important;
+  }
+
+  .f-info-span,
+  .f-info-div {
+    margin-bottom: 5px;
+  }
+  .f-info-div:last-child {
+    margin-bottom: 0;
+  }
+
+  .f-copy {
+    font-size: 10px;
+    font-weight: normal;
+    color: #969696;
+  }
 }
