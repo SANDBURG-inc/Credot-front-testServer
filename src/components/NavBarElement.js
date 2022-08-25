@@ -23,50 +23,166 @@ const NavBarElement = () => {
     watch(); // addEventListener 함수를 실행
     return () => {
       window.removeEventListener("scroll", handleFollow); // addEventListener 함수를 삭제
+
+      // 모바일 버거메뉴 클릭이벤트
+      document.querySelector(".burger-menu").addEventListener("click", function () {
+        document.querySelector(".mo-menu-wrap").classList.add("mo-open");
+      });
+
+      document.querySelector(".mo-close").addEventListener("click", function () {
+        document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+      });
+
+      document.querySelector(".mo-blank").addEventListener("click", function () {
+        document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+      });
     };
   });
 
   return (
-    <header className="header">
-      <div className="header__inner">
-        <h1 className="logo">
-          <a href="/">
-            <img src="../assets/images/logo/logo.png" alt="logo" />
-          </a>
-        </h1>
-        <div className="header-menu-wrap">
-          <a className="menu-service__use" href="/Service">
-            서비스 이용
-          </a>
-          <a className="menu-service__intro" href="/About">
-            서비스 소개
-          </a>
-          <a className="menu-notice" href="/Notice">
-            공지사항
-          </a>
-          <a className="menu-customer" href="/Faq">
-            고객센터
-          </a>
-        </div>
-        <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
-          <div>
-            <a href="/Login"> 로그인 </a>
-            <div className="devide-bar"></div>
-            <a href="/Register"> 회원가입 </a>
+    <>
+      <header className="header">
+        <div className="header__inner">
+          <h1 className="logo">
+            <a href="/">
+              <img src="../assets/images/logo/logo.png" alt="logo" />
+            </a>
+          </h1>
+          <div className="header-menu-wrap">
+            <a className="header-menu-menu menu-service__use" href="/Service">
+              서비스 이용
+            </a>
+            <a className="header-menu-menu menu-service__intro" href="/About">
+              서비스 소개
+            </a>
+            <a className="header-menu-menu menu-notice" href="/Notice">
+              공지사항
+            </a>
+            <a className="header-menu-menu menu-customer" href="/Faq">
+              고객센터
+            </a>
           </div>
-          <div>
-            <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
-              <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
-            </NavDropdown>
-            {/* <button>
-              <img src="../assets/images/icon/account-default.svg" alt="" />
+          {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
+          <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+            {/* <!-- 비로그인 상태 --> */}
+            <div className="account-not_login">
+              <a className="header-account-wrap-a" href="/Login">
+                {" "}
+                로그인{" "}
+              </a>
+              <div className="devide-bar"></div>
+              <a className="header-account-wrap-a" href="/Register">
+                {" "}
+                회원가입{" "}
+              </a>
+            </div>
+
+            {/* <!-- 로그인 상태 --> */}
+            <div className="account-login">
+              <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
+                <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
+              </NavDropdown>
+              {/* <button className="profile-btn">
+              <img className="profile-btn-img" src="../assets/images/icon/account-default.svg" alt="" />
               <span className="account-name">별별 셀러님</span>
             </button> */}
+            </div>
+            <div className="burger-menu">
+              <img src="../assets/images/icon/mo-burger.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </header>
+      {/*  <!-- 모바일메뉴 --> */}
+      <div className="mo-menu-wrap">
+        <div className="mo-blank"></div>
+        <div className="mo-menu">
+          <button className="mo-close">
+            <img src="../assets/images/icon/mo-close.svg" alt="" />
+          </button>
+          <span className="mo-menu-span font-eng">MENU</span>
+          <div className="header-menu-wrap">
+            <a className="mo-menu-menu menu-service__use" href="/Service">
+              서비스 이용
+            </a>
+            <a className="mo-menu-menu menu-service__intro" href="/About">
+              서비스 소개
+            </a>
+            <a className="mo-menu-menu menu-notice" href="/Notice">
+              공지사항
+            </a>
+            <a className="mo-menu-menu menu-customer" href="/Faq">
+              고객센터
+            </a>
+          </div>
+          {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
+          <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+            {/* <!-- 비로그인 상태 --> */}
+            <div className="account-not_login">
+              <a href="/Login"> 로그인 </a>
+              <div className="devide-bar"></div>
+              <a href="/Register"> 회원가입 </a>
+            </div>
+
+            {/* <!-- 로그인 상태 --> */}
+            <div className="account-login">
+              <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
+                <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
+              </NavDropdown>
+              {/* <button class="profile-btn">
+                <img class="profile-btn-img" src="../assets/images/icon/account-default.svg" alt="" />
+                <span class="account-name">별별 셀러님</span>
+              </button> */}
+            </div>
           </div>
         </div>
       </div>
-    </header>
+    </>
+    // 버젼2--------------------------------------
+    // <header className="header">
+    //   <div className="header__inner">
+    //     <h1 className="logo">
+    //       <a href="/">
+    //         <img src="../assets/images/logo/logo.png" alt="logo" />
+    //       </a>
+    //     </h1>
+    //     <div className="header-menu-wrap">
+    //       <a className="menu-service__use" href="/Service">
+    //         서비스 이용
+    //       </a>
+    //       <a className="menu-service__intro" href="/About">
+    //         서비스 소개
+    //       </a>
+    //       <a className="menu-notice" href="/Notice">
+    //         공지사항
+    //       </a>
+    //       <a className="menu-customer" href="/Faq">
+    //         고객센터
+    //       </a>
+    //     </div>
+    //     <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+    //       <div>
+    //         <a href="/Login"> 로그인 </a>
+    //         <div className="devide-bar"></div>
+    //         <a href="/Register"> 회원가입 </a>
+    //       </div>
+    //       <div>
+    //         <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+    //           <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
+    //           <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
+    //         </NavDropdown>
+    //         {/* <button>
+    //           <img src="../assets/images/icon/account-default.svg" alt="" />
+    //           <span className="account-name">별별 셀러님</span>
+    //         </button> */}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </header>
+
+    // 버젼1--------------------------------------
     // <Navbar bg="light" expand="lg">
     //   <Container>
     //     <Navbar.Brand href="/">

@@ -109,7 +109,7 @@ const Signature = (props) => {
         contractData.email +
         "&sign=" +
         copy.sign +
-        "&date=" +
+        "&contractDate=" +
         contractData.date +
         "&deadline=" +
         contractData.deadline +
