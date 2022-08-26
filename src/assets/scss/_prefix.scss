@@ -1,0 +1,274 @@
+
+//Colors
+$m-color:#192141;
+$p-color:#2547C4;
+$g-color:#8E929B;
+$msg-color:#606060;
+
+// Font and typography 
+// font size : 16px 기준 
+$px10:0.625rem;
+$px12:0.75rem;
+$px14:0.875rem;
+$px16:1rem;
+$px18:1.125rem;
+$px20:1.25rem;
+$px22:1.375rem;
+$px24:1.5rem;
+$px26:1.625rem;
+$px28:1.75rem;
+$px30:1.875rem;
+$px32:2rem;
+$px34:2.125rem;
+$px36:2.25rem;
+$px38:2.375rem;
+$px40:2.5rem;
+$px42:2.625rem;
+$px44:2.75rem;
+$px46:2.875rem;
+$px48:3rem;
+$px50:3.125rem;
+$px60:3.75rem;
+
+
+// $px10:1rem;
+// $px12:1.2rem;
+// $px14:1.4rem;
+// $px16:1.6rem;
+// $px18:1.8rem;
+// $px20:2rem;
+// $px22:2.2rem;
+// $px24:2.4rem;
+// $px26:2.6rem;
+// $px28:2.8rem;
+// $px30:3rem;
+// $px32:3.2rem;
+// $px34:3.4rem;
+// $px36:3.6rem;
+// $px38:3.8rem;
+// $px40:4rem;
+// $px42:4rem;
+// $px44:4rem;
+// $px46:4rem;
+// $px48:4rem;
+// $px50:4rem;
+// $px60:6rem;
+
+// font weight 
+// --font-medium: 500;
+// --font-semi-bold: 600;
+
+// z index
+// --z-tooltip: 10;
+// --z-fixed: 100;
+
+
+// mixin - font set 
+@mixin  f-set-total($px,$weight,$color) {
+    font-size: $px;
+    font-weight: $weight;
+    color: $color;
+}
+@mixin  f-set-weight($px,$weight) {
+  font-size: $px;
+  font-weight: $weight;
+}
+@mixin  f-set-color($px,$color) {
+  font-size: $px;
+  color: $color;
+}
+
+@mixin clear-both {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+@mixin border($color) {
+  border:1px solid $color;
+}
+
+@mixin box-shadow {
+  -webkit-box-shadow: 0 3px 30px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 3px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 30px rgba(0,0,0,0.1);
+}
+@mixin bg-base {
+  box-sizing: border-box;
+  background-color: #fff;
+  @include box-shadow;
+  border-radius: 5px;
+  padding:$px-20;
+}
+
+@mixin bg-img($ul, $size:100%, $repeat: no-repeat, $positionX:center, $positionY:center) {
+  background-image: url($ul);
+  background-size: $size;
+  background-repeat: $repeat;
+  background-position: $positionX $positionY;
+}
+
+@mixin center-align-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin vertical-align-flex {
+  display: flex;
+  align-items: center;
+}
+
+@mixin vertical-align-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+@mixin horizon-align-flex {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin horizon-align-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@mixin horizon-align-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin height-align {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin align-wrap {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+//말줄임표
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 한줄 width 설정 
+@mixin ellipsis($w) {
+  width:$w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 여러줄일때 
+@mixin ellipsis2($line,$w,$h) {
+  width:$w;
+  height:$h;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:$line;
+  -webkit-box-orient:vertical;
+}
+
+
+@mixin box-sizing($type) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  box-sizing: $type;
+}
+
+@mixin border-radius($num) {
+  -webkit-border-radius: $num;
+  -moz-border-radius: $num;
+  border-radius: $num;
+}
+
+@mixin transition($type, $second) {
+  -webkit-transition: $type $second;
+  -moz-transition: $type $second;
+  -o-transition: $type $second;
+  transition: $type $second;
+}
+
+
+
+@mixin background-size($num) {
+  -webkit-background-size: $num;
+  -moz-background-size: $num;
+  -o-background-size: $num;
+  background-size: $num;
+}
+
+@mixin transform-skew($num) {
+  -webkit-transform: skew($num);
+  -ms-transform: skew($num);
+  -moz-transform: skew($num);
+  -o-transform: skew($num);
+  transform: skew($num);
+}
+
+@mixin transform-rotate($num) {
+  -webkit-transform: rotate($num);
+  -ms-transform: rotate($num);
+  -moz-transform: rotate($num);
+  -o-transform: rotate($num);
+  transform: rotate($num);
+}
+
+@mixin square($num) {
+  width: $num;
+  height: $num;
+}
+
+@mixin full-circle($num) {
+  @include square($num);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+@mixin vertical-height($height) {
+  height: $height;
+  line-height: $height;
+}
+
+@mixin center-align-position($width, $height) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -($height/2);
+  margin-left: -($width/2);
+  width: $width;
+  height: $height;
+}
+
+// margin
+@mixin fixmr($num) {
+  margin-right:($num)px !important;
+}
+@mixin fixml($num) {
+  margin-left:($num)px !important;
+}
+@mixin fixmt($num) {
+  margin-top:($num)px !important;
+}
+@mixin fixmb($num) {
+  margin-bottom:($num)px !important;
+}
+
+// padding
+@mixin fixpr($num) {
+  padding-right:($num)px !important;
+}
+@mixin fixpl($num) {
+  padding-left:($num)px !important;
+}
+@mixin fixpt($num) {
+  padding-top:($num)px !important;
+}
+@mixin fixpb($num) {
+  padding-bottom:($num)px !important;
+}

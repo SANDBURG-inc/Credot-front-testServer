@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <clipPath id="1331ekq7pa">
+            <path data-name="사각형 21" transform="translate(.34 .34)" style="stroke:#ff7500;fill:#ff7500" d="M0 0h11v11H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="그룹 21" transform="rotate(-90 23 938)">
+        <circle data-name="타원 1" cx="12" cy="12" r="12" transform="translate(937 915)" style="fill:#fff"/>
+        <g data-name="마스크 그룹 2" transform="translate(943.66 921.66)" style="clip-path:url(#1331ekq7pa)">
+            <g data-name="그룹 19">
+                <path data-name="패스 3" d="m1060.5 932 3.6 3.6 3.6-3.6" transform="translate(-1058.448 -926.416)" style="stroke-linejoin:round;fill:none;stroke-linecap:round;stroke-width:1.5px;stroke:#ff7500"/>
+                <path data-name="패스 4" d="M1069 922.416v7.27" transform="translate(-1063.245 -920.772)" style="fill:none;stroke-linecap:round;stroke-width:1.5px;stroke:#ff7500"/>
+            </g>
+        </g>
+    </g>
+</svg>

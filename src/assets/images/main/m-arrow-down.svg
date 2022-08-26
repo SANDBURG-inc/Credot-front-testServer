@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62">
+    <defs>
+        <clipPath id="57rb5t27pb">
+            <path data-name="사각형 21" transform="translate(1033 932)" style="stroke:#000" d="M0 0h20v20H0z"/>
+        </clipPath>
+        <filter id="jatcnk4kwa" x="0" y="0" width="62" height="62" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feFlood flood-color="#9d9d9d" flood-opacity=".098"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="그룹 20">
+        <g style="filter:url(#jatcnk4kwa)">
+            <g data-name="타원 1" transform="translate(9 6)" style="fill:#fff;stroke:#f2f2f2">
+                <circle cx="22" cy="22" r="22" style="stroke:none"/>
+                <circle cx="22" cy="22" r="21.5" style="fill:none"/>
+            </g>
+        </g>
+        <g data-name="마스크 그룹 2" transform="translate(-1012 -914)" style="clip-path:url(#57rb5t27pb)">
+            <g data-name="그룹 19">
+                <path data-name="패스 3" d="m1060.5 932 6.484 6.484 6.486-6.484" transform="translate(-23.799 10.062)" style="stroke-linejoin:round;stroke-linecap:round;stroke-width:2px;fill:none;stroke:#000"/>
+                <path data-name="패스 4" d="M1069 922.416v13.1" transform="translate(-25.629 12.547)" style="stroke-linecap:round;stroke-width:2px;fill:none;stroke:#000"/>
+            </g>
+        </g>
+    </g>
+</svg>

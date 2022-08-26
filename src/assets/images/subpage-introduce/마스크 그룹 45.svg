@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <defs>
+        <clipPath id="vc52uha4ha">
+            <path data-name="사각형 339731" transform="translate(185.911 272.911)" style="fill:#fff;stroke:#707070" d="M0 0h100v100H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="마스크 그룹 45" transform="translate(-185.911 -272.911)" style="clip-path:url(#vc52uha4ha)">
+        <g data-name="그룹 16535" transform="translate(182.898 268.9)">
+            <circle data-name="타원 95" cx="44.975" cy="44.975" r="44.975" transform="rotate(-77.083 55.029 43.837)" style="fill:#f8f8f8"/>
+            <g data-name="그룹 16534" transform="translate(17.171 21.979)">
+                <ellipse data-name="타원 96" cx="17.496" cy="24.232" rx="17.496" ry="24.232" transform="translate(19.224 1.928)" style="fill:#ebebeb"/>
+                <path data-name="패스 36744" d="M372.85 125.31c-14.645 0-27.737 3.51-36.444 9.023a44.954 44.954 0 0 0 73.267.244c-8.704-5.654-21.964-9.267-36.823-9.267z" transform="translate(-336.406 -76.468)" style="fill:#ebebeb"/>
+                <rect data-name="사각형 339730" width="18.696" height="28.562" rx="9.348" transform="translate(27.372 31.913)" style="fill:#ebebeb"/>
+                <path data-name="패스 36745" d="M365.47 91.744c.524 3.885-.339 7.254-1.927 7.524s-3.3-2.66-3.823-6.545.338-7.254 1.926-7.524 3.299 2.66 3.824 6.545z" transform="translate(-343.482 -64.206)" style="fill:#ebebeb"/>
+                <path data-name="패스 36746" d="M410.43 91.744c-.524 3.885.339 7.254 1.926 7.524s3.3-2.66 3.824-6.545-.339-7.254-1.926-7.524-3.301 2.66-3.824 6.545z" transform="translate(-358.977 -64.206)" style="fill:#ebebeb"/>
+                <path data-name="패스 36747" d="m364.092 80.185-1.765-11.638a8.29 8.29 0 0 1 .094-4.221c.514-1.328 2.022-2.386 3.356-1.888-.534-2.7 2.451-4.691 5.053-5.587a30.188 30.188 0 0 1 13.6-1.674 19.673 19.673 0 0 1 12.118 6.041 10.774 10.774 0 0 1 2.281 3.7c.894 2.661.325 5.566-.252 8.314l-1.374 6.55a2.924 2.924 0 0 1-.561 1.4 2.966 2.966 0 0 1-2.269.651l-26.026.056c-1.631 0-3.76-.4-3.976-2.015" transform="translate(-344.257 -54.979)" style="fill:#ebebeb"/>
+            </g>
+        </g>
+    </g>
+</svg>
