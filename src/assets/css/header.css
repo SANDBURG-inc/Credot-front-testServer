@@ -1,0 +1,261 @@
+.header__inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.header__inner.blur {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.logo {
+  width: 62px;
+  height: 35px;
+}
+
+.logo {
+  margin-left: 80px;
+}
+
+.header-account-wrap {
+  margin-right: 80px;
+}
+
+.header-menu-menu {
+  margin-right: 60px;
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.header-menu:last-child,
+.header-account-wrap-a:last-child {
+  margin-right: 0;
+}
+
+.header-account-wrap-a {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.header-account-wrap .account-not_login,
+.header-account-wrap .account-login {
+  display: flex;
+  align-items: center;
+}
+
+.header-account-wrap .devide-bar {
+  width: 1px;
+  height: 11px;
+  background: #f2f2f2;
+  margin: 0 16.5px;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn-img {
+  margin-right: 10px;
+}
+
+.header-account-wrap .account-login {
+  display: none;
+}
+
+.header-account-wrap.logined .account-not_login {
+  display: none;
+}
+
+.header-account-wrap.logined .account-login {
+  display: flex;
+}
+
+.account-name {
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #202428;
+}
+
+.burger-menu {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .header-menu-wrap {
+    display: none;
+  }
+  .account-not_login,
+  .account-login {
+    display: none !important;
+  }
+
+  .burger-menu {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .logo {
+    margin-left: 50px;
+  }
+
+  .header-account-wrap {
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header__inner {
+    height: 50px;
+  }
+
+  .logo {
+    margin-left: 20px;
+  }
+
+  .header-account-wrap {
+    margin-right: 20px;
+  }
+
+  .logo {
+    width: 53px;
+  }
+}
+
+@media (max-width: 500px) {
+  .logo {
+    margin-left: 15px;
+  }
+
+  .header-account-wrap {
+    margin-right: 15px;
+  }
+}
+
+/* 모바일 메뉴 스타일링 */
+.mo-menu-wrap {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.66);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.mo-menu-wrap.mo-open {
+  opacity: 1;
+  pointer-events: unset;
+}
+
+.mo-menu-wrap.mo-open .mo-menu {
+  right: 0;
+}
+
+.mo-blank {
+  width: calc(100% - 300px);
+  height: 100vh;
+}
+
+.mo-menu {
+  position: absolute;
+  right: -100%;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  transition: 0.3s ease;
+}
+
+.mo-menu-wrap .header-menu-wrap {
+  display: flex;
+}
+
+.mo-menu .account-not_login {
+  display: flex !important;
+}
+
+/* .mo-menu .account-login {
+  display: flex !important;
+} */
+
+.mo-menu .header-account-wrap.logined .account-not_login {
+  display: none !important;
+}
+
+.mo-menu .header-account-wrap.logined .account-login {
+  display: flex !important;
+  align-items: center;
+}
+
+.mo-menu-wrap .header-menu-wrap {
+  flex-direction: column;
+  margin-bottom: 70px;
+}
+
+.mo-menu-span {
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fc8118;
+  margin-bottom: 70px;
+  padding: 0 30px;
+}
+
+.mo-menu-menu {
+  padding: 30px;
+  margin-right: 0 !important;
+  border-bottom: 1px solid #e9ebf2;
+
+  font-size: 17px;
+  font-weight: bold !important;
+}
+
+.mo-menu .header-account-wrap {
+  margin-right: 0;
+}
+
+.mo-menu .header-account-wrap .account-not_login,
+.mo-menu .header-account-wrap .account-login {
+  justify-content: center;
+}
+
+.mo-menu .header-account-wrap .devide-bar {
+  margin: 0 43px;
+}
+
+.mo-menu .header-account-wrap {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+}
+
+.mo-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

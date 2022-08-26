@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+    <defs>
+        <clipPath id="jdqyaguena">
+            <path data-name="사각형 354275" transform="translate(326 58)" style="stroke:#000" d="M0 0h21v21H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="마스크 그룹 7382" transform="translate(-326 -58)" style="clip-path:url(#jdqyaguena)">
+        <g data-name="그룹 474037">
+            <path data-name="사각형 354277" d="m329.093 74.767 13.675-13.675 1.14 1.14-13.675 13.675z"/>
+            <path data-name="사각형 355443" d="m330.232 61.092 13.675 13.675-1.14 1.14-13.675-13.675z"/>
+        </g>
+    </g>
+</svg>

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ContractModal from "../components/contractModal/ContractModal";
 import { HOST } from "../redux/store";
 import ProgressCircleDialog from "../components/ProgressCircleDialog";
+import "../assets/css/index.css";
 
 //버젼1
 // let Text = styled.p`
