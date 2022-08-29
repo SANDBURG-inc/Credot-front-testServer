@@ -4,6 +4,7 @@ import Guide from "./screens/Guide";
 import Media from "./screens/Media";
 import Notice from "./screens/Notice";
 import Faq from "./screens/Faq";
+import Inquiry from "./screens/Inquiry";
 import Mypage from "./screens/Mypage";
 import Login from "./screens/Login";
 import Finance from "./screens/Finance";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/Media" element={<Media />} />
         <Route path="/Notice" element={<Notice />} />
         <Route path="/Faq" element={<Faq />} />
+        <Route path="/Inquiry" element={<Inquiry />} />
         <Route path="/Mypage" element={<Mypage />} />
         <Route path="/Finance" element={<Finance />} />
         <Route path="/Login" element={<Login />} />
