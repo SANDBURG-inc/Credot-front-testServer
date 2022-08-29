@@ -8,37 +8,32 @@ import TableCell from "@material-ui/core/TableCell";
 import { HOST, updateFinanceHistory } from "./../redux/store.js";
 import { useDispatch, useSelector } from "react-redux";
 import "../assets/css/my_page.css";
+import { render } from "@testing-library/react";
 
 const Finance = () => {
-  const dispatch = useDispatch();
   const tmpEmail = useSelector((state) => state.info.email);
-  fetch(HOST + "/database/extractContract?email=" + tmpEmail)
-    .then((response) => {
-      console.log(response);
-      if (!response.ok) {
-        console.log("fetch error");
-      }
-      return response.json();
-    })
-    .then((response) => {
-      console.log(response);
-      dispatch(updateFinanceHistory(response));
-    });
-
-  const financeHistory = useSelector((state) => state.financeHistory);
-  var historyLength = financeHistory.length;
-
   const HistoryTable = () => {
-    for (let i = 0; i < historyLength; i++) {
-      <TableRow>
-        <TableCell>{i + 1}</TableCell>
-        <TableCell>{financeHistory[i].contractDate}</TableCell>
-        <TableCell>{financeHistory[i].deadline}</TableCell>
-        <TableCell>{financeHistory[i].ammount}</TableCell>
-        <TableCell>{financeHistory[i].commerce}</TableCell>
-        <TableCell>{financeHistory[i].status}</TableCell>
-      </TableRow>;
-    }
+    let history = [];
+    fetch(HOST + "/database/extractContract?email=" + tmpEmail, {})
+      .then((response) => {
+        if (!response.ok) {
+          console.log("fetch error");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        console.log(response.length);
+        history = Object.values(response);
+        console.log(history);
+      });
+    return (
+      <div>
+        {history.map((value, i) => (
+          <TableCell key={i}>{value}</TableCell>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -83,9 +78,7 @@ const Finance = () => {
                           <TableCell>납부여부</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>
-                        <HistoryTable />
-                      </TableBody>
+                      <TableBody>{HistoryTable()}</TableBody>
                     </Table>
                   </Paper>
                 </div>
