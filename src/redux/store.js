@@ -82,30 +82,36 @@ const incInfo = createSlice({
   },
 });
 
-const financeInfo = createSlice({
+const financeHistory = createSlice({
   name: "financeInfo",
-  initialState: {
-    contractDate: "",
-    deadline: "",
-    ammount: "",
-    commerce: "",
-    status: "",
-  },
+  // initialState: {
+  //   contractDate: "",
+  //   deadline: "",
+  //   ammount: "",
+  //   commerce: "",
+  //   status: "",
+  // },
+  // reducers: {
+  //   updateContractDate(state, value) {
+  //     state.contractDate = value.payload;
+  //   },
+  //   updateDeadline(state, value) {
+  //     state.deadline = value.payload;
+  //   },
+  //   updateAmmount(state, value) {
+  //     state.ammount = value.payload;
+  //   },
+  //   updateCommerce(state, value) {
+  //     state.commerce = value.payload;
+  //   },
+  //   updateStatus(state, value) {
+  //     state.status = value.payload;
+  //   },
+  // },
+  initialState: [],
   reducers: {
-    updateContractDate(state, value) {
-      state.contractDate = value.payload;
-    },
-    updateDeadline(state, value) {
-      state.deadline = value.payload;
-    },
-    updateAmmount(state, value) {
-      state.ammount = value.payload;
-    },
-    updateCommerce(state, value) {
-      state.corporateNum = value.payload;
-    },
-    updateStatus(state, value) {
-      state.status = value.payload;
+    updateFinanceHistory(state, value) {
+      state = value.payload;
     },
   },
 });
@@ -131,7 +137,7 @@ const rootReducer = combineReducers({
   login: isLogin.reducer,
   info: userInfo.reducer,
   incInfo: incInfo.reducer,
-  financeInfo: financeInfo.reducer,
+  financeHistory: financeHistory.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -154,6 +160,7 @@ export default store;
 export const { update } = isLogin.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
-export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
+// export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
+export const { updateFinanceHistory } = financeHistory.actions;
 export { HOST };
 // export let { updatePassword } = password.actions;

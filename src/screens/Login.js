@@ -18,11 +18,12 @@ import {
   updateCeo,
   updateBusinessLoc,
   updateCorporateNum,
-  updateContractDate,
-  updateDeadline,
-  updateAmmount,
-  updateCommerce,
-  updateStatus,
+  // updateFinanceHistory,
+  // updateContractDate,
+  // updateDeadline,
+  // updateAmmount,
+  // updateCommerce,
+  // updateStatus,
 } from "./../redux/store.js";
 
 const Login = () => {
@@ -146,12 +147,7 @@ const Login = () => {
             //         "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
             //       );
             //       console.log(response);
-            //       dispatch(updateContractDate(response[0].contractDate));
-            //       dispatch(updateDeadline(response[0].deadline));
-            //       dispatch(updateAmmount(response[0].ammount));
-            //       dispatch(updateCommerce(response[0].commerce));
-            //       dispatch(updateStatus(response[0].status));
-
+            //       dispatch(updateFinanceHistory(response));
             //       dispatch(update());
             //     })
             // );
