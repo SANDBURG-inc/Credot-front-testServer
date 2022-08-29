@@ -47,7 +47,7 @@ const Finance = () => {
         <section className="section-wrap my_page-wrap">
           <div className="inner">
             <div className="i-head">
-              <span className="head-title font-eng">MY PAGE</span>
+              <span className="head-title font-eng">정산현황</span>
             </div>
             <div className="i-body">
               <div className="m-head">

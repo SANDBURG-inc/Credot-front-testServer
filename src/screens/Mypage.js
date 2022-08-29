@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import AuthWrapper from "../components/auth/AuthWrapper";
 import Form from "react-bootstrap/Form";
 import AuthButton from "./../components/auth/AuthButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { update, HOST } from "./../redux/store.js";
+import "../assets/css/my_page.css";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
@@ -38,52 +38,63 @@ const Mypage = () => {
     return <Navigate to="/" />;
   }
   return (
-    <div
-      style={{
-        margin: "0px auto",
-        width: "450px",
-      }}
-    >
-      <Form.Group>
-        <Form.Label>성함</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpName} disabled />
-        <Form.Label>이메일</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpEmail} disabled />
-        <Form.Label>연락처</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpPhoneNum} disabled />
-        <Form.Label style={{ margin: "10px 0px 10px 0px" }}>계좌정보</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder={tmpBank} disabled />
-        <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpAccount} disabled />
-        <Form.Label>비밀번호</Form.Label>
-        <Form.Control style={{ margin: "10px 0px 25px 0px" }} placeholder="현재 비밀번호" onChange={handleOnChange1} />
-        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호" onChange={handleOnChange2} />
-        <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호 확인" />
-        <AuthButton
-          onClick={() => {
-            console.log(tmpEmail);
-            console.log(curPassword);
-            console.log(newPassword);
-            fetch(HOST + `/database/changepw?currentid=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
-              .then((response) => response.text())
-              .then((response) => {
-                alert(response);
-              });
-          }}
-        >
-          비밀번호 수정
-        </AuthButton>
-        <AuthButton
-          onClick={async () => {
-            await fetch(HOST + "/logout");
-            dispatch(update());
-            localStorage.clear();
-            alert("로그아웃 되었습니다");
-          }}
-        >
-          로그아웃
-        </AuthButton>
-      </Form.Group>
-    </div>
+    <main className="container">
+      <div className="inner">
+        <section className="section-wrap my_page-wrap">
+          <div className="inner">
+            <div className="i-head">
+              <span className="head-title font-eng">MY PAGE</span>
+            </div>
+            <div className="i-body">
+              <div className="m-stats">
+                <span className="m-stats-sub">내 정보</span>
+                <div className="m-stats-stat">
+                  <Form.Group>
+                    <Form.Label>성함</Form.Label>
+                    <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpName} disabled />
+                    <Form.Label>이메일</Form.Label>
+                    <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpEmail} disabled />
+                    <Form.Label>연락처</Form.Label>
+                    <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpPhoneNum} disabled />
+                    <Form.Label style={{ margin: "10px 0px 10px 0px" }}>계좌정보</Form.Label>
+                    <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder={tmpBank} disabled />
+                    <Form.Control style={{ margin: "10px 0px 50px 0px" }} placeholder={tmpAccount} disabled />
+                    <Form.Label>비밀번호</Form.Label>
+                    <Form.Control style={{ margin: "10px 0px 25px 0px" }} placeholder="현재 비밀번호" onChange={handleOnChange1} />
+                    <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호" onChange={handleOnChange2} />
+                    <Form.Control style={{ margin: "10px 0px 10px 0px" }} placeholder="새 비밀번호 확인" />
+                    <AuthButton
+                      onClick={() => {
+                        console.log(tmpEmail);
+                        console.log(curPassword);
+                        console.log(newPassword);
+                        fetch(HOST + `/database/changepw?currentid=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
+                          .then((response) => response.text())
+                          .then((response) => {
+                            alert(response);
+                          });
+                      }}
+                    >
+                      비밀번호 수정
+                    </AuthButton>
+                    <AuthButton
+                      onClick={async () => {
+                        await fetch(HOST + "/logout");
+                        dispatch(update());
+                        localStorage.clear();
+                        alert("로그아웃 되었습니다");
+                      }}
+                    >
+                      로그아웃
+                    </AuthButton>
+                  </Form.Group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 };
 
