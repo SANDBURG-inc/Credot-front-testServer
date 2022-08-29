@@ -84,13 +84,7 @@ const Login = () => {
             alert("비밀번호를 입력해주세요!");
           } else {
             handleOnClick();
-            fetch(HOST + "/login?email=" + inputs.email + "&pw=" + inputs.password, {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json; charset=utf-8",
-              },
-              credentials: "include",
-            })
+            fetch(HOST + "/login?email=" + inputs.email + "&pw=" + inputs.password)
               .then((response) => {
                 console.log(response);
                 if (!response.ok) {

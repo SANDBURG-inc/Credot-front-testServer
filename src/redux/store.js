@@ -83,7 +83,7 @@ const incInfo = createSlice({
 });
 
 const financeHistory = createSlice({
-  name: "financeInfo",
+  name: "financeHistory",
   // initialState: {
   //   contractDate: "",
   //   deadline: "",
@@ -111,7 +111,7 @@ const financeHistory = createSlice({
   initialState: [],
   reducers: {
     updateFinanceHistory(state, value) {
-      state = value.payload;
+      state = value;
     },
   },
 });
