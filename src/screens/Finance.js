@@ -12,13 +12,7 @@ import "../assets/css/my_page.css";
 const Finance = () => {
   const dispatch = useDispatch();
   const tmpEmail = useSelector((state) => state.info.email);
-  fetch(HOST + "/database/extractContract?email=" + tmpEmail, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
-    credentials: "include",
-  })
+  fetch(HOST + "/database/extractContract?email=" + tmpEmail)
     .then((response) => {
       console.log(response);
       if (!response.ok) {
