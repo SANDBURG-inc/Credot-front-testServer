@@ -1,46 +1,53 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import { HOST, updateFinanceHistory } from "./../redux/store.js";
+import { useDispatch, useSelector } from "react-redux";
 import "../assets/css/my_page.css";
 
 const Finance = () => {
-  const curDate = useSelector((state) => state.financeInfo.date);
-  const curDeadline = useSelector((state) => state.financeInfo.deadline);
-  const curAmmount = useSelector((state) => state.financeInfo.ammount);
-  const curCommerce = useSelector((state) => state.financeInfo.commerce);
-  const curStatus = useSelector((state) => state.financeInfo.status);
+  const dispatch = useDispatch();
+  const tmpEmail = useSelector((state) => state.info.email);
+  fetch(HOST + "/database/extractContract?email=" + tmpEmail, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    credentials: "include",
+  })
+    .then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        console.log("fetch error");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      console.log(response);
+      dispatch(updateFinanceHistory(response));
+    });
+
+  const financeHistory = useSelector((state) => state.financeHistory);
+  var historyLength = financeHistory.length;
+
+  const HistoryTable = () => {
+    for (let i = 0; i < historyLength; i++) {
+      <TableRow>
+        <TableCell>{i + 1}</TableCell>
+        <TableCell>{financeHistory[i].contractDate}</TableCell>
+        <TableCell>{financeHistory[i].deadline}</TableCell>
+        <TableCell>{financeHistory[i].ammount}</TableCell>
+        <TableCell>{financeHistory[i].commerce}</TableCell>
+        <TableCell>{financeHistory[i].status}</TableCell>
+      </TableRow>;
+    }
+  };
 
   return (
-    // <Paper>
-    //   <Table>
-    //     <TableHead>
-    //       <TableRow>
-    //         <TableCell>번호</TableCell>
-    //         <TableCell>계약일</TableCell>
-    //         <TableCell>납부마감일</TableCell>
-    //         <TableCell>금액</TableCell>
-    //         <TableCell>커머스</TableCell>
-    //         <TableCell>납부여부</TableCell>
-    //       </TableRow>
-    //     </TableHead>
-    //     <TableBody>
-    //       <TableRow>
-    //         <TableBody>1</TableBody>
-    //         <TableCell>{curDate}</TableCell>
-    //         <TableCell>{curDeadline}</TableCell>
-    //         <TableCell>{curAmmount}</TableCell>
-    //         <TableCell>{curCommerce}</TableCell>
-    //         <TableCell>{curStatus}</TableCell>
-    //       </TableRow>
-    //     </TableBody>
-    //   </Table>
-    // </Paper>
-
     <main className="container">
       <div className="inner">
         <section className="section-wrap my_page-wrap">
@@ -69,7 +76,25 @@ const Finance = () => {
               </div>
               <div className="m-stats">
                 <span className="m-stats-sub">정산금 통계</span>
-                <div className="m-stats-stat"></div>
+                <div className="m-stats-stat">
+                  <Paper>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>번호</TableCell>
+                          <TableCell>계약일</TableCell>
+                          <TableCell>납부마감일</TableCell>
+                          <TableCell>금액</TableCell>
+                          <TableCell>커머스</TableCell>
+                          <TableCell>납부여부</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        <HistoryTable />
+                      </TableBody>
+                    </Table>
+                  </Paper>
+                </div>
               </div>
               <div className="m-board">
                 <span className="m-board-sub">문의 게시판</span>
