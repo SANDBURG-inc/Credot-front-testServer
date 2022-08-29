@@ -23,7 +23,7 @@ const Guide = () => {
                 </a>
               </div>
             </div>
-            <div className="i-body">
+            <div className="i-body" style={{ width: "var(--main-width)" }}>
               <span className="g-title">서비스 가이드</span>
               <div className="g-process">
                 <span className="g-process-info">1. 사용중인 커머스를 확인하고 판매자 정보를 입력합니다.</span>
