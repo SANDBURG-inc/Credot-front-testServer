@@ -43,7 +43,7 @@ const Finance = () => {
 
     <main className="container">
       <div className="inner">
-        <section clasclassNames="section-wrap my_page-wrap">
+        <section className="section-wrap my_page-wrap">
           <div className="inner">
             <div className="i-head">
               <span className="head-title font-eng">MY PAGE</span>
