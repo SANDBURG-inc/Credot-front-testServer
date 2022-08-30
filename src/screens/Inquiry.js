@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import "../assets/css/customer-inquiry.css";
 
 const Inquiry = () => {
@@ -22,44 +23,62 @@ const Inquiry = () => {
     };
   });
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm("service_8h1pn0j", "template_kil80le", e.target, "CC6tKIfGeDYkzejKg").then(
+      (response) => {
+        console.log("Success!", response.status, response.text);
+        alert("1:1 문의가 접수되었습니다.");
+        window.location.reload();
+        // setStatus('success');
+      },
+      (error) => {
+        console.log("Failed...", error);
+        alert("문의 접수에 실패하였습니다.");
+        // setStatus('fail');
+      }
+    );
+  };
+
   return (
-    <main class="container">
-      <div class="inner">
-        <section class="section-wrap introduce-wrap guide-wrap">
-          <div class="inner">
-            <div class="n-head">
-              <span class="head-title">고객센터</span>
-              <div class="head-link">
-                <a class="head-link-a" href="/Faq">
+    <main className="container">
+      <div className="inner">
+        <section className="section-wrap introduce-wrap guide-wrap">
+          <div className="inner">
+            <div className="n-head">
+              <span className="head-title">고객센터</span>
+              <div className="head-link">
+                <a className="head-link-a" href="/Faq">
                   자주하는 질문
                 </a>
-                <a class="head-link-a active" href="/Inquiry">
+                <a className="head-link-a active" href="/Inquiry">
                   1:1 문의하기
                 </a>
               </div>
             </div>
-            <div class="n-body">
-              <form class="n-body-form" action="">
-                <div class="input-box">
-                  <span class="input-box-span">성함</span>
-                  <input class="input-box-input" type="text" />
+            <div className="n-body">
+              <form className="n-body-form" onSubmit={sendEmail}>
+                <div className="input-box">
+                  <span className="input-box-span">성함</span>
+                  <input className="input-box-input" type="text" name="name" />
                 </div>
-                <div class="input-box">
-                  <span class="input-box-span">이메일</span>
-                  <input class="input-box-input" type="text" />
+                <div className="input-box">
+                  <span className="input-box-span">이메일</span>
+                  <input className="input-box-input" type="text" name="email" />
                 </div>
-                <div class="input-box">
-                  <span class="input-box-span">연락처</span>
-                  <input class="input-box-input" type="text" />
+                <div className="input-box">
+                  <span className="input-box-span">연락처</span>
+                  <input className="input-box-input" type="text" name="phone" />
                 </div>
-                <div class="input-box">
-                  <span class="input-box-span">문의내용</span>
-                  <textarea class="input-box-textarea" name="" id="" cols="30" rows="10"></textarea>
+                <div className="input-box">
+                  <span className="input-box-span">문의내용</span>
+                  <textarea className="input-box-textarea" name="message" id="" cols="30" rows="10"></textarea>
                 </div>
-                <div class="button-wrap">
-                  <button class="form-btn">
+                <div className="button-wrap">
+                  <button className="form-btn">
                     문의하기
-                    <img class="form-btn-img" src="../assets/images/subpage-customer/i-button.svg" alt="" />
+                    <img className="form-btn-img" src="../assets/images/subpage-customer/i-button.svg" alt="" />
                   </button>
                 </div>
               </form>
