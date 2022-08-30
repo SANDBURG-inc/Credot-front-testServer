@@ -28,32 +28,30 @@ const Finance = () => {
         return response.json();
       })
       .then((userFin) => {
-        // setUserFin(response[0]);
-        console.log("--------------------------------------");
         console.log(userFin);
-        setUserContractDate(userFin[0].contractDate);
-        setUserDeadline(userFin[0].deadline);
-        setUserAmmount(userFin[0].ammount);
-        setUserCommerce(userFin[0].commerce);
-        setUserStatus(userFin[0].status);
+        console.log("--------------------------------------");
+        console.log("유저 정산현황 객체 길이: " + userFin.length);
+        setUserContractDate(userFin[userFin.length - 1].contractDate);
+        setUserDeadline(userFin[userFin.length - 1].deadline);
+        setUserAmmount(userFin[userFin.length - 1].ammount);
+        setUserCommerce(userFin[userFin.length - 1].commerce);
+        setUserStatus(userFin[userFin.length - 1].status);
       });
-    console.log("--------------------------------------------------------------------");
   });
-
   useEffect(() => {
-    console.log(userContractDate);
+    console.log("계약일: " + userContractDate);
   }, [userContractDate]);
   useEffect(() => {
-    console.log(userDeadline);
+    console.log("납부마감일: " + userDeadline);
   }, [userDeadline]);
   useEffect(() => {
-    console.log(userAmmount);
+    console.log("금액: " + userAmmount);
   }, [userAmmount]);
   useEffect(() => {
-    console.log(userCommerce);
+    console.log("커머스: " + userCommerce);
   }, [userCommerce]);
   useEffect(() => {
-    console.log(userStatus);
+    console.log("납부여부: " + userStatus);
   }, [userStatus]);
 
   return (
