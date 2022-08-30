@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { HOST, updateFinanceHistory } from "./../redux/store.js";
+import { HOST } from "./../redux/store.js";
 import { useDispatch, useSelector } from "react-redux";
 import "../assets/css/my_page.css";
-import { render } from "@testing-library/react";
 
 const Finance = () => {
+  const [userContractDate, setUserContractDate] = useState("init");
+  const [userDeadline, setUserDeadline] = useState("init");
+  const [userAmmount, setUserAmmount] = useState("init");
+  const [userCommerce, setUserCommerce] = useState("init");
+  const [userStatus, setUserStatus] = useState("init");
   const tmpEmail = useSelector((state) => state.info.email);
-  const HistoryTable = () => {
-    let history = [];
+  // const response = await fetch(HOST + "/database/extractContract?email=" + tmpEmail);
+  // const result = await response.json();
+  // console.log(result);
+  useEffect(() => {
     fetch(HOST + "/database/extractContract?email=" + tmpEmail, {})
       .then((response) => {
         if (!response.ok) {
@@ -21,20 +27,34 @@ const Finance = () => {
         }
         return response.json();
       })
-      .then((response) => {
-        console.log(response);
-        console.log(response.length);
-        history = Object.values(response);
-        console.log(history);
+      .then((userFin) => {
+        // setUserFin(response[0]);
+        console.log("--------------------------------------");
+        console.log(userFin);
+        setUserContractDate(userFin[0].contractDate);
+        setUserDeadline(userFin[0].deadline);
+        setUserAmmount(userFin[0].ammount);
+        setUserCommerce(userFin[0].commerce);
+        setUserStatus(userFin[0].status);
       });
-    return (
-      <div>
-        {history.map((value, i) => (
-          <TableCell key={i}>{value}</TableCell>
-        ))}
-      </div>
-    );
-  };
+    console.log("--------------------------------------------------------------------");
+  });
+
+  useEffect(() => {
+    console.log(userContractDate);
+  }, [userContractDate]);
+  useEffect(() => {
+    console.log(userDeadline);
+  }, [userDeadline]);
+  useEffect(() => {
+    console.log(userAmmount);
+  }, [userAmmount]);
+  useEffect(() => {
+    console.log(userCommerce);
+  }, [userCommerce]);
+  useEffect(() => {
+    console.log(userStatus);
+  }, [userStatus]);
 
   return (
     <main className="container">
@@ -78,7 +98,14 @@ const Finance = () => {
                           <TableCell>납부여부</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>{HistoryTable()}</TableBody>
+                      <TableBody>
+                        <TableCell>1</TableCell>
+                        <TableCell>{userContractDate}</TableCell>
+                        <TableCell>{userDeadline}</TableCell>
+                        <TableCell>{userAmmount}</TableCell>
+                        <TableCell>{userCommerce}</TableCell>
+                        <TableCell>{userStatus}</TableCell>
+                      </TableBody>
                     </Table>
                   </Paper>
                 </div>
