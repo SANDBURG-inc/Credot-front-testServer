@@ -19,6 +19,20 @@ const Finance = () => {
   // const response = await fetch(HOST + "/database/extractContract?email=" + tmpEmail);
   // const result = await response.json();
   // console.log(result);
+
+  const renderInfo = (idx, contractDate, deadline, ammount, commerce, status) => {
+    return (
+      <TableRow>
+        <TableCell>{idx}</TableCell>
+        <TableCell>{contractDate}</TableCell>
+        <TableCell>{deadline}</TableCell>
+        <TableCell>{ammount}</TableCell>
+        <TableCell>{commerce}</TableCell>
+        <TableCell>{status}</TableCell>
+      </TableRow>
+    );
+  };
+
   useEffect(() => {
     fetch(HOST + "/database/extractContract?email=" + tmpEmail, {})
       .then((response) => {
@@ -31,6 +45,9 @@ const Finance = () => {
         console.log(userFin);
         console.log("--------------------------------------");
         console.log("유저 정산현황 객체 길이: " + userFin.length);
+        for (let i = 0; i < userFin.length; ++i) {
+          // ?
+        }
         setUserContractDate(userFin[userFin.length - 1].contractDate);
         setUserDeadline(userFin[userFin.length - 1].deadline);
         setUserAmmount(userFin[userFin.length - 1].ammount);
@@ -97,12 +114,13 @@ const Finance = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        <TableCell>1</TableCell>
+                        {/* <TableCell>1</TableCell>
                         <TableCell>{userContractDate}</TableCell>
                         <TableCell>{userDeadline}</TableCell>
                         <TableCell>{userAmmount}</TableCell>
                         <TableCell>{userCommerce}</TableCell>
-                        <TableCell>{userStatus}</TableCell>
+                        <TableCell>{userStatus}</TableCell> */}
+                        {renderInfo(1, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
                       </TableBody>
                     </Table>
                   </Paper>
