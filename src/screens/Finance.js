@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -10,15 +10,33 @@ import { useDispatch, useSelector } from "react-redux";
 import "../assets/css/my_page.css";
 
 const Finance = () => {
+  var financeList = [];
+  const [length, setLength] = useState(0);
+  // const [data, setData] = useState([]);
   const [userContractDate, setUserContractDate] = useState("init");
   const [userDeadline, setUserDeadline] = useState("init");
   const [userAmmount, setUserAmmount] = useState("init");
   const [userCommerce, setUserCommerce] = useState("init");
   const [userStatus, setUserStatus] = useState("init");
+
   const tmpEmail = useSelector((state) => state.info.email);
   // const response = await fetch(HOST + "/database/extractContract?email=" + tmpEmail);
   // const result = await response.json();
   // console.log(result);
+
+  const renderInfo = (idx, contractDate, deadline, ammount, commerce, status) => {
+    return (
+      <TableRow>
+        <TableCell>{idx}</TableCell>
+        <TableCell>{contractDate}</TableCell>
+        <TableCell>{deadline}</TableCell>
+        <TableCell>{ammount}</TableCell>
+        <TableCell>{commerce}</TableCell>
+        <TableCell>{status}</TableCell>
+      </TableRow>
+    );
+  };
+
   useEffect(() => {
     fetch(HOST + "/database/extractContract?email=" + tmpEmail, {})
       .then((response) => {
@@ -28,14 +46,23 @@ const Finance = () => {
         return response.json();
       })
       .then((userFin) => {
-        console.log(userFin);
         console.log("--------------------------------------");
         console.log("유저 정산현황 객체 길이: " + userFin.length);
-        setUserContractDate(userFin[userFin.length - 1].contractDate);
-        setUserDeadline(userFin[userFin.length - 1].deadline);
-        setUserAmmount(userFin[userFin.length - 1].ammount);
-        setUserCommerce(userFin[userFin.length - 1].commerce);
-        setUserStatus(userFin[userFin.length - 1].status);
+        setLength(userFin.length);
+        for (let i = 0; i < userFin.length; i++) {
+          setUserContractDate(userFin[i].contractDate);
+          setUserDeadline(userFin[i].deadline);
+          setUserAmmount(userFin[i].ammount);
+          setUserCommerce(userFin[i].commerce);
+          setUserStatus(userFin[i].status);
+          financeList.push([i + 1, userContractDate, userDeadline, userAmmount, userCommerce, userStatus]);
+          console.log(financeList);
+        }
+        // setUserContractDate(userFin[userFin.length - 1].contractDate);
+        // setUserDeadline(userFin[userFin.length - 1].deadline);
+        // setUserAmmount(userFin[userFin.length - 1].ammount);
+        // setUserCommerce(userFin[userFin.length - 1].commerce);
+        // setUserStatus(userFin[userFin.length - 1].status);
       });
   });
   useEffect(() => {
@@ -97,12 +124,14 @@ const Finance = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        <TableCell>1</TableCell>
+                        {/* <TableCell>1</TableCell>
                         <TableCell>{userContractDate}</TableCell>
                         <TableCell>{userDeadline}</TableCell>
                         <TableCell>{userAmmount}</TableCell>
                         <TableCell>{userCommerce}</TableCell>
-                        <TableCell>{userStatus}</TableCell>
+                        <TableCell>{userStatus}</TableCell> */}
+                        {renderInfo(length, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
+                        {/* {renderList()} */}
                       </TableBody>
                     </Table>
                   </Paper>
