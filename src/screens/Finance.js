@@ -57,6 +57,7 @@ const Finance = () => {
           setUserStatus(userFin[i].status);
           financeList.push([i + 1, userContractDate, userDeadline, userAmmount, userCommerce, userStatus]);
           console.log(financeList);
+          console.log(financeList[0]);
         }
         // setUserContractDate(userFin[userFin.length - 1].contractDate);
         // setUserDeadline(userFin[userFin.length - 1].deadline);
@@ -130,7 +131,11 @@ const Finance = () => {
                         <TableCell>{userAmmount}</TableCell>
                         <TableCell>{userCommerce}</TableCell>
                         <TableCell>{userStatus}</TableCell> */}
+                        {/* {renderInfo(financeList[0][0], financeList[0][1], financeList[0][2], financeList[0][3], financeList[0][4], financeList[0][5])} */}
                         {renderInfo(length, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
+                        {renderInfo(length - 1, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
+                        {renderInfo(length - 2, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
+                        {renderInfo(length - 3, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
                         {/* {renderList()} */}
                       </TableBody>
                     </Table>
