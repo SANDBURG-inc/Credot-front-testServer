@@ -89,7 +89,7 @@ const Login = () => {
               headers: {
                 "Content-Type": "application/json; charset=utf-8",
               },
-              credentials: "include",
+              credentials: "same-origin",
             })
               .then((response) => {
                 console.log(response);
