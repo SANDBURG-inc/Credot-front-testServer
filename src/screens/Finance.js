@@ -356,7 +356,7 @@ const Finance = () => {
         // setUserCommerce(userFin[userFin.length - 1].commerce);
         // setUserStatus(userFin[userFin.length - 1].status);
       });
-  });
+  }, []);
   useEffect(() => {
     console.log("계약일: " + userContractDate);
   }, [userContractDate]);
