@@ -1,5 +1,13 @@
 import { configureStore, createSlice, combineReducers } from "@reduxjs/toolkit";
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 
@@ -158,8 +166,19 @@ const store = configureStore({
 export default store;
 
 export const { update } = isLogin.actions;
-export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
-export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
+export const {
+  updateUserName,
+  updateUserEmail,
+  updateUserPhoneNum,
+  updateUserBank,
+  updateUserAccount,
+} = userInfo.actions;
+export const {
+  updateCorporateName,
+  updateCeo,
+  updateBusinessLoc,
+  updateCorporateNum,
+} = incInfo.actions;
 // export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
 export const { updateFinanceHistory } = financeHistory.actions;
 export { HOST };
