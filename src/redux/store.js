@@ -9,8 +9,8 @@ import storage from "redux-persist/lib/storage";
 //   initialState: "http://3.38.232.237:9000",
 // });
 
-// var HOST = "http://3.38.232.237:9000";
-var HOST = "http://localhost:9000";
+var HOST = "http://3.38.232.237:9000";
+// var HOST = "http://localhost:9000";
 
 const isLogin = createSlice({
   name: "isLogin",
