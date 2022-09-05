@@ -314,7 +314,7 @@ const Finance = () => {
   };
   const renderInfo = (idx, contractDate, deadline, ammount, commerce, status) => {
     return (
-      <TableRow>
+      <TableRow key={idx}>
         <TableCell>{idx}</TableCell>
         <TableCell>{contractDate}</TableCell>
         <TableCell>{deadline}</TableCell>
@@ -415,21 +415,7 @@ const Finance = () => {
                           <TableCell>납부여부</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>
-                        {/* <TableCell>1</TableCell>
-                        <TableCell>{userContractDate}</TableCell>
-                        <TableCell>{userDeadline}</TableCell>
-                        <TableCell>{userAmmount}</TableCell>
-                        <TableCell>{userCommerce}</TableCell>
-                        <TableCell>{userStatus}</TableCell> */}
-                        {/* {renderInfo(financeList[0][0], financeList[0][1], financeList[0][2], financeList[0][3], financeList[0][4], financeList[0][5])} */}
-                        {render(length, financeList)}
-                        {/* {renderInfo(length, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)} */}
-                        {/* {renderInfo(length - 1, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
-                        {renderInfo(length - 2, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)}
-                        {renderInfo(length - 3, userContractDate, userDeadline, userAmmount, userCommerce, userStatus)} */}
-                        {/* {renderList()} */}
-                      </TableBody>
+                      <TableBody>{render(length, financeList)}</TableBody>
                     </Table>
                   </Paper>
                 </div>
