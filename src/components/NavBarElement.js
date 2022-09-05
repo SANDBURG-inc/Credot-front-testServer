@@ -17,25 +17,24 @@ const NavBarElement = () => {
   };
 
   useEffect(() => {
+    // 모바일 버거메뉴 클릭이벤트
+    document.querySelector(".burger-menu").addEventListener("click", function () {
+      document.querySelector(".mo-menu-wrap").classList.add("mo-open");
+    });
+
+    document.querySelector(".mo-close").addEventListener("click", function () {
+      document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+    });
+
+    document.querySelector(".mo-blank").addEventListener("click", function () {
+      document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+    });
     const watch = () => {
       window.addEventListener("scroll", handleFollow);
     };
     watch(); // addEventListener 함수를 실행
     return () => {
       window.removeEventListener("scroll", handleFollow); // addEventListener 함수를 삭제
-
-      // 모바일 버거메뉴 클릭이벤트
-      document.querySelector(".burger-menu").addEventListener("click", function () {
-        document.querySelector(".mo-menu-wrap").classList.add("mo-open");
-      });
-
-      document.querySelector(".mo-close").addEventListener("click", function () {
-        document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
-      });
-
-      document.querySelector(".mo-blank").addEventListener("click", function () {
-        document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
-      });
     };
   });
 
