@@ -7,8 +7,8 @@ const Notice = () => {
   const dataNo = useRef(0);
   const getData = async () => {
     const res = await fetch(
-      // HOST + "/database/notice"
-      "http://localhost:9000/database/notice"
+      HOST + "/database/notice"
+      // "http://localhost:9000/database/notice"
     ).then((res) => res.json());
 
     const initData = res.slice(0).map((item) => {
