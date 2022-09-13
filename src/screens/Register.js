@@ -8,7 +8,6 @@ import { Button, Form } from "react-bootstrap";
 import { useCombobox } from "downshift";
 import { Navigate } from "react-router-dom";
 import { bankList } from "./../data/bankList";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import oc from "open-color";
 import { HOST } from "../redux/store";
