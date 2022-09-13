@@ -60,31 +60,27 @@ const Service = () => {
 
   useEffect(() => {
     // 메인 첫 섹션 스크롤 이동
-    document
-      .querySelector(".visual-scroll-down")
-      .addEventListener("click", function () {
-        window.scrollTo({
-          top: document.querySelector(".calculate__check-wrap").offsetTop,
-          behavior: "smooth",
-        });
+    document.querySelector(".visual-scroll-down").addEventListener("click", function () {
+      window.scrollTo({
+        top: document.querySelector(".calculate__check-wrap").offsetTop,
+        behavior: "smooth",
       });
+    });
+    // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
+    let eyes = document.querySelectorAll(".eyes");
 
-    return () => {
-      // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
-      let eyes = document.querySelectorAll(".eyes");
-
-      for (let i = 0; i < eyes.length; i++) {
-        eyes[i].addEventListener("click", function () {
-          if (eyes[i].previousElementSibling.type === "text") {
-            this.classList.remove("visible");
-            this.previousElementSibling.type = "password";
-          } else {
-            this.classList.add("visible");
-            this.previousElementSibling.type = "text";
-          }
-        });
-      }
-    };
+    for (let i = 0; i < eyes.length; i++) {
+      eyes[i].addEventListener("click", function () {
+        if (eyes[i].previousElementSibling.type === "text") {
+          this.classList.remove("visible");
+          this.previousElementSibling.type = "password";
+        } else {
+          this.classList.add("visible");
+          this.previousElementSibling.type = "text";
+        }
+      });
+    }
+    return () => {};
   });
 
   const signing = () => {
@@ -492,86 +488,58 @@ const Service = () => {
                   즉시 정산 가능한 금액을 조회해보세요!
                 </span>
               </div>
-              <img
-                className="visual-main-img"
-                src="../assets/images/main/m-visual.png"
-                alt=""
-              />
+              <img className="visual-main-img" src="../assets/images/main/m-visual.png" alt="" />
             </div>
             <div className="visual-marquee">
               <div className="marquee">
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰
-                    도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
                   </span>
                 </div>
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">사용이 편리</strong>해서 초보들도
-                    간편하게 사용할수 있어요~ 넘 좋네요
+                    <strong className="strong">사용이 편리</strong>해서 초보들도 간편하게 사용할수 있어요~ 넘 좋네요
                   </span>
                 </div>
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰
-                    도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
                   </span>
                 </div>
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">빠른정산</strong>으로 사업이 더
-                    빨리 성장 할수 있었어요!! 최고 입니다~
+                    <strong className="strong">빠른정산</strong>으로 사업이 더 빨리 성장 할수 있었어요!! 최고 입니다~
                   </span>
                 </div>
               </div>
               <div className="marquee marquee2">
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰
-                    도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
                   </span>
                 </div>
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">사용이 편리</strong>해서 초보들도
-                    간편하게 사용할수 있어요~ 넘 좋네요
+                    <strong className="strong">사용이 편리</strong>해서 초보들도 간편하게 사용할수 있어요~ 넘 좋네요
                   </span>
                 </div>
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰
-                    도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
+                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
                   </span>
                 </div>
                 <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">
-                    쿠팡 셀러 김**님의 후기
-                  </span>
+                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
                   <span className="marquee-balloon-span2">
-                    <strong className="strong">빠른정산</strong>으로 사업이 더
-                    빨리 성장 할수 있었어요!! 최고 입니다~
+                    <strong className="strong">빠른정산</strong>으로 사업이 더 빨리 성장 할수 있었어요!! 최고 입니다~
                   </span>
                 </div>
               </div>
@@ -583,13 +551,7 @@ const Service = () => {
         </section>
 
         <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
-        <ContractModal
-          open={modalOpen}
-          close={closeModal}
-          header="계약서 작성"
-          amount={price}
-          deadline={deadline}
-        ></ContractModal>
+        <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal>
 
         <section className="calculate__check-wrap">
           <div className="inner">
@@ -613,28 +575,10 @@ const Service = () => {
               <div className="c-body-box">
                 {/* <!-- 조회하기 버튼에 active 클래스 추가시 색상변경 --> */}
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo1.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo1.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      name="id"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id}
-                    />
-                    <input
-                      name="pw"
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw}
-                    />
+                    <input name="id" className="check-box-input check-box-input-id" type="text" placeholder="ID" onChange={onChange} value={id} />
+                    <input name="pw" className="check-box-input check-box-input-pw" type="password" placeholder="PW" onChange={onChange} value={pw} />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn" onClick={lookUp}>
@@ -645,148 +589,64 @@ const Service = () => {
                   </button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo2.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo2.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo3.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo3.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo4.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo4.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo5.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo5.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo6.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo6.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo7.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo7.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
                 </div>
                 <div className="check-box">
-                  <img
-                    className="check-box-img"
-                    src="../assets/images/main/c-check-logo/c-check-logo8.png"
-                    alt=""
-                  />
+                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo8.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                    />
-                    <input
-                      className="check-box-input check-box-input-pw"
-                      type="password"
-                      placeholder="PW"
-                    />
+                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
+                    <input className="check-box-input check-box-input-pw" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
                   <button className="check-box-btn">조회하기</button>
@@ -795,11 +655,7 @@ const Service = () => {
             </div>
             <button className="c-button">
               더 많은 정산 서비스 확인하러 가기
-              <img
-                className="btn-img"
-                src="../assets/images/main/m-button-arrow-r.svg"
-                alt=""
-              />
+              <img className="btn-img" src="../assets/images/main/m-button-arrow-r.svg" alt="" />
             </button>
           </div>
         </section>

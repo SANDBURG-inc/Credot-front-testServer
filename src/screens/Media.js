@@ -3,23 +3,22 @@ import "../assets/css/notice-news.css";
 
 const Media = () => {
   useEffect(() => {
-    return () => {
-      let tableBox = document.querySelectorAll(".box-r-top");
-      for (let i = 0; i < tableBox.length; i++) {
-        tableBox[i].addEventListener("click", function () {
-          if (this.parentNode.classList.contains("is-opened")) {
-            this.parentNode.classList.remove("is-opened");
-          } else {
-            let current = document.getElementsByClassName("is-opened");
-            if (current.length > 0) {
-              current[0].className = current[0].className.replace(" is-opened", "");
-            }
-            this.parentNode.className += " is-opened";
+    let tableBox = document.querySelectorAll(".box-r-top");
+    for (let i = 0; i < tableBox.length; i++) {
+      tableBox[i].addEventListener("click", function () {
+        if (this.parentNode.classList.contains("is-opened")) {
+          this.parentNode.classList.remove("is-opened");
+        } else {
+          let current = document.getElementsByClassName("is-opened");
+          if (current.length > 0) {
+            current[0].className = current[0].className.replace(" is-opened", "");
           }
-        });
-      }
-      document.querySelector(".header").classList.add("this-page-n");
-    };
+          this.parentNode.className += " is-opened";
+        }
+      });
+    }
+    document.querySelector(".header").classList.add("this-page-n");
+    return () => {};
   });
   return (
     <main className="container">
