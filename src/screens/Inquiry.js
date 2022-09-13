@@ -4,23 +4,22 @@ import "../assets/css/customer-inquiry.css";
 
 const Inquiry = () => {
   useEffect(() => {
-    return () => {
-      let tableBox = document.querySelectorAll(".n-table-board");
-      for (let i = 0; i < tableBox.length; i++) {
-        tableBox[i].addEventListener("click", function () {
-          if (this.parentNode.classList.contains("is-opened")) {
-            this.parentNode.classList.remove("is-opened");
-          } else {
-            let current = document.getElementsByClassName("is-opened");
-            if (current.length > 0) {
-              current[0].className = current[0].className.replace(" is-opened", "");
-            }
-            this.parentNode.className += " is-opened";
+    let tableBox = document.querySelectorAll(".n-table-board");
+    for (let i = 0; i < tableBox.length; i++) {
+      tableBox[i].addEventListener("click", function () {
+        if (this.parentNode.classList.contains("is-opened")) {
+          this.parentNode.classList.remove("is-opened");
+        } else {
+          let current = document.getElementsByClassName("is-opened");
+          if (current.length > 0) {
+            current[0].className = current[0].className.replace(" is-opened", "");
           }
-        });
-      }
-      document.querySelector(".header").classList.add("this-page-c");
-    };
+          this.parentNode.className += " is-opened";
+        }
+      });
+    }
+    document.querySelector(".header").classList.add("this-page-c");
+    return () => {};
   });
 
   const sendEmail = (e) => {

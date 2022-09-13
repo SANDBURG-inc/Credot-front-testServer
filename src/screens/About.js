@@ -3,9 +3,9 @@ import "../assets/css/introduce-what_service.css";
 
 const About = () => {
   useEffect(() => {
-    return () => {
-      document.querySelector(".header").classList.add("this-page-s__i");
-    };
+    document.querySelector(".header").classList.add("this-page-s__i");
+
+    return () => {};
   });
   return (
     <main className="container">
