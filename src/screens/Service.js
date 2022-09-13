@@ -145,7 +145,7 @@ const Service = () => {
     }
 
     setprogressOpen(true);
-    fetch(HOST + "/coupang/crawl?id=" + id + "&pw=" + pw, {
+    fetch(HOST + "/commerce/coupang/crawl?id=" + id + "&pw=" + pw, {
       method: "post",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
