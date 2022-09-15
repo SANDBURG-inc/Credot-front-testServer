@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
 
 const NavBarElement = () => {
   let a = useSelector((state) => state.login);
@@ -48,9 +49,9 @@ const NavBarElement = () => {
             </a>
           </h1>
           <div className="header-menu-wrap">
-            <a className="header-menu-menu menu-service__use" href="/Service">
+            <Link className="header-menu-menu menu-service__use" to="/Service">
               서비스 이용
-            </a>
+            </Link>
             <a className="header-menu-menu menu-service__intro" href="/About">
               서비스 소개
             </a>
