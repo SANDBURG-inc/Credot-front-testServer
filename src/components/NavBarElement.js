@@ -52,29 +52,29 @@ const NavBarElement = () => {
             <Link className="header-menu-menu menu-service__use" to="/Service">
               서비스 이용
             </Link>
-            <a className="header-menu-menu menu-service__intro" href="/About">
+            <Link className="header-menu-menu menu-service__intro" to="/About">
               서비스 소개
-            </a>
-            <a className="header-menu-menu menu-notice" href="/Notice">
+            </Link>
+            <Link className="header-menu-menu menu-notice" to="/Notice">
               공지사항
-            </a>
-            <a className="header-menu-menu menu-customer" href="/Faq">
+            </Link>
+            <Link className="header-menu-menu menu-customer" to="/Faq">
               고객센터
-            </a>
+            </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
           <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
-              <a className="header-account-wrap-a" href="/Login">
+              <Link className="header-account-wrap-a" to="/Login">
                 {" "}
                 로그인{" "}
-              </a>
+              </Link>
               <div className="devide-bar"></div>
-              <a className="header-account-wrap-a" href="/Register">
+              <Link className="header-account-wrap-a" to="/Register">
                 {" "}
                 회원가입{" "}
-              </a>
+              </Link>
             </div>
 
             {/* <!-- 로그인 상태 --> */}
