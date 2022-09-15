@@ -10,26 +10,28 @@ import Login from "./screens/Login";
 import Finance from "./screens/Finance";
 import Register from "./screens/Register";
 import NavBarElement from "./components/NavBarElement";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <NavBarElement />
-      <Routes>
-        <Route path="/" element={<Service />} />
-        <Route path="/Service" element={<Service />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Guide" element={<Guide />} />
-        <Route path="/Media" element={<Media />} />
-        <Route path="/Notice" element={<Notice />} />
-        <Route path="/Faq" element={<Faq />} />
-        <Route path="/Inquiry" element={<Inquiry />} />
-        <Route path="/Mypage" element={<Mypage />} />
-        <Route path="/Finance" element={<Finance />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-      </Routes>
+      <BrowserRouter>
+        <NavBarElement />
+        <Routes>
+          <Route path="/" element={<Service />} />
+          <Route path="/Service" element={<Service />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Guide" element={<Guide />} />
+          <Route path="/Media" element={<Media />} />
+          <Route path="/Notice" element={<Notice />} />
+          <Route path="/Faq" element={<Faq />} />
+          <Route path="/Inquiry" element={<Inquiry />} />
+          <Route path="/Mypage" element={<Mypage />} />
+          <Route path="/Finance" element={<Finance />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
