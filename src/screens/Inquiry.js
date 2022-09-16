@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "../assets/css/customer-inquiry.css";
+import { Link } from "react-router-dom";
 
 const Inquiry = () => {
   useEffect(() => {
@@ -18,6 +19,8 @@ const Inquiry = () => {
         }
       });
     }
+    document.querySelector(".header").classList.remove("this-page-n");
+    document.querySelector(".header").classList.remove("this-page-s__i");
     document.querySelector(".header").classList.add("this-page-c");
     return () => {};
   });
@@ -48,12 +51,12 @@ const Inquiry = () => {
             <div className="n-head">
               <span className="head-title">고객센터</span>
               <div className="head-link">
-                <a className="head-link-a" href="/Faq">
+                <Link className="head-link-a" to="/Faq">
                   자주하는 질문
-                </a>
-                <a className="head-link-a active" href="/Inquiry">
+                </Link>
+                <Link className="head-link-a active" to="/Inquiry">
                   1:1 문의하기
-                </a>
+                </Link>
               </div>
             </div>
             <div className="n-body">

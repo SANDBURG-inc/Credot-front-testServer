@@ -80,6 +80,9 @@ const Service = () => {
         }
       });
     }
+    document.querySelector(".header").classList.remove("this-page-s__i");
+    document.querySelector(".header").classList.remove("this-page-c");
+    document.querySelector(".header").classList.remove("this-page-n");
     return () => {};
   });
 

@@ -44,9 +44,9 @@ const NavBarElement = () => {
       <header className="header">
         <div className="header__inner">
           <h1 className="logo">
-            <a href="/">
+            <Link to="/">
               <img src="../assets/images/logo/logo.png" alt="logo" />
-            </a>
+            </Link>
           </h1>
           <div className="header-menu-wrap">
             <Link className="header-menu-menu menu-service__use" to="/Service">
@@ -79,10 +79,19 @@ const NavBarElement = () => {
 
             {/* <!-- 로그인 상태 --> */}
             <div className="account-login">
-              <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+              <Link className="header-account-wrap-a" to="/Mypage">
+                {" "}
+                내 정보{" "}
+              </Link>
+              <div className="devide-bar"></div>
+              <Link className="header-account-wrap-a" to="/Finance">
+                {" "}
+                정산 현황{" "}
+              </Link>
+              {/* <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
                 <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
               {/* <button className="profile-btn">
               <img className="profile-btn-img" src="../assets/images/icon/account-default.svg" alt="" />
               <span className="account-name">별별 셀러님</span>
@@ -103,34 +112,43 @@ const NavBarElement = () => {
           </button>
           <span className="mo-menu-span font-eng">MENU</span>
           <div className="header-menu-wrap">
-            <a className="mo-menu-menu menu-service__use" href="/Service">
+            <Link className="mo-menu-menu menu-service__use" to="/Service">
               서비스 이용
-            </a>
-            <a className="mo-menu-menu menu-service__intro" href="/About">
+            </Link>
+            <Link className="mo-menu-menu menu-service__intro" to="/About">
               서비스 소개
-            </a>
-            <a className="mo-menu-menu menu-notice" href="/Notice">
+            </Link>
+            <Link className="mo-menu-menu menu-notice" to="/Notice">
               공지사항
-            </a>
-            <a className="mo-menu-menu menu-customer" href="/Faq">
+            </Link>
+            <Link className="mo-menu-menu menu-customer" to="/Faq">
               고객센터
-            </a>
+            </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
           <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
-              <a href="/Login"> 로그인 </a>
+              <Link to="/Login"> 로그인 </Link>
               <div className="devide-bar"></div>
-              <a href="/Register"> 회원가입 </a>
+              <Link to="/Register"> 회원가입 </Link>
             </div>
 
             {/* <!-- 로그인 상태 --> */}
             <div className="account-login">
-              <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
+              <Link className="header-account-wrap-a" to="/Mypage">
+                {" "}
+                내 정보{" "}
+              </Link>
+              <div className="devide-bar"></div>
+              <Link className="header-account-wrap-a" to="/Finance">
+                {" "}
+                정산 현황{" "}
+              </Link>
+              {/* <NavDropdown title="My 크레닷" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/Mypage">내 정보</NavDropdown.Item>
                 <NavDropdown.Item href="/Finance">정산 현황</NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
               {/* <button class="profile-btn">
                 <img class="profile-btn-img" src="../assets/images/icon/account-default.svg" alt="" />
                 <span class="account-name">별별 셀러님</span>

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../assets/css/introduce-what_service.css";
 
 const About = () => {
   useEffect(() => {
+    document.querySelector(".header").classList.remove("this-page-n");
+    document.querySelector(".header").classList.remove("this-page-c");
     document.querySelector(".header").classList.add("this-page-s__i");
-
     return () => {};
   });
   return (
@@ -15,12 +17,12 @@ const About = () => {
             <div className="i-head">
               <span className="head-title">서비스 소개</span>
               <div className="head-link">
-                <a className="head-link-a active" href="/About">
+                <Link className="head-link-a active" to="/About">
                   선정산 서비스란?
-                </a>
-                <a className="head-link-a" href="/Guide">
+                </Link>
+                <Link className="head-link-a" to="/Guide">
                   서비스 가이드
-                </a>
+                </Link>
               </div>
             </div>
             <div className="i-body">
