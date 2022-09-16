@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/notice-notice.css";
 import { HOST } from "../redux/store";
+import { Link } from "react-router-dom";
 
 const Notice = () => {
   const [length, setLength] = useState(0);
@@ -78,6 +79,8 @@ const Notice = () => {
         }
       });
     }
+    document.querySelector(".header").classList.remove("this-page-s__i");
+    document.querySelector(".header").classList.remove("this-page-c");
     document.querySelector(".header").classList.add("this-page-n");
     return () => {};
   });
@@ -90,12 +93,12 @@ const Notice = () => {
             <div className="n-head">
               <span className="head-title">공지사항</span>
               <div className="head-link">
-                <a className="head-link-a active" href="/Notice">
+                <Link className="head-link-a active" to="/Notice">
                   공지사항
-                </a>
-                <a className="head-link-a" href="/Media">
+                </Link>
+                <Link className="head-link-a" to="/Media">
                   언론속의 크레닷
-                </a>
+                </Link>
               </div>
             </div>
             <div className="n-body">

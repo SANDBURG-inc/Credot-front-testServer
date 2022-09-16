@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "../assets/css/notice-news.css";
+import { Link } from "react-router-dom";
 
 const Media = () => {
   useEffect(() => {
@@ -17,6 +18,8 @@ const Media = () => {
         }
       });
     }
+    document.querySelector(".header").classList.remove("this-page-s__i");
+    document.querySelector(".header").classList.remove("this-page-c");
     document.querySelector(".header").classList.add("this-page-n");
     return () => {};
   });
@@ -28,12 +31,12 @@ const Media = () => {
             <div className="n-head">
               <span className="head-title">공지사항</span>
               <div className="head-link">
-                <a className="head-link-a" href="/Notice">
+                <Link className="head-link-a" to="/Notice">
                   공지사항
-                </a>
-                <a className="head-link-a active" href="/Media">
+                </Link>
+                <Link className="head-link-a active" to="/Media">
                   언론속의 크레닷
-                </a>
+                </Link>
               </div>
             </div>
             <div className="n-body">
