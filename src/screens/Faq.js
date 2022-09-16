@@ -1,8 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/customer-qna.css";
+import { HOST } from "../redux/store";
 import { Link } from "react-router-dom";
 
 const Faq = () => {
+  const [length, setLength] = useState(0);
+  const [data, setData] = useState([]);
+  const dataNo = useRef(0);
+
+  const getData = async () => {
+    const res = await fetch(
+      // HOST + "/database/notice"
+      "http://localhost:9000/database/faq"
+    ).then((res) => res.json());
+
+    const initData = res.slice(0).map((item) => {
+      return {
+        title: item.title,
+        content: item.contents,
+        no: dataNo.current++,
+      };
+    });
+    setData(initData);
+  };
+
+  const render = (length, data) => {
+    var push = [];
+    for (var i = 0; i < length; i++) {
+      push.push(renderInfo(data[i].no, data[i].title, data[i].content));
+    }
+    return push;
+  };
+
+  const renderInfo = (no, title, contents) => {
+    return (
+      <div key={no} className="n-table-box">
+        <div className="n-table-board">
+          <span className="n-table-board-span1">
+            <img className="n-table-board-img" src="../assets/images/subpage-customer/c-q.svg" alt="" />
+            {title}
+          </span>
+          <div className="board-date">
+            <button className="board-date-arrow-wrap">
+              <img src="../assets/images/subpage-notice/n-table-arrow.svg" alt="" />
+            </button>
+          </div>
+        </div>
+        <div className="n-board-lead">
+          <span className="n-board-lead-span1">
+            <div dangerouslySetInnerHTML={{ __html: contents }}></div>
+          </span>
+        </div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    console.log(data);
+    setLength(data.length);
+    console.log(length);
+  }, [data]);
+
+  useEffect(() => {
+    getData();
+  }, []); // 빈 배열을 조건으로 줘야 Mount 시점에 적용.
+
   useEffect(() => {
     let tableBox = document.querySelectorAll(".n-table-board");
     for (let i = 0; i < tableBox.length; i++) {
@@ -42,7 +104,8 @@ const Faq = () => {
             </div>
             <div className="n-body">
               <div className="n-table-wrap">
-                <div className="n-table-box">
+                {render(length, data)}
+                {/* <div className="n-table-box">
                   <div className="n-table-board">
                     <span className="n-table-board-span1">
                       <img className="n-table-board-img" src="../assets/images/subpage-customer/c-q.svg" alt="" />
@@ -314,7 +377,7 @@ const Faq = () => {
                       카카오톡을 통해 발송되는 알림톡 수신을 원치 않으실 경우 반드시 알림톡을 차단하여 주시기 바랍니다.
                     </span>
                   </div>
-                </div>
+                </div> */}
               </div>
               <button className="more-btn">
                 더보기 +<img src="../" alt="" />
