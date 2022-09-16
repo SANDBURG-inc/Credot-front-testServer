@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 
 const Guide = () => {
   useEffect(() => {
+    return () => {};
+  }, []);
+  useEffect(() => {
     document.querySelector(".header").classList.remove("this-page-n");
     document.querySelector(".header").classList.remove("this-page-c");
     document.querySelector(".header").classList.add("this-page-s__i");
