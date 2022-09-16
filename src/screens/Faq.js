@@ -10,8 +10,8 @@ const Faq = () => {
 
   const getData = async () => {
     const res = await fetch(
-      // HOST + "/database/notice"
-      "http://localhost:9000/database/faq"
+      HOST + "/database/faq"
+      // "http://localhost:9000/database/faq"
     ).then((res) => res.json());
 
     const initData = res.slice(0).map((item) => {
