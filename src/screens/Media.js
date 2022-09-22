@@ -1,8 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/notice-news.css";
+import { HOST } from "../redux/store";
 import { Link } from "react-router-dom";
 
 const Media = () => {
+  const [length, setLength] = useState(0);
+  const [data, setData] = useState([]);
+  const dataNo = useRef(0);
+  // const [img, setImg] = useState("");
+
+  const getData = async () => {
+    const res = await fetch(
+      HOST + "/database/media"
+      // "http://localhost:9000/database/media"
+    ).then((res) => res.json());
+
+    const initData = res.slice(0).map((item) => {
+      return {
+        title: item.title,
+        img: item.img,
+        content: item.contents,
+        date: item.date,
+        no: dataNo.current++,
+      };
+    });
+    setData(initData);
+  };
+  const render = (length, data) => {
+    var push = [];
+    for (var i = 0; i < length; i++) {
+      push.push(renderInfo(data[i].no, data[i].title, data[i].img, data[i].content, data[i].date));
+    }
+    return push;
+  };
+
+  const renderInfo = (no, title, img, contents, date) => {
+    return (
+      <div key={no} className="news-box">
+        <img className="box-l" src={img} alt="" />
+        {/* <img className="box-l" src="../assets/images/subpage-notice/news1.png" alt="" /> */}
+        <div className="box-r">
+          <div className="box-r-top">
+            <span className="news-title">{title}</span>
+            <button className="table-arrow-wrap">
+              <img src="../assets/images/subpage-notice/n-table-arrow.svg" alt="" />
+            </button>
+          </div>
+          <div className="box-r-bottom">
+            <p className="news-lead">{contents}</p>
+            <span className="news-date font-eng">{date}</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    console.log(data);
+    setLength(data.length);
+    console.log(length);
+  }, [data]);
+
+  useEffect(() => {
+    getData();
+  }, []); // 빈 배열을 조건으로 줘야 Mount 시점에 적용.
+
   useEffect(() => {
     let tableBox = document.querySelectorAll(".box-r-top");
     for (let i = 0; i < tableBox.length; i++) {
@@ -41,7 +103,8 @@ const Media = () => {
             </div>
             <div className="n-body">
               <div className="n-table-wrap">
-                <div className="news-box">
+                {render(length, data)}
+                {/* <div className="news-box">
                   <img className="box-l" src="../assets/images/subpage-notice/news1.png" alt="" />
                   <div className="box-r">
                     <div className="box-r-top">
@@ -172,7 +235,7 @@ const Media = () => {
                       <span className="news-date font-eng">22-08-04</span>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="pagination-wrap">
                 <div className="pagination">
