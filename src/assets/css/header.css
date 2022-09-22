@@ -1,13 +1,14 @@
 .header__inner {
   width: 100%;
   display: flex;
+  padding: 0 calc((100% - 1240px) / 2);
   justify-content: space-between;
   align-items: center;
   height: 70px;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 999;
+  z-index: 10000;
   backdrop-filter: blur(0);
   -webkit-backdrop-filter: blur(30px);
 }
@@ -22,13 +23,13 @@
   height: 35px;
 }
 
-.logo {
+/* .logo {
   margin-left: 80px;
 }
 
 .header-account-wrap {
   margin-right: 80px;
-}
+} */
 
 .header-menu-menu {
   margin-right: 60px;
@@ -69,6 +70,7 @@
 }
 
 .header-account-wrap .account-login {
+  position: relative;
   display: none;
 }
 
@@ -89,11 +91,62 @@
   color: #202428;
 }
 
+.profile-dropmenu {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 5px 10px;
+  width: 140px;
+  border-radius: 8px;
+  border: solid 1px #dedede;
+  background-color: #fff;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-login.active .profile-dropmenu {
+  display: flex;
+}
+
+.profile-dropmenu a {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  color: #000;
+  padding: 12px 0;
+  border-top: 1px solid #f4f4f4;
+}
+
+.profile-dropmenu a:first-child {
+  border-top: none;
+}
+
 .burger-menu {
   display: none;
 }
 
+@media (max-width: 1300px) {
+  .header__inner {
+    width: 100%;
+    padding: 0 5%;
+  }
+}
+
 @media (max-width: 1024px) {
+  .header__inner {
+    padding: 0;
+  }
+
+  .header-menu-wrap {
+    position: unset !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
   .header-menu-wrap {
     display: none;
   }
@@ -189,6 +242,13 @@
 
 .mo-menu-wrap .header-menu-wrap {
   display: flex;
+}
+
+.header-menu-wrap {
+  position: absolute;
+  width: max-content;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .mo-menu .account-not_login {
