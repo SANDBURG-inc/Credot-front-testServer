@@ -30,6 +30,8 @@ const Service = () => {
 
   const { id, pw } = inputs;
 
+  const [active, setActive] = useState([false, false, false, false, false, false, false, false]);
+
   useEffect(() => {
     // 메인 첫 섹션 스크롤 이동
     document.querySelector(".visual-scroll-down").addEventListener("click", function () {
@@ -41,10 +43,13 @@ const Service = () => {
 
     // 조회하기 클릭시 입력폼 나타남
     let checkBtn = document.querySelectorAll(".check-box-btn1");
+
     for (let i = 0; i < checkBtn.length; i++) {
       checkBtn[i].addEventListener("click", function () {
-        if (this.parentNode.classList.contains("active") && i === 0) {
-          lookUp();
+        if (this.parentNode.classList.contains("active")) {
+          let copy = [...active];
+          copy[i] = true;
+          setActive(copy);
         }
         this.parentNode.classList.add("active");
       });
@@ -68,7 +73,7 @@ const Service = () => {
     document.querySelector(".header").classList.remove("this-page-c");
     document.querySelector(".header").classList.remove("this-page-n");
     return () => {};
-  });
+  }, []);
 
   const signing = () => {
     //로그인이 안된 경우
@@ -290,8 +295,9 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo1.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" onChange={onChange} value={id} />
+                    <input name="id" className="check-box-input check-box-input-id" type="text" placeholder="ID" onChange={onChange} value={id} />
                     <input
+                      name="pw"
                       className="check-box-input check-box-input-pw main-password"
                       type="password"
                       placeholder="PW"
@@ -300,7 +306,14 @@ const Service = () => {
                     />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[0]) lookUp();
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2" onClick={signing}>
                     선정산받기
                   </button>
@@ -312,7 +325,14 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[1]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
@@ -322,7 +342,14 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[2]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
@@ -332,7 +359,14 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[3]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
@@ -342,7 +376,14 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[4]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
@@ -352,7 +393,14 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[5]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
@@ -362,7 +410,14 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[6]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
@@ -372,12 +427,24 @@ const Service = () => {
                     <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
                     <div className="eyes"></div>
                   </form>
-                  <button className="check-box-btn check-box-btn1">조회하기</button>
+                  <button
+                    className="check-box-btn check-box-btn1"
+                    onClick={() => {
+                      if (active[7]) alert("서비스 준비중입니다.");
+                    }}
+                  >
+                    조회하기
+                  </button>
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
               </div>
             </div>
-            <button className="c-button">
+            <button
+              className="c-button"
+              onClick={() => {
+                alert("더 많은 정산 서비스가 준비중입니다.");
+              }}
+            >
               더 많은 정산 서비스 확인하러 가기
               <img className="btn-img" src="../assets/images/main/m-button-arrow-r.svg" alt="" />
             </button>
