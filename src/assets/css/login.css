@@ -35,7 +35,7 @@
   align-items: center;
 }
 
-.form-wrap form {
+.form-wrap .form {
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -94,7 +94,7 @@
   width: 100% !important;
 }
 
-.eyes {
+.eye {
   display: block;
   position: absolute;
   top: 50%;
@@ -108,7 +108,7 @@
   background-size: contain;
 }
 
-.eyes.visible {
+.eye.visible {
   background-image: url(../images/main/m-input-pw__v.png);
 }
 
@@ -161,7 +161,7 @@
 }
 
 @media (max-width: 700px) {
-  .form-wrap form {
+  .form-wrap .form {
     padding: 20px;
   }
 
@@ -197,7 +197,7 @@
 }
 
 @media (max-width: 500px) {
-  .form-wrap form {
+  .form-wrap .form {
     width: 343px;
   }
 
