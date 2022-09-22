@@ -47,7 +47,7 @@ const Media = () => {
             </button>
           </div>
           <div className="box-r-bottom">
-            <p className="news-lead">{contents}</p>
+            <div className="news-lead" dangerouslySetInnerHTML={{ __html: contents }}></div>
             <span className="news-date font-eng">{date}</span>
           </div>
         </div>
