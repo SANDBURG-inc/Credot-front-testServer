@@ -199,7 +199,7 @@ option[value=""][disabled] {
   position: relative;
 }
 
-.join-eyes {
+.register-eyes {
   display: block;
   position: absolute;
   top: 50%;
@@ -213,7 +213,7 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
-.join-eyes.visible {
+.register.visible {
   background-image: url(../images/main/m-input-pw__v.png);
 }
 
