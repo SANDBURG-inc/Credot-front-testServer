@@ -46,6 +46,11 @@ const Register = () => {
     setCheckPw(e.target.value);
   };
 
+  const selectBoxChange = (e) => {
+    console.log(e.target.value);
+    setBank(e.target.value);
+  };
+
   useEffect(() => {
     console.log("은행: " + bank);
   }, [bank]);
@@ -163,41 +168,41 @@ const Register = () => {
                   </div>
                   <div className="inner__sec last-sec">
                     <span className="sec__head">정산받을 계좌</span>
-                    <select className="input-sol" name id required>
+                    <select className="input-sol" name id required onChange={selectBoxChange}>
                       <option value disabled selected>
                         정산받을 계좌의 은행을 선택해주세요
                       </option>
                       <option value="기업은행">기업은행</option>
-                      <option value>우리은행</option>
-                      <option value>신한은행</option>
-                      <option value>하나은행</option>
-                      <option value>대구은행</option>
-                      <option value>부산은행</option>
-                      <option value>경남은행</option>
-                      <option value>광주은행</option>
-                      <option value>전북은행</option>
-                      <option value>제주은행</option>
-                      <option value>국민은행</option>
-                      <option value>농협은행</option>
-                      <option value>산업은행</option>
-                      <option value>수협은행</option>
-                      <option value>한국씨티뱅크</option>
-                      <option value>SC제일은행</option>
-                      <option value>HSBC</option>
-                      <option value>도이치뱅크</option>
-                      <option value>BOA</option>
-                      <option value>JP모간</option>
-                      <option value>중국공상</option>
-                      <option value>BNP파라바</option>
-                      <option value>우체국</option>
-                      <option value>케이뱅크</option>
-                      <option value>카카오뱅크</option>
-                      <option value>산림조합</option>
-                      <option value>신협은행</option>
-                      <option value>중국은행</option>
-                      <option value>중국건설은행</option>
-                      <option value>토스뱅크</option>
-                      <option value>SB저축은행</option>
+                      <option value="우리은행">우리은행</option>
+                      <option value="신한은행">신한은행</option>
+                      <option value="하나은행">하나은행</option>
+                      <option value="대구은행">대구은행</option>
+                      <option value="부산은행">부산은행</option>
+                      <option value="경남은행">경남은행</option>
+                      <option value="광주은행">광주은행</option>
+                      <option value="전북은행">전북은행</option>
+                      <option value="제주은행">제주은행</option>
+                      <option value="국민은행">국민은행</option>
+                      <option value="농협은행">농협은행</option>
+                      <option value="산업은행">산업은행</option>
+                      <option value="수협은행">수협은행</option>
+                      <option value="한국씨티뱅크">한국씨티뱅크</option>
+                      <option value="SC제일은행">SC제일은행</option>
+                      <option value="HSBC">HSBC</option>
+                      <option value="도이치뱅크">도이치뱅크</option>
+                      <option value="BOA">BOA</option>
+                      <option value="JP모간">JP모간</option>
+                      <option value="중국공상">중국공상</option>
+                      <option value="BNP파라바">BNP파라바</option>
+                      <option value="우체국">우체국</option>
+                      <option value="케이뱅크">케이뱅크</option>
+                      <option value="카카오뱅크">카카오뱅크</option>
+                      <option value="산림조합">산림조합</option>
+                      <option value="신협은행">신협은행</option>
+                      <option value="중국은행">중국은행</option>
+                      <option value="중국건설은행">중국건설은행</option>
+                      <option value="토스뱅크">토스뱅크</option>
+                      <option value="SB저축은행">SB저축은행</option>
                     </select>
                     <input
                       className="input-sol"
