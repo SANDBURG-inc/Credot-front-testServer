@@ -169,8 +169,35 @@ const Register = () => {
                       </option>
                       <option value="기업은행">기업은행</option>
                       <option value>우리은행</option>
+                      <option value>신한은행</option>
+                      <option value>하나은행</option>
+                      <option value>대구은행</option>
+                      <option value>부산은행</option>
+                      <option value>경남은행</option>
+                      <option value>광주은행</option>
+                      <option value>전북은행</option>
+                      <option value>제주은행</option>
                       <option value>국민은행</option>
-                      <option value>농협</option>
+                      <option value>농협은행</option>
+                      <option value>산업은행</option>
+                      <option value>수협은행</option>
+                      <option value>한국씨티뱅크</option>
+                      <option value>SC제일은행</option>
+                      <option value>HSBC</option>
+                      <option value>도이치뱅크</option>
+                      <option value>BOA</option>
+                      <option value>JP모간</option>
+                      <option value>중국공상</option>
+                      <option value>BNP파라바</option>
+                      <option value>우체국</option>
+                      <option value>케이뱅크</option>
+                      <option value>카카오뱅크</option>
+                      <option value>산림조합</option>
+                      <option value>신협은행</option>
+                      <option value>중국은행</option>
+                      <option value>중국건설은행</option>
+                      <option value>토스뱅크</option>
+                      <option value>SB저축은행</option>
                     </select>
                     <input
                       className="input-sol"
