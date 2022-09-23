@@ -220,8 +220,6 @@ const Register = () => {
                             setR(true);
                             console.log(r);
                             alert(users[users.length - 1].name + "님 환영합니다.");
-                          } else {
-                            alert("제대로 입력해라 마");
                           }
                         });
                       // 입력이 끝나고 inputs를 비워주는 역할
