@@ -282,7 +282,7 @@ const Register = () => {
                           name="password"
                           onChange={handleOnChange}
                         />
-                        <div className="eyes" />
+                        <div className="join-eyes" />
                       </div>
                       <div className="password-wrap password__check-input">
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
