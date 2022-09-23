@@ -68,7 +68,7 @@
   font-weight: 500;
   padding: 0 20px;
   height: 60px;
-  width: 100%;
+  /* width: 100%; */
   outline: none;
 }
 
@@ -199,7 +199,7 @@ option[value=""][disabled] {
   position: relative;
 }
 
-.eyes {
+.register-eyes {
   display: block;
   position: absolute;
   top: 50%;
@@ -213,7 +213,7 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
-.eyes.visible {
+.register.visible {
   background-image: url(../images/main/m-input-pw__v.png);
 }
 
