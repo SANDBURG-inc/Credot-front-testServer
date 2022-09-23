@@ -11,7 +11,7 @@ import { bankList } from "./../data/bankList";
 import styled from "styled-components";
 import oc from "open-color";
 import { HOST } from "../redux/store";
-import "../assets/css/join.css";
+import "../assets/css/register.css";
 
 const BankInput = styled.input`
   width: 65%;
@@ -282,7 +282,7 @@ const Register = () => {
                           name="password"
                           onChange={handleOnChange}
                         />
-                        <div className="join-eyes" />
+                        <div className="register-eyes" />
                       </div>
                       <div className="password-wrap password__check-input">
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
