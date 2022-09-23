@@ -114,13 +114,13 @@ const Register = () => {
               <span className="head-title">회원가입</span>
             </div>
             <div className="i-body">
-              <div className="form-wrap">
+              <div className="register-form-wrap">
                 <form action>
-                  <div className="inner__sec">
-                    <span className="sec__head">회원 정보</span>
-                    <div className="input-wrap">
+                  <div className="register-inner__sec">
+                    <span className="register-sec__head">회원 정보</span>
+                    <div className="register-input-wrap">
                       <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
-                      <div className="email-input-wrap">
+                      <div className="register-email-input-wrap">
                         <input className="input-email" type="text" placeholder="이메일을 입력해주세요" name="email" onChange={handleOnChange} />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button className="check-btn " type="button">
@@ -128,38 +128,38 @@ const Register = () => {
                         </button>
                       </div>
                     </div>
-                    <input className="input-sol" type="text" placeholder="연락처를 입력해주세요" name="phoneNum" onChange={handleOnChange} />
-                    <div className="input-wrap">
-                      <div className="password-wrap">
+                    <input className="register-input-sol" type="text" placeholder="연락처를 입력해주세요" name="phoneNum" onChange={handleOnChange} />
+                    <div className="register-input-wrap">
+                      <div className="register-password-wrap">
                         <input
                           type="password"
-                          className="password-input"
+                          className="register-password-input"
                           placeholder="비밀번호를 입력해주세요"
                           name="password"
                           onChange={handleOnChange}
                         />
                         <div className="register-eyes" />
                       </div>
-                      <div className="password-wrap password__check-input">
+                      <div className="register-password-wrap password__check-input">
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
                       </div>
                     </div>
                   </div>
-                  <div className="inner__sec ">
-                    <span className="sec__head">사업자 정보</span>
-                    <div className="input-wrap">
+                  <div className="register-inner__sec ">
+                    <span className="register-sec__head">사업자 정보</span>
+                    <div className="register-input-wrap">
                       <input type="text" placeholder="법인명을 입력해주세요" name="corporateName" onChange={handleOnChange2} />
                       <input type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
                     </div>
                     <input
-                      className="input-sol"
+                      className="register-input-sol"
                       type="text"
                       placeholder="사업장 소재지를 입력해주세요."
                       name="businessLoc"
                       onChange={handleOnChange2}
                     />
                     <input
-                      className="input-sol"
+                      className="register-input-sol"
                       type="text"
                       placeholder="사업자 등록번호를 입력해주세요."
                       name="corporateNum"
@@ -168,7 +168,7 @@ const Register = () => {
                   </div>
                   <div className="inner__sec last-sec">
                     <span className="sec__head">정산받을 계좌</span>
-                    <select className="input-sol" name id required onChange={selectBoxChange}>
+                    <select className="register-input-sol" name id required onChange={selectBoxChange}>
                       <option value disabled selected>
                         정산받을 계좌의 은행을 선택해주세요
                       </option>
@@ -205,7 +205,7 @@ const Register = () => {
                       <option value="SB저축은행">SB저축은행</option>
                     </select>
                     <input
-                      className="input-sol"
+                      className="register-input-sol"
                       type="text"
                       placeholder="정산받을 계좌번호를 입력해주세요."
                       name="account"
