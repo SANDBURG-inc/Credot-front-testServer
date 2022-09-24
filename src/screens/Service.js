@@ -328,7 +328,17 @@ const Service = () => {
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      if (active[1]) alert("서비스 준비중입니다.");
+                      // if (active[1]) alert("서비스 준비중입니다.");
+                      fetch(HOST + "/")
+                        .then((response) => {
+                          if (!response.ok) {
+                            throw new Error("400아니면 500에러남");
+                          }
+                          return response.text();
+                        })
+                        .then((response) => {
+                          return alert(response);
+                        });
                     }}
                   >
                     조회하기
