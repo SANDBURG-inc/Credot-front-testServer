@@ -123,7 +123,27 @@ const Register = () => {
                       <div className="register-email-input-wrap">
                         <input className="input-email" type="text" placeholder="이메일을 입력해주세요" name="email" onChange={handleOnChange} />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
-                        <button className="check-btn " type="button">
+                        <button
+                          className="check-btn active"
+                          type="button"
+                          onClick={() => {
+                            if (!inputs.email.includes("@")) {
+                              alert("이메일 형식을 올바르게 입력해주세요!");
+                            } else {
+                              fetch(HOST + "/database/checkEmail?email=" + inputs.email)
+                                .then((response) => response.json())
+                                .then((response) => {
+                                  console.log(response);
+                                  if (response) {
+                                    alert("중복되는 이메일이 있습니다.");
+                                  } else {
+                                    setCheckEmail(true);
+                                    alert("사용가능한 이메일입니다.");
+                                  }
+                                });
+                            }
+                          }}
+                        >
                           중복확인
                         </button>
                       </div>
