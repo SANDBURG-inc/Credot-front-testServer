@@ -1,4 +1,4 @@
-.introduce-wrap .inner {
+.register-introduce-wrap .inner {
   padding-top: 135px;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.i-head {
+.register-i-head {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@
   margin-bottom: 100px;
 }
 
-.head-title {
+.register-head-title {
   display: inline-block;
   font-size: 32px;
   font-weight: bold;
@@ -25,7 +25,7 @@
   margin-bottom: 35px;
 }
 
-.i-body {
+.register-i-body {
   width: var(--main-width);
   margin-bottom: 140px;
   display: flex;
@@ -72,7 +72,7 @@
   outline: none;
 }
 
-.i-head {
+.register-i-head {
   margin-bottom: 45px;
 }
 
@@ -145,12 +145,12 @@ option[value=""][disabled] {
   border-bottom: none !important;
 }
 
-.input-email {
+.register-input-email {
   width: calc(100% - 116px) !important;
   border-bottom: none !important;
 }
 
-.check-btn {
+.register-check-btn {
   width: 116px;
   background-color: #d6d6d6;
   font-size: 16px;
@@ -158,13 +158,22 @@ option[value=""][disabled] {
   color: #fff;
 }
 
-.check-btn.active {
+.register-check-btn.active {
   background-color: #505050;
   color: #fff;
 }
 
-.input-wrap input:last-child,
-.input-wrap div:last-child {
+.input-password {
+  width: 100% !important;
+}
+
+.input-input {
+  display: flex;
+  align-items: center;
+}
+
+.register-input-wrap input:last-child,
+.register-input-wrap div:last-child {
   border-bottom: 1px solid #f4f4f4;
 }
 
@@ -199,7 +208,7 @@ option[value=""][disabled] {
   position: relative;
 }
 
-.register-eyes {
+.r-eyes {
   display: block;
   position: absolute;
   top: 50%;
@@ -213,7 +222,7 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
-.register.visible {
+.r-eyes.visible {
   background-image: url(../images/main/m-input-pw__v.png);
 }
 
@@ -231,15 +240,15 @@ option[value=""][disabled] {
 }
 
 @media (max-width: 700px) {
-  .form-wrap form {
+  .register-form-wrap form {
     padding: 20px;
   }
 
-  .i-head {
+  .register-i-head {
     margin-bottom: 60px;
   }
 
-  .sec__head {
+  .register-sec__head {
     padding-bottom: 20px;
     margin-bottom: 20px;
   }
@@ -248,24 +257,24 @@ option[value=""][disabled] {
     font-size: 14px;
   }
 
-  .form-wrap input::placeholder {
+  .register-form-wrap input::placeholder {
     font-size: 14px;
   }
 
-  .check-btn {
+  .register-check-btn {
     font-size: 14px;
   }
 
-  .input-sol,
-  .input-wrap:last-child {
+  .register-input-sol,
+  .register-input-wrap:last-child {
     margin-top: 10px;
   }
 
-  .last-sec {
+  .register-last-sec {
     margin-bottom: 67px !important;
   }
 
-  .back-btn {
+  .register-back-btn {
     width: 398px;
     font-size: 15px;
   }
@@ -274,32 +283,32 @@ option[value=""][disabled] {
     font-size: 15px;
   }
 
-  .i-body {
+  .register-i-body {
     margin-bottom: 100px;
   }
 
-  .i-head {
+  .register-i-head {
     margin-bottom: 0px;
   }
 }
 
 @media (max-width: 500px) {
-  .form-wrap form {
+  .register-form-wrap form {
     width: 343px;
   }
 
-  .form-wrap input,
-  .form-wrap select {
+  .register-form-wrap input,
+  .register-form-wrap select {
     height: 58px;
   }
 
-  .login-btn,
-  .back-btn {
+  .register-login-btn,
+  .register-back-btn {
     height: 50px;
     font-size: 14px;
   }
 
-  .back-btn {
+  .register-back-btn {
     width: 301px;
   }
 }
