@@ -108,12 +108,12 @@ const Register = () => {
   return (
     <main className="container">
       <div className="inner">
-        <section className="section-wrap introduce-wrap">
+        <section className="section-wrap register-introduce-wrap">
           <div className="inner">
-            <div className="i-head">
-              <span className="head-title">회원가입</span>
+            <div className="register-i-head">
+              <span className="register-head-title">회원가입</span>
             </div>
-            <div className="i-body">
+            <div className="register-i-body">
               <div className="register-form-wrap">
                 <form action>
                   <div className="register-inner__sec">
@@ -121,10 +121,16 @@ const Register = () => {
                     <div className="register-input-wrap">
                       <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
                       <div className="register-email-input-wrap">
-                        <input className="input-email" type="text" placeholder="이메일을 입력해주세요" name="email" onChange={handleOnChange} />
+                        <input
+                          className="register-input-email"
+                          type="text"
+                          placeholder="이메일을 입력해주세요"
+                          name="email"
+                          onChange={handleOnChange}
+                        />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button
-                          className="check-btn active"
+                          className="register-check-btn active"
                           type="button"
                           onClick={() => {
                             if (!inputs.email.includes("@")) {
@@ -153,12 +159,12 @@ const Register = () => {
                       <div className="register-password-wrap">
                         <input
                           type="password"
-                          className="register-password-input"
+                          className="input-password"
                           placeholder="비밀번호를 입력해주세요"
                           name="password"
                           onChange={handleOnChange}
                         />
-                        <div className="register-eyes" />
+                        <div className="r-eyes"></div>
                       </div>
                       <div className="register-password-wrap password__check-input">
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
