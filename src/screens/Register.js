@@ -1,39 +1,11 @@
 import React, { useState, useEffect } from "react";
-import AuthWrapper from "../components/auth/AuthWrapper";
-import AuthContent from "../components/auth/AuthContent";
-import InputWithLabel from "./../components/InputWithLabel";
-import AuthButton from "./../components/auth/AuthButton";
-import RightAlignedLink from "./../components/RightAlignedLink";
-import { Button, Form } from "react-bootstrap";
-import { useCombobox } from "downshift";
+// import { useCombobox } from "downshift";
 import { Navigate } from "react-router-dom";
-import { bankList } from "./../data/bankList";
-import styled from "styled-components";
-import oc from "open-color";
+// import { bankList } from "./../data/bankList";
 import { HOST } from "../redux/store";
-import "../assets/css/join.css";
-
-const BankInput = styled.input`
-  width: 65%;
-  border: 1px solid ${oc.gray[3]};
-  line-height: 2rem;
-  padding-left: 0.5rem;
-`;
-
-const AccountInput = styled.input`
-  width: 72%;
-  border: 1px solid ${oc.gray[3]};
-  line-height: 2rem;
-  padding-left: 0.5rem;
-`;
-
-const Btn = styled.button`
-  border: 1px solid ${oc.gray[3]};
-  line-height: 2rem;
-`;
+import "../assets/css/register.css";
 
 const Register = () => {
-  const [flag, setFlag] = useState(0);
   const [r, setR] = useState(false);
   const [bank, setBank] = useState("초기값");
   const [account, setAccount] = useState("초기값");
@@ -72,6 +44,11 @@ const Register = () => {
 
   const handleOnChangeCheckPw = (e) => {
     setCheckPw(e.target.value);
+  };
+
+  const selectBoxChange = (e) => {
+    console.log(e.target.value);
+    setBank(e.target.value);
   };
 
   useEffect(() => {
@@ -123,132 +100,11 @@ const Register = () => {
       //   bank: "",
       //   account: "",
       // });
-      setFlag();
     } else {
       alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
     }
   };
 
-  // return flag === 0 ? (
-  //   <AuthWrapper>
-  //     <AuthContent title="회원가입">
-  //       <InputWithLabel label="이름" name="name" placeholder=" 이름" onChange={handleOnChange} />
-  //       <InputWithLabel label="이메일" name="email" placeholder="  이메일" onChange={handleOnChange} />
-  //       <Button
-  //         className="button"
-  //         style={{ margin: "20px 0px 65px 0px" }}
-  //         variant="light"
-  //         onClick={() => {
-  //           if (!inputs.email.includes("@")) {
-  //             alert("이메일 형식을 올바르게 입력해주세요!");
-  //           } else {
-  //             fetch(HOST + "/database/checkEmail?email=" + inputs.email)
-  //               .then((response) => response.json())
-  //               .then((response) => {
-  //                 console.log(response);
-  //                 if (response) {
-  //                   alert("중복되는 이메일이 있습니다.");
-  //                 } else {
-  //                   setCheckEmail(true);
-  //                   alert("사용가능한 이메일입니다.");
-  //                 }
-  //               });
-  //           }
-  //         }}
-  //       >
-  //         이메일 중복확인
-  //       </Button>
-  //       <InputWithLabel label="연락처" name="phoneNum" placeholder="  연락처" onChange={handleOnChange} />
-  //       <InputWithLabel label="비밀번호" name="password" placeholder="  비밀번호" type="password" onChange={handleOnChange} />
-  //       <InputWithLabel label="" name="passwordConfirm" placeholder="  비밀번호 확인" type="password" onChange={handleOnChangeCheckPw} />
-  //       <AuthButton
-  //         onClick={() => {
-  //           if (checkEmail) {
-  //             handleOnClick();
-  //           } else {
-  //             alert("이메일 중복확인을 해주세요!");
-  //           }
-  //         }}
-  //         // onChange={handleOnChange}
-  //       >
-  //         다음
-  //       </AuthButton>
-  //       <RightAlignedLink to="/login">로그인</RightAlignedLink>
-  //     </AuthContent>
-  //   </AuthWrapper>
-  // ) : (
-  //   <AuthWrapper>
-  //     <AuthContent title="사업자 정보를 알려주세요">
-  //       <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="corporateName" placeholder="법인명" onChange={handleOnChange2} />
-  //       <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="ceo" placeholder="대표명" onChange={handleOnChange2} />
-  //       <Form.Control style={{ margin: "10px 0px 25px 0px" }} name="businessLoc" placeholder="사업장 소재지" onChange={handleOnChange2} />
-  //       <Form.Control style={{ margin: "10px 0px 70px 0px" }} name="corporateNum" placeholder="사업자 등록번호" onChange={handleOnChange2} />
-  //     </AuthContent>
-  //     <AuthContent title="선정산 받으실 계좌를 알려주세요">
-  //       <Combobox name="bank" setBank={setBank} />
-  //       <AccountInput
-  //         style={{ margin: "10px 0px 10px 0px" }}
-  //         name="account"
-  //         placeholder="계좌번호"
-  //         onChange={(e) => {
-  //           setAccount(e.target.value);
-  //         }}
-  //       />
-  //     </AuthContent>
-  //     <AuthButton
-  //       onClick={() => {
-  //         handleOnClick();
-  //         fetch(
-  //           HOST +
-  //             "/database/register?email=" +
-  //             users[users.length - 1].email +
-  //             "&name=" +
-  //             users[users.length - 1].name +
-  //             "&pw=" +
-  //             users[users.length - 1].password +
-  //             "&phoneNum=" +
-  //             users[users.length - 1].phoneNum +
-  //             "&bank=" +
-  //             bank +
-  //             "&account=" +
-  //             account +
-  //             "&corporateName=" +
-  //             incInputs.corporateName +
-  //             "&ceo=" +
-  //             incInputs.ceo +
-  //             "&businessLoc=" +
-  //             incInputs.businessLoc +
-  //             "&corporateNum=" +
-  //             incInputs.corporateNum
-  //         )
-  //           .then((response) => response.text())
-  //           .then((response) => {
-  //             console.log(response);
-  //             if (!response) {
-  //               console.log("fetch error");
-  //             } else if (response) {
-  //               setR(true);
-  //               console.log(r);
-  //               alert(users[users.length - 1].name + "님 환영합니다.");
-  //             } else {
-  //               alert("제대로 입력해라 마");
-  //             }
-  //           });
-  //         // 입력이 끝나고 inputs를 비워주는 역할
-  //         setInputs({
-  //           name: "",
-  //           email: "",
-  //           phoneNum: "",
-  //           password: "",
-  //           bank: "",
-  //           account: "",
-  //         });
-  //       }}
-  //     >
-  //       회원가입 완료
-  //     </AuthButton>
-  //   </AuthWrapper>
-  // );
   return (
     <main className="container">
       <div className="inner">
@@ -258,13 +114,13 @@ const Register = () => {
               <span className="head-title">회원가입</span>
             </div>
             <div className="i-body">
-              <div className="form-wrap">
+              <div className="register-form-wrap">
                 <form action>
-                  <div className="inner__sec">
-                    <span className="sec__head">회원 정보</span>
-                    <div className="input-wrap">
+                  <div className="register-inner__sec">
+                    <span className="register-sec__head">회원 정보</span>
+                    <div className="register-input-wrap">
                       <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
-                      <div className="email-input-wrap">
+                      <div className="register-email-input-wrap">
                         <input className="input-email" type="text" placeholder="이메일을 입력해주세요" name="email" onChange={handleOnChange} />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button className="check-btn " type="button">
@@ -272,38 +128,38 @@ const Register = () => {
                         </button>
                       </div>
                     </div>
-                    <input className="input-sol" type="text" placeholder="연락처를 입력해주세요" name="phoneNum" onChange={handleOnChange} />
-                    <div className="input-wrap">
-                      <div className="password-wrap">
+                    <input className="register-input-sol" type="text" placeholder="연락처를 입력해주세요" name="phoneNum" onChange={handleOnChange} />
+                    <div className="register-input-wrap">
+                      <div className="register-password-wrap">
                         <input
                           type="password"
-                          className="password-input"
+                          className="register-password-input"
                           placeholder="비밀번호를 입력해주세요"
                           name="password"
                           onChange={handleOnChange}
                         />
-                        <div className="eyes" />
+                        <div className="register-eyes" />
                       </div>
-                      <div className="password-wrap password__check-input">
+                      <div className="register-password-wrap password__check-input">
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
                       </div>
                     </div>
                   </div>
-                  <div className="inner__sec ">
-                    <span className="sec__head">사업자 정보</span>
-                    <div className="input-wrap">
+                  <div className="register-inner__sec ">
+                    <span className="register-sec__head">사업자 정보</span>
+                    <div className="register-input-wrap">
                       <input type="text" placeholder="법인명을 입력해주세요" name="corporateName" onChange={handleOnChange2} />
                       <input type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
                     </div>
                     <input
-                      className="input-sol"
+                      className="register-input-sol"
                       type="text"
                       placeholder="사업장 소재지를 입력해주세요."
                       name="businessLoc"
                       onChange={handleOnChange2}
                     />
                     <input
-                      className="input-sol"
+                      className="register-input-sol"
                       type="text"
                       placeholder="사업자 등록번호를 입력해주세요."
                       name="corporateNum"
@@ -312,17 +168,44 @@ const Register = () => {
                   </div>
                   <div className="inner__sec last-sec">
                     <span className="sec__head">정산받을 계좌</span>
-                    <select className="input-sol" name id required>
+                    <select className="register-input-sol" name id required onChange={selectBoxChange}>
                       <option value disabled selected>
                         정산받을 계좌의 은행을 선택해주세요
                       </option>
                       <option value="기업은행">기업은행</option>
-                      <option value>우리은행</option>
-                      <option value>국민은행</option>
-                      <option value>농협</option>
+                      <option value="우리은행">우리은행</option>
+                      <option value="신한은행">신한은행</option>
+                      <option value="하나은행">하나은행</option>
+                      <option value="대구은행">대구은행</option>
+                      <option value="부산은행">부산은행</option>
+                      <option value="경남은행">경남은행</option>
+                      <option value="광주은행">광주은행</option>
+                      <option value="전북은행">전북은행</option>
+                      <option value="제주은행">제주은행</option>
+                      <option value="국민은행">국민은행</option>
+                      <option value="농협은행">농협은행</option>
+                      <option value="산업은행">산업은행</option>
+                      <option value="수협은행">수협은행</option>
+                      <option value="한국씨티뱅크">한국씨티뱅크</option>
+                      <option value="SC제일은행">SC제일은행</option>
+                      <option value="HSBC">HSBC</option>
+                      <option value="도이치뱅크">도이치뱅크</option>
+                      <option value="BOA">BOA</option>
+                      <option value="JP모간">JP모간</option>
+                      <option value="중국공상">중국공상</option>
+                      <option value="BNP파라바">BNP파라바</option>
+                      <option value="우체국">우체국</option>
+                      <option value="케이뱅크">케이뱅크</option>
+                      <option value="카카오뱅크">카카오뱅크</option>
+                      <option value="산림조합">산림조합</option>
+                      <option value="신협은행">신협은행</option>
+                      <option value="중국은행">중국은행</option>
+                      <option value="중국건설은행">중국건설은행</option>
+                      <option value="토스뱅크">토스뱅크</option>
+                      <option value="SB저축은행">SB저축은행</option>
                     </select>
                     <input
-                      className="input-sol"
+                      className="register-input-sol"
                       type="text"
                       placeholder="정산받을 계좌번호를 입력해주세요."
                       name="account"
@@ -369,8 +252,6 @@ const Register = () => {
                             setR(true);
                             console.log(r);
                             alert(users[users.length - 1].name + "님 환영합니다.");
-                          } else {
-                            alert("제대로 입력해라 마");
                           }
                         });
                       // 입력이 끝나고 inputs를 비워주는 역할
@@ -397,43 +278,43 @@ const Register = () => {
   );
 };
 
-const Combobox = (props) => {
-  const [items] = useState(bankList);
-  const [selectedItem, setSelectedItem] = useState("");
+// const Combobox = (props) => {
+//   const [items] = useState(bankList);
+//   const [selectedItem, setSelectedItem] = useState("");
 
-  useEffect(() => {
-    props.setBank(selectedItem);
-  }, [props, selectedItem]);
+//   useEffect(() => {
+//     props.setBank(selectedItem);
+//   }, [props, selectedItem]);
 
-  const getFilter = (inputValue) => {
-    return function Filter(bankList) {
-      return !inputValue || bankList.toUpperCase().includes(inputValue);
-    };
-  };
+//   const getFilter = (inputValue) => {
+//     return function Filter(bankList) {
+//       return !inputValue || bankList.toUpperCase().includes(inputValue);
+//     };
+//   };
 
-  const { isOpen, highlightedIndex, getComboboxProps, getInputProps, getToggleButtonProps, getMenuProps, getItemProps } = useCombobox({
-    onInputValueChange({ inputValue }) {
-      setSelectedItem(...bankList.filter(getFilter(inputValue)));
-    },
-    items,
-  });
+//   const { isOpen, highlightedIndex, getComboboxProps, getInputProps, getToggleButtonProps, getMenuProps, getItemProps } = useCombobox({
+//     onInputValueChange({ inputValue }) {
+//       setSelectedItem(...bankList.filter(getFilter(inputValue)));
+//     },
+//     items,
+//   });
 
-  return (
-    <>
-      <div {...getComboboxProps()}>
-        <BankInput readOnly name="bank" placeholder="은행" {...getInputProps()} />
-        <Btn {...getToggleButtonProps()}>{isOpen ? <>&#8593;</> : <>&#8595;</>}</Btn>
-      </div>
-      <ul {...getMenuProps()}>
-        {isOpen &&
-          items.map((item, index) => (
-            <li {...getItemProps({ item, index })} key={item} style={{ background: index === highlightedIndex && "lightgray" }}>
-              {item}
-            </li>
-          ))}
-      </ul>
-    </>
-  );
-};
+//   return (
+//     <>
+//       <div {...getComboboxProps()}>
+//         <BankInput readOnly name="bank" placeholder="은행" {...getInputProps()} />
+//         <Btn {...getToggleButtonProps()}>{isOpen ? <>&#8593;</> : <>&#8595;</>}</Btn>
+//       </div>
+//       <ul {...getMenuProps()}>
+//         {isOpen &&
+//           items.map((item, index) => (
+//             <li {...getItemProps({ item, index })} key={item} style={{ background: index === highlightedIndex && "lightgray" }}>
+//               {item}
+//             </li>
+//           ))}
+//       </ul>
+//     </>
+//   );
+// };
 
 export default Register;

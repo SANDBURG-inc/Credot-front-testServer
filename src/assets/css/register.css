@@ -34,7 +34,7 @@
   align-items: center;
 }
 
-.form-wrap form {
+.register-form-wrap form {
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -45,14 +45,14 @@
   background-color: #fff;
 }
 
-.inner__sec {
+.register-inner__sec {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 40px;
 }
 
-.sec__head {
+.register-sec__head {
   font-size: 16px;
   font-weight: bold;
   text-align: left;
@@ -62,13 +62,13 @@
   margin-bottom: 20px;
 }
 
-.form-wrap input,
-.form-wrap select {
+.register-form-wrap input,
+.register-form-wrap select {
   font-size: 18px;
   font-weight: 500;
   padding: 0 20px;
   height: 60px;
-  width: 100%;
+  /* width: 100%; */
   outline: none;
 }
 
@@ -76,7 +76,7 @@
   margin-bottom: 45px;
 }
 
-.form-wrap select {
+.register-form-wrap select {
   background-image: url(../images/icon/arrow-down.svg);
   background-position: right 20px center;
   background-repeat: no-repeat;
@@ -98,49 +98,49 @@ option[value=""][disabled] {
   display: none;
 }
 
-.form-wrap input::placeholder {
+.register-form-wrap input::placeholder {
   font-size: 18px;
   font-weight: 500;
   text-align: left;
   color: #d6d6d6;
 }
 
-.input-wrap {
+.register-input-wrap {
   border-radius: 8px;
   border: solid 1px #dedede;
   background-color: #fff;
   overflow: hidden;
 }
 
-.input-wrap:last-child {
+.register-input-wrap:last-child {
   margin-top: 14px;
 }
 
-.input-wrap input,
-.input-wrap div {
+.register-input-wrap input,
+.register-input-wrap div {
   border-bottom: 1px solid #f4f4f4;
 }
 
-.input-wrap input:last-child {
+.register-input-wrap input:last-child {
   border-bottom: none !important;
 }
 
-.input-wrap div:last-child {
+.register-input-wrap div:last-child {
   border-bottom: none !important;
 }
 
-.input-sol {
+.register-input-sol {
   border-radius: 8px;
   border: solid 1px #dedede;
   background-color: #fff;
   margin-top: 14px;
 }
 
-.input-sol:nth-child(2) {
+.register-input-sol:nth-child(2) {
   margin-top: 0;
 }
 
-.email-input-wrap {
+.register-email-input-wrap {
   display: flex;
   border-bottom: none !important;
 }
@@ -195,11 +195,11 @@ option[value=""][disabled] {
   color: #7e7e7e;
 }
 
-.password-wrap {
+.register-password-wrap {
   position: relative;
 }
 
-.eyes {
+.register-eyes {
   display: block;
   position: absolute;
   top: 50%;
@@ -213,7 +213,7 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
-.eyes.visible {
+.register.visible {
   background-image: url(../images/main/m-input-pw__v.png);
 }
 
