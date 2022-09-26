@@ -11,6 +11,7 @@ import Finance from "./screens/Finance";
 import Register from "./screens/Register";
 import NavBarElement from "./components/NavBarElement";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
