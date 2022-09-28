@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "../assets/css/introduce-what_service.css";
 
 const About = () => {
@@ -11,6 +12,10 @@ const About = () => {
   });
   return (
     <main className="container">
+      <Helmet>
+        <title>선정산 서비스란? - 크레닷</title>
+      </Helmet>
+
       <div className="inner">
         <section className="section-wrap introduce-wrap">
           <div className="inner">

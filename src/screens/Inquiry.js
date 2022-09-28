@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "../assets/css/customer-inquiry.css";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Inquiry = () => {
   useEffect(() => {
@@ -45,6 +46,9 @@ const Inquiry = () => {
 
   return (
     <main className="container">
+      <Helmet>
+        <title>1:1 문의 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap guide-wrap">
           <div className="inner">

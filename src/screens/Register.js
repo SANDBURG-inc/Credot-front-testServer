@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 // import { bankList } from "./../data/bankList";
 import { HOST } from "../redux/store";
 import "../assets/css/register.css";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const [r, setR] = useState(false);
@@ -124,6 +125,9 @@ const Register = () => {
 
   return (
     <main className="container">
+      <Helmet>
+        <title>회원가입 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap register-introduce-wrap">
           <div className="inner">
