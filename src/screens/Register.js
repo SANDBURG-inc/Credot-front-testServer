@@ -75,6 +75,23 @@ const Register = () => {
     console.log(users);
   }, [users]);
 
+  useEffect(() => {
+    // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
+    let eyes = document.querySelectorAll(".r-eyes");
+
+    for (let i = 0; i < eyes.length; i++) {
+      eyes[i].addEventListener("click", function () {
+        if (this.previousElementSibling.type === "text") {
+          this.classList.remove("visible");
+          this.previousElementSibling.type = "password";
+        } else {
+          this.classList.add("visible");
+          this.previousElementSibling.type = "text";
+        }
+      });
+    }
+  }, []);
+
   if (r === true) {
     return <Navigate to="/" />;
   }
