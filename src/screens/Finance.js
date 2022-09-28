@@ -8,6 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import { HOST } from "./../redux/store.js";
 import { useSelector } from "react-redux";
 import "../assets/css/my_page.css";
+import { Helmet } from "react-helmet";
 
 const Finance = () => {
   var tmpFinanceList = [];
@@ -59,6 +60,9 @@ const Finance = () => {
   }, []);
   return (
     <main className="container">
+      <Helmet>
+        <title>정산현황 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap my_page-wrap">
           <div className="inner">

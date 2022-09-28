@@ -15,6 +15,7 @@ import {
   updateCorporateNum,
 } from "./../redux/store.js";
 import "../assets/css/login.css";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const a = useSelector((state) => state.login);
@@ -119,6 +120,9 @@ const Login = () => {
 
   return (
     <main className="container">
+      <Helmet>
+        <title>로그인 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap">
           <div className="inner">

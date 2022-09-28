@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/notice-notice.css";
 import { HOST } from "../redux/store";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Notice = () => {
   const [length, setLength] = useState(0);
@@ -87,6 +88,9 @@ const Notice = () => {
 
   return (
     <main className="container">
+      <Helmet>
+        <title>공지사항 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap guide-wrap">
           <div className="inner">

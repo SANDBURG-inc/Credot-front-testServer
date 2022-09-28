@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { update, HOST } from "./../redux/store.js";
 import "../assets/css/my_page.css";
+import { Helmet } from "react-helmet";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
@@ -49,6 +50,9 @@ const Mypage = () => {
   }
   return (
     <main className="container">
+      <Helmet>
+        <title>My Page - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap my_page-wrap">
           <div className="inner">
