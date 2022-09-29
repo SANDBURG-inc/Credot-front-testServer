@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import { useCombobox } from "downshift";
+import { useCombobox } from "downshift";
 import { Navigate } from "react-router-dom";
-// import { bankList } from "./../data/bankList";
+import { Link } from "react-router-dom";
 import { HOST } from "../redux/store";
 import "../assets/css/register.css";
 
@@ -312,7 +312,11 @@ const Register = () => {
                   </button>
                 </form>
               </div>
-              <button className="back-btn">메인화면으로 돌아가기</button>
+              <button className="back-btn">
+                <Link to="/">
+                  <button className="back-btn">메인화면으로 돌아가기</button>
+                </Link>
+              </button>
             </div>
           </div>
         </section>
