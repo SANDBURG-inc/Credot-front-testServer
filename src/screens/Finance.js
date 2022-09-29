@@ -46,14 +46,9 @@ const Finance = () => {
         return response.json();
       })
       .then((userFin) => {
-        console.log("--------------------------------------");
-        console.log("유저 정산현황 객체 길이: " + userFin.length);
         setLength(userFin.length);
-        console.log(length);
         for (let i = 0; i < userFin.length; i++) {
           tmpFinanceList.push([i + 1, userFin[i].contractDate, userFin[i].deadline, userFin[i].ammount, userFin[i].commerce, userFin[i].status]);
-          console.log(financeList);
-          console.log(financeList[0]);
         }
         setFinanceList([...tmpFinanceList]);
       });

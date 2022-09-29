@@ -28,7 +28,6 @@ const Register = () => {
   const [users, setUsers] = useState([]);
 
   const handleOnChange = (e) => {
-    console.log(e.target.name + ": " + e.target.value);
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
@@ -36,7 +35,6 @@ const Register = () => {
   };
 
   const handleOnChange2 = (e) => {
-    console.log(e.target.name + ": " + e.target.value);
     setIncInputs({
       ...incInputs,
       [e.target.name]: e.target.value,
@@ -48,33 +46,8 @@ const Register = () => {
   };
 
   const selectBoxChange = (e) => {
-    console.log(e.target.value);
     setBank(e.target.value);
   };
-
-  useEffect(() => {
-    console.log("은행: " + bank);
-  }, [bank]);
-
-  useEffect(() => {
-    console.log("계좌번호: " + account);
-  }, [account]);
-
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
-
-  useEffect(() => {
-    console.log(incInputs);
-  }, [incInputs]);
-
-  useEffect(() => {
-    console.log("비밀번호 확인 값: " + checkPw);
-  }, [checkPw]);
-
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   useEffect(() => {
     // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
@@ -160,7 +133,6 @@ const Register = () => {
                               fetch(HOST + "/database/checkEmail?email=" + inputs.email)
                                 .then((response) => response.json())
                                 .then((response) => {
-                                  console.log(response);
                                   if (response) {
                                     alert("중복되는 이메일이 있습니다.");
                                   } else {
@@ -292,12 +264,10 @@ const Register = () => {
                       )
                         .then((response) => response.text())
                         .then((response) => {
-                          console.log(response);
                           if (!response) {
                             console.log("fetch error");
                           } else if (response) {
                             setR(true);
-                            console.log(r);
                             alert(users[users.length - 1].name + "님 환영합니다.");
                           }
                         });
