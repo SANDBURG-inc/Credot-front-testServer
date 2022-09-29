@@ -31,13 +31,11 @@ const Inquiry = () => {
 
     emailjs.sendForm("service_8h1pn0j", "template_kil80le", e.target, "CC6tKIfGeDYkzejKg").then(
       (response) => {
-        console.log("Success!", response.status, response.text);
         alert("1:1 문의가 접수되었습니다.");
         window.location.reload();
         // setStatus('success');
       },
       (error) => {
-        console.log("Failed...", error);
         alert("문의 접수에 실패하였습니다.");
         // setStatus('fail');
       }

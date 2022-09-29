@@ -184,7 +184,6 @@ const Service = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         alert("조회 실패... 아이디와 비번을 확인해주세요");
       });
   };

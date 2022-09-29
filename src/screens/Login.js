@@ -27,7 +27,6 @@ const Login = () => {
   });
   const [users, setUsers] = useState([]);
   const handleOnChange = (e) => {
-    console.log(e.target.name + ": " + e.target.value);
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
@@ -58,7 +57,6 @@ const Login = () => {
         credentials: "include",
       })
         .then((response) => {
-          console.log(response);
           if (!response.ok) {
             console.log("fetch error");
           }
@@ -66,7 +64,6 @@ const Login = () => {
         })
         .then((response) => {
           if (!response) {
-            console.log(response);
             alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
           } else {
             //userInfo
@@ -88,14 +85,6 @@ const Login = () => {
         });
     }
   };
-
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
-
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   useEffect(() => {
     // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트

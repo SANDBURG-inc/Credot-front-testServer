@@ -32,20 +32,7 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  useEffect(() => {
-    console.log("현재 비밀번호: " + curPassword);
-  }, [curPassword]);
-
-  useEffect(() => {
-    console.log("새 비밀번호: " + newPassword);
-  }, [newPassword]);
-
-  useEffect(() => {
-    console.log("새 비밀번호 확인: " + subNewPassword);
-  }, [subNewPassword]);
-
   if (a === false) {
-    console.log("로그인 안됌");
     return <Navigate to="/" />;
   }
   return (

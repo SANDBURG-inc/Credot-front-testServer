@@ -57,9 +57,7 @@ const Notice = () => {
   };
 
   useEffect(() => {
-    console.log(data);
     setLength(data.length);
-    console.log(length);
   }, [data]);
 
   useEffect(() => {
