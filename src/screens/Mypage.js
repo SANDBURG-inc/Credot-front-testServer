@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { update, HOST } from "./../redux/store.js";
 import "../assets/css/my_page.css";
+import { Helmet } from "react-helmet";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
@@ -31,24 +32,14 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  useEffect(() => {
-    console.log("현재 비밀번호: " + curPassword);
-  }, [curPassword]);
-
-  useEffect(() => {
-    console.log("새 비밀번호: " + newPassword);
-  }, [newPassword]);
-
-  useEffect(() => {
-    console.log("새 비밀번호 확인: " + subNewPassword);
-  }, [subNewPassword]);
-
   if (a === false) {
-    console.log("로그인 안됌");
     return <Navigate to="/" />;
   }
   return (
     <main className="container">
+      <Helmet>
+        <title>My Page - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap my_page-wrap">
           <div className="inner">

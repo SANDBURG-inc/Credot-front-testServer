@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/notice-news.css";
 import { HOST } from "../redux/store";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Media = () => {
   const [length, setLength] = useState(0);
@@ -56,9 +57,7 @@ const Media = () => {
   };
 
   useEffect(() => {
-    console.log(data);
     setLength(data.length);
-    console.log(length);
   }, [data]);
 
   useEffect(() => {
@@ -87,6 +86,9 @@ const Media = () => {
   });
   return (
     <main className="container">
+      <Helmet>
+        <title>언론속의 크레닷 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap guide-wrap">
           <div className="inner">

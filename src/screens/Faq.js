@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../assets/css/customer-qna.css";
 import { HOST } from "../redux/store";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const Faq = () => {
@@ -56,9 +57,7 @@ const Faq = () => {
   };
 
   useEffect(() => {
-    console.log(data);
     setLength(data.length);
-    console.log(length);
   }, [data]);
 
   useEffect(() => {
@@ -88,6 +87,9 @@ const Faq = () => {
 
   return (
     <main className="container">
+      <Helmet>
+        <title>자주하는 질문 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap guide-wrap">
           <div className="inner">

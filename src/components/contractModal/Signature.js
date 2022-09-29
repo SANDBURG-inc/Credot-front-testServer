@@ -97,7 +97,6 @@ const Signature = (props) => {
 
   const save = () => {
     const image = canvasRef.current.getTrimmedCanvas().toDataURL("image/png");
-    console.log(image.split(",")[1]); //base 64 코드
 
     let copy = { ...contractData };
     copy.sign = image.split(",")[1];

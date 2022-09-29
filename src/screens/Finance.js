@@ -8,6 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import { HOST } from "./../redux/store.js";
 import { useSelector } from "react-redux";
 import "../assets/css/my_page.css";
+import { Helmet } from "react-helmet";
 
 const Finance = () => {
   var tmpFinanceList = [];
@@ -45,20 +46,18 @@ const Finance = () => {
         return response.json();
       })
       .then((userFin) => {
-        console.log("--------------------------------------");
-        console.log("유저 정산현황 객체 길이: " + userFin.length);
         setLength(userFin.length);
-        console.log(length);
         for (let i = 0; i < userFin.length; i++) {
           tmpFinanceList.push([i + 1, userFin[i].contractDate, userFin[i].deadline, userFin[i].ammount, userFin[i].commerce, userFin[i].status]);
-          console.log(financeList);
-          console.log(financeList[0]);
         }
         setFinanceList([...tmpFinanceList]);
       });
   }, []);
   return (
     <main className="container">
+      <Helmet>
+        <title>정산현황 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap my_page-wrap">
           <div className="inner">

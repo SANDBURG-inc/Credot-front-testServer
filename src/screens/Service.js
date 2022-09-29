@@ -4,6 +4,7 @@ import ContractModal from "../components/contractModal/ContractModal";
 import { HOST } from "../redux/store";
 import ProgressCircleDialog from "../components/ProgressCircleDialog";
 import "../assets/css/index.css";
+import { Helmet } from "react-helmet";
 
 const Service = () => {
   let isLogined = useSelector((state) => state.login);
@@ -183,13 +184,15 @@ const Service = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         alert("조회 실패... 아이디와 비번을 확인해주세요");
       });
   };
 
   return (
     <main className="container">
+      <Helmet>
+        <title>CRE. - 초간편 선정산 서비스. 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap visual-wrap">
           <div className="inner">

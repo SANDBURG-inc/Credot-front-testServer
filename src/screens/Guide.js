@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "../assets/css/introduce-what_service.css";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Guide = () => {
   useEffect(() => {
@@ -14,6 +15,9 @@ const Guide = () => {
   });
   return (
     <main className="container">
+      <Helmet>
+        <title>서비스 가이드 - 크레닷</title>
+      </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap guide-wrap">
           <div className="inner">
