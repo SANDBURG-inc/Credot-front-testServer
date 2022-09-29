@@ -49,7 +49,7 @@ const Login = () => {
       alert("비밀번호를 입력해주세요!");
     } else {
       handleOnClick();
-      fetch(HOST + "/login?email=" + inputs.email + "&pw=" + inputs.password, {
+      fetch(HOST + "/passport/login?email=" + inputs.email + "&pw=" + inputs.password, {
         method: "post",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
