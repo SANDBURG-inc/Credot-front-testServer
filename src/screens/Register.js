@@ -66,6 +66,13 @@ const Register = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // 비밀번호 확인 검증 아이콘
+    let check = document.querySelector(".password__check-input");
+    if (inputs.password === checkPw) {
+    }
+  }, []);
+
   if (r === true) {
     return <Navigate to="/" />;
   }
