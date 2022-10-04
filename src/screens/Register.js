@@ -29,7 +29,7 @@ const Register = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (inputs.password === checkPw) {
+    if (inputs.password === checkPw && checkPw != "") {
       setPwEqual(true);
     } else {
       setPwEqual(false);
@@ -80,8 +80,13 @@ const Register = () => {
   }
 
   const handleOnClick = () => {
+    if (!checkEmail) {
+      alert("이메일 중복확인을 해주세요!");
+      return;
+    }
     if (inputs.password === "" || checkPw === "") {
       alert("비밀번호를 확인해주세요!");
+      return;
     } else if (inputs.password === checkPw) {
       const { name, email, phoneNum, password } = inputs;
 
@@ -295,10 +300,8 @@ const Register = () => {
                   </button>
                 </form>
               </div>
-              <button className="back-btn">
-                <Link to="/">
-                  <button className="back-btn">메인화면으로 돌아가기</button>
-                </Link>
+              <button className="register-back-btn">
+                <Link to="/">메인화면으로 돌아가기</Link>
               </button>
             </div>
           </div>
