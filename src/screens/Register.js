@@ -300,10 +300,8 @@ const Register = () => {
                   </button>
                 </form>
               </div>
-              <button className="back-btn">
-                <Link to="/">
-                  <button className="back-btn">메인화면으로 돌아가기</button>
-                </Link>
+              <button className="register-back-btn">
+                <Link to="/">메인화면으로 돌아가기</Link>
               </button>
             </div>
           </div>
