@@ -160,7 +160,7 @@ const Service = () => {
 
         if (response === "200") {
           const inputString = prompt("인증번호를 입력해주세요", "인증번호");
-          fetch(HOST + "/coupang/auth?code=" + inputString)
+          fetch(HOST + "/coupang/auth?code=" + inputString, { credentials: "include" })
             .then((response) => {
               if (!response.ok) {
                 setprogressOpen(false);
@@ -332,7 +332,7 @@ const Service = () => {
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
                       // if (active[1]) alert("서비스 준비중입니다.");
-                      fetch(HOST + "/")
+                      fetch(HOST + "/passport", { credentials: "include" })
                         .then((response) => {
                           if (!response.ok) {
                             throw new Error("400아니면 500에러남");
