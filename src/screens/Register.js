@@ -25,7 +25,16 @@ const Register = () => {
 
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPw, setCheckPw] = useState("");
+  const [pwEqual, setPwEqual] = useState(false);
   const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    if (inputs.password === checkPw) {
+      setPwEqual(true);
+    } else {
+      setPwEqual(false);
+    }
+  }, [checkPw, inputs.password]);
 
   const handleOnChange = (e) => {
     setInputs({
@@ -159,7 +168,7 @@ const Register = () => {
                         />
                         <div className="r-eyes"></div>
                       </div>
-                      <div className="register-password-wrap password__check-input">
+                      <div className={pwEqual ? "register-password-wrap password__check-input" : "register-password-wrap"}>
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
                       </div>
                     </div>
