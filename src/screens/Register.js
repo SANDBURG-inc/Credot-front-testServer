@@ -80,8 +80,13 @@ const Register = () => {
   }
 
   const handleOnClick = () => {
+    if (!checkEmail) {
+      alert("이메일 중복확인을 해주세요!");
+      return;
+    }
     if (inputs.password === "" || checkPw === "") {
       alert("비밀번호를 확인해주세요!");
+      return;
     } else if (inputs.password === checkPw) {
       const { name, email, phoneNum, password } = inputs;
 
