@@ -29,7 +29,7 @@ const Register = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (inputs.password === checkPw) {
+    if (inputs.password === checkPw && checkPw != "") {
       setPwEqual(true);
     } else {
       setPwEqual(false);
