@@ -14,8 +14,11 @@ const Finance = () => {
   var tmpFinanceList = [];
   const [length, setLength] = useState(0);
   const [financeList, setFinanceList] = useState([[], []]);
+  const [totalPrice, setTotalPrice] = useState("0");
+  const [boardFlag, setBoardFlag] = useState(true);
 
-  const tmpEmail = useSelector((state) => state.info.email);
+  const userName = useSelector((state) => state.info.name);
+  const userEmail = useSelector((state) => state.info.email);
   const render = (length, financeList) => {
     var push = [];
 
@@ -38,7 +41,7 @@ const Finance = () => {
   };
 
   useEffect(() => {
-    fetch(HOST + "/database/extractContract?email=" + tmpEmail, {})
+    fetch(HOST + "/database/extractContract?email=" + userEmail, {})
       .then((response) => {
         if (!response.ok) {
           console.log("fetch error");
@@ -47,12 +50,21 @@ const Finance = () => {
       })
       .then((userFin) => {
         setLength(userFin.length);
+        var price = 0;
         for (let i = 0; i < userFin.length; i++) {
           tmpFinanceList.push([i + 1, userFin[i].contractDate, userFin[i].deadline, userFin[i].ammount, userFin[i].commerce, userFin[i].status]);
+          price += Number(userFin[i].ammount);
         }
+        setTotalPrice(price);
         setFinanceList([...tmpFinanceList]);
       });
   }, []);
+
+  const AddComma = (num) => {
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return num.toString().replace(regexp, ",");
+  };
+
   return (
     <main className="container">
       <Helmet>
@@ -70,14 +82,14 @@ const Finance = () => {
                   <div className="m-head-profile">
                     <img className="m-head-profile-img" src="../assets/images/subpage-my_page/profile-img.svg" alt="" />
                     <div className="m-head-profile-div">
-                      <span className="m-head-name">별별 셀러님</span>
-                      <span className="m-head-email font-eng">credot123@test.com</span>
+                      <span className="m-head-name">{userName}</span>
+                      <span className="m-head-email font-eng">{userEmail}</span>
                     </div>
                   </div>
                   <div className="value-wrap">
                     <span className="value-wrap-span1">즉시 정산된 총 금액</span>
                     <div className="value">
-                      <strong className="strong font-eng">10,000,000</strong>
+                      <strong className="strong font-eng">{AddComma(totalPrice)}</strong>
                       <mark className="mark">원</mark>
                     </div>
                   </div>
@@ -106,8 +118,22 @@ const Finance = () => {
               <div className="m-board">
                 <span className="m-board-sub">문의 게시판</span>
                 <div className="m-board-category">
-                  <button className="m-board-category-btn active">답변완료</button>
-                  <button className="m-board-category-btn">미답변</button>
+                  <button
+                    className={"m-board-category-btn " + (boardFlag ? "active" : "")}
+                    onClick={() => {
+                      setBoardFlag(true);
+                    }}
+                  >
+                    답변완료
+                  </button>
+                  <button
+                    className={"m-board-category-btn " + (boardFlag ? "" : "active")}
+                    onClick={() => {
+                      setBoardFlag(false);
+                    }}
+                  >
+                    미답변
+                  </button>
                 </div>
                 <div className="m-board-table-wrap">
                   <table className="m-board-table-wrap-table">
