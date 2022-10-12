@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useCombobox } from "downshift";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { HOST } from "../redux/store";
@@ -7,16 +6,16 @@ import "../assets/css/register.css";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-  const [r, setR] = useState(false);
-  const [bank, setBank] = useState("초기값");
-  const [account, setAccount] = useState("초기값");
-  const [inputs, setInputs] = useState({
+  const [redirectionFlag, setRedirectionFlag] = useState(false);
+  const [userData, setUserData] = useState({
     name: "",
     email: "",
     phoneNum: "",
     password: "",
+    bank: "",
+    account: "",
   });
-  const [incInputs, setIncInputs] = useState({
+  const [incData, setIncData] = useState({
     corporateName: "",
     ceo: "",
     businessLoc: "",
@@ -26,37 +25,39 @@ const Register = () => {
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPw, setCheckPw] = useState("");
   const [pwEqual, setPwEqual] = useState(false);
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    if (inputs.password === checkPw && checkPw != "") {
-      setPwEqual(true);
-    } else {
-      setPwEqual(false);
-    }
-  }, [checkPw, inputs.password]);
-
-  const handleOnChange = (e) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleOnChange2 = (e) => {
-    setIncInputs({
-      ...incInputs,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleOnChangeCheckPw = (e) => {
-    setCheckPw(e.target.value);
-  };
-
-  const selectBoxChange = (e) => {
-    setBank(e.target.value);
-  };
+  const optionValue = [
+    "국민은행",
+    "신한은행",
+    "우리은행",
+    "하나은행",
+    "기업은행",
+    "대구은행",
+    "부산은행",
+    "경남은행",
+    "광주은행",
+    "전북은행",
+    "제주은행",
+    "농협은행",
+    "산업은행",
+    "수협은행",
+    "한국씨티",
+    "SC제일은행",
+    "HSBC",
+    "도이치뱅크",
+    "BOA",
+    "JP모간",
+    "중국공상",
+    "BNP파리바",
+    "우체국",
+    "케이뱅크",
+    "카카오뱅크",
+    "산림조합",
+    "신협",
+    "중국",
+    "중국건설",
+    "토스뱅크",
+  ];
 
   useEffect(() => {
     // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
@@ -75,41 +76,104 @@ const Register = () => {
     }
   }, []);
 
-  if (r === true) {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    if (userData.password === checkPw && checkPw !== "") {
+      setPwEqual(true);
+    } else {
+      setPwEqual(false);
+    }
+  }, [checkPw, userData.password]);
 
-  const handleOnClick = () => {
+  const handleOnChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleOnChange2 = (e) => {
+    setIncData({
+      ...incData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleOnChangeCheckPw = (e) => {
+    setCheckPw(e.target.value);
+  };
+
+  const handleRegister = () => {
     if (!checkEmail) {
       alert("이메일 중복확인을 해주세요!");
       return;
     }
-    if (inputs.password === "" || checkPw === "") {
+
+    if (userData.password === "" || checkPw === "") {
       alert("비밀번호를 확인해주세요!");
       return;
-    } else if (inputs.password === checkPw) {
-      const { name, email, phoneNum, password } = inputs;
+    } else if (userData.password === checkPw) {
+      for (const value in userData) {
+        if (userData[value] === "") {
+          alert("빈 칸을 모두 입력해주세요");
+          return;
+        }
+      }
+      for (const value in incData) {
+        if (incData[value] === "") {
+          alert("빈 칸을 모두 입력해주세요");
+          return;
+        }
+      }
 
-      // users 배열에 추가할 user 객체
-      const user = { name, email, phoneNum, password };
-
-      // spread 연산을 통해서 기존의 값을 복사하고, users State에 추가
-      setUsers([...users, user]);
-
+      fetch(
+        HOST +
+          "/database/register?email=" +
+          userData.email +
+          "&name=" +
+          userData.name +
+          "&pw=" +
+          userData.password +
+          "&phoneNum=" +
+          userData.phoneNum +
+          "&bank=" +
+          userData.bank +
+          "&account=" +
+          userData.account +
+          "&corporateName=" +
+          incData.corporateName +
+          "&ceo=" +
+          incData.ceo +
+          "&businessLoc=" +
+          incData.businessLoc +
+          "&corporateNum=" +
+          incData.corporateNum
+      )
+        .then((response) => response.text())
+        .then((response) => {
+          if (!response) {
+            console.log("fetch error");
+          } else if (response) {
+            setRedirectionFlag(true);
+            alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
+          }
+        });
       // 입력이 끝나고 inputs를 비워주는 역할
-      // setInputs({
-      //   name: "",
-      //   email: "",
-      //   phoneNum: "",
-      //   password: "",
-      //   bank: "",
-      //   account: "",
-      // });
+      setUserData({
+        name: "",
+        email: "",
+        phoneNum: "",
+        password: "",
+        bank: "",
+        account: "",
+      });
     } else {
       alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
     }
   };
 
+  if (redirectionFlag === true) {
+    return <Navigate to="/" />;
+  }
   return (
     <main className="container">
       <Helmet>
@@ -123,7 +187,7 @@ const Register = () => {
             </div>
             <div className="register-i-body">
               <div className="register-form-wrap">
-                <form action>
+                <form>
                   <div className="register-inner__sec">
                     <span className="register-sec__head">회원 정보</span>
                     <div className="register-input-wrap">
@@ -141,10 +205,10 @@ const Register = () => {
                           className="register-check-btn active"
                           type="button"
                           onClick={() => {
-                            if (!inputs.email.includes("@")) {
+                            if (!userData.email.includes("@")) {
                               alert("이메일 형식을 올바르게 입력해주세요!");
                             } else {
-                              fetch(HOST + "/database/checkEmail?email=" + inputs.email)
+                              fetch(HOST + "/database/checkEmail?email=" + userData.email)
                                 .then((response) => response.json())
                                 .then((response) => {
                                   if (response) {
@@ -201,50 +265,22 @@ const Register = () => {
                   </div>
                   <div className="inner__sec last-sec">
                     <span className="sec__head">정산받을 계좌</span>
-                    <select className="register-input-sol" name id required onChange={selectBoxChange}>
-                      <option value disabled selected>
+                    <select className="register-input-sol" defaultValue="default" name="bank" onChange={handleOnChange}>
+                      <option value="default" disabled>
                         정산받을 계좌의 은행을 선택해주세요
                       </option>
-                      <option value="기업은행">기업은행</option>
-                      <option value="우리은행">우리은행</option>
-                      <option value="신한은행">신한은행</option>
-                      <option value="하나은행">하나은행</option>
-                      <option value="대구은행">대구은행</option>
-                      <option value="부산은행">부산은행</option>
-                      <option value="경남은행">경남은행</option>
-                      <option value="광주은행">광주은행</option>
-                      <option value="전북은행">전북은행</option>
-                      <option value="제주은행">제주은행</option>
-                      <option value="국민은행">국민은행</option>
-                      <option value="농협은행">농협은행</option>
-                      <option value="산업은행">산업은행</option>
-                      <option value="수협은행">수협은행</option>
-                      <option value="한국씨티뱅크">한국씨티뱅크</option>
-                      <option value="SC제일은행">SC제일은행</option>
-                      <option value="HSBC">HSBC</option>
-                      <option value="도이치뱅크">도이치뱅크</option>
-                      <option value="BOA">BOA</option>
-                      <option value="JP모간">JP모간</option>
-                      <option value="중국공상">중국공상</option>
-                      <option value="BNP파라바">BNP파라바</option>
-                      <option value="우체국">우체국</option>
-                      <option value="케이뱅크">케이뱅크</option>
-                      <option value="카카오뱅크">카카오뱅크</option>
-                      <option value="산림조합">산림조합</option>
-                      <option value="신협은행">신협은행</option>
-                      <option value="중국은행">중국은행</option>
-                      <option value="중국건설은행">중국건설은행</option>
-                      <option value="토스뱅크">토스뱅크</option>
-                      <option value="SB저축은행">SB저축은행</option>
+                      {(optionValue || []).map((options, idx) => (
+                        <option key={idx} value={options}>
+                          {options}
+                        </option>
+                      ))}
                     </select>
                     <input
                       className="register-input-sol"
                       type="text"
                       placeholder="정산받을 계좌번호를 입력해주세요."
                       name="account"
-                      onChange={(e) => {
-                        setAccount(e.target.value);
-                      }}
+                      onChange={handleOnChange}
                     />
                   </div>
                   {/* login-btn 버튼에 active 클래스 추가시 로그인 버튼 활성화 */}
@@ -252,48 +288,7 @@ const Register = () => {
                     className="login-btn"
                     type="button"
                     onClick={() => {
-                      handleOnClick();
-                      fetch(
-                        HOST +
-                          "/database/register?email=" +
-                          users[users.length - 1].email +
-                          "&name=" +
-                          users[users.length - 1].name +
-                          "&pw=" +
-                          users[users.length - 1].password +
-                          "&phoneNum=" +
-                          users[users.length - 1].phoneNum +
-                          "&bank=" +
-                          bank +
-                          "&account=" +
-                          account +
-                          "&corporateName=" +
-                          incInputs.corporateName +
-                          "&ceo=" +
-                          incInputs.ceo +
-                          "&businessLoc=" +
-                          incInputs.businessLoc +
-                          "&corporateNum=" +
-                          incInputs.corporateNum
-                      )
-                        .then((response) => response.text())
-                        .then((response) => {
-                          if (!response) {
-                            console.log("fetch error");
-                          } else if (response) {
-                            setR(true);
-                            alert(users[users.length - 1].name + "님 환영합니다.");
-                          }
-                        });
-                      // 입력이 끝나고 inputs를 비워주는 역할
-                      setInputs({
-                        name: "",
-                        email: "",
-                        phoneNum: "",
-                        password: "",
-                        bank: "",
-                        account: "",
-                      });
+                      handleRegister();
                     }}
                   >
                     회원 가입하기
@@ -310,44 +305,5 @@ const Register = () => {
     </main>
   );
 };
-
-// const Combobox = (props) => {
-//   const [items] = useState(bankList);
-//   const [selectedItem, setSelectedItem] = useState("");
-
-//   useEffect(() => {
-//     props.setBank(selectedItem);
-//   }, [props, selectedItem]);
-
-//   const getFilter = (inputValue) => {
-//     return function Filter(bankList) {
-//       return !inputValue || bankList.toUpperCase().includes(inputValue);
-//     };
-//   };
-
-//   const { isOpen, highlightedIndex, getComboboxProps, getInputProps, getToggleButtonProps, getMenuProps, getItemProps } = useCombobox({
-//     onInputValueChange({ inputValue }) {
-//       setSelectedItem(...bankList.filter(getFilter(inputValue)));
-//     },
-//     items,
-//   });
-
-//   return (
-//     <>
-//       <div {...getComboboxProps()}>
-//         <BankInput readOnly name="bank" placeholder="은행" {...getInputProps()} />
-//         <Btn {...getToggleButtonProps()}>{isOpen ? <>&#8593;</> : <>&#8595;</>}</Btn>
-//       </div>
-//       <ul {...getMenuProps()}>
-//         {isOpen &&
-//           items.map((item, index) => (
-//             <li {...getItemProps({ item, index })} key={item} style={{ background: index === highlightedIndex && "lightgray" }}>
-//               {item}
-//             </li>
-//           ))}
-//       </ul>
-//     </>
-//   );
-// };
 
 export default Register;
