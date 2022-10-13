@@ -126,7 +126,7 @@ const Login = () => {
                     <div className="input-wrap">
                       <div className="input-input input-id">
                         <span className="font-eng">EMAIL</span>
-                        <input name="email" type="text" placeholder="이메일을 입력해주세요" onChange={handleOnChange} />
+                        <input className="input-email" name="email" type="text" placeholder="이메일을 입력해주세요" onChange={handleOnChange} />
                       </div>
                       <div className="input-input input-pw">
                         <span className="font-eng">PW</span>
