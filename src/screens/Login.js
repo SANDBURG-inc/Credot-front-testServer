@@ -42,6 +42,12 @@ const Login = () => {
     setUsers([...users, user]);
   };
 
+  const onKeyPress = (e) => {
+    if (e.key == "Enter") {
+      login();
+    }
+  };
+
   const login = () => {
     if (!inputs.email.includes("@")) {
       alert("이메일 형식을 올바르게 입력해주세요!");
@@ -137,6 +143,7 @@ const Login = () => {
                             type="password"
                             placeholder="비밀번호를 입력해주세요"
                             onChange={handleOnChange}
+                            onKeyPress={onKeyPress}
                           />
                           <div className="eye"></div>
                         </div>
