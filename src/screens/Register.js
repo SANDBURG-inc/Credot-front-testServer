@@ -191,7 +191,7 @@ const Register = () => {
                   <div className="register-inner__sec">
                     <span className="register-sec__head">회원 정보</span>
                     <div className="register-input-wrap">
-                      <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
+                      <input className="register-input-email" type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
                       <div className="register-email-input-wrap">
                         <input
                           className="register-input-email"
@@ -245,8 +245,14 @@ const Register = () => {
                   <div className="register-inner__sec ">
                     <span className="register-sec__head">사업자 정보</span>
                     <div className="register-input-wrap">
-                      <input type="text" placeholder="법인명을 입력해주세요" name="corporateName" onChange={handleOnChange2} />
-                      <input type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
+                      <input
+                        className="register-input"
+                        type="text"
+                        placeholder="법인명을 입력해주세요"
+                        name="corporateName"
+                        onChange={handleOnChange2}
+                      />
+                      <input className="register-input" type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
                     </div>
                     <input
                       className="register-input-sol"

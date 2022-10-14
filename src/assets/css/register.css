@@ -129,6 +129,10 @@ option[value=""][disabled] {
   border-bottom: none !important;
 }
 
+.register-input-sol:focus {
+  border: 1px solid rgb(255, 136, 0);
+}
+
 .register-input-sol {
   border-radius: 8px;
   border: solid 1px #dedede;
@@ -140,9 +144,18 @@ option[value=""][disabled] {
   margin-top: 0;
 }
 
+.register-input-email:focus {
+  border: 1px solid rgb(255, 136, 0);
+}
+
 .register-email-input-wrap {
   display: flex;
   border-bottom: none !important;
+}
+
+.register-input-email:focus {
+  border-radius: 7px 7px 7px 7px;
+  border: 1px solid rgb(255, 136, 0);
 }
 
 .register-input-email {
@@ -167,6 +180,11 @@ option[value=""][disabled] {
   width: 100% !important;
 }
 
+.input-password:focus {
+  border: 1px solid rgb(255, 136, 0);
+  border-radius: 7px 7px 7px 7px;
+}
+
 .input-input {
   display: flex;
   align-items: center;
@@ -175,6 +193,11 @@ option[value=""][disabled] {
 .register-input-wrap input:last-child,
 .register-input-wrap div:last-child {
   border-bottom: 1px solid #f4f4f4;
+}
+
+.register-input:focus {
+  border: 1px solid rgb(255, 136, 0);
+  border-radius: 7px;
 }
 
 .login-btn {
@@ -237,6 +260,11 @@ option[value=""][disabled] {
   height: 20px;
   background-image: url(../images/icon/input-access.svg);
   background-size: contain;
+}
+
+.password__check-input:focus {
+  border: 1px solid rgb(255, 136, 0);
+  border-radius: 7px 7px 7px 7px;
 }
 
 @media (max-width: 700px) {
