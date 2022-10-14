@@ -131,11 +131,15 @@ const Login = () => {
                     <span className="sec__head font-eng">Credot에 로그인</span>
                     <div className="input-wrap">
                       <div className="input-input input-id">
-                        <span className="font-eng">EMAIL</span>
+                        <span className="font-eng">
+                          <img src={require("../assets/images/logo/email_logo.png")} />
+                        </span>
                         <input className="input-email" name="email" type="text" placeholder="이메일을 입력해주세요" onChange={handleOnChange} />
                       </div>
                       <div className="input-input input-pw">
-                        <span className="font-eng">PW</span>
+                        <span className="font-eng">
+                          <img src={require("../assets/images/logo/pw_logo.png")} />
+                        </span>
                         <div className="password-wrap">
                           <input
                             name="password"
