@@ -92,6 +92,7 @@
 
 .input-email:focus {
   border: 1px solid rgb(255, 136, 0);
+  border-radius: 0 7px 0px 0px;
 }
 
 .input-password {
@@ -100,6 +101,7 @@
 
 .input-password:focus {
   border: 1px solid rgb(255, 136, 0);
+  border-radius: 0 0 7px 0px;
 }
 
 .eye {
