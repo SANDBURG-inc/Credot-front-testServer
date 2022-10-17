@@ -122,7 +122,7 @@ const Login = () => {
         <section className="section-wrap introduce-wrap">
           <div className="inner">
             <div className="i-head">
-              <span className="head-title font-eng">LOGIN</span>
+              <span className="head-title font-eng">로그인</span>
             </div>
             <div className="i-body">
               <div className="form-wrap">
