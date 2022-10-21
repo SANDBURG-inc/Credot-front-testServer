@@ -1,23 +1,10 @@
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
-const ModalWrapper = styled.div`
-  box-sizing: border-box;
-  display: "block";
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  overflow: auto;
-  outline: 0;
-`;
-
 const ModalOverlay = styled.div`
   box-sizing: border-box;
   justify-content: center;
-  display: block;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -29,12 +16,15 @@ const ModalOverlay = styled.div`
 
 const Modal = styled.div`
   display: block;
-  position: fixed;
-  top: 22%;
-  left: 35%;
+  position: relative;
+  margin: auto;
   width: 500px;
   height: 400px;
   background-color: white;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    margin-top: 0px;
+  }
 `;
 
 const LocationModal = (props) => {
@@ -63,13 +53,11 @@ const LocationModal = (props) => {
   return (
     <>
       {props.open ? (
-        <ModalWrapper onClick={clickOutside}>
-          <ModalOverlay>
-            <Modal>
-              <DaumPostcode autoClose onComplete={complete}></DaumPostcode>
-            </Modal>
-          </ModalOverlay>
-        </ModalWrapper>
+        <ModalOverlay onClick={clickOutside}>
+          <Modal>
+            <DaumPostcode autoClose onComplete={complete}></DaumPostcode>
+          </Modal>
+        </ModalOverlay>
       ) : null}
     </>
   );
