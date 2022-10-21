@@ -12,8 +12,8 @@ import storage from "redux-persist/lib/storage";
 //var HOST = "http://13.125.82.93:9000";
 // var HOST = "http://13.125.82.93";
 // var HOST = "http://localhost:9000";
-var HOST = "http://localhost:9000";
-//var HOST = "https://api.credot.kr";
+//var HOST = "http://localhost:9000";
+var HOST = "https://api.credot.kr";
 
 const isLogin = createSlice({
   name: "isLogin",
