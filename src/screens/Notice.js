@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/notice-notice.css";
 import { HOST } from "../redux/store";
 import { Link } from "react-router-dom";
@@ -6,7 +6,6 @@ import { Helmet } from "react-helmet";
 
 const Notice = () => {
   const [data, setData] = useState([]);
-  const dataNo = useRef(0);
 
   const getData = async () => {
     const res = await fetch(
@@ -19,15 +18,6 @@ const Notice = () => {
     for (var i = 0; i < res.data.length; i++) {
       console.log(res.data[i].attributes);
     }
-    // const initData = res.slice(0).map((item) => {
-    //   return {
-    //     title: item.title,
-    //     content: item.contents,
-    //     date: item.date,
-    //     no: dataNo.current++,
-    //   };
-    // });
-    // setData(initData);
   };
 
   useEffect(() => {
