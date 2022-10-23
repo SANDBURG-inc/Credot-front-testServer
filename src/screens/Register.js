@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { HOST } from "../redux/store";
 import "../assets/css/register.css";
 import { Helmet } from "react-helmet";
+import LocationModal from "../components/LocationModal";
 
 const Register = () => {
   const [redirectionFlag, setRedirectionFlag] = useState(false);
+
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -15,12 +17,22 @@ const Register = () => {
     bank: "",
     account: "",
   });
+
   const [incData, setIncData] = useState({
     corporateName: "",
     ceo: "",
-    businessLoc: "",
     corporateNum: "",
   });
+
+  const [LocModalOpen, setLocModalOpen] = useState(false);
+  const [Loc1, setLoc1] = useState("");
+  const [Loc2, setLoc2] = useState("");
+  const setLocFunc = (data) => {
+    setLoc1(data);
+  };
+  const setCloseModal = () => {
+    setLocModalOpen(false);
+  };
 
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPw, setCheckPw] = useState("");
@@ -98,6 +110,16 @@ const Register = () => {
     });
   };
 
+  const handleOnChangeLoc1 = (e) => {
+    console.log(e.target.value);
+    setLoc1(e.target.value);
+  };
+
+  const handleOnChangeLoc2 = (e) => {
+    console.log(e.target.value);
+    setLoc2(e.target.value);
+  };
+
   const handleOnChangeCheckPw = (e) => {
     setCheckPw(e.target.value);
   };
@@ -144,7 +166,7 @@ const Register = () => {
           "&ceo=" +
           incData.ceo +
           "&businessLoc=" +
-          incData.businessLoc +
+          (Loc1.trim() + " " + Loc2.trim()) +
           "&corporateNum=" +
           incData.corporateNum
       )
@@ -254,20 +276,59 @@ const Register = () => {
                       />
                       <input className="register-input" type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
                     </div>
+                    <div className="register-business-input-wrap">
+                      <input
+                        className="register-input-business"
+                        type="text"
+                        placeholder="사업장 소재지를 입력해주세요."
+                        name="businessLoc"
+                        onChange={handleOnChangeLoc1}
+                        value={Loc1}
+                      />
+                      <button
+                        className="register-check-businessbtn active"
+                        type="button"
+                        onClick={() => {
+                          setLocModalOpen(true);
+                        }}
+                      >
+                        주소검색
+                      </button>
+                    </div>
                     <input
                       className="register-input-sol"
                       type="text"
-                      placeholder="사업장 소재지를 입력해주세요."
+                      placeholder="상세주소를 입력해주세요."
                       name="businessLoc"
-                      onChange={handleOnChange2}
+                      onChange={handleOnChangeLoc2}
                     />
-                    <input
-                      className="register-input-sol"
-                      type="text"
-                      placeholder="사업자 등록번호를 입력해주세요."
-                      name="corporateNum"
-                      onChange={handleOnChange2}
-                    />
+                    <LocationModal open={LocModalOpen} setData={setLocFunc} close={setCloseModal}></LocationModal>
+                    <div className="register-business-input-wrap">
+                      <input
+                        className="register-input-business"
+                        type="text"
+                        placeholder="사업자 등록번호를 입력해주세요."
+                        name="corporateNum"
+                        onChange={handleOnChange2}
+                      />
+                      <button
+                        className="register-check-businessbtn active"
+                        type="button"
+                        onClick={() => {
+                          if (!incData.corporateNum.includes("-")) {
+                            alert("형식을 올바르게 입력해주세요!");
+                          } else {
+                            fetch(HOST + "/corpAuth?code=" + incData.corporateNum)
+                              .then((response) => response.text())
+                              .then((response) => {
+                                alert(response);
+                              });
+                          }
+                        }}
+                      >
+                        인증
+                      </button>
+                    </div>
                   </div>
                   <div className="inner__sec last-sec">
                     <span className="sec__head">정산받을 계좌</span>

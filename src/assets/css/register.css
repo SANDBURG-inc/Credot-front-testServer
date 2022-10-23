@@ -140,6 +140,40 @@ option[value=""][disabled] {
   margin-top: 14px;
 }
 
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgb(255, 136, 0);
+  text-align: left;
+}
+
+.register-business-input-wrap {
+  display: flex;
+  margin-top: 14px;
+  border-radius: 8px;
+  border: solid 1px #dedede;
+}
+
+.register-input-business {
+  width: calc(100% - 105px) !important;
+  border-bottom: none !important;
+}
+
+.register-check-businessbtn {
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+  width: 105px;
+  background-color: #d6d6d6;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.register-check-businessbtn.active {
+  background-color: #505050;
+  color: #fff;
+}
+
 .register-input-sol:nth-child(2) {
   margin-top: 0;
 }
