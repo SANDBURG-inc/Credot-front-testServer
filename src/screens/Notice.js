@@ -5,32 +5,41 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const Notice = () => {
-  const [length, setLength] = useState(0);
   const [data, setData] = useState([]);
   const dataNo = useRef(0);
 
   const getData = async () => {
     const res = await fetch(
-      HOST + "/database/notice"
+      // HOST + "/database/notice"
+      "http://3.34.155.60:1337/api/notices/"
       // "http://localhost:9000/database/notice"
     ).then((res) => res.json());
-
-    const initData = res.slice(0).map((item) => {
-      return {
-        title: item.title,
-        content: item.contents,
-        date: item.date,
-        no: dataNo.current++,
-      };
-    });
-    setData(initData);
+    console.log(res.data);
+    setData(res.data);
+    for (var i = 0; i < res.data.length; i++) {
+      console.log(res.data[i].attributes);
+    }
+    // const initData = res.slice(0).map((item) => {
+    //   return {
+    //     title: item.title,
+    //     content: item.contents,
+    //     date: item.date,
+    //     no: dataNo.current++,
+    //   };
+    // });
+    // setData(initData);
   };
 
-  const render = (length, data) => {
+  useEffect(() => {
+    console.log("현재 데이터 출력합니다.");
+    console.log(data);
+  }, [data]);
+
+  const render = (data) => {
     var push = [];
 
-    for (var i = 0; i < length; i++) {
-      push.push(renderInfo(data[i].title, data[i].content, data[i].date));
+    for (var i = 0; i < data.length; i++) {
+      push.push(renderInfo(data[i].attributes.title, data[i].attributes.contents, data[i].attributes.date));
     }
     return push;
   };
@@ -55,10 +64,6 @@ const Notice = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    setLength(data.length);
-  }, [data]);
 
   useEffect(() => {
     getData();
@@ -105,7 +110,7 @@ const Notice = () => {
             </div>
             <div className="n-body">
               <div className="n-table-wrap">
-                {render(length, data)}
+                {render(data)}
                 {/* <div className="n-table-box">
                   <div className="n-table-board">
                     <span className="n-table-board-span1">정산금 지급 문자 수신 후 정산금이 들어오지 않는 오류에 대해 말씀드립니다.</span>
