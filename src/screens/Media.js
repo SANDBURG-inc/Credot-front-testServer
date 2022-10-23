@@ -5,39 +5,38 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const Media = () => {
-  const [length, setLength] = useState(0);
   const [data, setData] = useState([]);
-  const dataNo = useRef(0);
-  // const [img, setImg] = useState("");
 
   const getData = async () => {
     const res = await fetch(
-      HOST + "/database/media"
-      // "http://localhost:9000/database/media"
+      // HOST + "/database/notice"
+      "http://3.34.155.60:1337/api/media/"
+      // "http://localhost:9000/database/notice"
     ).then((res) => res.json());
-
-    const initData = res.slice(0).map((item) => {
-      return {
-        title: item.title,
-        img: item.img,
-        content: item.contents,
-        date: item.date,
-        no: dataNo.current++,
-      };
-    });
-    setData(initData);
+    console.log(res.data);
+    setData(res.data);
+    for (var i = 0; i < res.data.length; i++) {
+      console.log(res.data[i].attributes);
+    }
   };
-  const render = (length, data) => {
+
+  useEffect(() => {
+    console.log("현재 데이터 출력합니다.");
+    console.log(data);
+  }, [data]);
+
+  const render = (data) => {
     var push = [];
-    for (var i = 0; i < length; i++) {
-      push.push(renderInfo(data[i].no, data[i].title, data[i].img, data[i].content, data[i].date));
+
+    for (var i = 0; i < data.length; i++) {
+      push.push(renderInfo(data[i].attributes.title, data[i].attributes.img, data[i].attributes.contents, data[i].attributes.date));
     }
     return push;
   };
 
-  const renderInfo = (no, title, img, contents, date) => {
+  const renderInfo = (title, img, contents, date) => {
     return (
-      <div key={no} className="news-box">
+      <div key={title} className="news-box">
         <img className="box-l" src={img} alt="" />
         {/* <img className="box-l" src="../assets/images/subpage-notice/news1.png" alt="" /> */}
         <div className="box-r">
@@ -55,15 +54,9 @@ const Media = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    setLength(data.length);
-  }, [data]);
-
   useEffect(() => {
     getData();
   }, []); // 빈 배열을 조건으로 줘야 Mount 시점에 적용.
-
   useEffect(() => {
     let tableBox = document.querySelectorAll(".box-r-top");
     for (let i = 0; i < tableBox.length; i++) {
@@ -105,7 +98,7 @@ const Media = () => {
             </div>
             <div className="n-body">
               <div className="n-table-wrap">
-                {render(length, data)}
+                {render(data)}
                 {/* <div className="news-box">
                   <img className="box-l" src="../assets/images/subpage-notice/news1.png" alt="" />
                   <div className="box-r">
