@@ -66,6 +66,8 @@ const Login = () => {
           console.log("Well done!");
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
+          dispatch(updateUserName(res.data.user.username));
+          dispatch(updateUserEmail(res.data.user.email));
           alert("환영합니다!");
           dispatch(update());
         })
