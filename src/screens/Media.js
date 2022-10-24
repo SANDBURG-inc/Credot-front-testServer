@@ -10,7 +10,7 @@ const Media = () => {
   const getData = async () => {
     const res = await fetch(
       // HOST + "/database/notice"
-      "https://3.34.155.60:1337/api/media/"
+      "https://cms.credot.kr/api/media"
       // "http://localhost:9000/database/notice"
     ).then((res) => res.json());
     console.log(res.data);
