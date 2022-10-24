@@ -10,7 +10,7 @@ const Media = () => {
   const getData = async () => {
     const res = await fetch(
       // HOST + "/database/notice"
-      "http://3.34.155.60:1337/api/media/"
+      "https://3.34.155.60:1337/api/media/"
       // "http://localhost:9000/database/notice"
     ).then((res) => res.json());
     console.log(res.data);
