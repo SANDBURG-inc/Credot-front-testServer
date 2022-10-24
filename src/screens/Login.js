@@ -16,6 +16,7 @@ import {
 } from "./../redux/store.js";
 import "../assets/css/login.css";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const Login = () => {
   const a = useSelector((state) => state.login);
@@ -55,40 +56,60 @@ const Login = () => {
       alert("비밀번호를 입력해주세요!");
     } else {
       handleOnClick();
-      fetch(HOST + "/passport/login?email=" + inputs.email + "&pw=" + inputs.password, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        credentials: "include",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            console.log("fetch error");
-          }
-          return response.json();
+      axios
+        .post("https://cms.credot.kr/api/auth/local", {
+          identifier: inputs.email,
+          password: inputs.password,
         })
-        .then((response) => {
-          if (!response) {
-            alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
-          } else {
-            //userInfo
-            dispatch(updateUserName(response.name));
-            dispatch(updateUserEmail(response.email));
-            dispatch(updateUserPhoneNum(response.phoneNum));
-            dispatch(updateUserBank(response.bank));
-            dispatch(updateUserAccount(response.account));
-            // dispatch(updatePassword(response.pw))
-
-            //incInfo
-            dispatch(updateCorporateName(response.corporateName));
-            dispatch(updateCeo(response.ceo));
-            dispatch(updateBusinessLoc(response.businessLoc));
-            dispatch(updateCorporateNum(response.corporateNum));
-
-            dispatch(update());
-          }
+        .then((res) => {
+          // Handle success.
+          console.log("Well done!");
+          console.log("User profile", res.data.user);
+          console.log("User token", res.data.jwt);
+          dispatch(updateUserName(res.data.user.username));
+          dispatch(updateUserEmail(res.data.user.email));
+          alert("환영합니다!");
+          dispatch(update());
+        })
+        .catch((error) => {
+          // Handle error.
+          console.log("An error occurred:", error.response);
+          alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
         });
+      // fetch(HOST + "/passport/login?email=" + inputs.email + "&pw=" + inputs.password, {
+      //   method: "post",
+      //   headers: {
+      //     "Content-Type": "application/json; charset=utf-8",
+      //   },
+      //   credentials: "include",
+      // })
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       console.log("fetch error");
+      //     }
+      //     return response.json();
+      //   })
+      //   .then((response) => {
+      //     if (!response) {
+      //       alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
+      //     } else {
+      //       //userInfo
+      //       dispatch(updateUserName(response.name));
+      //       dispatch(updateUserEmail(response.email));
+      //       dispatch(updateUserPhoneNum(response.phoneNum));
+      //       dispatch(updateUserBank(response.bank));
+      //       dispatch(updateUserAccount(response.account));
+      //       // dispatch(updatePassword(response.pw))
+
+      //       //incInfo
+      //       dispatch(updateCorporateName(response.corporateName));
+      //       dispatch(updateCeo(response.ceo));
+      //       dispatch(updateBusinessLoc(response.businessLoc));
+      //       dispatch(updateCorporateNum(response.corporateNum));
+
+      //       dispatch(update());
+      //     }
+      //   });
     }
   };
 
