@@ -5,50 +5,45 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const Faq = () => {
-  const [length, setLength] = useState(0);
   const [data, setData] = useState([]);
-  const dataNo = useRef(0);
 
   const getData = async () => {
-    const res = await fetch(
-      HOST + "/database/faq"
-      // "http://localhost:9000/database/faq"
-    ).then((res) => res.json());
-
-    const initData = res.slice(0).map((item) => {
-      return {
-        title: item.title,
-        content: item.contents,
-        no: dataNo.current++,
-      };
-    });
-    setData(initData);
+    const res = await fetch("https://cms.credot.kr/api/faqs").then((res) => res.json());
+    console.log(res.data);
+    setData(res.data);
+    for (var i = 0; i < res.data.length; i++) {
+      console.log(res.data[i].attributes);
+    }
   };
 
-  const render = (length, data) => {
+  useEffect(() => {
+    console.log("현재 데이터 출력합니다.");
+    console.log(data);
+  }, [data]);
+
+  const render = (data) => {
     var push = [];
-    for (var i = 0; i < length; i++) {
-      push.push(renderInfo(data[i].no, data[i].title, data[i].content));
+
+    for (var i = 0; i < data.length; i++) {
+      push.push(renderInfo(data[i].attributes.title, data[i].attributes.contents, data[i].attributes.date));
     }
     return push;
   };
 
-  const renderInfo = (no, title, contents) => {
+  const renderInfo = (title, contents, date) => {
     return (
-      <div key={no} className="n-table-box">
+      <div key={title} className="n-table-box">
         <div className="n-table-board">
-          <span className="n-table-board-span1">
-            <img className="n-table-board-img" src="../assets/images/subpage-customer/c-q.svg" alt="" />
-            {title}
-          </span>
+          <span className="n-table-board-span1">{title}</span>
           <div className="board-date">
+            <span className="board-date-span1 font-eng">{date}</span>
             <button className="board-date-arrow-wrap">
-              <img src="../assets/images/subpage-notice/n-table-arrow.svg" alt="" />
+              <img className="board-date-arrow" src="../assets/images/subpage-notice/n-table-arrow.svg" alt="" />
             </button>
           </div>
         </div>
         <div className="n-board-lead">
-          <span className="n-board-lead-span1">
+          <span className="n-board-lead-span">
             <div dangerouslySetInnerHTML={{ __html: contents }}></div>
           </span>
         </div>
@@ -57,13 +52,8 @@ const Faq = () => {
   };
 
   useEffect(() => {
-    setLength(data.length);
-  }, [data]);
-
-  useEffect(() => {
     getData();
   }, []); // 빈 배열을 조건으로 줘야 Mount 시점에 적용.
-
   useEffect(() => {
     let tableBox = document.querySelectorAll(".n-table-board");
     for (let i = 0; i < tableBox.length; i++) {
@@ -79,9 +69,9 @@ const Faq = () => {
         }
       });
     }
-    document.querySelector(".header").classList.remove("this-page-n");
     document.querySelector(".header").classList.remove("this-page-s__i");
-    document.querySelector(".header").classList.add("this-page-c");
+    document.querySelector(".header").classList.remove("this-page-c");
+    document.querySelector(".header").classList.add("this-page-n");
     return () => {};
   });
 
@@ -106,7 +96,7 @@ const Faq = () => {
             </div>
             <div className="n-body">
               <div className="n-table-wrap">
-                {render(length, data)}
+                {render(data)}
                 {/* <div className="n-table-box">
                   <div className="n-table-board">
                     <span className="n-table-board-span1">
