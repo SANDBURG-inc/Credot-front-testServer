@@ -5,6 +5,7 @@ import { HOST } from "../redux/store";
 import "../assets/css/register.css";
 import { Helmet } from "react-helmet";
 import LocationModal from "../components/LocationModal";
+import axios from "axios";
 
 const Register = () => {
   const [redirectionFlag, setRedirectionFlag] = useState(false);
@@ -147,38 +148,64 @@ const Register = () => {
         }
       }
 
-      fetch(
-        HOST +
-          "/database/register?email=" +
-          userData.email +
-          "&name=" +
-          userData.name +
-          "&pw=" +
-          userData.password +
-          "&phoneNum=" +
-          userData.phoneNum +
-          "&bank=" +
-          userData.bank +
-          "&account=" +
-          userData.account +
-          "&corporateName=" +
-          incData.corporateName +
-          "&ceo=" +
-          incData.ceo +
-          "&businessLoc=" +
-          (Loc1.trim() + " " + Loc2.trim()) +
-          "&corporateNum=" +
-          incData.corporateNum
-      )
-        .then((response) => response.text())
-        .then((response) => {
-          if (!response) {
-            console.log("fetch error");
-          } else if (response) {
-            setRedirectionFlag(true);
-            alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
-          }
+      axios
+        .post("https://cms.credot.kr/api/auth/local/register", {
+          username: userData.name,
+          email: userData.email,
+          password: userData.password,
+          phoneNum: userData.phoneNum,
+          bank: userData.bank,
+          account: userData.account,
+          corporateName: incData.corporateName,
+          ceo: incData.ceo,
+          businessLoc: Loc1.trim() + " " + Loc2.trim(),
+          corporateNum: incData.corporateNum,
+        })
+        .then((res) => {
+          // Handle success.
+          console.log("Well done!");
+          console.log("User profile", res.data.user);
+          console.log("User token", res.data.jwt);
+          setRedirectionFlag(true);
+          alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
+        })
+        .catch((error) => {
+          // Handle error.
+          console.log("An error occurred:", error.response);
         });
+
+      // fetch(
+      //   HOST +
+      //     "/database/register?email=" +
+      //     userData.email +
+      //     "&name=" +
+      //     userData.name +
+      //     "&pw=" +
+      //     userData.password +
+      //     "&phoneNum=" +
+      //     userData.phoneNum +
+      //     "&bank=" +
+      //     userData.bank +
+      //     "&account=" +
+      //     userData.account +
+      //     "&corporateName=" +
+      //     incData.corporateName +
+      //     "&ceo=" +
+      //     incData.ceo +
+      //     "&businessLoc=" +
+      //     (Loc1.trim() + " " + Loc2.trim()) +
+      //     "&corporateNum=" +
+      //     incData.corporateNum
+      // )
+      // .then((response) => response.text())
+      // .then((response) => {
+      //   if (!response) {
+      //     console.log("fetch error");
+      //   } else if (response) {
+      //     setRedirectionFlag(true);
+      //     alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
+      //   }
+      // });
       // 입력이 끝나고 inputs를 비워주는 역할
       setUserData({
         name: "",
