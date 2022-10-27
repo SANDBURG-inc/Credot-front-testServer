@@ -257,10 +257,10 @@ const Register = () => {
                             if (!userData.email.includes("@")) {
                               alert("이메일 형식을 올바르게 입력해주세요!");
                             } else {
-                              fetch(HOST + "/database/checkEmail?email=" + userData.email)
-                                .then((response) => response.json())
-                                .then((response) => {
-                                  if (response) {
+                              fetch("https://cms.credot.kr/api/email-valid/" + userData.email)
+                                .then((res) => res.json())
+                                .then((res) => {
+                                  if (res.isDuplicate) {
                                     alert("중복되는 이메일이 있습니다.");
                                   } else {
                                     setCheckEmail(true);
