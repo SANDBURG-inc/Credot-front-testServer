@@ -66,8 +66,21 @@ const Login = () => {
           console.log("Well done!");
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
+
+          // userInfo
           dispatch(updateUserName(res.data.user.username));
           dispatch(updateUserEmail(res.data.user.email));
+          dispatch(updateUserPhoneNum(res.data.user.phoneNum));
+          dispatch(updateUserBank(res.data.user.bank));
+          dispatch(updateUserAccount(res.data.user.account));
+          // dispatch(updatePassword(res.data.user.password));
+
+          //incInfo
+          dispatch(updateCorporateName(res.data.user.corporateName));
+          dispatch(updateCeo(res.data.user.ceo));
+          dispatch(updateBusinessLoc(res.data.user.businessLoc));
+          dispatch(updateCorporateNum(res.data.user.corporateNum));
+
           alert("환영합니다!");
           dispatch(update());
         })
@@ -76,40 +89,6 @@ const Login = () => {
           console.log("An error occurred:", error.response);
           alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
         });
-      // fetch(HOST + "/passport/login?email=" + inputs.email + "&pw=" + inputs.password, {
-      //   method: "post",
-      //   headers: {
-      //     "Content-Type": "application/json; charset=utf-8",
-      //   },
-      //   credentials: "include",
-      // })
-      //   .then((response) => {
-      //     if (!response.ok) {
-      //       console.log("fetch error");
-      //     }
-      //     return response.json();
-      //   })
-      //   .then((response) => {
-      //     if (!response) {
-      //       alert("계정이 존재하지 않거나 패스워드가 올바르지 않습니다!");
-      //     } else {
-      //       //userInfo
-      //       dispatch(updateUserName(response.name));
-      //       dispatch(updateUserEmail(response.email));
-      //       dispatch(updateUserPhoneNum(response.phoneNum));
-      //       dispatch(updateUserBank(response.bank));
-      //       dispatch(updateUserAccount(response.account));
-      //       // dispatch(updatePassword(response.pw))
-
-      //       //incInfo
-      //       dispatch(updateCorporateName(response.corporateName));
-      //       dispatch(updateCeo(response.ceo));
-      //       dispatch(updateBusinessLoc(response.businessLoc));
-      //       dispatch(updateCorporateNum(response.corporateNum));
-
-      //       dispatch(update());
-      //     }
-      //   });
     }
   };
 

@@ -8,11 +8,7 @@ const Media = () => {
   const [data, setData] = useState([]);
 
   const getData = async () => {
-    const res = await fetch(
-      // HOST + "/database/notice"
-      "https://cms.credot.kr/api/media"
-      // "http://localhost:9000/database/notice"
-    ).then((res) => res.json());
+    const res = await fetch("https://cms.credot.kr/api/media").then((res) => res.json());
     console.log(res.data);
     setData(res.data);
     for (var i = 0; i < res.data.length; i++) {
