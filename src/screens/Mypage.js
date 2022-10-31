@@ -95,8 +95,8 @@ const Mypage = () => {
                   <button
                     className="logout-btn"
                     onClick={async () => {
-                      await fetch(HOST + "/passport/logout", { credentials: "include" });
-                      dispatch(update());
+                      //await fetch(HOST + "/passport/logout", { credentials: "include" });
+                      await dispatch(update());
                       localStorage.clear();
                       alert("로그아웃 되었습니다");
                     }}
