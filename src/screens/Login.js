@@ -67,6 +67,9 @@ const Login = () => {
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
 
+          window.localStorage.setItem("jwt", res.data.jwt);
+          window.localStorage.setItem("userData", JSON.stringify(res.data.user));
+
           // userInfo
           dispatch(updateUserName(res.data.user.username));
           dispatch(updateUserEmail(res.data.user.email));
