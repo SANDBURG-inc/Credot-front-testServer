@@ -31,7 +31,7 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  if (jwt !== "") {
+  if (jwt === "EMPTY") {
     return <Navigate to="/" />;
   }
   return (
@@ -97,9 +97,9 @@ const Mypage = () => {
                     className="logout-btn"
                     onClick={async () => {
                       //await fetch(HOST + "/passport/logout", { credentials: "include" });
-                      dispatch(updateJWT(""));
                       localStorage.clear();
                       alert("로그아웃 되었습니다");
+                      dispatch(updateJWT("EMPTY"));
                     }}
                   >
                     로그아웃
