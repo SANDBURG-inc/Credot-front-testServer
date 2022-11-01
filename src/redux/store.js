@@ -15,6 +15,16 @@ import storage from "redux-persist/lib/storage";
 var HOST = "http://localhost:9000";
 //var HOST = "https://api.credot.kr";
 
+const JSON_Web_Token = createSlice({
+  name: "JSON_Web_Token",
+  initialState: "",
+  reducers: {
+    updateJWT(state, value) {
+      state = value;
+    },
+  },
+});
+
 const isLogin = createSlice({
   name: "isLogin",
   initialState: false,
@@ -139,6 +149,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   login: isLogin.reducer,
+  jwt: JSON_Web_Token.reducer,
   info: userInfo.reducer,
   incInfo: incInfo.reducer,
   financeHistory: financeHistory.reducer,
@@ -162,6 +173,7 @@ const store = configureStore({
 export default store;
 
 export const { update } = isLogin.actions;
+export const { updateJWT } = JSON_Web_Token.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
 // export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
