@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   HOST,
   update,
+  updateJWT,
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
@@ -20,7 +21,7 @@ import axios from "axios";
 
 const Login = () => {
   const a = useSelector((state) => state.login);
-
+  const jwt = useSelector((state) => state.jwt);
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     email: "",
@@ -44,7 +45,7 @@ const Login = () => {
   };
 
   const onKeyPress = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       login();
     }
   };
@@ -67,8 +68,10 @@ const Login = () => {
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
 
+          // deal jwt
           window.localStorage.setItem("jwt", res.data.jwt);
           window.localStorage.setItem("userData", JSON.stringify(res.data.user));
+          dispatch(updateJWT(res.data.jwt));
 
           // userInfo
           dispatch(updateUserName(res.data.user.username));
@@ -112,7 +115,7 @@ const Login = () => {
     }
   }, []);
 
-  if (a === true) {
+  if (jwt !== "") {
     return <Navigate to="/" />;
   }
 
