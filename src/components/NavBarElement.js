@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const NavBarElement = () => {
   let a = useSelector((state) => state.login);
   const tmpName = useSelector((state) => state.info.name);
+  const jwt = useSelector((state) => state.jwt);
 
   const [ScrollY, setScrollY] = useState(0); // 스크롤값을 저장하기 위한 상태
 
@@ -70,7 +71,7 @@ const NavBarElement = () => {
             </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
-          <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+          <div className={jwt !== "" ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
               <Link className="header-account-wrap-a" to="/Login">
@@ -124,7 +125,7 @@ const NavBarElement = () => {
             </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
-          <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+          <div className={jwt !== "" ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
               <Link to="/Login"> 로그인 </Link>
