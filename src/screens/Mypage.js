@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { update, HOST } from "./../redux/store.js";
+import { updateJWT, HOST } from "./../redux/store.js";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 
@@ -97,7 +97,7 @@ const Mypage = () => {
                     className="logout-btn"
                     onClick={async () => {
                       //await fetch(HOST + "/passport/logout", { credentials: "include" });
-                      await dispatch(update());
+                      dispatch(updateJWT(""));
                       localStorage.clear();
                       alert("로그아웃 되었습니다");
                     }}
