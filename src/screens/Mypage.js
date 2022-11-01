@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
+  const jwt = useSelector((state) => state.jwt);
 
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
@@ -30,7 +31,7 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  if (a === false) {
+  if (jwt !== "") {
     return <Navigate to="/" />;
   }
   return (
