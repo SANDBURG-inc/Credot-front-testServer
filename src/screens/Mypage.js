@@ -6,7 +6,7 @@ import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 
 const Mypage = () => {
-  const a = useSelector((state) => state.login);
+  // const a = useSelector((state) => state.login);
   const jwt = useSelector((state) => state.jwt);
 
   const tmpName = useSelector((state) => state.info.name);
