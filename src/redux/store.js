@@ -17,10 +17,12 @@ var HOST = "http://localhost:9000";
 
 const JSON_Web_Token = createSlice({
   name: "JSON_Web_Token",
-  initialState: "",
+  initialState: {
+    ACCESS_TOKEN: "EMPTY",
+  },
   reducers: {
-    updateJWT(value) {
-      return value;
+    updateJWT(state, value) {
+      state.ACCESS_TOKEN = value.payload;
     },
   },
 });
