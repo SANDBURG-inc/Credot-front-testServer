@@ -15,6 +15,16 @@ import storage from "redux-persist/lib/storage";
 var HOST = "http://localhost:9000";
 //var HOST = "https://api.credot.kr";
 
+const JSON_Web_Token = createSlice({
+  name: "JSON_Web_Token",
+  initialState: "",
+  reducers: {
+    updateJWT(state, value) {
+      state = value;
+    },
+  },
+});
+
 const isLogin = createSlice({
   name: "isLogin",
   initialState: false,
