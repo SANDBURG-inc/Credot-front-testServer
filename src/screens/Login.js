@@ -50,6 +50,10 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(jwt);
+  }, [jwt]);
+
   const login = () => {
     if (!inputs.email.includes("@")) {
       alert("이메일 형식을 올바르게 입력해주세요!");
