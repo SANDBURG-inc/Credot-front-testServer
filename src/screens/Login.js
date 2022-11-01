@@ -3,7 +3,6 @@ import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   HOST,
-  update,
   updateJWT,
   updateUserAccount,
   updateUserBank,
@@ -51,6 +50,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    console.log("JWT변경");
     console.log(jwt);
   }, [jwt]);
 
@@ -75,7 +75,6 @@ const Login = () => {
           // deal jwt
           window.localStorage.setItem("jwt", res.data.jwt);
           window.localStorage.setItem("userData", JSON.stringify(res.data.user));
-          dispatch(updateJWT(res.data.jwt));
 
           // userInfo
           dispatch(updateUserName(res.data.user.username));
@@ -92,7 +91,7 @@ const Login = () => {
           dispatch(updateCorporateNum(res.data.user.corporateNum));
 
           alert("환영합니다!");
-          dispatch(update());
+          dispatch(updateJWT(res.data.jwt));
         })
         .catch((error) => {
           // Handle error.
@@ -119,7 +118,7 @@ const Login = () => {
     }
   }, []);
 
-  if (jwt !== "") {
+  if (jwt !== "EMPTY") {
     return <Navigate to="/" />;
   }
 
