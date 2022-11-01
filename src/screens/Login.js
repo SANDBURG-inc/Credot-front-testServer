@@ -20,7 +20,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 
 const Login = () => {
-  const a = useSelector((state) => state.login);
+  // const a = useSelector((state) => state.login);
   const jwt = useSelector((state) => state.jwt);
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
