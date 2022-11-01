@@ -71,7 +71,7 @@ const NavBarElement = () => {
             </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
-          <div className={jwt !== "" ? "header-account-wrap" : "header-account-wrap logined"}>
+          <div className={jwt === "EMPTY" ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
               <Link className="header-account-wrap-a" to="/Login">
@@ -125,7 +125,7 @@ const NavBarElement = () => {
             </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
-          <div className={jwt !== "" ? "header-account-wrap" : "header-account-wrap logined"}>
+          <div className={jwt === "EMPTY" ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
               <Link to="/Login"> 로그인 </Link>
