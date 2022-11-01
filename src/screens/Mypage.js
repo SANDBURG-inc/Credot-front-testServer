@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { updateJWT, HOST } from "./../redux/store.js";
+import { update, HOST } from "./../redux/store.js";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 
 const Mypage = () => {
-  // const a = useSelector((state) => state.login);
-  const jwt = useSelector((state) => state.jwt);
+  const a = useSelector((state) => state.login);
 
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
@@ -31,7 +30,7 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  if (jwt === "EMPTY") {
+  if (a === false) {
     return <Navigate to="/" />;
   }
   return (
@@ -97,9 +96,9 @@ const Mypage = () => {
                     className="logout-btn"
                     onClick={async () => {
                       //await fetch(HOST + "/passport/logout", { credentials: "include" });
+                      await dispatch(update());
                       localStorage.clear();
                       alert("로그아웃 되었습니다");
-                      dispatch(updateJWT("EMPTY"));
                     }}
                   >
                     로그아웃

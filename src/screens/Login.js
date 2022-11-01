@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   HOST,
-  updateJWT,
+  update,
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
@@ -19,8 +19,8 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 
 const Login = () => {
-  // const a = useSelector((state) => state.login);
-  const jwt = useSelector((state) => state.jwt);
+  const a = useSelector((state) => state.login);
+
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     email: "",
@@ -44,15 +44,10 @@ const Login = () => {
   };
 
   const onKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key == "Enter") {
       login();
     }
   };
-
-  useEffect(() => {
-    console.log("JWT변경");
-    console.log(jwt);
-  }, [jwt]);
 
   const login = () => {
     if (!inputs.email.includes("@")) {
@@ -72,7 +67,6 @@ const Login = () => {
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
 
-          // deal jwt
           window.localStorage.setItem("jwt", res.data.jwt);
           window.localStorage.setItem("userData", JSON.stringify(res.data.user));
 
@@ -91,7 +85,7 @@ const Login = () => {
           dispatch(updateCorporateNum(res.data.user.corporateNum));
 
           alert("환영합니다!");
-          dispatch(updateJWT(res.data.jwt));
+          dispatch(update());
         })
         .catch((error) => {
           // Handle error.
@@ -118,7 +112,7 @@ const Login = () => {
     }
   }, []);
 
-  if (jwt !== "EMPTY") {
+  if (a === true) {
     return <Navigate to="/" />;
   }
 
