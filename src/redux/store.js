@@ -19,8 +19,8 @@ const JSON_Web_Token = createSlice({
   name: "JSON_Web_Token",
   initialState: "",
   reducers: {
-    updateJWT(state, value) {
-      state = value;
+    updateJWT(value) {
+      return value;
     },
   },
 });
