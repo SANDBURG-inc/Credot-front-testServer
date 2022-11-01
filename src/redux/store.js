@@ -25,15 +25,15 @@ const JSON_Web_Token = createSlice({
   },
 });
 
-const isLogin = createSlice({
-  name: "isLogin",
-  initialState: false,
-  reducers: {
-    update(state) {
-      return !state;
-    },
-  },
-});
+// const isLogin = createSlice({
+//   name: "isLogin",
+//   initialState: false,
+//   reducers: {
+//     update(state) {
+//       return !state;
+//     },
+//   },
+// });
 
 const userInfo = createSlice({
   name: "userInfo",
@@ -148,7 +148,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  login: isLogin.reducer,
+  // login: isLogin.reducer,
   jwt: JSON_Web_Token.reducer,
   info: userInfo.reducer,
   incInfo: incInfo.reducer,
@@ -172,7 +172,7 @@ const store = configureStore({
 
 export default store;
 
-export const { update } = isLogin.actions;
+// export const { update } = isLogin.actions;
 export const { updateJWT } = JSON_Web_Token.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
