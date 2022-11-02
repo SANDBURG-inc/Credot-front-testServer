@@ -8,8 +8,7 @@ import axios from "axios";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
-  const token = "YOUR_TOKEN_HERE";
-
+  const token = useSelector((state) => state.jwt);
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
   const tmpPhoneNum = useSelector((state) => state.info.phoneNum);

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   HOST,
   update,
+  updateJwt,
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
@@ -19,9 +20,9 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 
 const Login = () => {
-  const a = useSelector((state) => state.login);
-
   const dispatch = useDispatch();
+  const a = useSelector((state) => state.login);
+  const token = useSelector((state) => state.jwt);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -44,7 +45,7 @@ const Login = () => {
   };
 
   const onKeyPress = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       login();
     }
   };
@@ -64,11 +65,16 @@ const Login = () => {
         .then((res) => {
           // Handle success.
           console.log("Well done!");
+          console.log(res);
+          console.log("================================================");
+          console.log(res.data);
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
 
           window.localStorage.setItem("jwt", res.data.jwt);
           window.localStorage.setItem("userData", JSON.stringify(res.data.user));
+          dispatch(updateJwt(res.data.jwt));
+          console.log("토큰값 변경 확인: " + token);
 
           // userInfo
           dispatch(updateUserName(res.data.user.username));
@@ -94,6 +100,10 @@ const Login = () => {
         });
     }
   };
+
+  useEffect(() => {
+    console.log("토큰값 변경됨 " + token);
+  }, [token]);
 
   useEffect(() => {
     // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
