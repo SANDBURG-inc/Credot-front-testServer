@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 const Service = () => {
   let isLogined = useSelector((state) => state.login);
 
+  const token = useSelector((state) => state.jwt);
   const [modalOpen, setModalOpen] = useState(false);
   const [progressOpen, setprogressOpen] = useState(false);
 
@@ -32,6 +33,10 @@ const Service = () => {
   const { id, pw } = inputs;
 
   const [active, setActive] = useState([false, false, false, false, false, false, false, false]);
+
+  useEffect(() => {
+    console.log("토큰값 변경됨 " + token);
+  }, [token]);
 
   useEffect(() => {
     // 메인 첫 섹션 스크롤 이동
