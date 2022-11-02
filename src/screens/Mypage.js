@@ -31,25 +31,25 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  console.log("현재 토큰: " + token);
+  console.log("현재 토큰: " + token.jwt);
 
-  useEffect(() => {
-    // Request API.
-    axios
-      .get("https://cms.credot.kr/posts", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        // Handle success.
-        console.log("Data: ", res.data);
-      })
-      .catch((err) => {
-        // Handle error.
-        console.log("An error occurred:", err.response);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Request API.
+  //   axios
+  //     .get("https://cms.credot.kr/posts", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       // Handle success.
+  //       console.log("Data: ", res.data);
+  //     })
+  //     .catch((err) => {
+  //       // Handle error.
+  //       console.log("An error occurred:", err.response);
+  //     });
+  // }, []);
 
   if (a === false) {
     return <Navigate to="/" />;
@@ -141,19 +141,33 @@ const Mypage = () => {
                       //     alert(response);
                       //   });
 
+                      // Request API.
                       axios.post(
                         "https://cms.credot.kr/api/auth/change-password",
                         {
                           currentPassword: curPassword,
                           password: newPassword,
-                          passwordConfirmation: subNewPassword,
+                          passwordConfirmation: newPassword,
                         },
                         {
                           headers: {
-                            Authorization: token.jwt,
+                            Authorization: "Bearer " + token.jwt,
                           },
                         }
                       );
+                      // .post("https://cms.credot.kr/auth/reset-password", {
+                      //   code: "privateCode",
+                      //   password: newPassword,
+                      //   passwordConfirmation: newPassword,
+                      // })
+                      // .then((res) => {
+                      //   // Handle success.
+                      //   console.log("Your user's password has been changed.");
+                      // })
+                      // .catch((err) => {
+                      //   // Handle error.
+                      //   console.log("An error occurred:", err.res);
+                      // });
 
                       setCurPassword("");
                       setNewPassword("");
