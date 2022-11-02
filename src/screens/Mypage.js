@@ -31,6 +31,8 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
+  console.log("현재 토큰: " + token);
+
   useEffect(() => {
     // Request API.
     axios
@@ -148,7 +150,7 @@ const Mypage = () => {
                         },
                         {
                           headers: {
-                            Authorization: token,
+                            Authorization: token.jwt,
                           },
                         }
                       );
