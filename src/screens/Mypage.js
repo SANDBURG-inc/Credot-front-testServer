@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { update, HOST } from "./../redux/store.js";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
+  const token = "YOUR_TOKEN_HERE";
 
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
@@ -29,6 +31,24 @@ const Mypage = () => {
   const handleOnChange3 = (e) => {
     setSubNewPassword(e.target.value);
   };
+
+  useEffect(() => {
+    // Request API.
+    axios
+      .get("https://cms.credot.kr/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        // Handle success.
+        console.log("Data: ", res.data);
+      })
+      .catch((err) => {
+        // Handle error.
+        console.log("An error occurred:", err.response);
+      });
+  }, []);
 
   if (a === false) {
     return <Navigate to="/" />;
@@ -114,11 +134,25 @@ const Mypage = () => {
                         alert("새 비밀번호가 일치하지 않습니다.");
                         return;
                       }
-                      fetch(HOST + `/database/updatepw?currentemail=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
-                        .then((response) => response.text())
-                        .then((response) => {
-                          alert(response);
-                        });
+                      // fetch(HOST + `/database/updatepw?currentemail=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
+                      //   .then((response) => response.text())
+                      //   .then((response) => {
+                      //     alert(response);
+                      //   });
+
+                      axios.post(
+                        "https://cms.credot.kr/api/auth/change-password",
+                        {
+                          currentPassword: curPassword,
+                          password: newPassword,
+                          passwordConfirmation: subNewPassword,
+                        },
+                        {
+                          headers: {
+                            Authorization: token,
+                          },
+                        }
+                      );
 
                       setCurPassword("");
                       setNewPassword("");
