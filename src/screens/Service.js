@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 
 const Service = () => {
   let isLogined = useSelector((state) => state.login);
+  let userInfo = useSelector((state) => state.info);
 
   const token = useSelector((state) => state.jwt);
   const [modalOpen, setModalOpen] = useState(false);
@@ -148,6 +149,9 @@ const Service = () => {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
+      body: JSON.stringify({
+        uid: userInfo.email,
+      }),
       credentials: "include",
     })
       .then((response) => {
