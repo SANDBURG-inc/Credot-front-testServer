@@ -142,19 +142,28 @@ const Mypage = () => {
                       //   });
 
                       // Request API.
-                      axios.post(
-                        "https://cms.credot.kr/api/auth/change-password",
-                        {
-                          currentPassword: curPassword,
-                          password: newPassword,
-                          passwordConfirmation: newPassword,
-                        },
-                        {
-                          headers: {
-                            Authorization: "Bearer " + token.jwt,
+                      axios
+                        .post(
+                          "https://cms.credot.kr/api/auth/change-password",
+                          {
+                            currentPassword: curPassword,
+                            password: newPassword,
+                            passwordConfirmation: newPassword,
                           },
-                        }
-                      );
+                          {
+                            headers: {
+                              Authorization: "Bearer " + token.jwt,
+                            },
+                          }
+                        )
+                        .then(function (res) {
+                          alert("비밀번호가 변경되었습니다");
+                        })
+                        .catch((error) => {
+                          // Handle error.
+                          console.log("An error occurred:", error.response);
+                          alert("비밀번호를 확인해주세요");
+                        });
                       // .post("https://cms.credot.kr/auth/reset-password", {
                       //   code: "privateCode",
                       //   password: newPassword,
