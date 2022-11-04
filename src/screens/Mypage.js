@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { update, updateJwt } from "./../redux/store.js";
@@ -135,12 +135,6 @@ const Mypage = () => {
                         alert("새 비밀번호가 일치하지 않습니다.");
                         return;
                       }
-                      // fetch(HOST + `/database/updatepw?currentemail=${tmpEmail}&currentpw=${curPassword}&futurepw=${newPassword}`)
-                      //   .then((response) => response.text())
-                      //   .then((response) => {
-                      //     alert(response);
-                      //   });
-
                       // Request API.
                       axios
                         .post(
@@ -164,20 +158,6 @@ const Mypage = () => {
                           console.log("An error occurred:", error.response);
                           alert("비밀번호를 확인해주세요");
                         });
-                      // .post("https://cms.credot.kr/auth/reset-password", {
-                      //   code: "privateCode",
-                      //   password: newPassword,
-                      //   passwordConfirmation: newPassword,
-                      // })
-                      // .then((res) => {
-                      //   // Handle success.
-                      //   console.log("Your user's password has been changed.");
-                      // })
-                      // .catch((err) => {
-                      //   // Handle error.
-                      //   console.log("An error occurred:", err.res);
-                      // });
-
                       setCurPassword("");
                       setNewPassword("");
                       setSubNewPassword("");
