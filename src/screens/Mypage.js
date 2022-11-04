@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { update, HOST } from "./../redux/store.js";
+import { update, updateJwt } from "./../redux/store.js";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 import axios from "axios";
@@ -116,7 +116,7 @@ const Mypage = () => {
                   <button
                     className="logout-btn"
                     onClick={async () => {
-                      //await fetch(HOST + "/passport/logout", { credentials: "include" });
+                      await dispatch(updateJwt({}));
                       await dispatch(update());
                       localStorage.clear();
                       alert("로그아웃 되었습니다");
@@ -142,19 +142,28 @@ const Mypage = () => {
                       //   });
 
                       // Request API.
-                      axios.post(
-                        "https://cms.credot.kr/api/auth/change-password",
-                        {
-                          currentPassword: curPassword,
-                          password: newPassword,
-                          passwordConfirmation: newPassword,
-                        },
-                        {
-                          headers: {
-                            Authorization: "Bearer " + token.jwt,
+                      axios
+                        .post(
+                          "https://cms.credot.kr/api/auth/change-password",
+                          {
+                            currentPassword: curPassword,
+                            password: newPassword,
+                            passwordConfirmation: newPassword,
                           },
-                        }
-                      );
+                          {
+                            headers: {
+                              Authorization: "Bearer " + token.jwt,
+                            },
+                          }
+                        )
+                        .then(function (res) {
+                          alert("비밀번호가 변경되었습니다");
+                        })
+                        .catch((error) => {
+                          // Handle error.
+                          console.log("An error occurred:", error.response);
+                          alert("비밀번호를 확인해주세요");
+                        });
                       // .post("https://cms.credot.kr/auth/reset-password", {
                       //   code: "privateCode",
                       //   password: newPassword,
