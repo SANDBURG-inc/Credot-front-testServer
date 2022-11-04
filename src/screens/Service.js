@@ -169,7 +169,13 @@ const Service = () => {
 
         if (response === "200") {
           const inputString = prompt("인증번호를 입력해주세요", "인증번호");
-          fetch(HOST + "/coupang/auth?code=" + inputString, { credentials: "include" })
+          fetch(HOST + "/commerce/coupang/auth?code=" + inputString, {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
+            credentials: "include",
+          })
             .then((response) => {
               if (!response.ok) {
                 setprogressOpen(false);
