@@ -7,7 +7,7 @@ const CompletionModal = (props) => {
 
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
-    <div className={open ? "openModal modal" : "modal"}>
+    <div className={open ? "openModal contractModal" : "contractModal"}>
       {open ? (
         <section style={{ height: "fit-content" }}>
           <header>
@@ -25,8 +25,7 @@ const CompletionModal = (props) => {
           <main>
             <h3>작성 완료</h3>
             <h2>
-              서명이 완료되었습니다. <br /> 크레닷 선정산 서비스를 이용해주셔서
-              감사합니다.
+              서명이 완료되었습니다. <br /> 크레닷 선정산 서비스를 이용해주셔서 감사합니다.
             </h2>
           </main>
           <footer>
