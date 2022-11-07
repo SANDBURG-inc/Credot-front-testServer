@@ -70,8 +70,9 @@ const Faq = () => {
       });
     }
     document.querySelector(".header").classList.remove("this-page-s__i");
-    document.querySelector(".header").classList.remove("this-page-c");
-    document.querySelector(".header").classList.add("this-page-n");
+    document.querySelector(".header").classList.remove("this-page-n");
+    document.querySelector(".header").classList.add("this-page-c");
+
     return () => {};
   });
 
