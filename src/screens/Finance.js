@@ -19,14 +19,14 @@ const Finance = () => {
 
   const userName = useSelector((state) => state.info.name);
   const userEmail = useSelector((state) => state.info.email);
-  const render = (length, financeList) => {
-    var push = [];
+  // const render = (length, financeList) => {
+  //   var push = [];
 
-    for (var i = 0; i < length; i++) {
-      push.push(renderInfo(i, financeList[i][1], financeList[i][2], financeList[i][3], financeList[i][4], financeList[i][5]));
-    }
-    return push;
-  };
+  //   for (var i = 0; i < length; i++) {
+  //     push.push(renderInfo(i, financeList[i][1], financeList[i][2], financeList[i][3], financeList[i][4], financeList[i][5]));
+  //   }
+  //   return push;
+  // };
   const renderInfo = (idx, contractDate, deadline, ammount, commerce, status) => {
     return (
       <TableRow key={idx}>
@@ -40,25 +40,59 @@ const Finance = () => {
     );
   };
 
+  const [data, setData] = useState([]);
+
+  const getData = async () => {
+    const res = await fetch("https://cms.credot.kr/api/contracts").then((res) => res.json());
+    console.log(res.data);
+    setData(res.data);
+    for (var i = 0; i < res.data.length; i++) {
+      console.log(res.data[i].attributes);
+    }
+  };
+
   useEffect(() => {
-    fetch(HOST + "/database/extractContract?email=" + userEmail, {})
-      .then((response) => {
-        if (!response.ok) {
-          console.log("fetch error");
-        }
-        return response.json();
-      })
-      .then((userFin) => {
-        setLength(userFin.length);
-        var price = 0;
-        for (let i = 0; i < userFin.length; i++) {
-          tmpFinanceList.push([i + 1, userFin[i].contractDate, userFin[i].deadline, userFin[i].ammount, userFin[i].commerce, userFin[i].status]);
-          price += Number(userFin[i].ammount);
-        }
-        setTotalPrice(price);
-        setFinanceList([...tmpFinanceList]);
-      });
-  }, []);
+    console.log("현재 데이터 출력합니다.");
+    console.log(data);
+  }, [data]);
+
+  const render = (data) => {
+    var push = [];
+
+    for (var i = 0; i < data.length; i++) {
+      push.push(
+        renderInfo(
+          data[i].attributes.no,
+          data[i].attributes.contractDate,
+          data[i].attributes.deadline,
+          data[i].attributes.ammount,
+          data[i].attributes.commerce,
+          data[i].attributes.status
+        )
+      );
+    }
+    return push;
+  };
+
+  // useEffect(() => {
+  //   fetch(HOST + "/database/extractContract?email=" + userEmail, {})
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         console.log("fetch error");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((userFin) => {
+  //       setLength(userFin.length);
+  //       var price = 0;
+  //       for (let i = 0; i < userFin.length; i++) {
+  //         tmpFinanceList.push([i + 1, userFin[i].contractDate, userFin[i].deadline, userFin[i].ammount, userFin[i].commerce, userFin[i].status]);
+  //         price += Number(userFin[i].ammount);
+  //       }
+  //       setTotalPrice(price);
+  //       setFinanceList([...tmpFinanceList]);
+  //     });
+  // }, []);
 
   const AddComma = (num) => {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
