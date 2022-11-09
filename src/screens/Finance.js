@@ -21,12 +21,12 @@ const Finance = () => {
   const userName = useSelector((state) => state.info.name);
   const userEmail = useSelector((state) => state.info.email);
 
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token.jwt,
-    },
-  };
+  // const options = {
+  //   method: "GET",
+  //   headers: {
+  //     Authorization: "Bearer " + token.jwt,
+  //   },
+  // };
   // const render = (length, financeList) => {
   //   var push = [];
 
@@ -50,20 +50,6 @@ const Finance = () => {
 
   const [data, setData] = useState([]);
 
-  const getData = async () => {
-    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=Helloo", options)
-      .then((res) => res.json())
-      .catch((error) => {
-        // Handle error.
-        console.log(error.response);
-      });
-    console.log(res.data);
-    setData(res.data);
-    for (var i = 0; i < res.data.length; i++) {
-      console.log(res.data[i].attributes);
-    }
-  };
-
   useEffect(() => {
     console.log("현재 데이터 출력합니다.");
     console.log(data);
@@ -86,12 +72,9 @@ const Finance = () => {
     }
     return push;
   };
-
-  useEffect =
-    (() => {
-      getData();
-    },
-    []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   // useEffect(() => {
   //   fetch(HOST + "/database/extractContract?email=" + userEmail, {})
@@ -117,6 +100,22 @@ const Finance = () => {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
     return num.toString().replace(regexp, ",");
   };
+
+  const getData = async () => {
+    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=" + userEmail)
+      .then((res) => res.json())
+      .catch((error) => {
+        // Handle error.
+        console.log(error.response);
+      });
+    console.log("현재 데이터: " + res.data);
+    setData(res.data);
+    for (var i = 0; i < res.data.length; i++) {
+      console.log(res.data[i].attributes);
+    }
+    return;
+  };
+  // getData();
 
   return (
     <main className="container">
@@ -163,7 +162,7 @@ const Finance = () => {
                           <TableCell>납부여부</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>{render(length, financeList)}</TableBody>
+                      <TableBody>{render(data)}</TableBody>
                     </Table>
                   </Paper>
                 </div>
