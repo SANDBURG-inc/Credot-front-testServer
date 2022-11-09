@@ -5,13 +5,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { HOST } from "./../redux/store.js";
+import { updateJwt } from "./../redux/store.js";
 import { useSelector } from "react-redux";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 
 const Finance = () => {
   var tmpFinanceList = [];
+  const token = useSelector((state) => state.jwt);
   const [length, setLength] = useState(0);
   const [financeList, setFinanceList] = useState([[], []]);
   const [totalPrice, setTotalPrice] = useState("0");
@@ -19,6 +20,13 @@ const Finance = () => {
 
   const userName = useSelector((state) => state.info.name);
   const userEmail = useSelector((state) => state.info.email);
+
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token.jwt,
+    },
+  };
   // const render = (length, financeList) => {
   //   var push = [];
 
@@ -43,7 +51,12 @@ const Finance = () => {
   const [data, setData] = useState([]);
 
   const getData = async () => {
-    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=Helloo").then((res) => res.json());
+    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=Helloo", options)
+      .then((res) => res.json())
+      .catch((error) => {
+        // Handle error.
+        console.log(error.response);
+      });
     console.log(res.data);
     setData(res.data);
     for (var i = 0; i < res.data.length; i++) {
@@ -73,6 +86,12 @@ const Finance = () => {
     }
     return push;
   };
+
+  useEffect =
+    (() => {
+      getData();
+    },
+    []);
 
   // useEffect(() => {
   //   fetch(HOST + "/database/extractContract?email=" + userEmail, {})
