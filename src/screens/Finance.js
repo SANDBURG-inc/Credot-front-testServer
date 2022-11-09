@@ -21,12 +21,12 @@ const Finance = () => {
   const userName = useSelector((state) => state.info.name);
   const userEmail = useSelector((state) => state.info.email);
 
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     Authorization: "Bearer " + token.jwt,
-  //   },
-  // };
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token.jwt,
+    },
+  };
   // const render = (length, financeList) => {
   //   var push = [];
 
@@ -102,7 +102,7 @@ const Finance = () => {
   };
 
   const getData = async () => {
-    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=" + userEmail)
+    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=" + userEmail, options)
       .then((res) => res.json())
       .catch((error) => {
         // Handle error.
