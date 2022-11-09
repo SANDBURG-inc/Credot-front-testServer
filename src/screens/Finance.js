@@ -43,7 +43,7 @@ const Finance = () => {
   const [data, setData] = useState([]);
 
   const getData = async () => {
-    const res = await fetch("ttps://cms.credot.kr/api/contracts?filters%5Bemail%5D%5B%24eq%5D=Helloo").then((res) => res.json());
+    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=Helloo").then((res) => res.json());
     console.log(res.data);
     setData(res.data);
     for (var i = 0; i < res.data.length; i++) {
