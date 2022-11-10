@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { update, updateJwt } from "./../redux/store.js";
+import {
+  update,
+  persistor,
+  // updateJwt,
+  updateUserAccount,
+  updateUserBank,
+  updateUserEmail,
+  updateUserName,
+  updateUserPhoneNum,
+  updateCorporateName,
+  updateCeo,
+  updateBusinessLoc,
+  updateCorporateNum,
+} from "./../redux/store.js";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 
 const Mypage = () => {
   const a = useSelector((state) => state.login);
-  const token = useSelector((state) => state.jwt);
+  // const token = useSelector((state) => state.jwt);
+  const userData = localStorage.getItem("user");
   const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
   const tmpPhoneNum = useSelector((state) => state.info.phoneNum);
@@ -31,7 +45,28 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  console.log("현재 토큰: " + token.jwt);
+  // console.log("현재 토큰: " + token.jwt);
+
+  const logout = useCallback(() => {
+    // dispatch(updateJwt({}));
+    dispatch(update());
+    // userInfo
+    dispatch(updateUserName(""));
+    dispatch(updateUserEmail(""));
+    dispatch(updateUserPhoneNum(""));
+    dispatch(updateUserBank(""));
+    dispatch(updateUserAccount(""));
+    // dispatch(updatePassword(res.data.user.password));
+
+    //incInfo
+    dispatch(updateCorporateName(""));
+    dispatch(updateCeo(""));
+    dispatch(updateBusinessLoc(""));
+    dispatch(updateCorporateNum(""));
+    localStorage.removeItem("user");
+    localStorage.clear();
+    persistor.purge();
+  }, []);
 
   // useEffect(() => {
   //   // Request API.
@@ -51,9 +86,19 @@ const Mypage = () => {
   //     });
   // }, []);
 
+  // useEffect(() => {
+  //   if (token && tokenExpirationDate) {
+  //     const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+  //     logoutTimer = setTimeout(logout, remainingTime);
+  //   } else {
+  //     clearTimeout(logoutTimer);
+  //   }
+  // }, [token, logout, tokenExpirationDate]);
+
   if (a === false) {
     return <Navigate to="/" />;
   }
+  // console.log("토큰 만료시간 출력" + token.jwt.exp);
   return (
     <main className="container">
       <Helmet>
@@ -79,7 +124,6 @@ const Mypage = () => {
                   </div>
                 </div>
               </div>
-
               <div className="m-info">
                 <form action="">
                   <div className="m-info-box-wrap">
@@ -118,9 +162,7 @@ const Mypage = () => {
                   <button
                     className="logout-btn"
                     onClick={async () => {
-                      await dispatch(updateJwt({}));
-                      await dispatch(update());
-                      localStorage.clear();
+                      logout();
                       alert("로그아웃 되었습니다");
                     }}
                   >
@@ -148,7 +190,7 @@ const Mypage = () => {
                           },
                           {
                             headers: {
-                              Authorization: "Bearer " + token.jwt,
+                              Authorization: "Bearer " + userData.token,
                             },
                           }
                         )
