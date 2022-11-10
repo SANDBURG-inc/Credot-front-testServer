@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   update,
-  updateJwt,
+  // updateJwt,
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
@@ -27,6 +27,7 @@ const Login = () => {
     password: "",
   });
   const [users, setUsers] = useState([]);
+
   const handleOnChange = (e) => {
     setInputs({
       ...inputs,
@@ -69,10 +70,17 @@ const Login = () => {
           console.log(res.data);
           console.log("User profile", res.data.user);
           console.log("User token", res.data.jwt);
-
-          window.localStorage.setItem("jwt", res.data.jwt);
-          window.localStorage.setItem("userData", JSON.stringify(res.data.user));
-          dispatch(updateJwt(res.data.jwt));
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              userData: res.data.user,
+              token: res.data.jwt,
+            })
+          );
+          // localStorage.setItem("jwt", res.data.jwt);
+          // localStorage.setItem("userData", JSON.stringify(res.data.user));
+          // localStorage.setItem("exp", token.tokenExpiration.toISOString());
+          // dispatch(updateJwt(res.data.jwt));
           console.log("토큰값 변경 확인: " + token);
 
           // userInfo
