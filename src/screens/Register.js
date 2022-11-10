@@ -194,6 +194,8 @@ const Register = () => {
     <main className="container">
       <Helmet>
         <title>회원가입 - 크레닷</title>
+        <meta name="description" content="지금 바로 간편 회원가입을 통해 셀러들의 초간편 선정산 서비스, 크레닷(Cre.)을 만나보세요!" />
+        <meta name="keywords" content="선정산, 셀러, 이커머스, 크레닷, 자금, 대출" />
       </Helmet>
       <div className="inner">
         <section className="section-wrap register-introduce-wrap">
