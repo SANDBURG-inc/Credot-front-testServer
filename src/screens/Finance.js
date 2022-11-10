@@ -14,7 +14,6 @@ import { Helmet } from "react-helmet";
 import { isJSDocNonNullableType } from "typescript";
 
 const Finance = () => {
-
   // var tmpFinanceList = [];
   // const token = useSelector((state) => state.jwt);
   // const [length, setLength] = useState(0);
@@ -59,13 +58,28 @@ const Finance = () => {
 
   const [data, setData] = useState([]);
 
+  // const getData = async () => {
+  //   const res = await fetch("https://cms.credot.kr/api/contracts").then((res) => res.json());
+  //   console.log(res.data);
+  //   setData(res.data);
+  //   for (var i = 0; i < res.data.length; i++) {
+  //     console.log(res.data[i].attributes);
+  //   }
+  // };
+
   const getData = async () => {
-    const res = await fetch("https://cms.credot.kr/api/contracts").then((res) => res.json());
-    console.log(res.data);
+    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=" + userEmail, options)
+      .then((res) => res.json())
+      .catch((error) => {
+        // Handle error.
+        console.log(error.response);
+      });
+    console.log("현재 데이터: " + res.data);
     setData(res.data);
     for (var i = 0; i < res.data.length; i++) {
       console.log(res.data[i].attributes);
     }
+    return;
   };
 
   useEffect(() => {
@@ -110,6 +124,10 @@ const Finance = () => {
   //       setFinanceList([...tmpFinanceList]);
   //     });
   // }, []);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const AddComma = (num) => {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -162,7 +180,7 @@ const Finance = () => {
                           <TableCell>납부여부</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>{render(length, financeList)}</TableBody>
+                      <TableBody>{render(data)}</TableBody>
                     </Table>
                   </Paper>
                 </div>
