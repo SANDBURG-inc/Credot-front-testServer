@@ -80,6 +80,8 @@ const Faq = () => {
     <main className="container">
       <Helmet>
         <title>자주하는 질문 - 크레닷</title>
+        <meta name="description" content="셀러들의 자금 고민에 마침표를 찍다. 크레닷(Credot)이 궁금하신가요?" />
+        <meta name="keywords" content="선정산, 셀러, 이커머스, 크레닷, 자금, 대출" />
       </Helmet>
       <div className="inner">
         <section className="section-wrap introduce-wrap guide-wrap">
