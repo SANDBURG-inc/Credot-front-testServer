@@ -5,14 +5,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { updateJwt } from "./../redux/store.js";
+import { HOST } from "./../redux/store.js";
 import { useSelector } from "react-redux";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 
 const Finance = () => {
   var tmpFinanceList = [];
-  const token = useSelector((state) => state.jwt);
   const [length, setLength] = useState(0);
   const [financeList, setFinanceList] = useState([[], []]);
   const [totalPrice, setTotalPrice] = useState("0");
@@ -20,13 +19,6 @@ const Finance = () => {
 
   const userName = useSelector((state) => state.info.name);
   const userEmail = useSelector((state) => state.info.email);
-
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token.jwt,
-    },
-  };
   // const render = (length, financeList) => {
   //   var push = [];
 
@@ -50,6 +42,15 @@ const Finance = () => {
 
   const [data, setData] = useState([]);
 
+  const getData = async () => {
+    const res = await fetch("https://cms.credot.kr/api/contracts").then((res) => res.json());
+    console.log(res.data);
+    setData(res.data);
+    for (var i = 0; i < res.data.length; i++) {
+      console.log(res.data[i].attributes);
+    }
+  };
+
   useEffect(() => {
     console.log("현재 데이터 출력합니다.");
     console.log(data);
@@ -72,9 +73,6 @@ const Finance = () => {
     }
     return push;
   };
-  useEffect(() => {
-    getData();
-  }, []);
 
   // useEffect(() => {
   //   fetch(HOST + "/database/extractContract?email=" + userEmail, {})
@@ -101,26 +99,11 @@ const Finance = () => {
     return num.toString().replace(regexp, ",");
   };
 
-  const getData = async () => {
-    const res = await fetch("https://cms.credot.kr/api/contracts?filters[email][$eq]=" + userEmail, options)
-      .then((res) => res.json())
-      .catch((error) => {
-        // Handle error.
-        console.log(error.response);
-      });
-    console.log("현재 데이터: " + res.data);
-    setData(res.data);
-    for (var i = 0; i < res.data.length; i++) {
-      console.log(res.data[i].attributes);
-    }
-    return;
-  };
-  // getData();
-
   return (
     <main className="container">
       <Helmet>
         <title>정산현황 - 크레닷</title>
+        <meta name="keywords" content="선정산, 셀러, 이커머스, 크레닷, 자금, 대출" />
       </Helmet>
       <div className="inner">
         <section className="section-wrap my_page-wrap">
@@ -162,7 +145,7 @@ const Finance = () => {
                           <TableCell>납부여부</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>{render(data)}</TableBody>
+                      <TableBody>{render(length, financeList)}</TableBody>
                     </Table>
                   </Paper>
                 </div>

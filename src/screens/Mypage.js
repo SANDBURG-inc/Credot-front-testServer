@@ -58,6 +58,8 @@ const Mypage = () => {
     <main className="container">
       <Helmet>
         <title>My Page - 크레닷</title>
+        <meta name="description" content="셀러들의 초간편 선정산 서비스, 크레닷(Cre.) - 마이페이지" />
+        <meta name="keywords" content="선정산, 셀러, 이커머스, 크레닷, 자금, 대출" />
       </Helmet>
       <div className="inner">
         <section className="section-wrap my_page-wrap">

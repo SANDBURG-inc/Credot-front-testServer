@@ -14,6 +14,11 @@ const About = () => {
     <main className="container">
       <Helmet>
         <title>선정산 서비스란? - 크레닷</title>
+        <meta
+          name="description"
+          content="선정산 서비스란? 정산 주기가 길어 사업의 유지나 확장에 어려움을 겪고 있는 온오프라인 셀러들을 위해 판매대금을 선정산해주는 서비스입니다."
+        />
+        <meta name="keywords" content="선정산, 셀러, 이커머스, 크레닷, 자금, 대출" />
       </Helmet>
 
       <div className="inner">
