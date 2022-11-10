@@ -21,7 +21,8 @@ import axios from "axios";
 const Login = () => {
   const dispatch = useDispatch();
   const a = useSelector((state) => state.login);
-  const token = useSelector((state) => state.jwt);
+  // const token = useSelector((state) => state.jwt);
+  const userData = localStorage.getItem("user");
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -81,7 +82,7 @@ const Login = () => {
           // localStorage.setItem("userData", JSON.stringify(res.data.user));
           // localStorage.setItem("exp", token.tokenExpiration.toISOString());
           // dispatch(updateJwt(res.data.jwt));
-          console.log("토큰값 변경 확인: " + token);
+          // console.log("토큰값 변경 확인: " + token);
 
           // userInfo
           dispatch(updateUserName(res.data.user.username));
@@ -108,9 +109,9 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("토큰값 변경됨 " + token);
-  }, [token]);
+  // useEffect(() => {
+  //   console.log("토큰값 변경됨 " + token);
+  // }, [token]);
 
   useEffect(() => {
     // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트

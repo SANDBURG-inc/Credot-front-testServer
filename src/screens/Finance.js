@@ -5,26 +5,29 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { updateJwt } from "./../redux/store.js";
+// import { updateJwt } from "./../redux/store.js";
 import { useSelector } from "react-redux";
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
+import { isJSDocNonNullableType } from "typescript";
 
 const Finance = () => {
-  var tmpFinanceList = [];
-  const token = useSelector((state) => state.jwt);
-  const [length, setLength] = useState(0);
-  const [financeList, setFinanceList] = useState([[], []]);
+  // var tmpFinanceList = [];
+  // const token = useSelector((state) => state.jwt);
+  // const [length, setLength] = useState(0);
+  // const [financeList, setFinanceList] = useState([[], []]);
+  const userData = localStorage.getItem("user");
   const [totalPrice, setTotalPrice] = useState("0");
   const [boardFlag, setBoardFlag] = useState(true);
 
   const userName = useSelector((state) => state.info.name);
   const userEmail = useSelector((state) => state.info.email);
-
+  console.log(userData);
+  console.log(typeof userData);
   const options = {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + token.jwt,
+      Authorization: "Bearer " + JSON.parse(userData).token,
     },
   };
   // const render = (length, financeList) => {
