@@ -25,17 +25,17 @@ const isLogin = createSlice({
   },
 });
 
-const JWT = createSlice({
-  name: "JWT",
-  initialState: {
-    jwt: {},
-  },
-  reducers: {
-    updateJwt(state, value) {
-      state.jwt = value.payload;
-    },
-  },
-});
+// const JWT = createSlice({
+//   name: "JWT",
+//   initialState: {
+//     jwt: {},
+//   },
+//   reducers: {
+//     updateJwt(state, value) {
+//       state.jwt = value.payload;
+//     },
+//   },
+// });
 
 const userInfo = createSlice({
   name: "userInfo",
@@ -151,7 +151,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   login: isLogin.reducer,
-  jwt: JWT.reducer,
+  // jwt: JWT.reducer,
   info: userInfo.reducer,
   incInfo: incInfo.reducer,
   financeHistory: financeHistory.reducer,
@@ -179,7 +179,7 @@ let persistor = persistStore(store);
 export { store, persistor };
 
 export const { update } = isLogin.actions;
-export const { updateJwt } = JWT.actions;
+// export const { updateJwt } = JWT.actions;
 export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
 // export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
