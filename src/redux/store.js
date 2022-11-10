@@ -1,5 +1,5 @@
 import { configureStore, createSlice, combineReducers } from "@reduxjs/toolkit";
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 
@@ -166,13 +166,17 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-      // eslint-disable-next-line no-dupe-keys
-      serializableCheck: false,
     }).concat(logger),
-  // }),
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, (state) => {
+      storage.remove("root");
+    });
+  },
 });
 
-export default store;
+let persistor = persistStore(store);
+
+export { store, persistor };
 
 export const { update } = isLogin.actions;
 export const { updateJwt } = JWT.actions;
