@@ -93,7 +93,7 @@ const Finance = () => {
     for (var i = 0; i < data.length; i++) {
       push.push(
         renderInfo(
-          data[i].attributes.no,
+          data[i].attributes.id,
           data[i].attributes.contractDate,
           data[i].attributes.deadline,
           data[i].attributes.ammount,
