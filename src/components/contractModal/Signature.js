@@ -62,6 +62,7 @@ const ClearButton = styled.button`
 const Signature = (props) => {
   const { open, amount, deadline } = props;
   let userInfo = useSelector((state) => state.info);
+  const userData = localStorage.getItem("user");
 
   const canvasRef = useRef(null);
   const [isSigned, setIsSigned] = useState(false);
@@ -84,7 +85,7 @@ const Signature = (props) => {
 
     let copy = { ...contractData };
     copy.email = userInfo.email;
-    copy.date = year + ". " + todayMonth + ". " + todayDate + ".";
+    copy.date = year + "-" + todayMonth + "-" + todayDate + "-";
     copy.deadline = deadline;
     copy.ammount = amount;
     setContractData(copy);
@@ -102,27 +103,34 @@ const Signature = (props) => {
     copy.sign = image.split(",")[1];
     setContractData(copy);
 
-    fetch(
-      HOST +
-        "/database/contract?email=" +
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + JSON.parse(userData).token,
+      },
+      body:
+        '{"data":{"email":"' +
         contractData.email +
-        "&sign=" +
+        '","sign":"' +
         copy.sign +
-        "&contractDate=" +
-        contractData.date +
-        "&deadline=" +
-        contractData.deadline +
-        "&ammount=" +
-        contractData.ammount +
-        "&commerce=" +
+        '","commerce":"' +
         contractData.commerce +
-        "&status=" +
-        contractData.status
-    );
-    // const link = document.createElement("a");
-    // link.href = image;
-    // link.download = "sign_image.png";
-    // link.click(); // img 다운로드
+        '","ammount":"' +
+        contractData.ammount +
+        '","contractDate":"' +
+        contractData.date +
+        '","deadline":"' +
+        contractData.deadline +
+        '","status":"' +
+        contractData.status +
+        '"}}',
+    };
+
+    fetch("https://cms.credot.kr/api/contracts", options)
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
   };
 
   return (
