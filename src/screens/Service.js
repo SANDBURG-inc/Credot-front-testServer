@@ -117,6 +117,9 @@ const Service = () => {
       case "104":
         alert("인증번호가 틀렸습니다.");
         return false;
+      case "105":
+        alert("커머스의 비밀번호를 변경하고 다시 시도해주세요.");
+        return false;
       default:
         return true;
     }
@@ -348,17 +351,8 @@ const Service = () => {
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      // if (active[1]) alert("서비스 준비중입니다.");
-                      fetch(HOST + "/passport", { credentials: "include" })
-                        .then((response) => {
-                          if (!response.ok) {
-                            throw new Error("400아니면 500에러남");
-                          }
-                          return response.text();
-                        })
-                        .then((response) => {
-                          return alert(response);
-                        });
+                      if (active[1]) {
+                      }
                     }}
                   >
                     조회하기
@@ -385,14 +379,44 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo4.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input name="id" className="check-box-input check-box-input-id" type="text" placeholder="ID" onChange={onChange} value={id} />
+                    <input
+                      name="pw"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[3]) alert("서비스 준비중입니다.");
+                    onClick={async () => {
+                      if (active[3]) {
+                        setprogressOpen(true);
+                        await fetch(HOST + "/commerce/tmon/crawl?id=" + id + "&pw=" + pw, {
+                          method: "post",
+                          headers: {
+                            "Content-Type": "application/json; charset=utf-8",
+                          },
+                          body: JSON.stringify({
+                            uid: userInfo.email,
+                          }),
+                          credentials: "include",
+                        })
+                          .then((response) => {
+                            if (!response.ok) {
+                              setprogressOpen(false);
+                              alert("오류");
+                            }
+                            return response.text();
+                          })
+                          .then((response) => {
+                            setprogressOpen(false);
+                            finishLookUp(response);
+                          });
+                      }
                     }}
                   >
                     조회하기
@@ -409,7 +433,8 @@ const Service = () => {
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      if (active[4]) alert("서비스 준비중입니다.");
+                      if (active[4]) {
+                      }
                     }}
                   >
                     조회하기
