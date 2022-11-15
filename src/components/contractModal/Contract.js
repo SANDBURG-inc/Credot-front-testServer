@@ -3,19 +3,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import "./ContractModal.css";
 
-const Container = styled.div`
-  width: 1100px;
-  height: 700px;
-  padding: 70px;
-  text-align: start;
-  display: inline-block;
-  background: rgb(250, 250, 250);
-  border: 1px solid rgb(201, 200, 199);
-  box-sizing: border-box;
-  border-radius: 5px;
-  overflow: scroll;
-`;
-
 const Contract = (props) => {
   const { amount, deadline } = props;
 
@@ -60,7 +47,7 @@ const Contract = (props) => {
   }, []);
 
   return (
-    <Container>
+    <div className='Container'>
       <h2 style={{ textAlign: "center" }}>
         <strong>채권양수도 계약서</strong>
       </h2>
@@ -290,7 +277,7 @@ const Contract = (props) => {
         전화번호:
         <span className="showText"> {sandburgData.__PHONE__} </span>
       </p>
-    </Container>
+    </div>
   );
 };
 
