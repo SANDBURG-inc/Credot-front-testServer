@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -17,11 +17,36 @@ const NavBarElement = () => {
     }
   };
 
+  // 마이페이지 드롭메뉴 세부설정 - 바깥 누르거나 내부 요소 누르면 드롭메뉴 없애기 (~46line)
+  const dropMenuRef = useRef();
+  const [dropMenuOpen, setDropMenuOpen] = useState(false);  // 드롭메뉴의 state
+
+  const handleToggleOption = () => setDropMenuOpen((prev) => !prev);  // 드롭메뉴 state 변경 함수
+
+  const handleClickOutSide = (e) => {   // 드롭메뉴 이외 영역을 누르면 드롭메뉴 state 바꿔줌
+    if (dropMenuOpen && !dropMenuRef.current.contains(e.target)){
+      setDropMenuOpen((prev) => !prev);
+    }
+  };
+
+  const DropMenu = () => {
+    useEffect(() => {
+      document.addEventListener('click', handleClickOutSide)    // 드롭메뉴가 켜지면 handleClickOutside함수에 이벤트 전달
+      return () => {
+        document.removeEventListener('click', handleClickOutSide) // 메모리 제거
+      }
+    }, []);
+    return (  // 드롭메뉴 div 리턴
+    <>
+      <div className="profile-dropmenu" onClick={handleToggleOption}>
+        <Link to="/Mypage"> 내 정보 </Link>
+        <Link to="/Finance">정산현황</Link>
+      </div>
+    </>)
+  }
+  
+
   useEffect(() => {
-    //프로필 버튼 클릭스 마이페이지 드랍메뉴
-    document.querySelector(".profile-btn").addEventListener("click", function () {
-      this.parentNode.classList.toggle("active");
-    });
     // 모바일 버거메뉴 클릭이벤트
     document.querySelector(".burger-menu").addEventListener("click", function () {
       document.querySelector(".mo-menu-wrap").classList.add("mo-open");
@@ -85,15 +110,12 @@ const NavBarElement = () => {
             </div>
 
             {/* <!-- 로그인 상태 --> */}
-            <div className="account-login">
-              <button className="profile-btn">
+            <div className="account-login" ref={dropMenuRef}>
+              <button className="profile-btn" onClick={handleToggleOption}>
                 <img className="profile-btn-img" src="../assets/images/icon/account-default.svg" alt="" />
                 <span className="account-name">{tmpName}님</span>
               </button>
-              <div className="profile-dropmenu">
-                <Link to="/Mypage"> 내 정보 </Link>
-                <Link to="/Finance">정산현황</Link>
-              </div>
+              {dropMenuOpen ? <DropMenu/> : null}
             </div>
             <div className="burger-menu">
               <img src="../assets/images/icon/mo-burger.svg" alt="" />
