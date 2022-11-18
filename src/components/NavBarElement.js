@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+
+let currentPath = ""; // 현재 경로 저장 변수
 
 const NavBarElement = () => {
   let a = useSelector((state) => state.login);
@@ -70,6 +73,15 @@ const NavBarElement = () => {
       window.removeEventListener("scroll", handleFollow); // addEventListener 함수를 삭제
     };
   });
+
+  // 같은 링크를 다시 클릭하면 새로고침 해주는 기능
+  const location = useLocation(); // 현재 url을 받아서 저장
+
+  useEffect(() => {
+    if (currentPath === location.pathname) window.location.reload();  // 현재 페이지와 location이 같으면 reload
+
+    currentPath = location.pathname;  // currentPath 재설정
+  }, [location]); // location이 바뀔 때마다 실행
 
   return (
     <>
