@@ -74,14 +74,23 @@ const NavBarElement = () => {
     };
   });
 
-  // 같은 링크를 다시 클릭하면 새로고침 해주는 기능
+  // 네브바 dom 사이 이동시 세부 컨트롤
   const location = useLocation(); // 현재 url을 받아서 저장
 
   useEffect(() => {
-    if (currentPath === location.pathname) window.location.reload();  // 현재 페이지와 location이 같으면 reload
-
+    if (currentPath === location.pathname){ // 같은 경로 -> 같은 경로 : 최상단으로 스크롤
+        window.scrollTo({top : 0, behavior : "smooth"});
+    }
+    else{
+      if (currentPath === '/Service' && location.pathname === '/')  // 서비스 -> 홈 : 최상단으로 스크롤
+        window.scrollTo({top : 0, behavior : "smooth"});
+      else if (location.pathname !== '/Service')  // 목적지가 서비스가 아니면 최상단으로 이동, 목적지가 서비스이면 Service.js에서 컨트롤
+        window.scrollTo(0, 0);
+    } 
+    
     currentPath = location.pathname;  // currentPath 재설정
   }, [location]); // location이 바뀔 때마다 실행
+
 
   return (
     <>
