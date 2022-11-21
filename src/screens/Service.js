@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, forwardRef } from "react";
 import { useSelector } from "react-redux";
 import ContractModal from "../components/contractModal/ContractModal";
 import { HOST } from "../redux/store";
@@ -6,6 +6,9 @@ import ProgressCircleDialog from "../components/ProgressCircleDialog";
 import "../assets/css/index.css";
 import { Helmet } from "react-helmet";
 import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
+import { useLocation } from "react-router-dom";
+
+let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수
 
 const Service = () => {
   let isLogined = useSelector((state) => state.login);
@@ -223,6 +226,26 @@ const Service = () => {
         alert("조회 실패... 아이디와 비번을 확인해주세요");
       });
   };
+  
+  // 네브바 이동 컨트롤
+  const location = useLocation(); // 현재 url을 받아서 저장
+
+  useEffect(() => {
+    if (currentPath === '/' && location.pathname === '/Service')  // 홈 -> 서비스 : 서비스 창으로 스크롤
+      window.scrollTo({
+        top: document.querySelector(".calculate__check-wrap").offsetTop,
+        behavior: "smooth",
+      });
+    else if (location.pathname === '/Service')  // * -> 서비스 : 서비스 창으로 스크롤
+      window.scrollTo({
+        top: document.querySelector(".calculate__check-wrap").offsetTop,
+        behavior: "smooth",
+      });
+    else if (currentPath === '/Service' && location.pathname === '/') // 서비스 -> 홈 : 최상단으로 스크롤
+      window.scrollTo({top : 0, behavior : "smooth"});
+    
+    currentPath = location.pathname;  // currentPath 재설정
+  }, [location]); // location이 바뀔 때마다 실행
 
   return (
     <main className="container">
