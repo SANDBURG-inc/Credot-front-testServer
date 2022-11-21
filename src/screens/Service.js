@@ -5,6 +5,7 @@ import { HOST } from "../redux/store";
 import ProgressCircleDialog from "../components/ProgressCircleDialog";
 import "../assets/css/index.css";
 import { Helmet } from "react-helmet";
+import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
 import { useLocation } from "react-router-dom";
 
 let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수
@@ -16,6 +17,25 @@ const Service = () => {
   const token = useSelector((state) => state.jwt);
   const [modalOpen, setModalOpen] = useState(false);
   const [progressOpen, setprogressOpen] = useState(false);
+
+  const [autoModalOpen, setAutoModalOpen] = useState(false);
+  const [image, setImage] = useState("");
+
+  const OpenAutoModal = async () => {
+    setprogressOpen(true);
+    const fetchData = async () => {
+      let image = await fetch(HOST + "/commerce/wmp/crawl");
+      image = await image.blob();
+      setImage(image);
+    };
+    await fetchData();
+    setprogressOpen(false);
+
+    setAutoModalOpen(true);
+  };
+  const closeAutoModal = () => {
+    setAutoModalOpen(false);
+  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -111,12 +131,10 @@ const Service = () => {
       case "101":
         alert("아이디 또는 비밀번호가 다릅니다. 확인 후 다시 입력해주세요");
         return false;
-
       case "102":
       case "103":
         alert("정산 현황이 존재하지 않습니다.");
         return false;
-
       case "104":
         alert("인증번호가 틀렸습니다.");
         return false;
@@ -316,6 +334,7 @@ const Service = () => {
 
         <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
         <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal>
+        <AutoInputModal open={autoModalOpen} close={closeAutoModal} header="자동입력방지문자 입력" image={image} id={id} pw={pw}></AutoInputModal>
 
         <section className="calculate__check-wrap">
           <div className="inner">
@@ -456,12 +475,15 @@ const Service = () => {
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
+                      // 위메프 조회하기
                       if (active[4]) {
+                        OpenAutoModal();
                       }
                     }}
                   >
                     조회하기
                   </button>
+
                   <button className="check-box-btn check-box-btn2">선정산받기</button>
                 </div>
                 <div className="check-box">
