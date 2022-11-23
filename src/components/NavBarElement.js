@@ -34,9 +34,9 @@ const NavBarElement = () => {
 
   const DropMenu = () => {
     useEffect(() => {
-      document.addEventListener('click', handleClickOutSide)    // 드롭메뉴가 켜지면 handleClickOutside함수에 이벤트 전달
+      document.addEventListener('mousedown', handleClickOutSide)    // 드롭메뉴가 켜지면 handleClickOutside함수에 이벤트 전달
       return () => {
-        document.removeEventListener('click', handleClickOutSide) // 메모리 제거
+        document.removeEventListener('mousedown', handleClickOutSide) // 메모리 제거
       }
     }, []);
     return (  // 드롭메뉴 div 리턴
@@ -48,18 +48,21 @@ const NavBarElement = () => {
     </>)
   }
   
-
   useEffect(() => {
     // 모바일 버거메뉴 클릭이벤트
-    document.querySelector(".burger-menu").addEventListener("click", function () {
+    document.querySelector(".burger-menu").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.add("mo-open");
     });
 
-    document.querySelector(".mo-close").addEventListener("click", function () {
+    document.querySelector(".mo-close").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
 
-    document.querySelector(".mo-blank").addEventListener("click", function () {
+    document.querySelector(".mo-blank").addEventListener('click', function () {
+      document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+    });
+
+    document.querySelector(".mo-menu-wrap .header-menu-wrap").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
   }, []);
