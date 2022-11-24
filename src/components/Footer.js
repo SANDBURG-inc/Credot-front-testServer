@@ -18,7 +18,7 @@ const Footer = () => {
             <span>대표번호 - </span>
           </div>
         </div>
-        <span className="f-copy font-eng">Copyright © Creadot, All Rights Reserved.</span>
+        <span className="f-copy font-eng">Copyright © Credot, All Rights Reserved.</span>
       </div>
     </footer>
   );
