@@ -53,18 +53,26 @@ const NavBarElement = () => {
     document.querySelector(".burger-menu").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.add("mo-open");
     });
-
     document.querySelector(".mo-close").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
-
     document.querySelector(".mo-blank").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
-
     document.querySelector(".mo-menu-wrap .header-menu-wrap").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
+    if (a) {
+      document.querySelector(".mo-menu .header-account-wrap.logined .account-login").addEventListener('click', function () {
+        document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+      });
+    }
+    else {
+    document.querySelector(".mo-menu .header-account-wrap .account-not_login").addEventListener('click', function () {
+      document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
+    });
+  }
+    
   }, []);
 
   useEffect(() => {
