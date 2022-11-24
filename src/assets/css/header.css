@@ -283,6 +283,7 @@
   text-align: left;
   color: #fc8118;
   margin-bottom: 70px;
+  margin-top : -150px;
   padding: 0 30px;
 }
 
@@ -302,6 +303,7 @@
 .mo-menu .header-account-wrap .account-not_login,
 .mo-menu .header-account-wrap .account-login {
   justify-content: center;
+  margin-bottom : 150px;
 }
 
 .mo-menu .header-account-wrap .devide-bar {

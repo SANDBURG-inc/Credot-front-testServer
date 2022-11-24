@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 let currentPath = ""; // 현재 경로 저장 변수
 
 const NavBarElement = () => {
-  let a = useSelector((state) => state.login);
+  let isLogin = useSelector((state) => state.login);
   const tmpName = useSelector((state) => state.info.name);
 
   const [ScrollY, setScrollY] = useState(0); // 스크롤값을 저장하기 위한 상태
@@ -62,7 +62,7 @@ const NavBarElement = () => {
     document.querySelector(".mo-menu-wrap .header-menu-wrap").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
-    if (a) {
+    if (isLogin) {
       document.querySelector(".mo-menu .header-account-wrap.logined .account-login").addEventListener('click', function () {
         document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
       });
@@ -127,7 +127,7 @@ const NavBarElement = () => {
             </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
-          <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+          <div className={isLogin === false ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
               <Link className="header-account-wrap-a" to="/Login">
@@ -178,7 +178,7 @@ const NavBarElement = () => {
             </Link>
           </div>
           {/* <!-- header-account-wrap 클래스에 logined 추가시 로그인 상태 --> */}
-          <div className={a === false ? "header-account-wrap" : "header-account-wrap logined"}>
+          <div className={isLogin === false ? "header-account-wrap" : "header-account-wrap logined"}>
             {/* <!-- 비로그인 상태 --> */}
             <div className="account-not_login">
               <Link to="/Login"> 로그인 </Link>
