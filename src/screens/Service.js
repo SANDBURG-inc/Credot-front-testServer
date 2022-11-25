@@ -5,8 +5,8 @@ import { HOST } from "../redux/store";
 import ProgressCircleDialog from "../components/ProgressCircleDialog";
 import "../assets/css/index.css";
 import { Helmet } from "react-helmet";
-import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
 import { useLocation } from "react-router-dom";
+import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
 
 let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수
 
@@ -24,14 +24,14 @@ const Service = () => {
   const OpenAutoModal = async () => {
     setprogressOpen(true);
     const fetchData = async () => {
-      let image = await fetch(HOST + "/commerce/wmp/crawl");
+      let image = await fetch(HOST + "/commerce/wmp/crawl?option=getImage");
       image = await image.blob();
       setImage(image);
     };
-    await fetchData();
-    setprogressOpen(false);
-
-    setAutoModalOpen(true);
+    await fetchData().then(() => {
+      setprogressOpen(false);
+      setAutoModalOpen(true);
+    });
   };
   const closeAutoModal = () => {
     setAutoModalOpen(false);
@@ -44,17 +44,33 @@ const Service = () => {
     setModalOpen(false);
   };
 
-  const [inputs, setInputs] = useState({
-    id: "",
-    pw: "",
-  });
+  const [inputs, setInputs] = useState([
+    {
+      id0: "",
+      pw0: "",
+      id1: "",
+      pw1: "",
+      id2: "",
+      pw2: "",
+      id3: "",
+      pw3: "",
+      id4: "",
+      pw4: "",
+      id5: "",
+      pw5: "",
+      id6: "",
+      pw6: "",
+      id7: "",
+      pw7: "",
+    },
+  ]);
+  const { id0, id1, id2, id3, id4, id5, id6, id7 } = inputs;
+  const { pw0, pw1, pw2, pw3, pw4, pw5, pw6, pw7 } = inputs;
 
   const [price, setPrice] = useState(0);
   const [deadline, setDeadline] = useState(0);
 
   const [isChecked, setIsChecked] = useState(false);
-
-  const { id, pw } = inputs;
 
   const [active, setActive] = useState([false, false, false, false, false, false, false, false]);
 
@@ -162,13 +178,13 @@ const Service = () => {
   };
 
   const lookUp = () => {
-    if (!id || !pw) {
+    if (!id0 || !pw0) {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
     }
 
     setprogressOpen(true);
-    fetch(HOST + "/commerce/coupang/crawl?id=" + id + "&pw=" + pw, {
+    fetch(HOST + "/commerce/coupang/crawl?id=" + id0 + "&pw=" + pw0, {
       method: "post",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -226,25 +242,28 @@ const Service = () => {
         alert("조회 실패... 아이디와 비번을 확인해주세요");
       });
   };
-  
+
   // 네브바 이동 컨트롤
   const location = useLocation(); // 현재 url을 받아서 저장
 
   useEffect(() => {
-    if (currentPath === '/' && location.pathname === '/Service')  // 홈 -> 서비스 : 서비스 창으로 스크롤
+    if (currentPath === "/" && location.pathname === "/Service")
+      // 홈 -> 서비스 : 서비스 창으로 스크롤
       window.scrollTo({
         top: document.querySelector(".calculate__check-wrap").offsetTop,
         behavior: "smooth",
       });
-    else if (location.pathname === '/Service')  // * -> 서비스 : 서비스 창으로 스크롤
+    else if (location.pathname === "/Service")
+      // * -> 서비스 : 서비스 창으로 스크롤
       window.scrollTo({
         top: document.querySelector(".calculate__check-wrap").offsetTop,
         behavior: "smooth",
       });
-    else if (currentPath === '/Service' && location.pathname === '/') // 서비스 -> 홈 : 최상단으로 스크롤
-      window.scrollTo({top : 0, behavior : "smooth"});
-    
-    currentPath = location.pathname;  // currentPath 재설정
+    else if (currentPath === "/Service" && location.pathname === "/")
+      // 서비스 -> 홈 : 최상단으로 스크롤
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    currentPath = location.pathname; // currentPath 재설정
   }, [location]); // location이 바뀔 때마다 실행
 
   return (
@@ -334,7 +353,15 @@ const Service = () => {
 
         <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
         <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal>
-        <AutoInputModal open={autoModalOpen} close={closeAutoModal} header="자동입력방지문자 입력" image={image} id={id} pw={pw}></AutoInputModal>
+        <AutoInputModal
+          open={autoModalOpen}
+          close={closeAutoModal}
+          header="자동입력방지문자 입력"
+          image={image}
+          setImage={setImage}
+          id={id4 || ""}
+          pw={pw4 || ""}
+        ></AutoInputModal>
 
         <section className="calculate__check-wrap">
           <div className="inner">
@@ -360,21 +387,31 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo1.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input name="id" className="check-box-input check-box-input-id" type="text" placeholder="ID" onChange={onChange} value={id} />
                     <input
-                      name="pw"
+                      name="id0"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id0 || ""}
+                    />
+                    <input
+                      name="pw0"
                       className="check-box-input check-box-input-pw main-password"
                       type="password"
                       placeholder="PW"
                       onChange={onChange}
-                      value={pw}
+                      value={pw0 || ""}
                     />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      if (active[0]) lookUp();
+                      if (active[0]) {
+                        console.log(id0, pw0);
+                        lookUp();
+                      }
                     }}
                   >
                     조회하기
@@ -386,14 +423,29 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo2.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input
+                      name="id1"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id1 || ""}
+                    />
+                    <input
+                      name="pw1"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw1 || ""}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
                       if (active[1]) {
+                        console.log(id1, pw1);
                       }
                     }}
                   >
@@ -404,8 +456,22 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo3.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input
+                      name="id2"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id2 || ""}
+                    />
+                    <input
+                      name="pw2"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw2 || ""}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
@@ -421,23 +487,31 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo4.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input name="id" className="check-box-input check-box-input-id" type="text" placeholder="ID" onChange={onChange} value={id} />
                     <input
-                      name="pw"
+                      name="id3"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id3 || ""}
+                    />
+                    <input
+                      name="pw3"
                       className="check-box-input check-box-input-pw main-password"
                       type="password"
                       placeholder="PW"
                       onChange={onChange}
-                      value={pw}
+                      value={pw3 || ""}
                     />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={async () => {
+                      console.log(id3, pw3);
                       if (active[3]) {
                         setprogressOpen(true);
-                        await fetch(HOST + "/commerce/tmon/crawl?id=" + id + "&pw=" + pw, {
+                        await fetch(HOST + "/commerce/tmon/crawl?id=" + id3 + "&pw=" + pw3, {
                           method: "post",
                           headers: {
                             "Content-Type": "application/json; charset=utf-8",
@@ -468,16 +542,42 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo5.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input
+                      name="id4"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id4 || ""}
+                    />
+                    <input
+                      name="pw4"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw4 || ""}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
-                    onClick={() => {
+                    onClick={async () => {
                       // 위메프 조회하기
+
                       if (active[4]) {
-                        OpenAutoModal();
+                        await fetch(HOST + "/commerce/wmp/crawl?option=isCaptcha", {
+                          headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                          },
+                          method: "POST",
+                          body: JSON.stringify({ id: id4, pw: pw4 }),
+                        }).then((response) => {
+                          if (response.status == 200) {
+                            OpenAutoModal();
+                          }
+                        });
                       }
                     }}
                   >
@@ -489,14 +589,30 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo6.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input
+                      name="id5"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id5 || ""}
+                    />
+                    <input
+                      name="pw5"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw5 || ""}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      if (active[5]) alert("서비스 준비중입니다.");
+                      if (active[5]) {
+                        console.log(id5, pw5);
+                      }
                     }}
                   >
                     조회하기
@@ -506,14 +622,30 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo7.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input
+                      name="id6"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id6 || ""}
+                    />
+                    <input
+                      name="pw6"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw6 || ""}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      if (active[6]) alert("서비스 준비중입니다.");
+                      if (active[6]) {
+                        console.log(id6, pw6);
+                      }
                     }}
                   >
                     조회하기
@@ -523,14 +655,30 @@ const Service = () => {
                 <div className="check-box">
                   <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo8.png" alt="" />
                   <form className="check-box-form" action="">
-                    <input className="check-box-input check-box-input-id" type="text" placeholder="ID" />
-                    <input className="check-box-input check-box-input-pw main-password" type="password" placeholder="PW" />
+                    <input
+                      name="id7"
+                      className="check-box-input check-box-input-id"
+                      type="text"
+                      placeholder="ID"
+                      onChange={onChange}
+                      value={id7 || ""}
+                    />
+                    <input
+                      name="pw7"
+                      className="check-box-input check-box-input-pw main-password"
+                      type="password"
+                      placeholder="PW"
+                      onChange={onChange}
+                      value={pw7 || ""}
+                    />
                     <div className="eyes"></div>
                   </form>
                   <button
                     className="check-box-btn check-box-btn1"
                     onClick={() => {
-                      if (active[7]) alert("서비스 준비중입니다.");
+                      if (active[7]) {
+                        console.log(id7, pw7);
+                      }
                     }}
                   >
                     조회하기
