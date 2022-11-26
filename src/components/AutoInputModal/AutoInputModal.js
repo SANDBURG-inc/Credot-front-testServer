@@ -25,8 +25,8 @@ const AutoInputModal = (props) => {
                 <input
                   style={{
                     width: "200px",
-                    height: "30px",
-                    margin: "10px",
+                    height: "40px",
+                    margin: "20px",
                     fontSize: "17px",
                   }}
                   onChange={(e) => {
