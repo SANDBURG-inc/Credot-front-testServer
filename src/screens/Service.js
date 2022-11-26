@@ -566,6 +566,7 @@ const Service = () => {
                       // 위메프 조회하기
 
                       if (active[4]) {
+                        setprogressOpen(true);
                         await fetch(HOST + "/commerce/wmp/crawl?option=isCaptcha", {
                           headers: {
                             Accept: "application/json",
@@ -573,8 +574,10 @@ const Service = () => {
                           },
                           method: "POST",
                           body: JSON.stringify({ id: id4, pw: pw4 }),
+                          credentials: "include",
                         }).then((response) => {
                           if (response.status == 200) {
+                            setprogressOpen(false);
                             OpenAutoModal();
                           }
                         });
