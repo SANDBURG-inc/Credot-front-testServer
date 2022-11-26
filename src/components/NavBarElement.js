@@ -71,8 +71,7 @@ const NavBarElement = () => {
     document.querySelector(".mo-menu .header-account-wrap .account-not_login").addEventListener('click', function () {
       document.querySelector(".mo-menu-wrap").classList.remove("mo-open");
     });
-  }
-    
+    }
   }, []);
 
   useEffect(() => {
