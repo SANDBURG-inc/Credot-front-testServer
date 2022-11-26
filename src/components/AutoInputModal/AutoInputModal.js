@@ -4,7 +4,7 @@ import { useState } from "react";
 import { HOST } from "../../redux/store";
 
 const AutoInputModal = (props) => {
-  const { open, close, header, image, setImage, id, pw } = props;
+  const { open, close, header, image, setImage, id4, pw4 } = props;
   const [input, setInput] = useState("");
 
   return (
@@ -24,9 +24,10 @@ const AutoInputModal = (props) => {
                 <input
                   style={{
                     width: "200px",
-                    height: "30px",
-                    margin: "10px",
+                    height: "40px",
+                    margin: "20px",
                     fontSize: "17px",
+                    border: "1px solid black",
                   }}
                   onChange={(e) => {
                     setInput(e.target.value);
@@ -45,7 +46,7 @@ const AutoInputModal = (props) => {
                         "Content-Type": "application/json",
                       },
                       method: "POST",
-                      body: JSON.stringify({ input: input, id: id, pw: pw }),
+                      body: JSON.stringify({ input: input, id: id4, pw: pw4 }),
                     });
                     close();
                   }}
