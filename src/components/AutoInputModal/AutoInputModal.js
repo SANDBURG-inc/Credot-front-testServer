@@ -4,7 +4,7 @@ import { useState } from "react";
 import { HOST } from "../../redux/store";
 
 const AutoInputModal = (props) => {
-  const { open, close, header, image, setImage, id4, pw4 } = props;
+  const { open, close, header, image, setImage, id, pw } = props;
   const [input, setInput] = useState("");
 
   return (
@@ -36,6 +36,7 @@ const AutoInputModal = (props) => {
                 <button
                   className="submit"
                   onClick={async () => {
+                    console.log(id, pw);
                     if (input == "") {
                       alert("빈 칸을 채워주세요.");
                       return;
@@ -46,7 +47,7 @@ const AutoInputModal = (props) => {
                         "Content-Type": "application/json",
                       },
                       method: "POST",
-                      body: JSON.stringify({ input: input, id: id4, pw: pw4 }),
+                      body: JSON.stringify({ input: input, id: id, pw: pw }),
                     });
                     close();
                   }}
