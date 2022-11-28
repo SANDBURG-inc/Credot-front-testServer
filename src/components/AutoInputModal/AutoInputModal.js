@@ -2,10 +2,9 @@ import React from "react";
 import "./AutoInputModal.css";
 import { useState } from "react";
 import { HOST } from "../../redux/store";
-import { useSelector } from "react-redux";
 
 const AutoInputModal = (props) => {
-  const { open, close, header, image, id, pw } = props;
+  const { open, close, header, image, setImage, id, pw } = props;
   const [input, setInput] = useState("");
 
   return (
@@ -25,9 +24,10 @@ const AutoInputModal = (props) => {
                 <input
                   style={{
                     width: "200px",
-                    height: "30px",
-                    margin: "10px",
+                    height: "40px",
+                    margin: "20px",
                     fontSize: "17px",
+                    border: "1px solid black",
                   }}
                   onChange={(e) => {
                     setInput(e.target.value);
@@ -36,6 +36,7 @@ const AutoInputModal = (props) => {
                 <button
                   className="submit"
                   onClick={async () => {
+                    console.log(id, pw);
                     if (input == "") {
                       alert("빈 칸을 채워주세요.");
                       return;
@@ -57,9 +58,13 @@ const AutoInputModal = (props) => {
                   style={{ width: "75px", margin: "10px" }}
                   className="refresh"
                   onClick={async () => {
-                    let refreshedImage = await fetch(HOST + "/commerce/wmp/crawl?option=refresh");
-                    refreshedImage = await refreshedImage.blob();
-                    await document.getElementById("img").setAttribute("src", URL.createObjectURL(refreshedImage));
+                    await fetch(HOST + "/commerce/wmp/crawl?option=refresh")
+                      .then((response) => {
+                        return response.blob();
+                      })
+                      .then((response) => {
+                        setImage(response);
+                      });
                   }}
                 >
                   새로고침

@@ -101,7 +101,7 @@
   border-radius: 8px;
   border: solid 1px #dedede;
   background-color: #fff;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
