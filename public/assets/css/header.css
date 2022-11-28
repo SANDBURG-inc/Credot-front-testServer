@@ -8,14 +8,14 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 10000;
+  z-index: 999;
   backdrop-filter: blur(0);
-  -webkit-backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(17px);
 }
 
 .header__inner.blur {
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(17px);
 }
 
 .logo {
@@ -283,7 +283,7 @@
   text-align: left;
   color: #fc8118;
   margin-bottom: 70px;
-  margin-top : -150px;
+  margin-top: -150px;
   padding: 0 30px;
 }
 
@@ -303,7 +303,7 @@
 .mo-menu .header-account-wrap .account-not_login,
 .mo-menu .header-account-wrap .account-login {
   justify-content: center;
-  margin-bottom : 150px;
+  margin-bottom: 150px;
 }
 
 .mo-menu .header-account-wrap .devide-bar {
