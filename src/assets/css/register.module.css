@@ -1,4 +1,4 @@
-.register-introduce-wrap .inner {
+.registerIntroduceWrap .inner {
   padding-top: 135px;
   display: flex;
   flex-direction: column;
@@ -6,15 +6,15 @@
   align-items: center;
 }
 
-.register-i-head {
+.registerIHead {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
+  margin-bottom: 45px;
 }
 
-.register-head-title {
+.registerHeadTitle {
   display: inline-block;
   font-size: 32px;
   font-weight: bold;
@@ -25,7 +25,7 @@
   margin-bottom: 35px;
 }
 
-.register-i-body {
+.registerIBody {
   width: var(--main-width);
   margin-bottom: 140px;
   display: flex;
@@ -34,7 +34,7 @@
   align-items: center;
 }
 
-.register-form-wrap form {
+.registerFormWrap form {
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -45,14 +45,14 @@
   background-color: #fff;
 }
 
-.register-inner__sec {
+.registerInnerSec {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 40px;
 }
 
-.register-sec__head {
+.registerSecHead {
   font-size: 16px;
   font-weight: bold;
   text-align: left;
@@ -62,8 +62,8 @@
   margin-bottom: 20px;
 }
 
-.register-form-wrap input,
-.register-form-wrap select {
+.registerFormWrap input,
+.registerFormWrap select {
   font-size: 18px;
   font-weight: 500;
   padding: 0 20px;
@@ -72,11 +72,7 @@
   outline: none;
 }
 
-.register-i-head {
-  margin-bottom: 45px;
-}
-
-.register-form-wrap select {
+.registerFormWrap select {
   background-image: url(../images/icon/arrow-down.svg);
   background-position: right 20px center;
   background-repeat: no-repeat;
@@ -98,42 +94,46 @@ option[value=""][disabled] {
   display: none;
 }
 
-.register-form-wrap input::placeholder {
+.registerFormWrap input::placeholder {
   font-size: 18px;
   font-weight: 500;
   text-align: left;
   color: #d6d6d6;
 }
 
-.register-input-wrap {
+.registerInputWrap {
   border-radius: 8px;
   border: solid 1px #dedede;
   background-color: #fff;
   overflow: hidden;
 }
 
-.register-input-wrap:last-child {
-  margin-top: 14px;
-}
-
-.register-input-wrap input,
-.register-input-wrap div {
-  border-bottom: 1px solid #f4f4f4;
-}
-
-.register-input-wrap input:last-child {
-  border-bottom: none !important;
-}
-
-.register-input-wrap div:last-child {
-  border-bottom: none !important;
-}
-
-.register-input-sol:focus {
+.registerInputWrap:focus-within {
   border: 1px solid rgb(255, 136, 0);
 }
 
-.register-input-sol {
+.registerInputWrap:last-child {
+  margin-top: 14px;
+}
+
+.registerInputWrap input,
+.registerInputWrap div {
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.registerInputWrap input:last-child {
+  border-bottom: none !important;
+}
+
+.registerInputWrap div:last-child {
+  border-bottom: none !important;
+}
+
+.registerInputSol:focus {
+  border: 1px solid rgb(255, 136, 0);
+}
+
+.registerInputSol {
   border-radius: 8px;
   border: solid 1px #dedede;
   background-color: #fff;
@@ -146,19 +146,23 @@ option[value=""][disabled] {
   text-align: left;
 }
 
-.register-business-input-wrap {
+.registerBusinessInputWrap {
   display: flex;
   margin-top: 14px;
   border-radius: 8px;
   border: solid 1px #dedede;
 }
 
-.register-input-business {
+.registerBusinessInputWrap:focus-within {
+  border: 1px solid rgb(255, 136, 0);
+}
+
+.registerInputBusiness {
   width: calc(100% - 105px) !important;
   border-bottom: none !important;
 }
 
-.register-check-businessbtn {
+.registerCheckBusinessbtn {
   border-bottom-right-radius: 7px;
   border-top-right-radius: 7px;
   width: 105px;
@@ -168,35 +172,26 @@ option[value=""][disabled] {
   color: #fff;
 }
 
-.register-check-businessbtn.active {
+.registerCheckBusinessbtn.active {
   background-color: #505050;
   color: #fff;
 }
 
-.register-input-sol:nth-child(2) {
+.registerInputSol:nth-child(2) {
   margin-top: 0;
 }
 
-.register-input-email:focus {
-  border: 1px solid rgb(255, 136, 0);
-}
-
-.register-email-input-wrap {
+.registerEmailInputWrap {
   display: flex;
   border-bottom: none !important;
 }
 
-.register-input-email:focus {
-  border-radius: 7px 7px 7px 7px;
-  border: 1px solid rgb(255, 136, 0);
-}
-
-.register-input-email {
+.registerInputEmail {
   width: calc(100% - 116px) !important;
   border-bottom: none !important;
 }
 
-.register-check-btn {
+.registerCheckBtn {
   width: 116px;
   background-color: #d6d6d6;
   font-size: 16px;
@@ -204,18 +199,13 @@ option[value=""][disabled] {
   color: #fff;
 }
 
-.register-check-btn.active {
+.registerCheckBtn.active {
   background-color: #505050;
   color: #fff;
 }
 
-.input-password {
+.inputPassword {
   width: 100% !important;
-}
-
-.input-password:focus {
-  border: 1px solid rgb(255, 136, 0);
-  border-radius: 7px 7px 7px 7px;
 }
 
 .input-input {
@@ -223,17 +213,12 @@ option[value=""][disabled] {
   align-items: center;
 }
 
-.register-input-wrap input:last-child,
-.register-input-wrap div:last-child {
+.registerInputWrap input:last-child,
+.registerInputWrap div:last-child {
   border-bottom: 1px solid #f4f4f4;
 }
 
-.register-input:focus {
-  border: 1px solid rgb(255, 136, 0);
-  border-radius: 7px;
-}
-
-.login-btn {
+.loginBtn {
   width: 100%;
   height: 60px;
   margin-bottom: 10px;
@@ -244,11 +229,11 @@ option[value=""][disabled] {
   color: #fff;
 }
 
-.login-btn.active {
+.loginBtn.active {
   background-color: #fc8118;
 }
 
-.register-back-btn {
+.registerBackBtn {
   width: 380px;
   height: 60px;
   object-fit: contain;
@@ -260,11 +245,11 @@ option[value=""][disabled] {
   color: #7e7e7e;
 }
 
-.register-password-wrap {
+.registerPasswordWrap {
   position: relative;
 }
 
-.r-eyes {
+.rEyes {
   display: block;
   position: absolute;
   top: 50%;
@@ -278,11 +263,11 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
-.r-eyes.visible {
+.rEyes.visible {
   background-image: url(../images/main/m-input-pw__v.png);
 }
 
-.password__check-input::after {
+.passwordCheckInput::after {
   content: "";
   display: block;
   position: absolute;
@@ -295,21 +280,16 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
-.password__check-input:focus {
-  border: 1px solid rgb(255, 136, 0);
-  border-radius: 7px 7px 7px 7px;
-}
-
 @media (max-width: 700px) {
-  .register-form-wrap form {
+  .registerFormWrap form {
     padding: 20px;
   }
 
-  .register-i-head {
+  .registerIHead {
     margin-bottom: 60px;
   }
 
-  .register-sec__head {
+  .registerSecHead {
     padding-bottom: 20px;
     margin-bottom: 20px;
   }
@@ -318,58 +298,68 @@ option[value=""][disabled] {
     font-size: 14px;
   }
 
-  .register-form-wrap input::placeholder {
+  .registerFormWrap input::placeholder {
     font-size: 14px;
   }
 
-  .register-check-btn {
+  .registerBusinessInputWrap input::placeholder {
+    font-size: 12px;
+  }
+
+  .registerCheckBtn,
+  .registerCheckBusinessbtn {
     font-size: 14px;
   }
 
-  .register-input-sol,
-  .register-input-wrap:last-child {
+  .registerFormWrap input,
+  .registerFormWrap select {
+    font-size: 14px;
+  }
+
+  .registerInputSol,
+  .registerInputWrap:last-child {
     margin-top: 10px;
   }
 
-  .register-last-sec {
+  .registerLastSec {
     margin-bottom: 67px !important;
   }
 
-  .register-back-btn {
+  .registerBackBtn {
     width: 398px;
     font-size: 15px;
   }
 
-  .login-btn {
+  .loginBtn {
     font-size: 15px;
   }
 
-  .register-i-body {
+  .registerIBody {
     margin-bottom: 100px;
   }
 
-  .register-i-head {
+  .registerIHead {
     margin-bottom: 0px;
   }
 }
 
 @media (max-width: 500px) {
-  .register-form-wrap form {
+  .registerFormWrap form {
     width: 343px;
   }
 
-  .register-form-wrap input,
-  .register-form-wrap select {
+  .registerFormWrap input,
+  .registerFormWrap select {
     height: 58px;
   }
 
-  .register-login-btn,
-  .register-back-btn {
+  .registerLoginBtn,
+  .registerBackBtn {
     height: 50px;
     font-size: 14px;
   }
 
-  .register-back-btn {
+  .registerBackBtn {
     width: 301px;
   }
 }

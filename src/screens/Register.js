@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { HOST } from "../redux/store";
-import "../assets/css/register.css";
+import styles from "../assets/css/register.module.css";
 import { Helmet } from "react-helmet";
 import LocationModal from "../components/LocationModal";
 import axios from "axios";
+import { style } from "@mui/system";
 
 const Register = () => {
   const [redirectionFlag, setRedirectionFlag] = useState(false);
@@ -36,8 +37,6 @@ const Register = () => {
   };
 
   const [checkEmail, setCheckEmail] = useState(false);
-  const [checkPw, setCheckPw] = useState("");
-  const [pwEqual, setPwEqual] = useState(false);
 
   const optionValue = [
     "국민은행",
@@ -72,23 +71,20 @@ const Register = () => {
     "토스뱅크",
   ];
 
-  useEffect(() => {
-    // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
-    let eyes = document.querySelectorAll(".r-eyes");
+  // [To password show & hide]
+  // Initialize a boolean state
+  const [passwordShown, setPasswordShown] = useState(false);
 
-    for (let i = 0; i < eyes.length; i++) {
-      eyes[i].addEventListener("click", function () {
-        if (this.previousElementSibling.type === "text") {
-          this.classList.remove("visible");
-          this.previousElementSibling.type = "password";
-        } else {
-          this.classList.add("visible");
-          this.previousElementSibling.type = "text";
-        }
-      });
-    }
-  }, []);
+  // Password toggle handler
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
 
+  // [check password equal]
+  const [checkPw, setCheckPw] = useState("");
+  const [pwEqual, setPwEqual] = useState(false);
   useEffect(() => {
     if (userData.password === checkPw && checkPw !== "") {
       setPwEqual(true);
@@ -198,21 +194,21 @@ const Register = () => {
         <meta name="keywords" content="선정산, 셀러, 이커머스, 크레닷, 자금, 대출" />
       </Helmet>
       <div className="inner">
-        <section className="section-wrap register-introduce-wrap">
-          <div className="inner">
-            <div className="register-i-head">
-              <span className="register-head-title">회원가입</span>
+        <section className={"section-wrap " + styles.registerIntroduceWrap}>
+          <div className={styles.inner}>
+            <div className={styles.registerIHead}>
+              <span className={styles.registerHeadTitle}>회원가입</span>
             </div>
-            <div className="register-i-body">
-              <div className="register-form-wrap">
+            <div className={styles.registerIBody}>
+              <div className={styles.registerFormWrap}>
                 <form>
-                  <div className="register-inner__sec">
-                    <span className="register-sec__head">회원 정보</span>
-                    <div className="register-input-wrap">
-                      <input className="register-input-email" type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
-                      <div className="register-email-input-wrap">
+                  <div className={styles.registerInnerSec}>
+                    <span className={styles.registerSecHead}>회원 정보</span>
+                    <div className={styles.registerInputWrap}>
+                      <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
+                      <div className={styles.registerEmailInputWrap}>
                         <input
-                          className="register-input-email"
+                          className={styles.registerInputEmail}
                           type="text"
                           placeholder="이메일을 입력해주세요"
                           name="email"
@@ -220,7 +216,7 @@ const Register = () => {
                         />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button
-                          className="register-check-btn active"
+                          className={`${styles.registerCheckBtn} ${styles.active}`}
                           type="button"
                           onClick={() => {
                             if (!userData.email.includes("@")) {
@@ -243,46 +239,52 @@ const Register = () => {
                         </button>
                       </div>
                     </div>
-                    <input className="register-input-sol" type="text" placeholder="연락처를 입력해주세요" name="phoneNum" onChange={handleOnChange} />
-                    <div className="register-input-wrap">
-                      <div className="register-password-wrap">
+                    <input
+                      className={styles.registerInputSol}
+                      type="text"
+                      placeholder="연락처를 입력해주세요"
+                      name="phoneNum"
+                      onChange={handleOnChange}
+                    />
+                    <div className={styles.registerInputWrap}>
+                      <div className={styles.registerPasswordWrap}>
                         <input
-                          type="password"
-                          className="input-password"
+                          type={passwordShown ? "text" : "password"}
+                          className={styles.inputPassword}
                           placeholder="비밀번호를 입력해주세요"
                           name="password"
                           onChange={handleOnChange}
                         />
-                        <div className="r-eyes"></div>
+                        <div onClick={togglePassword} className={passwordShown ? styles.rEyes : `${styles.rEyes} ${styles.visible}`}></div>
                       </div>
-                      <div className={pwEqual ? "register-password-wrap password__check-input" : "register-password-wrap"}>
+                      <div className={pwEqual ? `${styles.registerPasswordWrap} ${styles.passwordCheckInput}` : styles.registerPasswordWrap}>
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
                       </div>
                     </div>
                   </div>
-                  <div className="register-inner__sec ">
-                    <span className="register-sec__head">사업자 정보</span>
-                    <div className="register-input-wrap">
+                  <div className={styles.registerInnerSec}>
+                    <span className={styles.registerSecHead}>사업자 정보</span>
+                    <div className={styles.registerInputWrap}>
                       <input
-                        className="register-input"
+                        className={styles.registerInput}
                         type="text"
                         placeholder="법인명을 입력해주세요"
                         name="corporateName"
                         onChange={handleOnChange2}
                       />
-                      <input className="register-input" type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
+                      <input className={styles.registerInput} type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
                     </div>
-                    <div className="register-business-input-wrap">
+                    <div className={styles.registerBusinessInputWrap}>
                       <input
-                        className="register-input-business"
+                        className={styles.registerInputBusiness}
                         type="text"
-                        placeholder="사업장 소재지를 입력해주세요."
+                        placeholder="사업장 소재지를 입력해주세요"
                         name="businessLoc"
                         onChange={handleOnChangeLoc1}
                         value={Loc1}
                       />
                       <button
-                        className="register-check-businessbtn active"
+                        className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
                         type="button"
                         onClick={() => {
                           setLocModalOpen(true);
@@ -292,23 +294,23 @@ const Register = () => {
                       </button>
                     </div>
                     <input
-                      className="register-input-sol"
+                      className={styles.registerInputSol}
                       type="text"
-                      placeholder="상세주소를 입력해주세요."
+                      placeholder="상세주소를 입력해주세요"
                       name="businessLoc"
                       onChange={handleOnChangeLoc2}
                     />
                     <LocationModal open={LocModalOpen} setData={setLocFunc} close={setCloseModal}></LocationModal>
-                    <div className="register-business-input-wrap">
+                    <div className={styles.registerBusinessInputWrap}>
                       <input
-                        className="register-input-business"
+                        className={styles.registerInputBusiness}
                         type="text"
-                        placeholder="사업자 등록번호를 입력해주세요."
+                        placeholder="사업자등록번호를 입력해주세요"
                         name="corporateNum"
                         onChange={handleOnChange2}
                       />
                       <button
-                        className="register-check-businessbtn active"
+                        className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
                         type="button"
                         onClick={() => {
                           if (!incData.corporateNum.includes("-")) {
@@ -326,9 +328,9 @@ const Register = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="inner__sec last-sec">
-                    <span className="sec__head">정산받을 계좌</span>
-                    <select className="register-input-sol" defaultValue="default" name="bank" onChange={handleOnChange}>
+                  <div className={styles.registerInnerSec}>
+                    <span className={styles.registerSecHead}>정산받을 계좌</span>
+                    <select className={styles.registerInputSol} defaultValue="default" name="bank" onChange={handleOnChange}>
                       <option value="default" disabled>
                         정산받을 계좌의 은행을 선택해주세요
                       </option>
@@ -339,16 +341,16 @@ const Register = () => {
                       ))}
                     </select>
                     <input
-                      className="register-input-sol"
+                      className={styles.registerInputSol}
                       type="text"
-                      placeholder="정산받을 계좌번호를 입력해주세요."
+                      placeholder="정산받을 계좌번호를 입력해주세요"
                       name="account"
                       onChange={handleOnChange}
                     />
                   </div>
                   {/* login-btn 버튼에 active 클래스 추가시 로그인 버튼 활성화 */}
                   <button
-                    className="login-btn"
+                    className={styles.loginBtn}
                     type="button"
                     onClick={() => {
                       handleRegister();
@@ -358,7 +360,7 @@ const Register = () => {
                   </button>
                 </form>
               </div>
-              <button className="register-back-btn">
+              <button className={styles.registerBackBtn}>
                 <Link to="/">메인화면으로 돌아가기</Link>
               </button>
             </div>
