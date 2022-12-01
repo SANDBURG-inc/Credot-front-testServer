@@ -18,8 +18,10 @@ import {
 import "../assets/css/my_page.css";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const Mypage = () => {
+
   const a = useSelector((state) => state.login);
   // const token = useSelector((state) => state.jwt);
   const userData = localStorage.getItem("user");
@@ -45,7 +47,18 @@ const Mypage = () => {
     setSubNewPassword(e.target.value);
   };
 
-  // console.log("현재 토큰: " + token.jwt);
+  // 토큰 만료 판별
+  const jwtToken = JSON.parse(localStorage.getItem("user")).token;
+  const isExpired = (jwtToken) => {
+    try {
+      const expiration = jwtDecode(jwtToken).exp;
+      const now = new Date(Date.now() - 1000 * 60);
+      return now > expiration * 1000;
+    }
+    catch {
+      return true;
+    }
+  }
 
   const logout = useCallback(() => {
     // dispatch(updateJwt({}));
@@ -94,12 +107,17 @@ const Mypage = () => {
   //     clearTimeout(logoutTimer);
   //   }
   // }, [token, logout, tokenExpirationDate]);
-
+  console.log(isExpired(jwtToken));
   if (a === false) {
     return <Navigate to="/" />;
   }
-  // console.log("토큰 만료시간 출력" + token.jwt.exp);
-  return (
+  else if (isExpired(jwtToken)) {
+    alert("로그인 토큰이 만료되었습니다. 다시 로그인 해주세요.");
+    logout();
+    return <Navigate to="/Login"/>;
+  }
+  else {
+    return (
     <main className="container">
       <Helmet>
         <title>My Page - 크레닷</title>
@@ -217,6 +235,7 @@ const Mypage = () => {
       </div>
     </main>
   );
+  }
 };
 
 export default Mypage;
