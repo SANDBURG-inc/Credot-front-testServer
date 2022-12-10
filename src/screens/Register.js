@@ -6,7 +6,6 @@ import styles from "../assets/css/register.module.css";
 import { Helmet } from "react-helmet";
 import LocationModal from "../components/LocationModal";
 import axios from "axios";
-import { style } from "@mui/system";
 
 const Register = () => {
   const [redirectionFlag, setRedirectionFlag] = useState(false);
@@ -83,24 +82,24 @@ const Register = () => {
   };
 
   // [check password equal]
-  const [checkPw, setCheckPw] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
   const [pwEqual, setPwEqual] = useState(false);
   useEffect(() => {
-    if (userData.password === checkPw && checkPw !== "") {
+    if (userData.password === checkPassword && checkPassword !== "") {
       setPwEqual(true);
     } else {
       setPwEqual(false);
     }
-  }, [checkPw, userData.password]);
+  }, [checkPassword, userData.password]);
 
-  const handleOnChange = (e) => {
+  const handleUserData = (e) => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleOnChange2 = (e) => {
+  const handleIncData = (e) => {
     setIncData({
       ...incData,
       [e.target.name]: e.target.value,
@@ -117,70 +116,82 @@ const Register = () => {
     setLoc2(e.target.value);
   };
 
-  const handleOnChangeCheckPw = (e) => {
-    setCheckPw(e.target.value);
+  const handleCheckPassword = (e) => {
+    setCheckPassword(e.target.value);
   };
 
   const handleRegister = () => {
+    console.log(userData);
+    console.log(incData);
+    console.log(Loc1);
+    console.log(Loc2);
     if (!checkEmail) {
       alert("이메일 중복확인을 해주세요!");
       return;
     }
 
-    if (userData.password === "" || checkPw === "") {
+    if (userData.password === "" || checkPassword === "") {
       alert("비밀번호를 확인해주세요!");
       return;
-    } else if (userData.password === checkPw) {
-      for (const value in userData) {
-        if (userData[value] === "") {
-          alert("빈 칸을 모두 입력해주세요");
-          return;
-        }
-      }
-      for (const value in incData) {
-        if (incData[value] === "") {
-          alert("빈 칸을 모두 입력해주세요");
-          return;
-        }
-      }
-
-      axios
-        .post("https://cms.credot.kr/api/auth/local/register", {
-          username: userData.name,
-          email: userData.email,
-          password: userData.password,
-          phoneNum: userData.phoneNum,
-          bank: userData.bank,
-          account: userData.account,
-          corporateName: incData.corporateName,
-          ceo: incData.ceo,
-          businessLoc: Loc1.trim() + " " + Loc2.trim(),
-          corporateNum: incData.corporateNum,
-        })
-        .then((res) => {
-          // Handle success.
-          console.log("Well done!");
-          console.log("User profile", res.data.user);
-          console.log("User token", res.data.jwt);
-          setRedirectionFlag(true);
-          alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
-        })
-        .catch((error) => {
-          // Handle error.
-          console.log("An error occurred:", error.response);
-        });
-      // 입력이 끝나고 inputs를 비워주는 역할
-      setUserData({
-        name: "",
-        email: "",
-        phoneNum: "",
-        password: "",
-        bank: "",
-        account: "",
-      });
-    } else {
-      alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
     }
+
+    if (userData.password !== checkPassword) {
+      alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
+      return;
+    }
+
+    for (const value in userData) {
+      if (userData[value] === "") {
+        alert("빈 칸을 모두 입력해주세요");
+        return;
+      }
+    }
+    for (const value in incData) {
+      if (incData[value] === "") {
+        alert("빈 칸을 모두 입력해주세요");
+        return;
+      }
+    }
+
+    axios
+      .post("https://cms.credot.kr/api/auth/local/register", {
+        username: userData.name,
+        email: userData.email,
+        password: userData.password,
+        phoneNum: userData.phoneNum,
+        bank: userData.bank,
+        account: userData.account,
+        corporateName: incData.corporateName,
+        ceo: incData.ceo,
+        businessLoc: Loc1.trim() + " " + Loc2.trim(),
+        corporateNum: incData.corporateNum,
+      })
+      .then((res) => {
+        // Handle success.
+        console.log("Well done!");
+        console.log("User profile", res.data.user);
+        console.log("User token", res.data.jwt);
+        setRedirectionFlag(true);
+        alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
+        // 입력이 끝나고 inputs를 비워주는 역할
+        setUserData({
+          name: "",
+          email: "",
+          phoneNum: "",
+          password: "",
+          bank: "",
+          account: "",
+        });
+        setIncData({
+          corporateName: "",
+          ceo: "",
+          corporateNum: "",
+        });
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
   };
 
   if (redirectionFlag === true) {
@@ -205,14 +216,14 @@ const Register = () => {
                   <div className={styles.registerInnerSec}>
                     <span className={styles.registerSecHead}>회원 정보</span>
                     <div className={styles.registerInputWrap}>
-                      <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleOnChange} />
+                      <input type="text" placeholder="이름을 입력해주세요" name="name" onChange={handleUserData} />
                       <div className={styles.registerEmailInputWrap}>
                         <input
                           className={styles.registerInputEmail}
                           type="text"
                           placeholder="이메일을 입력해주세요"
                           name="email"
-                          onChange={handleOnChange}
+                          onChange={handleUserData}
                         />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button
@@ -244,7 +255,7 @@ const Register = () => {
                       type="text"
                       placeholder="연락처를 입력해주세요"
                       name="phoneNum"
-                      onChange={handleOnChange}
+                      onChange={handleUserData}
                     />
                     <div className={styles.registerInputWrap}>
                       <div className={styles.registerPasswordWrap}>
@@ -253,12 +264,12 @@ const Register = () => {
                           className={styles.inputPassword}
                           placeholder="비밀번호를 입력해주세요"
                           name="password"
-                          onChange={handleOnChange}
+                          onChange={handleUserData}
                         />
                         <div onClick={togglePassword} className={passwordShown ? styles.rEyes : `${styles.rEyes} ${styles.visible}`}></div>
                       </div>
                       <div className={pwEqual ? `${styles.registerPasswordWrap} ${styles.passwordCheckInput}` : styles.registerPasswordWrap}>
-                        <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleOnChangeCheckPw} />
+                        <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleCheckPassword} />
                       </div>
                     </div>
                   </div>
@@ -270,9 +281,9 @@ const Register = () => {
                         type="text"
                         placeholder="법인명을 입력해주세요"
                         name="corporateName"
-                        onChange={handleOnChange2}
+                        onChange={handleIncData}
                       />
-                      <input className={styles.registerInput} type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleOnChange2} />
+                      <input className={styles.registerInput} type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleIncData} />
                     </div>
                     <div className={styles.registerBusinessInputWrap}>
                       <input
@@ -307,7 +318,7 @@ const Register = () => {
                         type="text"
                         placeholder="사업자등록번호를 입력해주세요"
                         name="corporateNum"
-                        onChange={handleOnChange2}
+                        onChange={handleIncData}
                       />
                       <button
                         className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
@@ -330,7 +341,7 @@ const Register = () => {
                   </div>
                   <div className={styles.registerInnerSec}>
                     <span className={styles.registerSecHead}>정산받을 계좌</span>
-                    <select className={styles.registerInputSol} defaultValue="default" name="bank" onChange={handleOnChange}>
+                    <select className={styles.registerInputSol} defaultValue="default" name="bank" onChange={handleUserData}>
                       <option value="default" disabled>
                         정산받을 계좌의 은행을 선택해주세요
                       </option>
@@ -345,7 +356,7 @@ const Register = () => {
                       type="text"
                       placeholder="정산받을 계좌번호를 입력해주세요"
                       name="account"
-                      onChange={handleOnChange}
+                      onChange={handleUserData}
                     />
                   </div>
                   {/* login-btn 버튼에 active 클래스 추가시 로그인 버튼 활성화 */}
