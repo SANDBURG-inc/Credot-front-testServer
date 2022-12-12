@@ -7,6 +7,7 @@ import "../assets/css/index.css";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
+import SecurityModal from "../components/SecurityModal/SecurityModal";
 
 let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수
 
@@ -19,7 +20,15 @@ const Service = () => {
   const [progressOpen, setprogressOpen] = useState(false);
 
   const [autoModalOpen, setAutoModalOpen] = useState(false);
+  const [securityModalOpen, setSecurityModalOpen] = useState(false);
   const [image, setImage] = useState("");
+
+  const OpenSecurityModal = async () => {
+    setSecurityModalOpen(true);
+  };
+  const CloseSecurityModal = async () => {
+    setSecurityModalOpen(false);
+  };
 
   const OpenAutoModal = async () => {
     setprogressOpen(true);
@@ -362,6 +371,7 @@ const Service = () => {
           id={id4 || ""}
           pw={pw4 || ""}
         ></AutoInputModal>
+        <SecurityModal open={securityModalOpen} close={CloseSecurityModal} header="보안 모달"></SecurityModal>
 
         <section className="calculate__check-wrap">
           <div className="inner">
@@ -615,6 +625,7 @@ const Service = () => {
                     onClick={() => {
                       if (active[5]) {
                         console.log(id5, pw5);
+                        OpenSecurityModal();
                       }
                     }}
                   >
