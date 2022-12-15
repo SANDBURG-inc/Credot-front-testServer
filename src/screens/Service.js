@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
 import SecurityModal from "../components/SecurityModal/SecurityModal";
 
-let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수
+let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수.
 
 const Service = () => {
   let isLogined = useSelector((state) => state.login);
