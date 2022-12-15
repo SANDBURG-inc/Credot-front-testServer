@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { HOST } from "../redux/store";
@@ -10,6 +10,7 @@ import axios from "axios";
 const Register = () => {
   const [redirectionFlag, setRedirectionFlag] = useState(false);
 
+  //User Data
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -19,15 +20,18 @@ const Register = () => {
     account: "",
   });
 
+  //Incorporated Data
   const [incData, setIncData] = useState({
     corporateName: "",
     ceo: "",
     corporateNum: "",
   });
 
+  //location madal & location Data & Detailed address
   const [LocModalOpen, setLocModalOpen] = useState(false);
   const [Loc1, setLoc1] = useState("");
   const [Loc2, setLoc2] = useState("");
+  const businessLoc = useRef();
   const setLocFunc = (data) => {
     setLoc1(data);
   };
@@ -35,6 +39,7 @@ const Register = () => {
     setLocModalOpen(false);
   };
 
+  //Verify email duplication
   const [checkEmail, setCheckEmail] = useState(false);
 
   const optionValue = [
@@ -107,12 +112,10 @@ const Register = () => {
   };
 
   const handleOnChangeLoc1 = (e) => {
-    console.log(e.target.value);
     setLoc1(e.target.value);
   };
 
   const handleOnChangeLoc2 = (e) => {
-    console.log(e.target.value);
     setLoc2(e.target.value);
   };
 
@@ -121,10 +124,6 @@ const Register = () => {
   };
 
   const handleRegister = () => {
-    console.log(userData);
-    console.log(incData);
-    console.log(Loc1);
-    console.log(Loc2);
     if (!checkEmail) {
       alert("이메일 중복확인을 해주세요!");
       return;
@@ -153,6 +152,10 @@ const Register = () => {
       }
     }
 
+    if (Loc1 === "") {
+      alert("주소를 입력해주세요");
+    }
+
     axios
       .post("https://cms.credot.kr/api/auth/local/register", {
         username: userData.name,
@@ -167,10 +170,6 @@ const Register = () => {
         corporateNum: incData.corporateNum,
       })
       .then((res) => {
-        // Handle success.
-        console.log("Well done!");
-        console.log("User profile", res.data.user);
-        console.log("User token", res.data.jwt);
         setRedirectionFlag(true);
         alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
         // 입력이 끝나고 inputs를 비워주는 역할
@@ -190,6 +189,7 @@ const Register = () => {
       })
       .catch((error) => {
         // Handle error.
+        alert("[회원가입 에러] 고객센터의 1:1문의를 통해 문의해주세요.");
         console.log("An error occurred:", error.response);
       });
   };
@@ -293,6 +293,8 @@ const Register = () => {
                         name="businessLoc"
                         onChange={handleOnChangeLoc1}
                         value={Loc1}
+                        readOnly
+                        ref={businessLoc}
                       />
                       <button
                         className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
@@ -311,7 +313,7 @@ const Register = () => {
                       name="businessLoc"
                       onChange={handleOnChangeLoc2}
                     />
-                    <LocationModal open={LocModalOpen} setData={setLocFunc} close={setCloseModal}></LocationModal>
+                    <LocationModal open={LocModalOpen} setData={setLocFunc} close={setCloseModal} businessLocComponent={businessLoc}></LocationModal>
                     <div className={styles.registerBusinessInputWrap}>
                       <input
                         className={styles.registerInputBusiness}
@@ -325,7 +327,7 @@ const Register = () => {
                         type="button"
                         onClick={() => {
                           if (!incData.corporateNum.includes("-")) {
-                            alert("형식을 올바르게 입력해주세요!");
+                            alert("형식을 올바르게 입력해주세요!(-를 포함해주세요)");
                           } else {
                             fetch(HOST + "/corpAuth?code=" + incData.corporateNum)
                               .then((response) => response.text())
