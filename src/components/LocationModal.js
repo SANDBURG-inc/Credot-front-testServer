@@ -40,10 +40,9 @@ const LocationModal = (props) => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log(fullAddress);
     props.setData(fullAddress);
+    props.businessLocComponent.current.style.fontSize = "12px";
     props.close();
-    props.showHiddenInput();
   };
 
   const clickOutside = () => {
