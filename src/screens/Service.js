@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
 import SecurityModal from "../components/SecurityModal/SecurityModal";
+import MarqueeAnimation from "./../components/Marquee/Marquee";
 
 let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수.
 
@@ -300,60 +301,7 @@ const Service = () => {
               </div>
               <img className="visual-main-img" src="../assets/images/main/m-visual.png" alt="" />
             </div>
-            <div className="visual-marquee">
-              <div className="marquee">
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
-                  </span>
-                </div>
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">사용이 편리</strong>해서 초보들도 간편하게 사용할수 있어요~ 넘 좋네요
-                  </span>
-                </div>
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
-                  </span>
-                </div>
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">빠른정산</strong>으로 사업이 더 빨리 성장 할수 있었어요!! 최고 입니다~
-                  </span>
-                </div>
-              </div>
-              <div className="marquee marquee2">
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
-                  </span>
-                </div>
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">사용이 편리</strong>해서 초보들도 간편하게 사용할수 있어요~ 넘 좋네요
-                  </span>
-                </div>
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">사업 확대</strong>에 있어 큰 도움이 됩니다. 더 열심히 할 수 있게 되었어요^^
-                  </span>
-                </div>
-                <div className="marquee-balloon">
-                  <span className="marquee-balloon-span1">쿠팡 셀러 김**님의 후기</span>
-                  <span className="marquee-balloon-span2">
-                    <strong className="strong">빠른정산</strong>으로 사업이 더 빨리 성장 할수 있었어요!! 최고 입니다~
-                  </span>
-                </div>
-              </div>
-            </div>
+            <MarqueeAnimation />
             <button className="visual-scroll-down">
               <img src="../assets/images/main/m-arrow-down.svg" alt="" />
             </button>

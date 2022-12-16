@@ -1,0 +1,119 @@
+.visual-marquee {
+  position: relative;
+  height: 220px;
+  width: var(--main-width);
+  background: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+  margin-bottom: 60px;
+}
+
+.visual-marquee::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 58px;
+  height: 100%;
+  object-fit: contain;
+  background: linear-gradient(to left, transparent, #fff);
+  z-index: 10;
+}
+
+.visual-marquee::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 58px;
+  height: 100%;
+  object-fit: contain;
+  background: linear-gradient(to right, transparent, #fff);
+  z-index: 10;
+}
+
+.marquee {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  white-space: nowrap;
+  background: none;
+  /* width: 1292px; */
+  overflow: hidden;
+  animation: slidemarquee 20s linear infinite;
+}
+
+.marquee2 {
+  animation-delay: -10s;
+}
+
+@keyframes slidemarquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee-balloon {
+  position: relative;
+  width: 275px;
+  height: 150px;
+  border-radius: 15px;
+  padding: 0 20px;
+  background: #fff;
+  border: solid 2px #f4f4f4;
+  margin: 0 20px;
+  display: flex;
+  white-space: normal;
+  flex-direction: column;
+  justify-content: center;
+  /* box-shadow: 6px 6px 10px 0 rgba(43, 43, 43, 0.08); */
+
+  -webkit-filter: drop-shadow(6px 6px 10px rgba(43, 43, 43, 0.08));
+  filter: drop-shadow(6px 6px 10px rgba(43, 43, 43, 0.1));
+}
+
+.marquee-balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 35%;
+  transform: translate(-50%, 0) rotate(90deg);
+  border-bottom: 15px solid #fff;
+  border-top: 15px solid transparent;
+  border-left: 15px solid #fff;
+  border-right: 15px solid transparent;
+}
+
+.marquee-balloon:nth-child(2n -1) {
+  margin-top: 25px;
+}
+
+.marquee-balloon-span1 {
+  font-size: 13px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.92;
+  letter-spacing: normal;
+  text-align: left;
+  color: #a09f9f;
+  margin-bottom: 15px;
+}
+
+.marquee-balloon-span2 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.63;
+  text-align: left;
+  color: #000;
+  word-break: keep-all;
+}
+
+.marquee-balloon-span2 .strong {
+  font-weight: 500;
+  color: #fc8118;
+}
