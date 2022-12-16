@@ -146,23 +146,23 @@ option[value=""][disabled] {
   text-align: left;
 }
 
-.registerBusinessInputWrap {
+.registerInputWithBtnWrap {
   display: flex;
   margin-top: 14px;
   border-radius: 8px;
   border: solid 1px #dedede;
 }
 
-.registerBusinessInputWrap:focus-within {
+.registerInputWithBtnWrap:focus-within {
   border: 1px solid rgb(255, 136, 0);
 }
 
-.registerInputBusiness {
+.registerInputWithBtn {
   width: calc(100% - 105px) !important;
   border-bottom: none !important;
 }
 
-.registerCheckBusinessbtn {
+.registerCheckbtn {
   border-bottom-right-radius: 7px;
   border-top-right-radius: 7px;
   width: 105px;
@@ -172,7 +172,7 @@ option[value=""][disabled] {
   color: #fff;
 }
 
-.registerCheckBusinessbtn.active {
+.registerCheckbtn.active {
   background-color: #505050;
   color: #fff;
 }
@@ -302,7 +302,7 @@ option[value=""][disabled] {
     font-size: 14px;
   }
 
-  .registerBusinessInputWrap input::placeholder {
+  .registerInputWithBtnWrap input::placeholder {
     font-size: 12px;
   }
 

@@ -250,6 +250,18 @@ const Register = () => {
                         </button>
                       </div>
                     </div>
+                    <div className={styles.registerInputWithBtnWrap}>
+                      <input
+                        className={styles.registerInputWithBtn}
+                        type="text"
+                        placeholder="닉네임을 입력해주세요"
+                        name="phoneNum"
+                        // onChange={handleOnChangeLoc1}
+                      />
+                      <button className={`${styles.registerCheckbtn} ${styles.active}`} type="button" onClick={() => {}}>
+                        중복확인
+                      </button>
+                    </div>
                     <input
                       className={styles.registerInputSol}
                       type="text"
@@ -285,9 +297,9 @@ const Register = () => {
                       />
                       <input className={styles.registerInput} type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleIncData} />
                     </div>
-                    <div className={styles.registerBusinessInputWrap}>
+                    <div className={styles.registerInputWithBtnWrap}>
                       <input
-                        className={styles.registerInputBusiness}
+                        className={styles.registerInputWithBtn}
                         type="text"
                         placeholder="사업장 소재지를 입력해주세요"
                         name="businessLoc"
@@ -297,7 +309,7 @@ const Register = () => {
                         ref={businessLoc}
                       />
                       <button
-                        className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
+                        className={`${styles.registerCheckbtn} ${styles.active}`}
                         type="button"
                         onClick={() => {
                           setLocModalOpen(true);
@@ -314,16 +326,16 @@ const Register = () => {
                       onChange={handleOnChangeLoc2}
                     />
                     <LocationModal open={LocModalOpen} setData={setLocFunc} close={setCloseModal} businessLocComponent={businessLoc}></LocationModal>
-                    <div className={styles.registerBusinessInputWrap}>
+                    <div className={styles.registerInputWithBtnWrap}>
                       <input
-                        className={styles.registerInputBusiness}
+                        className={styles.registerInputWithBtn}
                         type="text"
                         placeholder="사업자등록번호를 입력해주세요"
                         name="corporateNum"
                         onChange={handleIncData}
                       />
                       <button
-                        className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
+                        className={`${styles.registerCheckbtn} ${styles.active}`}
                         type="button"
                         onClick={() => {
                           if (!incData.corporateNum.includes("-")) {
