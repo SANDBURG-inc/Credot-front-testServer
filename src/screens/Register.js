@@ -86,16 +86,28 @@ const Register = () => {
     setPasswordShown(!passwordShown);
   };
 
-  // [check password equal]
+  // [check password equal & length > 6]
   const [checkPassword, setCheckPassword] = useState("");
   const [pwEqual, setPwEqual] = useState(false);
   useEffect(() => {
-    if (userData.password === checkPassword && checkPassword !== "") {
-      setPwEqual(true);
+    if (userData.password.length > 5) {
+      setPasswordValidationFlag(true);
+      if (userData.password === checkPassword && checkPassword !== "") {
+        setPwEqual(true);
+      } else {
+        setPwEqual(false);
+      }
+    } else if (userData.password.length > 0 && userData.password.length < 6) {
+      setPasswordValidationFlag(false);
+      setPwEqual(false);
     } else {
+      setPasswordValidationFlag(true);
       setPwEqual(false);
     }
   }, [checkPassword, userData.password]);
+
+  // [To password validation (password must be at least 6 characters)]
+  const [passwordValidationFlag, setPasswordValidationFlag] = useState(false);
 
   const handleUserData = (e) => {
     setUserData({
@@ -129,12 +141,12 @@ const Register = () => {
       return;
     }
 
-    if (userData.password === "" || checkPassword === "") {
+    if (userData.password === "" || checkPassword === "" || !passwordValidationFlag) {
       alert("비밀번호를 확인해주세요!");
       return;
     }
 
-    if (userData.password !== checkPassword) {
+    if (!pwEqual) {
       alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
       return;
     }
@@ -255,7 +267,7 @@ const Register = () => {
                         className={styles.registerInputWithBtn}
                         type="text"
                         placeholder="닉네임을 입력해주세요"
-                        name="phoneNum"
+                        name="nickName"
                         // onChange={handleOnChangeLoc1}
                       />
                       <button className={`${styles.registerCheckbtn} ${styles.active}`} type="button" onClick={() => {}}>
@@ -265,7 +277,7 @@ const Register = () => {
                     <input
                       className={styles.registerInputSol}
                       type="text"
-                      placeholder="연락처를 입력해주세요"
+                      placeholder="연락처를 입력해주세요 ('-'제외)"
                       name="phoneNum"
                       onChange={handleUserData}
                     />
@@ -284,6 +296,7 @@ const Register = () => {
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleCheckPassword} />
                       </div>
                     </div>
+                    {passwordValidationFlag ? null : <div className={styles.errorMessage}>비밀번호는 6자 이상이어야 합니다.</div>}
                   </div>
                   <div className={styles.registerInnerSec}>
                     <span className={styles.registerSecHead}>사업자 정보</span>
