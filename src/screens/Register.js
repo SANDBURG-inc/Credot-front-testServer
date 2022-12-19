@@ -13,6 +13,7 @@ const Register = () => {
   //User Data
   const [userData, setUserData] = useState({
     name: "",
+    nickName: "",
     email: "",
     phoneNum: "",
     password: "",
@@ -38,9 +39,6 @@ const Register = () => {
   const setCloseModal = () => {
     setLocModalOpen(false);
   };
-
-  //Verify email duplication
-  const [checkEmail, setCheckEmail] = useState(false);
 
   const optionValue = [
     "국민은행",
@@ -109,6 +107,11 @@ const Register = () => {
   // [To password validation (password must be at least 6 characters)]
   const [passwordValidationFlag, setPasswordValidationFlag] = useState(false);
 
+  //input available
+  const [emailInputBlock, setEmailInputBlock] = useState(false);
+  const [nickInputBlock, setNickInputBlock] = useState(false);
+  const [corpNumInputBlock, setCorpNumInputBlock] = useState(false);
+
   const handleUserData = (e) => {
     setUserData({
       ...userData,
@@ -136,8 +139,13 @@ const Register = () => {
   };
 
   const handleRegister = () => {
-    if (!checkEmail) {
+    if (!emailInputBlock) {
       alert("이메일 중복확인을 해주세요!");
+      return;
+    }
+
+    if (!nickInputBlock) {
+      alert("닉네임 중복확인을 진행해주세요.");
       return;
     }
 
@@ -164,13 +172,20 @@ const Register = () => {
       }
     }
 
+    if (!corpNumInputBlock) {
+      alert("사업자번호 인증을 진행해주세요.");
+      return;
+    }
+
     if (Loc1 === "") {
       alert("주소를 입력해주세요");
+      return;
     }
 
     axios
       .post("https://cms.credot.kr/api/auth/local/register", {
-        username: userData.name,
+        realName: userData.name,
+        username: userData.nickName,
         email: userData.email,
         password: userData.password,
         phoneNum: userData.phoneNum,
@@ -187,6 +202,7 @@ const Register = () => {
         // 입력이 끝나고 inputs를 비워주는 역할
         setUserData({
           name: "",
+          nickName: "",
           email: "",
           phoneNum: "",
           password: "",
@@ -236,10 +252,11 @@ const Register = () => {
                           placeholder="이메일을 입력해주세요"
                           name="email"
                           onChange={handleUserData}
+                          readOnly={emailInputBlock}
                         />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button
-                          className={`${styles.registerCheckBtn} ${styles.active}`}
+                          className={`${styles.registerCheckBtn} ${emailInputBlock ? "" : styles.active}`}
                           type="button"
                           onClick={() => {
                             if (!userData.email.includes("@")) {
@@ -251,12 +268,13 @@ const Register = () => {
                                   if (res.isDuplicate) {
                                     alert("중복되는 이메일이 있습니다.");
                                   } else {
-                                    setCheckEmail(true);
+                                    setEmailInputBlock(true);
                                     alert("사용가능한 이메일입니다.");
                                   }
                                 });
                             }
                           }}
+                          disabled={emailInputBlock}
                         >
                           중복확인
                         </button>
@@ -268,9 +286,17 @@ const Register = () => {
                         type="text"
                         placeholder="닉네임을 입력해주세요"
                         name="nickName"
-                        // onChange={handleOnChangeLoc1}
+                        onChange={handleUserData}
+                        readOnly={nickInputBlock}
                       />
-                      <button className={`${styles.registerCheckbtn} ${styles.active}`} type="button" onClick={() => {}}>
+                      <button
+                        className={`${styles.registerCheckbtn} ${nickInputBlock ? "" : styles.active}`}
+                        type="button"
+                        onClick={() => {
+                          setNickInputBlock(true);
+                        }}
+                        disabled={nickInputBlock}
+                      >
                         중복확인
                       </button>
                     </div>
@@ -346,9 +372,10 @@ const Register = () => {
                         placeholder="사업자등록번호를 입력해주세요"
                         name="corporateNum"
                         onChange={handleIncData}
+                        readOnly={corpNumInputBlock}
                       />
                       <button
-                        className={`${styles.registerCheckbtn} ${styles.active}`}
+                        className={`${styles.registerCheckbtn} ${corpNumInputBlock ? "" : styles.active}`}
                         type="button"
                         onClick={() => {
                           if (!incData.corporateNum.includes("-")) {
@@ -358,9 +385,13 @@ const Register = () => {
                               .then((response) => response.text())
                               .then((response) => {
                                 alert(response);
+                                if (response === "인증이 완료되었습니다.") {
+                                  setCorpNumInputBlock(true);
+                                }
                               });
                           }
                         }}
+                        disabled={corpNumInputBlock}
                       >
                         인증
                       </button>
