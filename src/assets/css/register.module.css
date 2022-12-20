@@ -59,7 +59,7 @@
   color: #000;
   padding-bottom: 30px;
   border-bottom: 1px solid #f4f4f4;
-  margin-bottom: 20px;
+  margin-bottom: 6px;
 }
 
 .registerFormWrap input,
@@ -106,14 +106,11 @@ option[value=""][disabled] {
   border: solid 1px #dedede;
   background-color: #fff;
   overflow: hidden;
+  margin-top: 14px;
 }
 
 .registerInputWrap:focus-within {
   border: 1px solid rgb(255, 136, 0);
-}
-
-.registerInputWrap:last-child {
-  margin-top: 14px;
 }
 
 .registerInputWrap input,
@@ -146,23 +143,23 @@ option[value=""][disabled] {
   text-align: left;
 }
 
-.registerBusinessInputWrap {
+.registerInputWithBtnWrap {
   display: flex;
   margin-top: 14px;
   border-radius: 8px;
   border: solid 1px #dedede;
 }
 
-.registerBusinessInputWrap:focus-within {
+.registerInputWithBtnWrap:focus-within {
   border: 1px solid rgb(255, 136, 0);
 }
 
-.registerInputBusiness {
+.registerInputWithBtn {
   width: calc(100% - 105px) !important;
   border-bottom: none !important;
 }
 
-.registerCheckBusinessbtn {
+.registerCheckbtn {
   border-bottom-right-radius: 7px;
   border-top-right-radius: 7px;
   width: 105px;
@@ -172,13 +169,9 @@ option[value=""][disabled] {
   color: #fff;
 }
 
-.registerCheckBusinessbtn.active {
+.registerCheckbtn.active {
   background-color: #505050;
   color: #fff;
-}
-
-.registerInputSol:nth-child(2) {
-  margin-top: 0;
 }
 
 .registerEmailInputWrap {
@@ -280,6 +273,13 @@ option[value=""][disabled] {
   background-size: contain;
 }
 
+.errorMessage {
+  color: #e52528;
+  margin: 9px 12px 0;
+  font-size: 12px;
+  line-height: 18px;
+}
+
 @media (max-width: 700px) {
   .registerFormWrap form {
     padding: 20px;
@@ -291,7 +291,7 @@ option[value=""][disabled] {
 
   .registerSecHead {
     padding-bottom: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 6px;
   }
 
   select:required:invalid {
@@ -302,7 +302,7 @@ option[value=""][disabled] {
     font-size: 14px;
   }
 
-  .registerBusinessInputWrap input::placeholder {
+  .registerInputWithBtnWrap input::placeholder {
     font-size: 12px;
   }
 
@@ -317,8 +317,8 @@ option[value=""][disabled] {
   }
 
   .registerInputSol,
-  .registerInputWrap:last-child {
-    margin-top: 10px;
+  .registerInputWrap {
+    margin-top: 14px;
   }
 
   .registerLastSec {

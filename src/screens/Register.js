@@ -13,6 +13,7 @@ const Register = () => {
   //User Data
   const [userData, setUserData] = useState({
     name: "",
+    nickName: "",
     email: "",
     phoneNum: "",
     password: "",
@@ -38,9 +39,6 @@ const Register = () => {
   const setCloseModal = () => {
     setLocModalOpen(false);
   };
-
-  //Verify email duplication
-  const [checkEmail, setCheckEmail] = useState(false);
 
   const optionValue = [
     "국민은행",
@@ -86,16 +84,34 @@ const Register = () => {
     setPasswordShown(!passwordShown);
   };
 
-  // [check password equal]
+  // [check password equal & length > 6]
   const [checkPassword, setCheckPassword] = useState("");
   const [pwEqual, setPwEqual] = useState(false);
   useEffect(() => {
-    if (userData.password === checkPassword && checkPassword !== "") {
-      setPwEqual(true);
+    if (userData.password.length > 5) {
+      setPasswordValidationFlag(true);
+      if (userData.password === checkPassword && checkPassword !== "") {
+        setPwEqual(true);
+      } else {
+        setPwEqual(false);
+      }
+    } else if (userData.password.length > 0 && userData.password.length < 6) {
+      setPasswordValidationFlag(false);
+      setPwEqual(false);
     } else {
+      setPasswordValidationFlag(true);
       setPwEqual(false);
     }
   }, [checkPassword, userData.password]);
+
+  // [To password,nickName validation (password must be at least 6 characters, nickName must be at least 3 characters)]
+  const [passwordValidationFlag, setPasswordValidationFlag] = useState(false);
+  const [nickNameValidationFlag, setNickNameValidationFlag] = useState(false);
+
+  //input available
+  const [emailInputBlock, setEmailInputBlock] = useState(false);
+  const [nickInputBlock, setNickInputBlock] = useState(false);
+  const [corpNumInputBlock, setCorpNumInputBlock] = useState(false);
 
   const handleUserData = (e) => {
     setUserData({
@@ -123,18 +139,33 @@ const Register = () => {
     setCheckPassword(e.target.value);
   };
 
+  useEffect(() => {
+    if (userData.nickName.length > 2) {
+      setNickNameValidationFlag(true);
+    } else if (userData.nickName.length > 0 && userData.nickName.length < 3) {
+      setNickNameValidationFlag(false);
+    } else {
+      setNickNameValidationFlag(true);
+    }
+  }, [userData.nickName]);
+
   const handleRegister = () => {
-    if (!checkEmail) {
+    if (!emailInputBlock) {
       alert("이메일 중복확인을 해주세요!");
       return;
     }
 
-    if (userData.password === "" || checkPassword === "") {
+    if (!nickInputBlock) {
+      alert("닉네임 중복확인을 진행해주세요.");
+      return;
+    }
+
+    if (userData.password === "" || checkPassword === "" || !passwordValidationFlag) {
       alert("비밀번호를 확인해주세요!");
       return;
     }
 
-    if (userData.password !== checkPassword) {
+    if (!pwEqual) {
       alert("비밀번호와 비밀번호 확인 값이 일치하지 않습니다!");
       return;
     }
@@ -152,13 +183,20 @@ const Register = () => {
       }
     }
 
+    if (!corpNumInputBlock) {
+      alert("사업자번호 인증을 진행해주세요.");
+      return;
+    }
+
     if (Loc1 === "") {
       alert("주소를 입력해주세요");
+      return;
     }
 
     axios
       .post("https://cms.credot.kr/api/auth/local/register", {
-        username: userData.name,
+        realName: userData.name,
+        username: userData.nickName,
         email: userData.email,
         password: userData.password,
         phoneNum: userData.phoneNum,
@@ -175,6 +213,7 @@ const Register = () => {
         // 입력이 끝나고 inputs를 비워주는 역할
         setUserData({
           name: "",
+          nickName: "",
           email: "",
           phoneNum: "",
           password: "",
@@ -224,10 +263,11 @@ const Register = () => {
                           placeholder="이메일을 입력해주세요"
                           name="email"
                           onChange={handleUserData}
+                          readOnly={emailInputBlock}
                         />
                         {/* check-btn 버튼에 active 클래스 추가시 중복확인 버튼 활성화 */}
                         <button
-                          className={`${styles.registerCheckBtn} ${styles.active}`}
+                          className={`${styles.registerCheckBtn} ${emailInputBlock ? "" : styles.active}`}
                           type="button"
                           onClick={() => {
                             if (!userData.email.includes("@")) {
@@ -239,21 +279,61 @@ const Register = () => {
                                   if (res.isDuplicate) {
                                     alert("중복되는 이메일이 있습니다.");
                                   } else {
-                                    setCheckEmail(true);
+                                    setEmailInputBlock(true);
                                     alert("사용가능한 이메일입니다.");
                                   }
                                 });
                             }
                           }}
+                          disabled={emailInputBlock}
                         >
                           중복확인
                         </button>
                       </div>
                     </div>
+                    <div className={styles.registerInputWithBtnWrap}>
+                      <input
+                        className={styles.registerInputWithBtn}
+                        type="text"
+                        placeholder="닉네임을 입력해주세요"
+                        name="nickName"
+                        onChange={handleUserData}
+                        readOnly={nickInputBlock}
+                      />
+                      <button
+                        className={`${styles.registerCheckbtn} ${nickInputBlock ? "" : styles.active}`}
+                        type="button"
+                        onClick={() => {
+                          if (userData.nickName.length < 3) {
+                            setNickNameValidationFlag(false);
+                            alert("닉네임은 3자 이상이어야 합니다.");
+                            return;
+                          }
+                          var options = { method: "GET", url: "https://cms.credot.kr/api/nickname-valid/" + userData.nickName };
+
+                          axios
+                            .request(options)
+                            .then(function (response) {
+                              if (!response.data.inDuplicate) {
+                                setNickInputBlock(true);
+                              }
+                              alert(response.data.message);
+                            })
+                            .catch(function (error) {
+                              alert("[닉네임 중복 확인 에러] 고객센터의 1:1문의를 통해 문의해주세요.");
+                              console.error(error);
+                            });
+                        }}
+                        disabled={nickInputBlock}
+                      >
+                        중복확인
+                      </button>
+                    </div>
+                    {nickNameValidationFlag ? null : <div className={styles.errorMessage}>닉네임은 3자 이상이어야 합니다.</div>}
                     <input
                       className={styles.registerInputSol}
                       type="text"
-                      placeholder="연락처를 입력해주세요"
+                      placeholder="연락처를 입력해주세요 ('-'제외)"
                       name="phoneNum"
                       onChange={handleUserData}
                     />
@@ -272,6 +352,7 @@ const Register = () => {
                         <input type="password" placeholder="비밀번호를 확인해주세요" name="password" onChange={handleCheckPassword} />
                       </div>
                     </div>
+                    {passwordValidationFlag ? null : <div className={styles.errorMessage}>비밀번호는 6자 이상이어야 합니다.</div>}
                   </div>
                   <div className={styles.registerInnerSec}>
                     <span className={styles.registerSecHead}>사업자 정보</span>
@@ -285,9 +366,9 @@ const Register = () => {
                       />
                       <input className={styles.registerInput} type="text" placeholder="대표명을 입력해주세요" name="ceo" onChange={handleIncData} />
                     </div>
-                    <div className={styles.registerBusinessInputWrap}>
+                    <div className={styles.registerInputWithBtnWrap}>
                       <input
-                        className={styles.registerInputBusiness}
+                        className={styles.registerInputWithBtn}
                         type="text"
                         placeholder="사업장 소재지를 입력해주세요"
                         name="businessLoc"
@@ -297,7 +378,7 @@ const Register = () => {
                         ref={businessLoc}
                       />
                       <button
-                        className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
+                        className={`${styles.registerCheckbtn} ${styles.active}`}
                         type="button"
                         onClick={() => {
                           setLocModalOpen(true);
@@ -314,16 +395,17 @@ const Register = () => {
                       onChange={handleOnChangeLoc2}
                     />
                     <LocationModal open={LocModalOpen} setData={setLocFunc} close={setCloseModal} businessLocComponent={businessLoc}></LocationModal>
-                    <div className={styles.registerBusinessInputWrap}>
+                    <div className={styles.registerInputWithBtnWrap}>
                       <input
-                        className={styles.registerInputBusiness}
+                        className={styles.registerInputWithBtn}
                         type="text"
                         placeholder="사업자등록번호를 입력해주세요"
                         name="corporateNum"
                         onChange={handleIncData}
+                        readOnly={corpNumInputBlock}
                       />
                       <button
-                        className={`${styles.registerCheckBusinessbtn} ${styles.active}`}
+                        className={`${styles.registerCheckbtn} ${corpNumInputBlock ? "" : styles.active}`}
                         type="button"
                         onClick={() => {
                           if (!incData.corporateNum.includes("-")) {
@@ -333,9 +415,13 @@ const Register = () => {
                               .then((response) => response.text())
                               .then((response) => {
                                 alert(response);
+                                if (response === "인증이 완료되었습니다.") {
+                                  setCorpNumInputBlock(true);
+                                }
                               });
                           }
                         }}
+                        disabled={corpNumInputBlock}
                       >
                         인증
                       </button>
