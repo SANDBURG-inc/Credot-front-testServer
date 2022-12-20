@@ -40,15 +40,19 @@ const isLogin = createSlice({
 const userInfo = createSlice({
   name: "userInfo",
   initialState: {
-    name: "",
+    realName: "",
+    nickName: "",
     email: "",
     phoneNum: "",
     bank: "",
     account: "",
   },
   reducers: {
-    updateUserName(state, value) {
-      state.name = value.payload;
+    updateUserRealName(state, value) {
+      state.realName = value.payload;
+    },
+    updateUserNickName(state, value) {
+      state.nickName = value.payload;
     },
     updateUserEmail(state, value) {
       state.email = value.payload;
@@ -64,7 +68,8 @@ const userInfo = createSlice({
     },
     removeUserInfo() {
       return {
-        name: "",
+        realName: "",
+        nickName: "",
         email: "",
         phoneNum: "",
         bank: "",
@@ -180,7 +185,7 @@ export { store, persistor };
 
 export const { update } = isLogin.actions;
 // export const { updateJwt } = JWT.actions;
-export const { updateUserName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
+export const { updateUserRealName, updateUserNickName, updateUserEmail, updateUserPhoneNum, updateUserBank, updateUserAccount } = userInfo.actions;
 export const { updateCorporateName, updateCeo, updateBusinessLoc, updateCorporateNum } = incInfo.actions;
 // export const { updateContractDate, updateDeadline, updateAmmount, updateCommerce, updateStatus } = financeInfo.actions;
 export const { updateFinanceHistory } = financeHistory.actions;

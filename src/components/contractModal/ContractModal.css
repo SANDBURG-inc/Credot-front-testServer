@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 1001;
   background-color: rgba(0, 0, 0, 0.6);
   text-align: center;
 }
@@ -26,7 +26,7 @@
 }
 .contractModal > section > header {
   position: relative;
-  font-size : 2vh;
+  font-size: 2vh;
   padding: 1.5vh 16px 1.5vh 16px;
   background-color: #f1f1f1;
   font-weight: 700;
@@ -47,9 +47,9 @@
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
 }
-.modal > section > main > h3{
-  margin : 1vh 0px 1vh 0px;
-  font-size : 2vh;
+.modal > section > main > h3 {
+  margin: 1vh 0px 1vh 0px;
+  font-size: 2vh;
 }
 .contractModal > section > footer {
   padding: 12px 16px;
@@ -90,7 +90,7 @@
   }
 }
 
-.Container{
+.Container {
   width: 1100px;
   height: 78vh;
   padding: 70px;
@@ -103,27 +103,28 @@
   overflow: scroll;
 }
 
-.Container > h2{
+.Container > h2 {
   font-size: 2.5vh;
 }
 
-.Container > p, .Container > span{
+.Container > p,
+.Container > span {
   font-size: 1.8vh;
 }
 
-@media screen and (max-width : 1200px){
-  .Container{
-      width : 700px;
-      /* height: 610px; */
-      padding : 40px;
+@media screen and (max-width: 1200px) {
+  .Container {
+    width: 700px;
+    /* height: 610px; */
+    padding: 40px;
   }
 }
 
-@media screen and (max-width : 768px){
-  .Container{
-      width : 100%;
-      /* height : 630px; */
-      padding : 30px;
-      font-size : 13px;
+@media screen and (max-width: 768px) {
+  .Container {
+    width: 100%;
+    /* height : 630px; */
+    padding: 30px;
+    font-size: 13px;
   }
 }

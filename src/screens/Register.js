@@ -12,7 +12,7 @@ const Register = () => {
 
   //User Data
   const [userData, setUserData] = useState({
-    name: "",
+    nickName: "",
     nickName: "",
     email: "",
     phoneNum: "",
@@ -212,7 +212,7 @@ const Register = () => {
         alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
         // 입력이 끝나고 inputs를 비워주는 역할
         setUserData({
-          name: "",
+          nickName: "",
           nickName: "",
           email: "",
           phoneNum: "",
@@ -314,7 +314,7 @@ const Register = () => {
                           axios
                             .request(options)
                             .then(function (response) {
-                              if (!response.data.inDuplicate) {
+                              if (!response.data.isDuplicate) {
                                 setNickInputBlock(true);
                               }
                               alert(response.data.message);

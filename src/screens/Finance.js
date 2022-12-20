@@ -17,7 +17,8 @@ import {
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
-  updateUserName,
+  updateUserRealName,
+  updateUserNickName,
   updateUserPhoneNum,
   updateCorporateName,
   updateCeo,
@@ -31,7 +32,7 @@ const Finance = () => {
   const [totalPrice, setTotalPrice] = useState("0");
   const [boardFlag, setBoardFlag] = useState(true);
 
-  const userName = useSelector((state) => state.info.name);
+  const userNickName = useSelector((state) => state.info.nickName);
   const userEmail = useSelector((state) => state.info.email);
 
   const options = {
@@ -41,25 +42,25 @@ const Finance = () => {
     },
   };
 
-  // 토큰 만료 판별 
-  const jwtToken = JSON.parse(localStorage.getItem("user")).token; // "Bearer " 제거 
+  // 토큰 만료 판별
+  const jwtToken = JSON.parse(localStorage.getItem("user")).token; // "Bearer " 제거
   const isExpired = (jwtToken) => {
     try {
       const expiration = jwtDecode(jwtToken).exp;
       const now = new Date(Date.now() - 1000 * 60);
       return now > expiration * 1000;
-    }
-    catch {
+    } catch {
       return true;
     }
-  }
+  };
 
   const dispatch = useDispatch();
   const logout = useCallback(() => {
     // dispatch(updateJwt({}));
     dispatch(update());
     // userInfo
-    dispatch(updateUserName(""));
+    dispatch(updateUserRealName(""));
+    dispatch(updateUserNickName(""));
     dispatch(updateUserEmail(""));
     dispatch(updateUserPhoneNum(""));
     dispatch(updateUserBank(""));
@@ -137,14 +138,12 @@ const Finance = () => {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
     return num.toString().replace(regexp, ",");
   };
-  
 
   if (isExpired(jwtToken)) {
     alert("로그인 토큰이 만료되었습니다. 다시 로그인 해주세요.");
     logout();
-    return <Navigate to="/Login"/>;
-  }
-  else{
+    return <Navigate to="/Login" />;
+  } else {
     return (
       <main className="container">
         <Helmet>
@@ -163,7 +162,7 @@ const Finance = () => {
                     <div className="m-head-profile">
                       <img className="m-head-profile-img" src="../assets/images/subpage-my_page/profile-img.svg" alt="" />
                       <div className="m-head-profile-div">
-                        <span className="m-head-name">{userName}</span>
+                        <span className="m-head-name">{userNickName}</span>
                         <span className="m-head-email font-eng">{userEmail}</span>
                       </div>
                     </div>
