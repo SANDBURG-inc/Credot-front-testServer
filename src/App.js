@@ -12,6 +12,9 @@ import Register from "./screens/Register";
 import NavBarElement from "./components/NavBarElement";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
+import ForgotID from "./screens/ForgotID";
+import ForgotPW from "./screens/ForgotPW";
+import ResetPW from "./screens/ResetPW";
 
 function App() {
   return (
@@ -31,6 +34,8 @@ function App() {
           <Route path="/Finance" element={<Finance />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/ForgotPW" element={<ForgotPW />} />
+          <Route path="/ResetPW" element={<ResetPW />} />
         </Routes>
         <Footer />
       </BrowserRouter>
