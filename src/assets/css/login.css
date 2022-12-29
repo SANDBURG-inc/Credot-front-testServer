@@ -166,6 +166,16 @@
   color: #fff;
 }
 
+.forgot-div {
+  margin-left: auto;
+  white-space: 0px;
+}
+
+.forgot-btn-separator {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
 .login-btn.active {
   background-color: #fc8118;
 }

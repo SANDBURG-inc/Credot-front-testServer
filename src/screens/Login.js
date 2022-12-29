@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   update,
@@ -19,6 +19,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 
 const Login = () => {
+  const navigator = useNavigate();
   const dispatch = useDispatch();
   const a = useSelector((state) => state.login);
   // const token = useSelector((state) => state.jwt);
@@ -193,6 +194,17 @@ const Login = () => {
                       회원가입
                     </button>
                   </Link>
+                  <div className="forgot-div">
+                    <span className="forgot-btn-separator">•</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator("/ForgotPW");
+                      }}
+                    >
+                      비밀번호 찾기
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
