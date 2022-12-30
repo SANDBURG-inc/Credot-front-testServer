@@ -5,9 +5,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import ApexCharts from "apexcharts";
 import jwtDecode from "jwt-decode";
 import { useSelector, useDispatch } from "react-redux";
 import "../assets/css/my_page.css";
+import "../assets/css/chart.css";
+import { financeList } from "../data/financeList.js";
 import { Helmet } from "react-helmet";
 import { Navigate } from "react-router-dom";
 import {
@@ -139,6 +142,82 @@ const Finance = () => {
     return num.toString().replace(regexp, ",");
   };
 
+  const chartOptions = {
+    chart: {
+      type: "bar",
+      width: "100%",
+    },
+    series: [
+      {
+        name: "sales",
+        data: financeList,
+      },
+    ],
+    dataLabels: {
+      enabled: true,
+      enabledOnSeries: undefined,
+      formatter: function (val, opts) {
+        return val;
+      },
+      textAnchor: "middle",
+      distributed: false,
+      offsetX: 0,
+      offsetY: 0,
+      style: {
+        fontSize: "14px",
+        fontFamily: "Helvetica, Arial, sans-serif",
+        fontWeight: "bold",
+        colors: undefined,
+      },
+      background: {
+        enabled: true,
+        foreColor: "#fff",
+        padding: 4,
+        borderRadius: 2,
+        borderWidth: 1,
+        borderColor: "#fff",
+        opacity: 0.9,
+        dropShadow: {
+          enabled: false,
+          top: 1,
+          left: 1,
+          blur: 1,
+          color: "#000",
+          opacity: 0.45,
+        },
+      },
+      dropShadow: {
+        enabled: false,
+        top: 1,
+        left: 1,
+        blur: 1,
+        color: "#000",
+        opacity: 0.45,
+      },
+    },
+    colors: [
+      function ({ value, seriesIndex, w }) {
+        if (value < 400) {
+          return "#7E36AF";
+        } else {
+          return "#D9534F";
+        }
+      },
+    ],
+    xaxis: {
+      categories: [7, 8, 9, 10, 11, 12],
+    },
+    yaxis: {
+      title: {
+        text: "₩ (만원)",
+      },
+    },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#chart"), chartOptions);
+
+  chart.render();
+
   if (isExpired(jwtToken)) {
     alert("로그인 토큰이 만료되었습니다. 다시 로그인 해주세요.");
     logout();
@@ -176,6 +255,8 @@ const Finance = () => {
                   </div>
                 </div>
                 <div className="m-stats">
+                  <span className="m-stats-sub">매출 현황</span>
+                  <div id="chart"></div>
                   <span className="m-stats-sub">정산금 통계</span>
                   <div className="m-stats-stat">
                     <Paper>
