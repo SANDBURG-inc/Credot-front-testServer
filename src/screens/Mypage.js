@@ -22,7 +22,6 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 const Mypage = () => {
-
   const isLogin = useSelector((state) => state.login);
   const a = useSelector((state) => state.login);
   // const token = useSelector((state) => state.jwt);
@@ -136,81 +135,6 @@ const Mypage = () => {
                       </div>
                     </div>
 
-                  <div className="m-info-box-wrap">
-                    <div className="m-info-info">
-                      <span className="info-ct">현재 비밀번호</span>
-                      <input type="password" placeholder="현재 비밀번호를 입력해주세요" onChange={handleOnChange1} value={curPassword} />
-                    </div>
-                    <div className="m-info-info">
-                      <span className="info-ct">새 비밀번호</span>
-                      <input type="password" placeholder="새 비밀번호를 입력해주세요" onChange={handleOnChange2} value={newPassword} />
-                    </div>
-                    <div className="m-info-info">
-                      <span className="info-ct">새 비밀번호 확인</span>
-                      <input type="password" placeholder="새 비밀번호를 입력해주세요" onChange={handleOnChange3} value={subNewPassword} />
-                    </div>
-                  </div>
-                </form>
-                <div className="btn-wrap">
-                  <button
-                    className="logout-btn"
-                    onClick={async () => {
-                      logout();
-                      alert("로그아웃 되었습니다");
-                      navigate("/");
-                    }}
-                  >
-                    로그아웃
-                  </button>
-                  <button
-                    className="change-btn"
-                    onClick={() => {
-                      if (curPassword === "" || newPassword === "" || subNewPassword === "") {
-                        alert("빈 칸을 입력해주세요");
-                        return;
-                      }
-                      if (newPassword !== subNewPassword) {
-                        alert("새 비밀번호가 일치하지 않습니다.");
-                        return;
-                      }
-                      // Request API.
-                      axios
-                        .post(
-                          "https://cms.credot.kr/api/auth/change-password",
-                          {
-                            currentPassword: curPassword,
-                            password: newPassword,
-                            passwordConfirmation: newPassword,
-                          },
-                          {
-                            headers: {
-                              Authorization: "Bearer " + jwtToken,
-                            },
-                          }
-                        )
-                        .then(function (res) {
-                          alert("비밀번호가 변경되었습니다");
-                        })
-                        .catch((error) => {
-                          // Handle error.
-                          console.log("An error occurred:", error.response);
-                          alert("비밀번호를 확인해주세요");
-                        });
-                      setCurPassword("");
-                      setNewPassword("");
-                      setSubNewPassword("");
-                    }}
-                  >
-                    개인정보 수정 <img src="../assets/images/icon/btn-arrow.svg" alt="" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-  );
                     <div className="m-info-box-wrap">
                       <div className="m-info-info">
                         <span className="info-ct">현재 비밀번호</span>
@@ -232,6 +156,7 @@ const Mypage = () => {
                       onClick={async () => {
                         logout();
                         alert("로그아웃 되었습니다");
+                        navigate("/");
                       }}
                     >
                       로그아웃
@@ -258,7 +183,7 @@ const Mypage = () => {
                             },
                             {
                               headers: {
-                                Authorization: "Bearer " + userData.token,
+                                Authorization: "Bearer " + jwtToken,
                               },
                             }
                           )
@@ -286,6 +211,81 @@ const Mypage = () => {
       </main>
     );
   }
+  //                   <div className="m-info-box-wrap">
+  //                     <div className="m-info-info">
+  //                       <span className="info-ct">현재 비밀번호</span>
+  //                       <input type="password" placeholder="현재 비밀번호를 입력해주세요" onChange={handleOnChange1} value={curPassword} />
+  //                     </div>
+  //                     <div className="m-info-info">
+  //                       <span className="info-ct">새 비밀번호</span>
+  //                       <input type="password" placeholder="새 비밀번호를 입력해주세요" onChange={handleOnChange2} value={newPassword} />
+  //                     </div>
+  //                     <div className="m-info-info">
+  //                       <span className="info-ct">새 비밀번호 확인</span>
+  //                       <input type="password" placeholder="새 비밀번호를 입력해주세요" onChange={handleOnChange3} value={subNewPassword} />
+  //                     </div>
+  //                   </div>
+  //                 </form>
+  //                 <div className="btn-wrap">
+  //                   <button
+  //                     className="logout-btn"
+  //                     onClick={async () => {
+  //                       logout();
+  //                       alert("로그아웃 되었습니다");
+  //                     }}
+  //                   >
+  //                     로그아웃
+  //                   </button>
+  //                   <button
+  //                     className="change-btn"
+  //                     onClick={() => {
+  //                       if (curPassword === "" || newPassword === "" || subNewPassword === "") {
+  //                         alert("빈 칸을 입력해주세요");
+  //                         return;
+  //                       }
+  //                       if (newPassword !== subNewPassword) {
+  //                         alert("새 비밀번호가 일치하지 않습니다.");
+  //                         return;
+  //                       }
+  //                       // Request API.
+  //                       axios
+  //                         .post(
+  //                           "https://cms.credot.kr/api/auth/change-password",
+  //                           {
+  //                             currentPassword: curPassword,
+  //                             password: newPassword,
+  //                             passwordConfirmation: newPassword,
+  //                           },
+  //                           {
+  //                             headers: {
+  //                               Authorization: "Bearer " + userData.token,
+  //                             },
+  //                           }
+  //                         )
+  //                         .then(function (res) {
+  //                           alert("비밀번호가 변경되었습니다");
+  //                         })
+  //                         .catch((error) => {
+  //                           // Handle error.
+  //                           console.log("An error occurred:", error.response);
+  //                           alert("비밀번호를 확인해주세요");
+  //                         });
+  //                       setCurPassword("");
+  //                       setNewPassword("");
+  //                       setSubNewPassword("");
+  //                     }}
+  //                   >
+  //                     개인정보 수정 <img src="../assets/images/icon/btn-arrow.svg" alt="" />
+  //                   </button>
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </section>
+  //       </div>
+  //     </main>
+  //   );
+  // }
 };
 
 export default Mypage;
