@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   update,
   persistor,
@@ -22,15 +22,16 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 const Mypage = () => {
-  const a = useSelector((state) => state.login);
+  const isLogin = useSelector((state) => state.login);
   // const token = useSelector((state) => state.jwt);
   const userData = localStorage.getItem("user");
-  const tmpNickName = useSelector((state) => state.info.nickName);
+  const tmpName = useSelector((state) => state.info.name);
   const tmpEmail = useSelector((state) => state.info.email);
   const tmpPhoneNum = useSelector((state) => state.info.phoneNum);
   const tmpBank = useSelector((state) => state.info.bank);
   const tmpAccount = useSelector((state) => state.info.account);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [curPassword, setCurPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -49,6 +50,7 @@ const Mypage = () => {
 
   // 토큰 만료 판별
   const jwtToken = JSON.parse(localStorage.getItem("user")).token;
+  console.log(jwtToken);
   const isExpired = (jwtToken) => {
     try {
       const expiration = jwtDecode(jwtToken).exp;
@@ -81,8 +83,7 @@ const Mypage = () => {
     persistor.purge();
   }, []);
 
-  console.log(isExpired(jwtToken));
-  if (a === false) {
+  if (isLogin === false) {
     return <Navigate to="/" />;
   } else if (isExpired(jwtToken)) {
     alert("로그인 토큰이 만료되었습니다. 다시 로그인 해주세요.");
@@ -108,7 +109,7 @@ const Mypage = () => {
                     <div className="m-head-profile">
                       <img className="m-head-profile-img" src="../assets/images/subpage-my_page/profile-img.svg" alt="" />
                       <div className="m-head-profile-div">
-                        <span className="m-head-name">{tmpNickName}님</span>
+                        <span className="m-head-name">{tmpName}님</span>
                         <span className="m-head-email font-eng">{tmpEmail}</span>
                       </div>
                     </div>
@@ -154,6 +155,7 @@ const Mypage = () => {
                       onClick={async () => {
                         logout();
                         alert("로그아웃 되었습니다");
+                        navigate("/");
                       }}
                     >
                       로그아웃
@@ -180,7 +182,7 @@ const Mypage = () => {
                             },
                             {
                               headers: {
-                                Authorization: "Bearer " + userData.token,
+                                Authorization: "Bearer " + jwtToken,
                               },
                             }
                           )
