@@ -6,7 +6,7 @@ let currentPath = ""; // 현재 경로 저장 변수
 
 const NavBarElement = () => {
   let isLogin = useSelector((state) => state.login);
-  const tmpName = useSelector((state) => state.info.username);
+  const tmpName = useSelector((state) => state.info.nickName);
 
   const [ScrollY, setScrollY] = useState(0); // 스크롤값을 저장하기 위한 상태
 
