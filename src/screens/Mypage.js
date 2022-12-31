@@ -25,7 +25,7 @@ const Mypage = () => {
   const isLogin = useSelector((state) => state.login);
   // const token = useSelector((state) => state.jwt);
   const userData = localStorage.getItem("user");
-  const tmpName = useSelector((state) => state.info.name);
+  const tmpName = useSelector((state) => state.info.realName);
   const tmpEmail = useSelector((state) => state.info.email);
   const tmpPhoneNum = useSelector((state) => state.info.phoneNum);
   const tmpBank = useSelector((state) => state.info.bank);

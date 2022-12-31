@@ -35,7 +35,7 @@ const Finance = () => {
   const [totalPrice, setTotalPrice] = useState("0");
   const [boardFlag, setBoardFlag] = useState(true);
 
-  const userNickName = useSelector((state) => state.info.nickName);
+  const userRealName = useSelector((state) => state.info.realName);
   const userEmail = useSelector((state) => state.info.email);
 
   const options = {
@@ -241,7 +241,7 @@ const Finance = () => {
                     <div className="m-head-profile">
                       <img className="m-head-profile-img" src="../assets/images/subpage-my_page/profile-img.svg" alt="" />
                       <div className="m-head-profile-div">
-                        <span className="m-head-name">{userNickName}</span>
+                        <span className="m-head-name">{userRealName}님</span>
                         <span className="m-head-email font-eng">{userEmail}</span>
                       </div>
                     </div>
