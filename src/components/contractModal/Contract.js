@@ -34,7 +34,7 @@ const Contract = (props) => {
     const todayDate = now.getDate();
 
     let copy = { ...contractData };
-    copy.__CREDITOR__ = userInfo.name;
+    copy.__CREDITOR__ = userInfo.realName;
     copy.__AMOUNT__ = amount;
     copy.__DATE__ = year + ". " + todayMonth + ". " + todayDate + ".";
     copy.__DEADLINE__ = deadline;
@@ -47,7 +47,7 @@ const Contract = (props) => {
   }, []);
 
   return (
-    <div className='Container'>
+    <div className="Container">
       <h2 style={{ textAlign: "center" }}>
         <strong>채권양수도 계약서</strong>
       </h2>

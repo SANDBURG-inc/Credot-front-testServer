@@ -1,14 +1,18 @@
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ContractModal from "../components/contractModal/ContractModal";
-import { HOST } from "../redux/store";
-import ProgressCircleDialog from "../components/ProgressCircleDialog";
 import "../assets/css/index.css";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-import AutoInputModal from "../components/AutoInputModal/AutoInputModal";
-import SecurityModal from "../components/SecurityModal/SecurityModal";
 import MarqueeAnimation from "./../components/Marquee/Marquee";
+import CoupangLookUpBox from "../components/Commerce/Coupang";
+import CoupangZLookUpBox from "../components/Commerce/CoupangZ";
+import CoupangRocketLookUpBox from "../components/Commerce/CoupangRocket";
+import TmonLookUpBox from "../components/Commerce/Tmon";
+import WeMakePriceLookUpBox from "../components/Commerce/Wemakeprice";
+import Location11LookUpBox from "../components/Commerce/Street11";
+import GmarketLookUpBox from "../components/Commerce/Gmarket";
+import AuctionLookUpBox from "../components/Commerce/Auction";
 
 let currentPath = ""; // 현재 url 주소를 저장하기 위한 변수.
 
@@ -18,34 +22,6 @@ const Service = () => {
 
   const token = useSelector((state) => state.jwt);
   const [modalOpen, setModalOpen] = useState(false);
-  const [progressOpen, setprogressOpen] = useState(false);
-
-  const [autoModalOpen, setAutoModalOpen] = useState(false);
-  const [securityModalOpen, setSecurityModalOpen] = useState(false);
-  const [image, setImage] = useState("");
-
-  const OpenSecurityModal = async () => {
-    setSecurityModalOpen(true);
-  };
-  const CloseSecurityModal = async () => {
-    setSecurityModalOpen(false);
-  };
-
-  const OpenAutoModal = async () => {
-    setprogressOpen(true);
-    const fetchData = async () => {
-      let image = await fetch(HOST + "/commerce/wmp/crawl?option=getImage");
-      image = await image.blob();
-      setImage(image);
-    };
-    await fetchData().then(() => {
-      setprogressOpen(false);
-      setAutoModalOpen(true);
-    });
-  };
-  const closeAutoModal = () => {
-    setAutoModalOpen(false);
-  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -54,35 +30,12 @@ const Service = () => {
     setModalOpen(false);
   };
 
-  const [inputs, setInputs] = useState([
-    {
-      id0: "",
-      pw0: "",
-      id1: "",
-      pw1: "",
-      id2: "",
-      pw2: "",
-      id3: "",
-      pw3: "",
-      id4: "",
-      pw4: "",
-      id5: "",
-      pw5: "",
-      id6: "",
-      pw6: "",
-      id7: "",
-      pw7: "",
-    },
-  ]);
-  const { id0, id1, id2, id3, id4, id5, id6, id7 } = inputs;
-  const { pw0, pw1, pw2, pw3, pw4, pw5, pw6, pw7 } = inputs;
-
   const [price, setPrice] = useState(0);
   const [deadline, setDeadline] = useState(0);
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const [active, setActive] = useState([false, false, false, false, false, false, false, false]);
+  // const [active, setActive] = useState([false, false, false, false, false, false, false, false]);
 
   useEffect(() => {
     console.log("토큰값 변경됨 " + token);
@@ -97,21 +50,6 @@ const Service = () => {
       });
     });
 
-    // 조회하기 클릭시 입력폼 나타남
-    let checkBtn = document.querySelectorAll(".check-box-btn1");
-
-    for (let i = 0; i < checkBtn.length; i++) {
-      checkBtn[i].addEventListener("click", function () {
-        if (this.parentNode.classList.contains("active")) {
-          let copy = [...active];
-          copy[i] = true;
-          setActive(copy);
-        }
-        this.parentNode.classList.add("active");
-      });
-    }
-
-    // 패스워드 인풋 눈 클릭시 비밀번호 보였다 안 보였다 스크립트
     let eyes = document.querySelectorAll(".eyes");
 
     for (let i = 0; i < eyes.length; i++) {
@@ -150,107 +88,6 @@ const Service = () => {
       return;
     }
     openModal();
-  };
-
-  const checkError = (errorCode) => {
-    switch (errorCode) {
-      case "101":
-        alert("아이디 또는 비밀번호가 다릅니다. 확인 후 다시 입력해주세요");
-        return false;
-      case "102":
-      case "103":
-        alert("정산 현황이 존재하지 않습니다.");
-        return false;
-      case "104":
-        alert("인증번호가 틀렸습니다.");
-        return false;
-      case "105":
-        alert("커머스의 비밀번호를 변경하고 다시 시도해주세요.");
-        return false;
-      default:
-        return true;
-    }
-  };
-
-  const onChange = (e) => {
-    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
-    setInputs({
-      ...inputs, // 기존의 input 객체를 복사한 뒤
-      [name]: value, // name 키를 가진 값을 value 로 설정
-    });
-  };
-
-  const finishLookUp = (result) => {
-    setPrice(JSON.parse(result).price);
-    setDeadline(JSON.parse(result).deadline);
-    setIsChecked(true);
-    alert(result);
-  };
-
-  const lookUp = () => {
-    if (!id0 || !pw0) {
-      alert("아이디와 비밀번호를 입력해주세요");
-      return;
-    }
-
-    setprogressOpen(true);
-    fetch(HOST + "/commerce/coupang/crawl?id=" + id0 + "&pw=" + pw0, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      body: JSON.stringify({
-        uid: userInfo.email,
-      }),
-      credentials: "include",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          setprogressOpen(false);
-          throw new Error("400 or 500 Error");
-        }
-        return response.text();
-      })
-      .then((response) => {
-        if (!checkError(response)) {
-          setprogressOpen(false);
-          return;
-        }
-
-        if (response === "200") {
-          const inputString = prompt("인증번호를 입력해주세요", "인증번호");
-          fetch(HOST + "/commerce/coupang/auth?code=" + inputString, {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-            },
-            credentials: "include",
-          })
-            .then((response) => {
-              if (!response.ok) {
-                setprogressOpen(false);
-                throw new Error("400아니면 500에러남");
-              }
-              return response.text();
-            })
-            .then((response) => {
-              if (!checkError(response)) {
-                setprogressOpen(false);
-                return;
-              }
-              finishLookUp(response);
-            });
-          setprogressOpen(false);
-          return;
-        } else {
-          finishLookUp(response);
-          setprogressOpen(false);
-          return;
-        }
-      })
-      .catch((err) => {
-        alert("조회 실패... 아이디와 비번을 확인해주세요");
-      });
   };
 
   // 네브바 이동 컨트롤
@@ -307,19 +144,7 @@ const Service = () => {
             </button>
           </div>
         </section>
-
-        <ProgressCircleDialog open={progressOpen}></ProgressCircleDialog>
         <ContractModal open={modalOpen} close={closeModal} header="계약서 작성" amount={price} deadline={deadline}></ContractModal>
-        <AutoInputModal
-          open={autoModalOpen}
-          close={closeAutoModal}
-          header="자동입력방지문자 입력"
-          image={image}
-          setImage={setImage}
-          id={id4 || ""}
-          pw={pw4 || ""}
-        ></AutoInputModal>
-        <SecurityModal open={securityModalOpen} close={CloseSecurityModal} header="보안 모달"></SecurityModal>
 
         <section className="calculate__check-wrap">
           <div className="inner">
@@ -341,312 +166,14 @@ const Service = () => {
             </div>
             <div className="c-body">
               <div className="c-body-box">
-                {/* <!-- 조회하기 버튼에 active 클래스 추가시 색상변경 --> */}
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo1.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id0"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id0 || ""}
-                    />
-                    <input
-                      name="pw0"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw0 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[0]) {
-                        console.log(id0, pw0);
-                        lookUp();
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2" onClick={signing}>
-                    선정산받기
-                  </button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo2.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id1"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id1 || ""}
-                    />
-                    <input
-                      name="pw1"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw1 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[1]) {
-                        console.log(id1, pw1);
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo3.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id2"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id2 || ""}
-                    />
-                    <input
-                      name="pw2"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw2 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[2]) alert("서비스 준비중입니다.");
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo4.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id3"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id3 || ""}
-                    />
-                    <input
-                      name="pw3"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw3 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={async () => {
-                      console.log(id3, pw3);
-                      if (active[3]) {
-                        setprogressOpen(true);
-                        await fetch(HOST + "/commerce/tmon/crawl?id=" + id3 + "&pw=" + pw3, {
-                          method: "post",
-                          headers: {
-                            "Content-Type": "application/json; charset=utf-8",
-                          },
-                          body: JSON.stringify({
-                            uid: userInfo.email,
-                          }),
-                          credentials: "include",
-                        })
-                          .then((response) => {
-                            if (!response.ok) {
-                              setprogressOpen(false);
-                              alert("오류");
-                            }
-                            return response.text();
-                          })
-                          .then((response) => {
-                            setprogressOpen(false);
-                            finishLookUp(response);
-                          });
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo5.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id4"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id4 || ""}
-                    />
-                    <input
-                      name="pw4"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw4 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={async () => {
-                      // 위메프 조회하기
-
-                      if (active[4]) {
-                        setprogressOpen(true);
-                        await fetch(HOST + "/commerce/wmp/crawl?option=isCaptcha", {
-                          headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                          },
-                          method: "POST",
-                          body: JSON.stringify({ id: id4, pw: pw4 }),
-                          credentials: "include",
-                        }).then((response) => {
-                          if (response.status == 200) {
-                            setprogressOpen(false);
-                            OpenAutoModal();
-                          }
-                        });
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo6.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id5"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id5 || ""}
-                    />
-                    <input
-                      name="pw5"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw5 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[5]) {
-                        console.log(id5, pw5);
-                        OpenSecurityModal();
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo7.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id6"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id6 || ""}
-                    />
-                    <input
-                      name="pw6"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw6 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[6]) {
-                        console.log(id6, pw6);
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
-                <div className="check-box">
-                  <img className="check-box-img" src="../assets/images/main/c-check-logo/c-check-logo8.png" alt="" />
-                  <form className="check-box-form" action="">
-                    <input
-                      name="id7"
-                      className="check-box-input check-box-input-id"
-                      type="text"
-                      placeholder="ID"
-                      onChange={onChange}
-                      value={id7 || ""}
-                    />
-                    <input
-                      name="pw7"
-                      className="check-box-input check-box-input-pw main-password"
-                      type="password"
-                      placeholder="PW"
-                      onChange={onChange}
-                      value={pw7 || ""}
-                    />
-                    <div className="eyes"></div>
-                  </form>
-                  <button
-                    className="check-box-btn check-box-btn1"
-                    onClick={() => {
-                      if (active[7]) {
-                        console.log(id7, pw7);
-                      }
-                    }}
-                  >
-                    조회하기
-                  </button>
-                  <button className="check-box-btn check-box-btn2">선정산받기</button>
-                </div>
+                <CoupangLookUpBox />
+                <CoupangRocketLookUpBox />
+                <CoupangZLookUpBox />
+                <TmonLookUpBox />
+                <WeMakePriceLookUpBox />
+                <Location11LookUpBox />
+                <GmarketLookUpBox />
+                <AuctionLookUpBox />
               </div>
             </div>
             <button

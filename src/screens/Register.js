@@ -12,7 +12,7 @@ const Register = () => {
 
   //User Data
   const [userData, setUserData] = useState({
-    name: "",
+    nickName: "",
     nickName: "",
     email: "",
     phoneNum: "",
@@ -104,8 +104,9 @@ const Register = () => {
     }
   }, [checkPassword, userData.password]);
 
-  // [To password validation (password must be at least 6 characters)]
+  // [To password,nickName validation (password must be at least 6 characters, nickName must be at least 3 characters)]
   const [passwordValidationFlag, setPasswordValidationFlag] = useState(false);
+  const [nickNameValidationFlag, setNickNameValidationFlag] = useState(false);
 
   //input available
   const [emailInputBlock, setEmailInputBlock] = useState(false);
@@ -137,6 +138,16 @@ const Register = () => {
   const handleCheckPassword = (e) => {
     setCheckPassword(e.target.value);
   };
+
+  useEffect(() => {
+    if (userData.nickName.length > 2) {
+      setNickNameValidationFlag(true);
+    } else if (userData.nickName.length > 0 && userData.nickName.length < 3) {
+      setNickNameValidationFlag(false);
+    } else {
+      setNickNameValidationFlag(true);
+    }
+  }, [userData.nickName]);
 
   const handleRegister = () => {
     if (!emailInputBlock) {
@@ -201,7 +212,7 @@ const Register = () => {
         alert(userData.name + "님 환영합니다. \n 로그인 후 서비스를 이용해주세요.");
         // 입력이 끝나고 inputs를 비워주는 역할
         setUserData({
-          name: "",
+          nickName: "",
           nickName: "",
           email: "",
           phoneNum: "",
@@ -293,13 +304,32 @@ const Register = () => {
                         className={`${styles.registerCheckbtn} ${nickInputBlock ? "" : styles.active}`}
                         type="button"
                         onClick={() => {
-                          setNickInputBlock(true);
+                          if (userData.nickName.length < 3) {
+                            setNickNameValidationFlag(false);
+                            alert("닉네임은 3자 이상이어야 합니다.");
+                            return;
+                          }
+                          var options = { method: "GET", url: "https://cms.credot.kr/api/nickname-valid/" + userData.nickName };
+
+                          axios
+                            .request(options)
+                            .then(function (response) {
+                              if (!response.data.isDuplicate) {
+                                setNickInputBlock(true);
+                              }
+                              alert(response.data.message);
+                            })
+                            .catch(function (error) {
+                              alert("[닉네임 중복 확인 에러] 고객센터의 1:1문의를 통해 문의해주세요.");
+                              console.error(error);
+                            });
                         }}
                         disabled={nickInputBlock}
                       >
                         중복확인
                       </button>
                     </div>
+                    {nickNameValidationFlag ? null : <div className={styles.errorMessage}>닉네임은 3자 이상이어야 합니다.</div>}
                     <input
                       className={styles.registerInputSol}
                       type="text"

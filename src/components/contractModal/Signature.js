@@ -85,7 +85,7 @@ const Signature = (props) => {
 
     let copy = { ...contractData };
     copy.email = userInfo.email;
-    copy.date = year + "-" + todayMonth + "-" + todayDate + "-";
+    copy.date = year + "-" + todayMonth + "-" + todayDate;
     copy.deadline = deadline;
     copy.ammount = amount;
     setContractData(copy);

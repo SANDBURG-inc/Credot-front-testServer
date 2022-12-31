@@ -117,3 +117,20 @@
   font-weight: 500;
   color: #fc8118;
 }
+
+@media (max-width: 500px) {
+  .marquee-balloon-span1 {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .marquee-balloon-span2 {
+    font-size: 15px;
+  }
+
+  .marquee-balloon {
+    position: relative;
+    width: 257px;
+    height: 132px;
+  }
+}

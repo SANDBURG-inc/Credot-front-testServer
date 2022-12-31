@@ -7,7 +7,8 @@ import {
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
-  updateUserName,
+  updateUserRealName,
+  updateUserNickName,
   updateUserPhoneNum,
   updateCorporateName,
   updateCeo,
@@ -86,7 +87,8 @@ const Login = () => {
           // console.log("토큰값 변경 확인: " + token);
 
           // userInfo
-          dispatch(updateUserName(res.data.user.username));
+          dispatch(updateUserRealName(res.data.user.realName));
+          dispatch(updateUserNickName(res.data.user.username));
           dispatch(updateUserEmail(res.data.user.email));
           dispatch(updateUserPhoneNum(res.data.user.phoneNum));
           dispatch(updateUserBank(res.data.user.bank));
