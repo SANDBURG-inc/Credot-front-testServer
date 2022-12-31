@@ -8,7 +8,8 @@ import {
   updateUserAccount,
   updateUserBank,
   updateUserEmail,
-  updateUserName,
+  updateUserRealName,
+  updateUserNickName,
   updateUserPhoneNum,
   updateCorporateName,
   updateCeo,
@@ -64,7 +65,8 @@ const Mypage = () => {
     // dispatch(updateJwt({}));
     dispatch(update());
     // userInfo
-    dispatch(updateUserName(""));
+    dispatch(updateUserRealName(""));
+    dispatch(updateUserNickName(""));
     dispatch(updateUserEmail(""));
     dispatch(updateUserPhoneNum(""));
     dispatch(updateUserBank(""));
